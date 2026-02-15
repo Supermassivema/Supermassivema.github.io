@@ -102,6 +102,37 @@ lang: en
             transition: all var(--duration-base) var(--ease-elegant);
             text-decoration: none;
             display: block;
+            overflow: hidden;
+            /* Ensure background stays within card */
+            z-index: 1;
+        }
+
+        .gateway-choice-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transition: transform var(--duration-slow) var(--ease-elegant);
+            opacity: 0.15;
+            /* Subtle background by default */
+        }
+
+        .gateway-choice:hover .gateway-choice-bg {
+            transform: scale(1.05);
+            opacity: 0.25;
+        }
+
+        /* Specific for Gallery with better visibility on hover */
+        .choice-gallery .gateway-choice-bg {
+            opacity: 0.4;
+        }
+
+        .choice-gallery:hover .gateway-choice-bg {
+            opacity: 0.6;
         }
 
         .gateway-choice:hover {
@@ -250,7 +281,10 @@ lang: en
 
             <div class="gateway-choices">
                 <!-- Gallery Choice -->
-                <a href="{{ '/gallery/' | relative_url }}" class="gateway-choice">
+                <a href="{{ '/gallery/' | relative_url }}" class="gateway-choice choice-gallery">
+                    <div class="gateway-choice-bg"
+                        style="background-image: url('{{ '/assets/images/Gallery Background photo/gallery.png' | relative_url }}');">
+                    </div>
                     <div class="gateway-choice-label">Art Space</div>
                     <h2 class="gateway-choice-title">Gallery</h2>
                     <p class="gateway-choice-description">
