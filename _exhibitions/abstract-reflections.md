@@ -1,13 +1,12 @@
 ---
-title: Abstract Reflections
-curator: Jennifer Park
-start_date: 2026-06-20
-end_date: 2026-08-30
-status: upcoming
+title: Geum Sahong: Colors of the Morning Calm
+curator: Geum Sahong
+start_date: 2026-03-01
+end_date: 2026-06-29
+status: incomming
 featured_image: null
 upcoming_design: halftone
 artists:
-  - Debbie Doye
   - Geum Sahong
 ---
 
