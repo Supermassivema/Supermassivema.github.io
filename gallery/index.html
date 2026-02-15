@@ -2,6 +2,7 @@
 layout: gallery-page
 title: "Home"
 description: "44BYRON STUDIO - Contemporary art space in Inverell showcasing curated exhibitions"
+header_transparent: true
 ---
 
 <!-- ========================================
@@ -13,9 +14,11 @@ description: "44BYRON STUDIO - Contemporary art space in Inverell showcasing cur
 {% assign lang = page.lang | default: site.default_lang | default: "en" %}
 {% assign t = site.data.translations[lang] %}
 
-<!-- 1. HERO SECTION - MINIMAL & ELEGANT -->
-<section class="gallery-hero" style="background-image: url('{{ " /assets/images/Gallery Background photo/gallery.png" |
-  relative_url }}');">
+<!-- 1. HERO SECTION - FULL SCREEN EXHIBITION SHADOW -->
+{% assign current_exhibition = site.exhibitions | where: "status", "current" | first %}
+{% assign hero_bg = current_exhibition.featured_image | default: '/assets/images/Gallery Background photo/gallery.png' |
+relative_url %}
+<section class="gallery-hero" style="background-image: url('{{ hero_bg }}');">
   <div class="container">
     <span class="gallery-label">{{ t.nav.gallery | upcase }}</span>
     <h1 class="gallery-hero-title">{{ t.gallery.title }}</h1>
@@ -31,6 +34,14 @@ description: "44BYRON STUDIO - Contemporary art space in Inverell showcasing cur
       <a href="{{ '/gallery/collection' | relative_url }}" class="btn">
         {{ t.gallery.from_collection }}
       </a>
+    </div>
+  </div>
+
+  <!-- Scroll Down Indicator -->
+  <div class="scroll-indicator">
+    <span class="scroll-text">{{ t.common.scroll_down | default: "SCROLL" }}</span>
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
     </div>
   </div>
 </section>

@@ -30,6 +30,7 @@ en:
     back: "Back"
     next: "Next"
     previous: "Previous"
+    scroll_down: "Scroll"
     close: "Close"
     
   gallery:
@@ -149,6 +150,7 @@ ko:
     back: "뒤로"
     next: "다음"
     previous: "이전"
+    scroll_down: "스크롤"
     close: "닫기"
     
   gallery:

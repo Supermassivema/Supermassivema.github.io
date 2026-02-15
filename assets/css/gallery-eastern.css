@@ -9,10 +9,8 @@
 
 .gallery-hero {
     position: relative;
-    padding: var(--space-24) 0;
-    /* Consistent generous padding top and bottom */
-    min-height: 70vh;
-    /* Ensure some minimum vertical presence */
+    height: 100vh;
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,6 +20,7 @@
     background-attachment: fixed;
     color: #ffffff;
     overflow: hidden;
+    padding: 0;
 }
 
 .gallery-hero::before {
@@ -51,12 +50,99 @@
 }
 
 .gallery-hero-subtitle {
-    font-size: var(--text-xl);
+    font-size: var(--text-2xl);
     color: rgba(255, 255, 255, 0.9);
     font-weight: var(--weight-light);
-    max-width: 600px;
-    margin: 0 auto var(--space-8);
+    max-width: 800px;
+    margin: 0 auto var(--space-10);
+    line-height: var(--leading-relaxed);
+}
+
+.gallery-label {
+    display: block;
+    font-size: var(--text-sm);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-6);
+    opacity: 0.8;
+}
+
+.gallery-hero-divider {
+    width: 60px;
+    height: 1px;
+    background-color: var(--accent-primary);
+    margin: var(--space-8) auto;
+}
+
+.gallery-hero-description {
+    font-size: var(--text-lg);
+    max-width: 700px;
+    margin: 0 auto var(--space-10);
+    opacity: 0.9;
     line-height: var(--leading-loose);
+}
+
+.gallery-cta-group {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: var(--space-8);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+.scroll-text {
+    font-size: var(--text-xs);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.scroll-mouse {
+    width: 22px;
+    height: 36px;
+    border: 1.5px solid #ffffff;
+    border-radius: 12px;
+    position: relative;
+}
+
+.scroll-wheel {
+    width: 2px;
+    height: 6px;
+    background-color: #ffffff;
+    border-radius: 1px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-wheel-anim 2s infinite;
+}
+
+@keyframes scroll-wheel-anim {
+    0% {
+        opacity: 0;
+        top: 6px;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        top: 20px;
+    }
 }
 
 /* ============================================

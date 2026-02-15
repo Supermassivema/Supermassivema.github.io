@@ -340,67 +340,71 @@ lang: en
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const videos = {{ video_files | jsonify | default: "[]"
+            const videos = {{ video_files | jsonify | default: "[]" | strip_newlines
         }};
         const container = document.querySelector('.background-video-container');
-        const videoElements = [
-            document.getElementById('bg-video-1'),
-            document.getElementById('bg-video-2')
-        ];
+        const video1 = document.getElementById('bg-video-1');
+        const video2 = document.getElementById('bg-video-2');
+        const videoElements = [video1, video2];
 
         let currentVideoIndex = 0;
         let activeElementIndex = 0;
 
         function playNextVideo() {
+            if (videos.length <= 1) return;
             const activeVideo = videoElements[activeElementIndex];
-
-            // 1. Start Fade Out to Black
             container.classList.add('fading');
             activeVideo.classList.remove('active');
 
-            // If this was the last video, stop here after fading out
-            if (currentVideoIndex >= videos.length - 1) {
-                setTimeout(() => {
-                    activeVideo.pause();
-                }, 1500);
-                return;
-            }
-
-            // 2. Wait for fade out, then switch to next video
             setTimeout(() => {
                 activeVideo.pause();
-
-                currentVideoIndex++;
+                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
                 const nextElementIndex = 1 - activeElementIndex;
                 const nextVideo = videoElements[nextElementIndex];
-
                 nextVideo.src = videos[currentVideoIndex];
                 nextVideo.load();
-
                 nextVideo.oncanplay = function () {
-                    nextVideo.play();
-                    // 3. Fade In next video
+                    nextVideo.play().catch(e => console.log("Autoplay blocked:", e));
                     nextVideo.classList.add('active');
                     container.classList.remove('fading');
                     activeElementIndex = nextElementIndex;
-
-                    // Set up listener for next transition or final fade
                     nextVideo.onended = playNextVideo;
                 };
-            }, 1500); // Matches CSS transition duration
+            }, 1500);
         }
 
-        // Initial play
+        // Force Play Logic for initial video
         if (videos.length > 0) {
-            const firstVideo = videoElements[0];
-            firstVideo.src = videos[0];
-            firstVideo.load();
-            firstVideo.oncanplay = function () {
-                firstVideo.play();
-                firstVideo.classList.add('active');
-                // Always listen for end to trigger fade or next video
-                firstVideo.onended = playNextVideo;
+            // Ensure class 'active' is present for immediate visibility
+            video1.classList.add('active');
+
+            // Set loop if only one video
+            if (videos.length === 1) {
+                video1.loop = true;
+            }
+
+            // Force play attempts
+            const forcePlay = () => {
+                video1.play().then(() => {
+                    console.log("Video started playing");
+                }).catch(err => {
+                    console.log("Waiting for interaction to play video...");
+                    // Try again on first user interaction
+                    document.addEventListener('click', () => video1.play(), { once: true });
+                    document.addEventListener('touchstart', () => video1.play(), { once: true });
+                });
             };
+
+            // Multiple triggers to ensure it starts
+            video1.oncanplay = forcePlay;
+            if (video1.readyState >= 2) forcePlay();
+
+            // Final fallback timeout
+            setTimeout(forcePlay, 1000);
+
+            if (videos.length > 1) {
+                video1.onended = playNextVideo;
+            }
         }
         });
     </script>
@@ -408,9 +412,11 @@ lang: en
 
 <body class="gateway-page">
     <div class="background-video-container">
-        <video muted playsinline id="bg-video-1"
-            poster="{{ '/assets/images/Gallery Background photo/space (3).jpg' | relative_url }}"></video>
-        <video muted playsinline id="bg-video-2"></video>
+        {% assign first_video = video_files | first %}
+        <video id="bg-video-1" class="active" muted playsinline autoplay loop preload="auto" src="{{ first_video }}"
+            poster="{{ '/assets/images/Gallery Background photo/space (3).jpg' | relative_url }}">
+        </video>
+        <video id="bg-video-2" muted playsinline preload="auto"></video>
     </div>
     <header class="gateway-header">
         <div class="gateway-logo">

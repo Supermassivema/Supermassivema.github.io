@@ -369,11 +369,42 @@ img {
 }
 
 .site-header.scrolled {
-    background-color: rgba(250, 248, 243, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    background-color: rgba(250, 248, 243, 0.75);
+    /* More translucent for glass effect */
+    backdrop-filter: blur(16px);
+    /* Stronger blur */
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-sm);
-    border-bottom: var(--border-subtle);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    /* Subtle border */
+}
+
+/* Absolute Overlay Mode for Hero Pages */
+.header-transparent .site-header:not(.scrolled) {
+    position: absolute;
+    width: 100%;
+    background-color: transparent;
+    border-bottom: none;
+    box-shadow: none;
+}
+
+/* Dynamic Text Color for Dark Backgrounds (Heroes) */
+.header-transparent .site-header:not(.scrolled) .logo-line-1,
+.header-transparent .site-header:not(.scrolled) .logo-line-2,
+.header-transparent .site-header:not(.scrolled) .nav-link {
+    color: #ffffff;
+    background-color: transparent;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header-transparent .site-header:not(.scrolled) .hamburger-line {
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header-transparent .site-header:not(.scrolled) .nav-link::after {
+    background-color: #ffffff;
 }
 
 .header-content {
