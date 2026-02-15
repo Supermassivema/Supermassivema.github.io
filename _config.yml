@@ -3,9 +3,9 @@
 
 # Site Settings
 title: "44BYION STUDIO"
-description: "Contemporary art gallery and artisanal cafe in Sydney"
+description: "A premium contemporary art gallery and artisanal cafe in Sydney, bridging tradition and innovation."
 baseurl: ""
-url: "https://be-alexkim.github.io"
+url: "https://supermassivema.github.io"
 lang: en
 timezone: Australia/Sydney
 
@@ -97,8 +97,15 @@ sass:
   sass_dir: assets/css
   style: compressed
 
-# SEO Settings
+# SEO Settings (Enhanced)
 logo: /assets/images/shared/logo.png
+favicon: /assets/images/favicon.svg
+twitter:
+  username: 44BYION
+  card: summary_large_image
+image: /assets/images/work/Min hea jung soo/Work (1).jpg
+
+# Social Links
 social:
   name: 44BYION STUDIO
   links:

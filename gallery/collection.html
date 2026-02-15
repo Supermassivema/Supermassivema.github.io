@@ -17,9 +17,9 @@ title: "Collection"
     <!-- Filter Buttons -->
     <div class="collection-filters">
       <button class="filter-btn active" data-filter="all">ALL</button>
-      {% assign artists = site.artists | map: 'name' | uniq %}
-      {% for artist in artists %}
-      <button class="filter-btn" data-filter="{{ artist }}">{{ artist }}</button>
+      {% assign artwork_artists = site.artworks | map: 'artist' | uniq | sort %}
+      {% for artist in artwork_artists %}
+      <button class="filter-btn" data-filter="{{ artist }}">{{ artist | upcase }}</button>
       {% endfor %}
       <button class="filter-btn" data-filter="available">{{ t.collection.available }}</button>
       <button class="filter-btn" data-filter="sold">{{ t.collection.sold }}</button>

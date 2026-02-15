@@ -1,107 +1,441 @@
 {% assign lang = page.lang | default: site.default_lang | default: "en" %}
 {% assign t = site.data.translations[lang] %}
 
-<article class="section">
-  <div class="container">
-    <div class="grid"
-      style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: var(--space-12); align-items: start;">
+<div class="artwork-editorial-wrapper" lang="{{ lang }}">
+  <nav class="editorial-nav">
+    <a href="{{ '/gallery/collection/' | relative_url }}" class="nav-btn-back">
+      <span class="nav-icon"></span>
+      <span class="nav-text">{{ t.common.back_to_list | default: 'COLLECTION' }}</span>
+    </a>
+  </nav>
 
-      <!-- Artwork Image -->
-      <div class="artwork-detail-image">
-        <div class="artwork-image-wrapper p-4 bg-secondary"
-          style="padding: var(--space-4); background-color: var(--soft-beige);">
-          <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="img-fluid"
-            style="width: 100%; height: auto; display: block;">
-        </div>
-      </div>
-
-      <!-- Artwork Info -->
-      <div class="artwork-detail-info">
-        <div class="gallery-section-header">
-          <h1 class="artwork-title mb-2" style="font-size: clamp(32px, 4vw, 48px);">{{ page.title }}</h1>
-
-          {% if page.artist %}
-          {% assign artist = site.artists | where: "name", page.artist | first %}
-          <p class="artwork-artist text-xl serif italic"
-            style="font-size: var(--text-xl); font-family: var(--font-serif-en); font-style: italic;">
-            {% if artist %}
-            <a href="{{ artist.url | relative_url }}" class="text-accent">{{ page.artist }}</a>
-            {% else %}
-            {{ page.artist }}
-            {% endif %}
-          </p>
-          {% endif %}
-        </div>
-
-        <div class="artwork-metadata mt-12 py-8 border-y"
-          style="margin-top: var(--space-12); padding: var(--space-8) 0; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
-          <div class="grid grid-cols-2 gap-y-4"
-            style="display: grid; grid-template-columns: 100px 1fr; gap: var(--space-4);">
-            <span class="text-sm text-tertiary uppercase tracking-widest">{{ t.artwork.year }}</span>
-            <span class="text-lg">{{ page.year }}</span>
-
-            <span class="text-sm text-tertiary uppercase tracking-widest">{{ t.artwork.medium }}</span>
-            <span class="text-lg">{{ page.medium }}</span>
-
-            <span class="text-sm text-tertiary uppercase tracking-widest">{{ t.artwork.dimensions }}</span>
-            <span class="text-lg">{{ page.dimensions }}</span>
-
-            <span class="text-sm text-tertiary uppercase tracking-widest">{{ t.artwork.status }}</span>
-            <span>
-              {% if page.status == 'available' %}
-              <span class="text-accent-secondary">{{ page.price | default: 'Contact for price' }}</span>
-              {% else %}
-              <span class="text-tertiary italic">{{ t.collection.sold }}</span>
-              {% endif %}
-            </span>
-          </div>
-        </div>
-
-        <div class="artwork-description mt-12 prose">
-          {{ content }}
-        </div>
-
-        <div class="artwork-actions mt-16">
-          <a href="mailto:{{ site.email }}?subject=Inquiry about {{ page.title | uri_escape }} by {{ page.artist | uri_escape }}"
-            class="btn btn-primary w-full">
-            {{ t.collection.inquiry_title | upcase }}
-          </a>
+  <div class="editorial-container">
+    <!-- 2. VISUAL STAGE (Single Image Focus) -->
+    <div class="visual-stage">
+      <div class="artwork-frame-outer">
+        <div class="artwork-frame-inner">
+          <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="main-artwork-image">
+          <div class="stage-shadow"></div>
         </div>
       </div>
     </div>
+
+    <!-- 3. DOCUMENTARY CONTENT -->
+    <div class="content-stage">
+      <div class="content-measure">
+        <header class="editorial-header">
+          <div class="eyebrow-container">
+            <span class="serial-no">NO. {{ page.year | slice: -2, 2 }}{{ page.title | size | prepend: '00' | slice: -3,
+              3 }}</span>
+            <span class="separator">/</span>
+            <span class="category">FINE ART CATALOGUE</span>
+          </div>
+
+          <h1 class="entry-title">{{ page.title }}</h1>
+
+          {% if page.artist %}
+          {% assign artist = site.artists | where: "name", page.artist | first %}
+          <div class="artist-signature">
+            <span class="small-caps">BY</span>
+            {% if artist %}
+            <a href="{{ artist.url | relative_url }}" class="artist-link">{{ page.artist }}</a>
+            {% else %}
+            <span class="artist-name">{{ page.artist }}</span>
+            {% endif %}
+            <div class="signature-line"></div>
+          </div>
+          {% endif %}
+        </header>
+
+        <div class="museum-label-section">
+          <div class="label-grid">
+            <div class="label-item">
+              <span class="label-key">{{ t.artwork.year | default: 'YEAR' }}</span>
+              <span class="label-val">{{ page.year }}</span>
+            </div>
+            <div class="label-item">
+              <span class="label-key">{{ t.artwork.medium | default: 'MEDIUM' }}</span>
+              <span class="label-val">{{ page.medium }}</span>
+            </div>
+            <div class="label-item">
+              <span class="label-key">{{ t.artwork.dimensions | default: 'DIMENSIONS' }}</span>
+              <span class="label-val">{{ page.dimensions }}</span>
+            </div>
+            <div class="label-item highlight">
+              <span class="label-key">{{ t.artwork.status | default: 'STATUS' }}</span>
+              <span class="label-val">
+                {% if page.status == 'available' %}
+                <span class="price-emphasis">{{ page.price | default: 'Price upon request' }}</span>
+                {% else %}
+                <span class="sold-out">{{ t.collection.sold | default: 'PRIVATE COLLECTION' }}</span>
+                {% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <section class="narrative-body">
+          <h2 class="section-hint">{{ t.artwork.description | default: 'ARTIST STATEMENT' | upcase }}</h2>
+          <div class="prose-rich">
+            {{ content }}
+          </div>
+        </section>
+
+        {% if page.exhibition %}
+        {% assign exhibition = site.exhibitions | where: "title", page.exhibition | first %}
+        <footer class="editorial-footer">
+          <div class="context-pill">
+            <span class="pill-head">{{ t.artwork.exhibition | default: 'EXHIBITION' }}</span>
+            <div class="pill-body">
+              <h3 class="context-name">{{ page.exhibition }}</h3>
+              {% if exhibition %}
+              <a href="{{ exhibition.url | relative_url }}" class="context-discover">EXPLORE EXHIBITION <span
+                  class="arr">→</span></a>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="action-dock">
+            <a href="mailto:{{ site.email }}?subject=Inquiry: {{ page.title | uri_escape }}"
+              class="btn-primary-editorial">
+              {{ t.collection.inquiry_title | default: 'INQUIRE ABOUT THIS WORK' | upcase }}
+            </a>
+          </div>
+        </footer>
+        {% endif %}
+      </div>
+    </div>
   </div>
-</article>
+</div>
 
 <style>
-  .border-y {
-    border-top: 1px solid var(--border-subtle);
-    border-bottom: 1px solid var(--border-subtle);
+  :root {
+    --art-accent: #c5a982;
+    --art-ink: #000000;
+    --art-paper: #ffffff;
+    --art-rice: #fcfbf8;
+    --art-mono: 'Space Grotesk', 'Inter', sans-serif;
+    --art-serif: 'Playfair Display', serif;
+    --art-serif-ko: 'Noto Serif KR', serif;
+    --art-ease: cubic-bezier(0.23, 1, 0.32, 1);
+    --view-padding: 6vw;
   }
 
-  .py-8 {
-    padding-top: var(--space-8);
-    padding-bottom: var(--space-8);
+  .artwork-editorial-wrapper {
+    background-color: var(--art-paper);
+    color: var(--art-ink);
+    min-height: 100vh;
+    font-size: 16px;
   }
 
-  .mt-12 {
-    margin-top: var(--space-12);
-  }
-
-  .mt-16 {
-    margin-top: var(--space-16);
-  }
-
-  .mb-2 {
-    margin-bottom: var(--space-2);
-  }
-
-  .w-full {
+  /* 1. NAVIGATION */
+  .editorial-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 80px;
+    z-index: 100;
+    padding: 0 var(--view-padding);
+    display: flex;
+    align-items: center;
+    pointer-events: none;
   }
 
-  .text-accent-secondary {
-    color: var(--accent-secondary);
-    font-weight: var(--weight-medium);
-    font-size: var(--text-xl);
+  .nav-btn-back {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: var(--art-ink);
+    font-family: var(--art-mono);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    transition: transform 0.3s var(--art-ease);
+  }
+
+  .nav-icon {
+    width: 20px;
+    height: 1px;
+    background: var(--art-ink);
+    position: relative;
+    transition: 0.3s var(--art-ease);
+  }
+
+  .nav-icon::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -4px;
+    width: 6px;
+    height: 6px;
+    border-left: 1px solid var(--art-ink);
+    border-top: 1px solid var(--art-ink);
+    transform: rotate(-45deg);
+  }
+
+  .nav-btn-back:hover {
+    transform: translateX(-10px);
+  }
+
+  /* 2. LAYOUT */
+  .editorial-container {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .visual-stage {
+    flex: 0 0 50%;
+    background-color: var(--art-rice);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--view-padding);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+
+  .artwork-frame-outer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .artwork-frame-inner {
+    position: relative;
+    z-index: 2;
+    transition: transform 0.6s var(--art-ease);
+  }
+
+  .main-artwork-image {
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.15);
+    background: white;
+  }
+
+  .stage-shadow {
+    position: absolute;
+    bottom: -30px;
+    left: 5%;
+    width: 90%;
+    height: 40px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: 1;
+    filter: blur(10px);
+  }
+
+  /* 3. CONTENT */
+  .content-stage {
+    flex: 1;
+    padding: 120px var(--view-padding) 80px;
+    background-color: var(--art-paper);
+    display: flex;
+    justify-content: center;
+  }
+
+  .content-measure {
+    width: 100%;
+    max-width: 580px;
+  }
+
+  .eyebrow-container {
+    font-family: var(--art-mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    font-weight: 700;
+    color: var(--art-accent);
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .entry-title {
+    font-family: var(--art-serif);
+    font-size: clamp(40px, 4.5vw, 68px);
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  [lang="ko"] .entry-title {
+    font-family: var(--art-serif-ko);
+    line-height: 1.35;
+  }
+
+  .artist-signature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 60px;
+  }
+
+  .artist-link {
+    font-family: var(--art-serif);
+    font-size: 24px;
+    font-style: italic;
+    color: var(--art-ink);
+    text-decoration: none;
+  }
+
+  [lang="ko"] .artist-link {
+    font-family: var(--art-serif-ko);
+    font-style: normal;
+  }
+
+  .signature-line {
+    flex: 1;
+    height: 1px;
+    background: #f0f0f0;
+    margin-left: 20px;
+  }
+
+  /* LABEL */
+  .museum-label-section {
+    margin-bottom: 80px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .label-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px 60px;
+  }
+
+  .label-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .label-key {
+    font-family: var(--art-mono);
+    font-size: 9px;
+    font-weight: 800;
+    color: #999;
+    text-transform: uppercase;
+  }
+
+  .label-val {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .highlight .label-val {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .price-emphasis {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--art-accent);
+  }
+
+  /* BODY */
+  .narrative-body {
+    margin-bottom: 80px;
+  }
+
+  .section-hint {
+    font-family: var(--art-mono);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: #bbb;
+    margin-bottom: 30px;
+  }
+
+  .prose-rich {
+    font-size: 18px;
+    line-height: 1.9;
+    color: #333;
+  }
+
+  [lang="ko"] .prose-rich {
+    font-family: var(--font-sans-kr);
+    word-break: keep-all;
+  }
+
+  /* FOOTER */
+  .context-pill {
+    background: var(--art-rice);
+    display: flex;
+    margin-bottom: 60px;
+  }
+
+  .pill-head {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    font-family: var(--art-mono);
+    font-size: 9px;
+    font-weight: 800;
+    padding: 20px 15px;
+    background: var(--art-ink);
+    color: var(--art-paper);
+  }
+
+  .pill-body {
+    padding: 30px 40px;
+    flex: 1;
+  }
+
+  .context-name {
+    font-family: var(--art-serif);
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .context-discover {
+    font-family: var(--art-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--art-accent);
+    text-decoration: none;
+  }
+
+  .btn-primary-editorial {
+    display: block;
+    width: 100%;
+    padding: 24px;
+    background: var(--art-ink);
+    color: var(--art-paper);
+    text-align: center;
+    font-family: var(--art-mono);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    text-decoration: none;
+    transition: 0.4s;
+  }
+
+  .btn-primary-editorial:hover {
+    background: transparent;
+    color: var(--art-ink);
+    box-shadow: inset 0 0 0 1px var(--art-ink);
+  }
+
+  @media (max-width: 1200px) {
+    .editorial-container {
+      flex-direction: column;
+    }
+
+    .visual-stage {
+      width: 100%;
+      height: 70vh;
+      position: relative;
+    }
+
+    .content-stage {
+      padding-top: 60px;
+    }
   }
 </style>

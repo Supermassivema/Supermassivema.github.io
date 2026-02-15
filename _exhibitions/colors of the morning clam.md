@@ -1,9 +1,9 @@
 ---
-title: Geum Sahong: Colors of the Morning Calm
+title: "Geum Sahong: Colors of the Morning Calm"
 curator: Kim Ki Lim
-start_date: 2026-03-01
+start_date: 2026-01-01
 end_date: 2026-06-29
-status: incomming
+status: upcoming
 featured_image: null
 upcoming_design: halftone
 artists:
