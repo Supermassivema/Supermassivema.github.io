@@ -1,15 +1,15 @@
 ---
 title: "Spatial Studies 05"
-artist: Min hea jung soo
+artist: Min Hea Jung Soo
 year: 2025
 medium: Acrylic and collage on panel
 dimensions: 90 × 90 cm
 status: available
 price: AUD $4,800
-image: /assets/images/work/Min hea jung soo/Work (1).jpg
+image: /assets/images/work/Min Hea Jung Soo/Work (1).jpg
 ---
 
-"Spatial Studies 05" is part of Min hea jung soo's ongoing investigation into the relationships between architectural space and abstract form. This work combines painting with collage elements, creating layers of visual information that suggest the complexity of urban environments.
+"Spatial Studies 05" is part of Min Hea Jung Soo's ongoing investigation into the relationships between architectural space and abstract form. This work combines painting with collage elements, creating layers of visual information that suggest the complexity of urban environments.
 
 Jung Soo's approach is characterized by a sophisticated understanding of composition and spatial relationships. The work's square format emphasizes its all-over composition, with no dominant focal point but rather a network of relationships that activate the entire surface.
 

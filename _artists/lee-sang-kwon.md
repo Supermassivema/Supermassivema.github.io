@@ -10,6 +10,7 @@ website: ""
 instagram: ""
 bio_short: "Lee Sang-kwon's work explores the poetic resonance of nature and the emotional landscapes of memory, focusing on the beauty of gardens, paths, and the passage of time."
 philosophy: "For Lee, the act of painting is a journey of finding a 'hidden path' through nature and memory. His work invites viewers to contemplative spaces where the boundary between the external world and internal reflection becomes fluid."
+featured: true
 ---
 
 ## Biography

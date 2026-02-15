@@ -10,6 +10,7 @@ website: ""
 instagram: ""
 bio_short: "Cho Chang-hwan is a contemporary artist who explores the intersection of physical space, perception, and conceptual frameworks through diverse media."
 philosophy: "Cho investigates the tension between the curated environment of the gallery and the raw essence of artistic expression. His work often challenges the viewer's perception of space and time."
+featured: true
 ---
 
 ## Biography

@@ -4,14 +4,15 @@ name: "Debbie Doye"
 slug: "debbie-doye"
 medium: "Mixed Media, Abstract"
 nationality: "Australian"
-location: "Sydney, Australia"
+location: "Inverell, NSW"
 featured_image: /assets/images/work/Debbie Doye/work (1).jpeg
 website: ""
 instagram: ""
 bio_short: "Debbie Doye creates vibrant abstract compositions that explore color relationships and emotional resonance through mixed media techniques."
+featured: false
 ---
 
-Debbie Doye is a Sydney-based abstract artist whose work celebrates the interplay of color, texture, and form. Working primarily in mixed media, Doye creates layered compositions that invite viewers into contemplative spaces filled with energy and movement.
+Debbie Doye is an Inverell-based abstract artist whose work celebrates the interplay of color, texture, and form. Working primarily in mixed media, Doye creates layered compositions that invite viewers into contemplative spaces filled with energy and movement.
 
 Her practice is rooted in intuitive mark-making and a deep exploration of materiality. Each piece evolves organically, with layers of paint, collage, and mixed media building upon one another to create rich, tactile surfaces. Doye's color palette ranges from bold, saturated hues to subtle, nuanced tones, reflecting her interest in emotional expression through chromatic relationships.
 

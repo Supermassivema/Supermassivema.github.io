@@ -4,12 +4,13 @@ name: "Geum Sahong"
 slug: "geum-sahong"
 medium: "Painting, Contemporary"
 nationality: "Korean"
-location: "Sydney, Australia"
+location: "Inverell, NSW"
 featured_image: "/assets/images/work/Geum Sahong/profile.jpg"
 website: ""
 instagram: ""
 bio_short: "A contemporary artist whose work explores the ephemeral nature of light and shadow, bridging traditional Eastern aesthetics with modern abstract forms."
 philosophy: "For Sahong, painting is both a meditative practice and a form of cultural inquiry. The act of painting becomes a way of processing personal and collective history, of understanding one's place within a continuum of artistic tradition while forging a unique contemporary voice."
+featured: true
 ---
 
 ## Biography
@@ -28,11 +29,11 @@ Their work explores the concept of \"in-between-ness\"—the space between past 
 
 Geum Sahong has exhibited extensively in South Korea and internationally. Their work has been featured in solo and group exhibitions across Asia, Europe, and Australia, earning recognition for their unique synthesis of traditional and contemporary approaches.
 
-## Exhibitions at 44BYION STUDIO
+## Exhibitions at 44BYRON STUDIO
 
 - **Upcoming**: "Threshold Memories" (Solo Exhibition, April 2026)
 - **2025**: "East Meets Contemporary" (Group Exhibition)
 
 ## Selected Works
 
-Works held in private and public collections in Seoul, Tokyo, Sydney, and Berlin.
+Works held in private and public collections in Seoul, Tokyo, Inverell, and Berlin.

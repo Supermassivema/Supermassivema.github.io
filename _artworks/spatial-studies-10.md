@@ -1,12 +1,12 @@
 ---
 title: "Spatial Studies 10"
-artist: Min hea jung soo
+artist: Min Hea Jung Soo
 year: 2025
 medium: Mixed media on panel
 dimensions: 100 × 75 cm
 status: available
 price: AUD $5,200
-image: /assets/images/work/Min hea jung soo/Work (10).jpg
+image: /assets/images/work/Min Hea Jung Soo/Work (10).jpg
 ---
 
 The tenth work in Jung Soo's acclaimed "Spatial Studies" series represents a culmination of ideas explored throughout this body of work. Here, the artist achieves a remarkable balance between complexity and clarity, creating a composition that feels both dense with information and elegantly resolved.

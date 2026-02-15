@@ -1,13 +1,13 @@
 ---
 title: "Spatial Studies 12"
-artist: Min hea jung soo
+artist: Min Hea Jung Soo
 year: 2026
 medium: Acrylic and mixed media on canvas
 dimensions: 110 × 90 cm
 status: available
 price: AUD $5,800
 featured: true
-image: /assets/images/work/Min hea jung soo/Work (12).jpg
+image: /assets/images/work/Min Hea Jung Soo/Work (12).jpg
 ---
 
 "Spatial Studies 12" marks an exciting new direction in Jung Soo's practice, introducing more gestural elements while maintaining the architectural sensibility that characterizes this series. The work feels more spontaneous and energetic than earlier pieces, suggesting the artist's growing confidence in balancing structure with improvisation.

@@ -1,9 +1,9 @@
 # English Translations
 en:
   site:
-    title: "44BYION STUDIO"
+    title: "44BYRON STUDIO"
     tagline: "Curating Space, Crafting Experience"
-    description: "44BYION STUDIO - A sanctuary for contemporary art and artisanal coffee in Sydney."
+    description: "44BYRON STUDIO - A sanctuary for contemporary art and artisanal coffee in Inverell."
     all: "ALL"
     
   nav:
@@ -86,7 +86,7 @@ en:
     mission: "Mission"
     philosophy: "Curatorial Philosophy"
     story_title: "Curating Space, Crafting Experience"
-    story_desc: "44BYION STUDIO exists at the intersection of tradition and innovation, East and West, contemplation and transformation."
+    story_desc: "44BYRON STUDIO exists at the intersection of tradition and innovation, East and West, contemplation and transformation."
     
   visit:
     title: "Visit"
@@ -120,9 +120,9 @@ en:
 # Korean Translations
 ko:
   site:
-    title: "44BYION STUDIO"
+    title: "44BYRON STUDIO"
     tagline: "공간을 큐레이팅하고, 경험을 빚어냅니다"
-    description: "시드니의 현대 미술 갤러리와 아티즌 카페, 44BYION STUDIO"
+    description: "인버렐의 현대 미술 갤러리와 아티즌 카페, 44BYRON STUDIO"
     all: "전체"
     
   nav:
@@ -205,7 +205,7 @@ ko:
     mission: "미션"
     philosophy: "큐레이토리얼 철학"
     story_title: "공간을 큐레이팅하고, 경험을 빚어냅니다"
-    story_desc: "44BYION STUDIO는 전통과 혁신, 동양과 서양, 사유와 변형이 교차하는 지점에 존재합니다."
+    story_desc: "44BYRON STUDIO는 전통과 혁신, 동양과 서양, 사유와 변형이 교차하는 지점에 존재합니다."
     
   visit:
     title: "방문"

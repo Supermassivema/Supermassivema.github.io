@@ -4,11 +4,12 @@ name: "Stephen Jones"
 slug: "stephen-jones"
 medium: "Sculpture, Installation"
 nationality: "British-Australian"
-location: "Melbourne, Australia"
+location: "Inverell, NSW"
 featured_image: /assets/images/work/Stephen Jones/Work (1).jpg
 website: ""
 instagram: ""
 bio_short: "Stephen Jones creates sculptural works and installations that explore the relationship between form, space, and materiality with a minimalist sensibility."
+featured: false
 ---
 
 ## Biography
@@ -31,12 +32,12 @@ Jones's studio practice combines traditional craftsmanship with contemporary fab
 
 Scale varies significantly across his practice. Some pieces are deliberately intimate, meant to be encountered closely in domestic or gallery settings. Others are architectural in ambition, designed to transform how we experience larger spaces. Regardless of scale, precision and attention to detail remain constant.
 
-## Exhibitions at 44BYION STUDIO
+## Exhibitions at 44BYRON STUDIO
 
 - **2026**: "Essential Forms" (Solo Exhibition, May 2026)
 - **2025**: "Material Dialogues" (Group Exhibition)
 
 ## Recognition
 
-Jones's work has been exhibited in Australia, the UK, and across Asia. His sculptures are held in significant private collections and have been commissioned for public and corporate spaces in Melbourne, Sydney, and London.
+Jones's work has been exhibited in Australia, the UK, and across Asia. His sculptures are held in significant private collections and have been commissioned for public and corporate spaces in Melbourne, Inverell, and London.
 

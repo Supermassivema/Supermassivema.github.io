@@ -1,6 +1,10 @@
 <nav class="gallery-nav" aria-label="Gallery Main Navigation">
   <div class="gallery-nav-logo">
-    <a href="{{ '/gallery/' | relative_url }}">44BYION STUDIO</a>
+    <a href="{{ '/gallery/' | relative_url }}"
+      style="font-size: 1.4em; font-weight: 700; display: flex; flex-direction: column; line-height: 1;">
+      <span>BYRON</span>
+      <span style="font-size: 0.6em; font-weight: 400; letter-spacing: 0.1em;">ART SPACE</span>
+    </a>
   </div>
   <ul class="gallery-nav-menu">
     <li {% if page.url contains '/gallery/index' or page.url=='/gallery/' %}class="active" {% endif %}>

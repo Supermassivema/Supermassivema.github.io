@@ -8,9 +8,11 @@ lang: en
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>44BYION STUDIO | Contemporary Art & Artisanal Coffee</title>
+    <title>ART SPACE BYRON | Contemporary Art & Artisanal Coffee in Inverell</title>
     <meta name="description"
-        content="44BYION STUDIO - A sanctuary for contemporary art and artisanal coffee in Sydney.">
+        content="ART SPACE BYRON - A sanctuary for contemporary art and artisanal coffee in Inverell, NSW.">
+
+    <link rel="icon" type="image/svg+xml" href="{{ site.favicon | relative_url }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +42,7 @@ lang: en
             font-size: var(--text-xl);
             font-weight: var(--weight-semibold);
             letter-spacing: var(--tracking-wider);
-            color: var(--ink-black);
+            color: var(--warm-white);
         }
 
         .gateway-container {
@@ -62,16 +64,17 @@ lang: en
             font-size: clamp(3rem, 8vw, 7rem);
             font-weight: var(--weight-semibold);
             letter-spacing: var(--tracking-tight);
-            color: var(--ink-black);
+            color: var(--warm-white);
             margin-bottom: var(--space-6);
             line-height: var(--leading-tight);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .gateway-tagline {
             font-family: var(--font-sans-en);
             font-size: var(--text-xl);
             font-weight: var(--weight-light);
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.8);
             letter-spacing: var(--tracking-wide);
             margin-bottom: var(--space-12);
             line-height: var(--leading-relaxed);
@@ -97,8 +100,10 @@ lang: en
         .gateway-choice {
             position: relative;
             padding: var(--space-10) var(--space-6);
-            background-color: var(--warm-white);
-            border: 1px solid var(--border-subtle);
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all var(--duration-base) var(--ease-elegant);
             text-decoration: none;
             display: block;
@@ -106,8 +111,9 @@ lang: en
 
         .gateway-choice:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
             border-color: var(--celadon);
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .gateway-choice-label {
@@ -115,7 +121,7 @@ lang: en
             font-weight: var(--weight-medium);
             letter-spacing: var(--tracking-widest);
             text-transform: uppercase;
-            color: var(--text-tertiary);
+            color: rgba(255, 255, 255, 0.5);
             margin-bottom: var(--space-3);
         }
 
@@ -123,14 +129,14 @@ lang: en
             font-family: var(--font-serif-en);
             font-size: var(--text-4xl);
             font-weight: var(--weight-semibold);
-            color: var(--ink-black);
+            color: var(--warm-white);
             margin-bottom: var(--space-4);
             line-height: var(--leading-tight);
         }
 
         .gateway-choice-description {
             font-size: var(--text-base);
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.7);
             line-height: var(--leading-relaxed);
             margin-bottom: var(--space-6);
         }
@@ -156,20 +162,46 @@ lang: en
         }
 
         .gateway-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             padding: var(--space-6) var(--container-padding);
             text-align: center;
-            border-top: 1px solid var(--border-subtle);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: var(--ink-black);
+            z-index: 100;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: all 0.4s var(--ease-elegant);
+            pointer-events: none;
+        }
+
+        .footer-trigger {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            z-index: 99;
+        }
+
+        .footer-trigger:hover~.gateway-footer,
+        .gateway-footer:hover {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
         }
 
         .gateway-footer-text {
             font-size: var(--text-sm);
-            color: var(--text-tertiary);
+            color: rgba(255, 255, 255, 0.6);
             margin-bottom: var(--space-2);
         }
 
         .gateway-footer-contact {
             font-size: var(--text-xs);
-            color: var(--text-tertiary);
+            color: rgba(255, 255, 255, 0.4);
         }
 
         /* Korean Typography */
@@ -228,29 +260,177 @@ lang: en
         .gateway-choices {
             animation-delay: 0.4s;
         }
+
+        /* Background Video */
+        .background-video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background-color: #000000;
+            /* Black background for fade effect */
+        }
+
+        .background-video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.5) 0%,
+                    rgba(0, 0, 0, 0.2) 50%,
+                    rgba(0, 0, 0, 0.7) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 2;
+            transition: opacity 1.5s ease-in-out;
+            /* Added transition for overlay */
+        }
+
+        .background-video-container.fading::before {
+            opacity: 0;
+            /* Fade out overlay during transition */
+        }
+
+        #bg-video-1,
+        #bg-video-2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            /* Adjusted timing */
+        }
+
+        #bg-video-1.active,
+        #bg-video-2.active {
+            opacity: 1;
+        }
+
+        /* Ensure content visibility */
+        .gateway-page {
+            position: relative;
+            background-color: transparent;
+        }
+
+        /* Ensure footer stays above background */
+        .gateway-footer {
+            z-index: 100;
+        }
     </style>
+
+    <!-- Background Video Sequencer script -->
+    {% assign video_files = "" | split: "" %}
+    {% for file in site.static_files %}
+    {% if file.path contains "/assets/video/" and file.extname == ".mp4" %}
+    {% assign path = file.path | relative_url %}
+    {% assign video_files = video_files | push: path %}
+    {% endif %}
+    {% endfor %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const videos = {{ video_files | jsonify | default: "[]"
+        }};
+        const container = document.querySelector('.background-video-container');
+        const videoElements = [
+            document.getElementById('bg-video-1'),
+            document.getElementById('bg-video-2')
+        ];
+
+        let currentVideoIndex = 0;
+        let activeElementIndex = 0;
+
+        function playNextVideo() {
+            const activeVideo = videoElements[activeElementIndex];
+
+            // 1. Start Fade Out to Black
+            container.classList.add('fading');
+            activeVideo.classList.remove('active');
+
+            // If this was the last video, stop here after fading out
+            if (currentVideoIndex >= videos.length - 1) {
+                setTimeout(() => {
+                    activeVideo.pause();
+                }, 1500);
+                return;
+            }
+
+            // 2. Wait for fade out, then switch to next video
+            setTimeout(() => {
+                activeVideo.pause();
+
+                currentVideoIndex++;
+                const nextElementIndex = 1 - activeElementIndex;
+                const nextVideo = videoElements[nextElementIndex];
+
+                nextVideo.src = videos[currentVideoIndex];
+                nextVideo.load();
+
+                nextVideo.oncanplay = function () {
+                    nextVideo.play();
+                    // 3. Fade In next video
+                    nextVideo.classList.add('active');
+                    container.classList.remove('fading');
+                    activeElementIndex = nextElementIndex;
+
+                    // Set up listener for next transition or final fade
+                    nextVideo.onended = playNextVideo;
+                };
+            }, 1500); // Matches CSS transition duration
+        }
+
+        // Initial play
+        if (videos.length > 0) {
+            const firstVideo = videoElements[0];
+            firstVideo.src = videos[0];
+            firstVideo.load();
+            firstVideo.oncanplay = function () {
+                firstVideo.play();
+                firstVideo.classList.add('active');
+                // Always listen for end to trigger fade or next video
+                firstVideo.onended = playNextVideo;
+            };
+        }
+        });
+    </script>
 </head>
 
 <body class="gateway-page">
+    <div class="background-video-container">
+        <video muted playsinline id="bg-video-1"
+            poster="{{ '/assets/images/Gallery Background photo/space (3).jpg' | relative_url }}"></video>
+        <video muted playsinline id="bg-video-2"></video>
+    </div>
     <header class="gateway-header">
         <div class="gateway-logo">
-            <span style="display: block; font-weight: 600; letter-spacing: 0.2em;">44BYION</span>
-            <span
-                style="display: block; font-size: 0.6em; letter-spacing: 0.4em; color: var(--text-tertiary);">STUDIO</span>
+            <span style="display: block; font-size: 1.5em; font-weight: 700; line-height: 1;">BYRON</span>
+            <span style="display: block; font-size: 0.8em; letter-spacing: 0.1em;">ART SPACE</span>
         </div>
         <!-- Language switcher removed as per user request -->
     </header>
 
     <main class="gateway-container">
         <div class="gateway-content">
-            <h1 class="gateway-title">44BYION STUDIO</h1>
+            <h1 class="gateway-title">ART SPACE BYRON</h1>
             <p class="gateway-tagline">Curating Space, Crafting Experience</p>
 
             <div class="gateway-divider"></div>
 
             <div class="gateway-choices">
                 <!-- Gallery Choice -->
-                <a href="{{ '/gallery/' | relative_url }}" class="gateway-choice">
+                <a href="{{ '/gallery/' | relative_url }}" class="gateway-choice"
+                    style="max-width: 500px; margin: 0 auto;">
                     <div class="gateway-choice-label">Art Space</div>
                     <h2 class="gateway-choice-title">Gallery</h2>
                     <p class="gateway-choice-description">
@@ -259,24 +439,14 @@ lang: en
                     </p>
                     <span class="gateway-choice-cta">Enter Gallery</span>
                 </a>
-
-                <!-- Cafe Choice -->
-                <a href="{{ '/cafe/' | relative_url }}" class="gateway-choice">
-                    <div class="gateway-choice-label">Artisanal Craft</div>
-                    <h2 class="gateway-choice-title">Café</h2>
-                    <p class="gateway-choice-description">
-                        Exquisitely crafted coffee and seasonal brunch in a space designed for connection.
-                        Where the art of coffee meets the comfort of home.
-                    </p>
-                    <span class="gateway-choice-cta">Enter Café</span>
-                </a>
             </div>
         </div>
     </main>
 
+    <div class="footer-trigger"></div>
     <footer class="gateway-footer">
-        <p class="gateway-footer-text">Two experiences. One vision.</p>
-        <p class="gateway-footer-contact">123 Example Street, Sydney | hello@liminal-ember.com</p>
+        <p class="gateway-footer-text">Contemporary art at the intersection of tradition and innovation.</p>
+        <p class="gateway-footer-contact">44 Byron St, Inverell NSW 2360 | 44byronthegallerycafe@gmail.com</p>
     </footer>
 </body>
 

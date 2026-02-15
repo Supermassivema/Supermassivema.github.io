@@ -1,7 +1,7 @@
 ---
 layout: gallery-page
 title: "Home"
-description: "44BYION STUDIO - Contemporary art space in Sydney showcasing curated exhibitions"
+description: "44BYRON STUDIO - Contemporary art space in Inverell showcasing curated exhibitions"
 ---
 
 <!-- ========================================
@@ -14,8 +14,8 @@ description: "44BYION STUDIO - Contemporary art space in Sydney showcasing curat
 {% assign t = site.data.translations[lang] %}
 
 <!-- 1. HERO SECTION - MINIMAL & ELEGANT -->
-<section class="gallery-hero"
-  style="background-image: url('{{ '/assets/images/Gallery Background photo/gallery.png' | relative_url }}');">
+<section class="gallery-hero" style="background-image: url('{{ " /assets/images/Gallery Background photo/gallery.png" |
+  relative_url }}');">
   <div class="container">
     <span class="gallery-label">{{ t.nav.gallery | upcase }}</span>
     <h1 class="gallery-hero-title">{{ t.gallery.title }}</h1>
@@ -87,7 +87,8 @@ description: "44BYION STUDIO - Contemporary art space in Sydney showcasing curat
     </div>
 
     <div class="artist-grid">
-      {% for artist in site.artists limit: 4 %}
+      {% assign featured_artists = site.artists | where: "featured", true %}
+      {% for artist in featured_artists limit: 4 %}
       <a href="{{ artist.url | relative_url }}" class="artist-card">
         <div class="artist-card-image">
           <img src="{{ artist.featured_image | relative_url }}" alt="{{ artist.name }}" loading="lazy">
@@ -120,7 +121,7 @@ description: "44BYION STUDIO - Contemporary art space in Sydney showcasing curat
     {% assign featured_artworks = site.artworks | where: "featured", true %}
     {% if featured_artworks.size > 0 %}
     <div class="artwork-grid">
-      {% for artwork in featured_artworks limit: 3 %}
+      {% for artwork in featured_artworks limit: 4 %}
       <a href="{{ artwork.url | relative_url }}" class="artwork-card">
         <div class="artwork-card-image">
           <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">

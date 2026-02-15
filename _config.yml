@@ -1,11 +1,11 @@
 # Jekyll Gallery & Cafe Website Configuration
-# 44BYION STUDIO
+# 44BYRON STUDIO
 
 # Site Settings
-title: "44BYION STUDIO"
-description: "A premium contemporary art gallery and artisanal cafe in Sydney, bridging tradition and innovation."
+title: "ART SPACE BYRON"
+description: "A premium contemporary art gallery and artisanal cafe in Inverell, NSW."
 baseurl: ""
-url: "https://supermassivema.github.io"
+url: "https://artspacebyron.com.au"
 lang: en
 timezone: Australia/Sydney
 
@@ -15,8 +15,8 @@ default_lang: "en"
 
 # Author/Brand
 author:
-  name: "44BYION STUDIO"
-  email: "hello@44byion.com"
+  name: "ART SPACE BYRON"
+  email: "44byronthegallerycafe@gmail.com"
 
 # Social Media
 social:
@@ -101,13 +101,13 @@ sass:
 logo: /assets/images/shared/logo.png
 favicon: /assets/images/favicon.svg
 twitter:
-  username: 44BYION
+  username: 44BYRON
   card: summary_large_image
 image: /assets/images/work/Min hea jung soo/Work (1).jpg
 
 # Social Links
 social:
-  name: 44BYION STUDIO
+  name: ART SPACE BYRON
   links:
     - https://instagram.com/liminalgallery
     - https://instagram.com/emberandhearth
