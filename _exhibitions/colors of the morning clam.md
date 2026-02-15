@@ -1,6 +1,6 @@
 ---
 title: Geum Sahong: Colors of the Morning Calm
-curator: Geum Sahong
+curator: Kim Ki Lim
 start_date: 2026-03-01
 end_date: 2026-06-29
 status: incomming
