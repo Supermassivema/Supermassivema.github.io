@@ -33,7 +33,7 @@
                     </a>
                 </div>
 
-                <nav class="main-nav">
+                <nav class="main-nav" id="main-nav">
                     <ul class="nav-menu">
                         <li><a href="{{ '/gallery/' | relative_url }}"
                                 class="nav-link {% if page.url == '/gallery/' or page.url == '/gallery/index.html' %}active{% endif %}">Home</a>
@@ -54,7 +54,11 @@
                 </nav>
 
                 <div class="header-right">
-                    <!-- Language switcher removed as per user request -->
+                    <button class="menu-toggle" aria-label="Toggle Menu" aria-controls="main-nav">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -106,6 +110,29 @@
             } else {
                 header.classList.remove('scrolled');
             }
+        });
+
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            const body = document.body;
+
+            menuToggle.addEventListener('click', function () {
+                const isOpen = mainNav.classList.toggle('is-open');
+                menuToggle.classList.toggle('is-active');
+                body.style.overflow = isOpen ? 'hidden' : '';
+            });
+
+            // Close menu on link click
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('is-open');
+                    menuToggle.classList.remove('is-active');
+                    body.style.overflow = '';
+                });
+            });
         });
     </script>
 </body>

@@ -9,12 +9,18 @@
 
 .gallery-hero {
     position: relative;
-    padding: var(--space-32) 0 var(--space-28);
+    padding: var(--space-24) 0;
+    /* Consistent generous padding top and bottom */
+    min-height: 70vh;
+    /* Ensure some minimum vertical presence */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    color: var(--rice-paper); /* Default to light color for image background */
+    color: #ffffff;
     overflow: hidden;
 }
 
@@ -25,7 +31,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
     z-index: 1;
 }
 
@@ -39,6 +46,8 @@
     margin-bottom: var(--space-4);
     font-weight: var(--weight-bold);
     letter-spacing: var(--tracking-tighter);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+    color: #ffffff;
 }
 
 .gallery-hero-subtitle {
@@ -547,9 +556,10 @@
 
 .gallery-hero-divider {
     width: 60px;
-    height: 1px;
+    height: 2px;
     background-color: var(--accent-primary);
     margin: var(--space-6) auto;
+    box-shadow: 0 0 10px rgba(168, 197, 181, 0.3);
 }
 
 .gallery-label {
@@ -560,6 +570,7 @@
     color: var(--accent-primary);
     margin-bottom: var(--space-4);
     text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .gallery-hero-description {
@@ -575,6 +586,33 @@
     justify-content: center;
     gap: var(--space-4);
     flex-wrap: wrap;
+    margin-top: var(--space-4);
+}
+
+/* Button overrides for dark hero */
+.gallery-hero .btn {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+}
+
+.gallery-hero .btn:hover {
+    background-color: #ffffff;
+    color: var(--ink-black);
+    border-color: #ffffff;
+}
+
+.gallery-hero .btn-primary {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: var(--ink-black);
+    font-weight: var(--weight-bold);
+}
+
+.gallery-hero .btn-primary:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
 }
 
 /* ============================================
@@ -594,6 +632,74 @@
 
 .mb-12 {
     margin-bottom: var(--space-12);
+}
+
+/* ============================================
+   RESPONSIVE NAVIGATION
+   ============================================ */
+
+@media (max-width: 1100px) {
+    #main-nav {
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important;
+        width: 100% !important;
+        height: 100vh !important;
+        background-color: var(--background-primary) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        transition: right 0.5s ease !important;
+        z-index: 2000 !important;
+    }
+
+    #main-nav.is-open {
+        right: 0 !important;
+    }
+
+    #main-nav .nav-menu {
+        flex-direction: column !important;
+        gap: 2rem !important;
+    }
+
+    #main-nav .nav-link {
+        font-size: 1.5rem !important;
+    }
+
+    .menu-toggle {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        width: 30px !important;
+        height: 20px !important;
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        z-index: 2001 !important;
+        position: relative !important;
+        margin-left: auto !important;
+    }
+
+    .hamburger-line {
+        width: 100% !important;
+        height: 2px !important;
+        background-color: var(--ink-black) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .menu-toggle.is-active .hamburger-line:nth-child(1) {
+        transform: translateY(9px) rotate(45deg) !important;
+    }
+
+    .menu-toggle.is-active .hamburger-line:nth-child(2) {
+        opacity: 0 !important;
+    }
+
+    .menu-toggle.is-active .hamburger-line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg) !important;
+    }
 }
 
 /* ============================================

@@ -404,6 +404,10 @@ img {
     z-index: 10;
 }
 
+.menu-toggle {
+    display: none;
+}
+
 .site-logo {
     display: flex;
     flex-direction: column;
@@ -642,14 +646,6 @@ img {
         /* 80px */
         --space-24: 6rem;
         /* 96px */
-    }
-
-    .nav-menu {
-        gap: var(--space-4);
-    }
-
-    .main-nav {
-        gap: var(--space-4);
     }
 }
 
