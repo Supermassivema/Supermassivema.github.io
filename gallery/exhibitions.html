@@ -31,7 +31,6 @@ show_header: true
           </div>
           <div class="exhibition-info">
             <h3 class="exhibition-title">{{ exhibition.title }}</h3>
-            <p class="exhibition-curator">{{ t.exhibitions.curator }}: {{ exhibition.curator }}</p>
             <p class="exhibition-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B
               %d, %Y" }}</p>
           </div>
@@ -59,7 +58,6 @@ show_header: true
           </div>
           <div class="exhibition-info">
             <h3 class="exhibition-title">{{ exhibition.title }}</h3>
-            <p class="exhibition-curator">{{ t.exhibitions.curator }}: {{ exhibition.curator }}</p>
             <p class="exhibition-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B
               %d, %Y" }}</p>
           </div>
@@ -83,7 +81,6 @@ show_header: true
           </div>
           <div class="exhibition-info">
             <h3 class="exhibition-title">{{ exhibition.title }}</h3>
-            <p class="exhibition-curator">{{ t.exhibitions.curator }}: {{ exhibition.curator }}</p>
           </div>
         </a>
         {% endfor %}
