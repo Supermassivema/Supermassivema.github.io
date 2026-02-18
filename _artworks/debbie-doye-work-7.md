@@ -5,7 +5,7 @@ artist: "Debbie Doye"
 medium: "Mixed Media, Abstract"
 dimensions: "Various"
 year: "2024"
-image: /assets/images/work/Debbie Doye/work07.jpeg
+image: /assets/images/work/DebbieDoye/work07.jpeg
 featured: true
 status: "available"
 price: "Contact for price"
