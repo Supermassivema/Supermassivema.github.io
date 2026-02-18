@@ -568,15 +568,116 @@
     border-radius: 100px !important;
 }
 
-.collection-count {
-    text-align: center;
+/* ============================================
+   EXHIBITION SPLIT LAYOUT (Byron Modern Style)
+   ============================================ */
+
+.exhibition-split-container {
+    padding: var(--space-8) 0 var(--space-20);
+}
+
+.exhibition-split-content {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    min-height: 500px;
+}
+
+.exhibition-split-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 20px;
+}
+
+.exhibition-split-header {
+    margin-bottom: var(--space-8);
+}
+
+.exhibition-split-artist {
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: var(--space-2);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.exhibition-split-title {
+    font-size: clamp(24px, 3vw, 32px);
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+    line-height: 1.2;
+}
+
+.exhibition-split-meta {
     font-size: var(--text-sm);
     color: var(--text-tertiary);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    margin-bottom: var(--space-8);
-    border-top: 1px solid var(--border-subtle);
-    padding-top: var(--space-4);
+    letter-spacing: 0.05em;
+    text-transform: none;
+    line-height: 1.6;
+}
+
+.exhibition-split-description {
+    font-size: var(--text-base);
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin-bottom: var(--space-10);
+}
+
+.visit-link-minimal {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.3s var(--ease-elegant);
+}
+
+.visit-link-minimal:hover {
+    transform: translateX(5px);
+}
+
+.link-arrow {
+    font-size: 18px;
+}
+
+.exhibition-split-image-wrap {
+    flex: 1.5;
+    overflow: hidden;
+}
+
+.exhibition-split-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease-elegant);
+}
+
+.exhibition-image-link:hover .exhibition-split-img {
+    transform: scale(1.03);
+}
+
+@media (max-width: 991px) {
+    .exhibition-split-content {
+        flex-direction: column-reverse;
+        gap: var(--space-10);
+    }
+
+    .exhibition-split-text {
+        padding-right: 0;
+        text-align: left;
+    }
+
+    .exhibition-split-description {
+        max-width: 100%;
+    }
 }
 
 /* ============================================
@@ -803,5 +904,240 @@
 
     .artist-card-image {
         max-width: 200px;
+    }
+}
+
+/* ============================================
+   WHITE CUBE - 3-COLUMN HEADER & CENTERED HERO
+   ============================================ */
+
+.header-content-v2 {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 30px 0;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.header-nav-left,
+.header-nav-right {
+    flex: 1;
+    display: flex;
+}
+
+.header-nav-left .nav-menu {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: flex-start;
+}
+
+.header-nav-right .nav-menu {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header-center {
+    flex: 0 0 auto;
+    text-align: center;
+}
+
+.site-logo-minimal {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-decoration: none;
+    color: #FFFFFF !important;
+    text-align: center;
+    display: block;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.site-header--white-cube .nav-link {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.15em !important;
+    text-decoration: none !important;
+    color: #FFFFFF !important;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    text-transform: uppercase !important;
+}
+
+.site-header--white-cube .nav-link:hover {
+    opacity: 1;
+}
+
+.nav-user-icon a {
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+}
+
+/* Centered Hero Layout */
+.gallery-hero-v2 {
+    position: relative;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    color: #FFFFFF;
+}
+
+.gallery-hero-overlay-minimal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    /* Slightly lighter for better image clarity */
+    z-index: 1;
+}
+
+.gallery-hero-content-centered {
+    position: relative;
+    z-index: 10;
+    max-width: 1000px;
+    width: 100%;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-artist-name {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(48px, 8vw, 96px) !important;
+    font-weight: 500 !important;
+    margin-bottom: 10px !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1 !important;
+    text-transform: none !important;
+}
+
+.hero-exhibition-title {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(32px, 5vw, 64px) !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    margin-bottom: 40px !important;
+    opacity: 0.95;
+    text-transform: none !important;
+    border: none !important;
+}
+
+.hero-meta-centered {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+    margin-bottom: 50px;
+}
+
+.hero-meta-centered p {
+    margin: 5px 0;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.hero-text-wrap {
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+.hero-btn-minimal {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: opacity 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 4px;
+}
+
+.hero-btn-minimal:hover {
+    opacity: 0.7;
+    border-bottom-color: #FFFFFF;
+}
+
+/* Minimal Scroll Indicator */
+.scroll-indicator-minimal {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.scroll-mouse-minimal {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-wheel-minimal {
+    width: 1px;
+    height: 25px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: scrollAnimMinimal 2s infinite;
+}
+
+@keyframes scrollAnimMinimal {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(35px);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 991px) {
+
+    .header-nav-left,
+    .header-nav-right {
+        display: none;
+    }
+
+    .header-content-v2 {
+        flex-direction: row;
+        justify-content: center;
     }
 }

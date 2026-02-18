@@ -6,7 +6,9 @@ const featuredArtists = [
     'min-hea-jung-soo.md',
     'lee-sang-kwon.md',
     'cho-chang-hwan.md',
-    'geum-sahong.md'
+    'geum-sahong.md',
+    'debbie-doye.md',
+    'stephen-jones.md'
 ];
 
 const files = fs.readdirSync(artistsDir);

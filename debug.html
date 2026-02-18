@@ -1,0 +1,15 @@
+---
+layout: null
+---
+<h1>Artist Debug</h1>
+<p>Total Artists in site.artists: {{ site.artists | size }}</p>
+<ul>
+    {% for artist in site.artists %}
+    <li>
+        Filename: {{ artist.path }}<br>
+        Name: {{ artist.name }}<br>
+        Featured: {{ artist.featured }}<br>
+        URL: {{ artist.url }}
+    </li>
+    {% endfor %}
+</ul>

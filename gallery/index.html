@@ -14,70 +14,89 @@ header_transparent: true
 {% assign lang = page.lang | default: site.default_lang | default: "en" %}
 {% assign t = site.data.translations[lang] %}
 
-<!-- 1. HERO SECTION - FULL SCREEN EXHIBITION SHADOW -->
+<!-- 1. HERO SECTION - WHITE CUBE CENTERED STYLE -->
 {% assign current_exhibition = site.exhibitions | where: "status", "current" | first %}
 {% assign hero_bg = current_exhibition.featured_image | default: '/assets/images/Gallery Background photo/gallery.png' |
 relative_url %}
-<section class="gallery-hero" style="background-image: url('{{ hero_bg }}');">
-  <div class="container">
-    <span class="gallery-label">{{ t.nav.gallery | upcase }}</span>
-    <h1 class="gallery-hero-title">{{ t.gallery.title }}</h1>
-    <p class="gallery-hero-subtitle">{{ t.gallery.subtitle }}</p>
-    <div class="gallery-hero-divider"></div>
-    <p class="gallery-hero-description">
-      {{ t.site.description }}
-    </p>
-    <div class="gallery-cta-group">
-      <a href="{{ '/gallery/exhibitions' | relative_url }}" class="btn btn-primary">
-        {{ t.gallery.current_exhibitions }}
-      </a>
-      <a href="{{ '/gallery/collection' | relative_url }}" class="btn">
-        {{ t.gallery.from_collection }}
-      </a>
+
+<section class="gallery-hero-v2" style="background-image: url('{{ hero_bg }}');">
+  <div class="gallery-hero-overlay-minimal"></div>
+  <div class="container gallery-hero-content-centered">
+    <div class="hero-text-wrap">
+      <h2 class="hero-artist-name">
+        {{ current_exhibition.artists | join: ", " | default: current_exhibition.artist }}
+      </h2>
+      <h1 class="hero-exhibition-title"><i>{{ current_exhibition.title }}</i></h1>
+
+      <div class="hero-meta-centered">
+        <p class="hero-date-range">
+          {{ current_exhibition.start_date | date: "%d %B" }} – {{ current_exhibition.end_date | date: "%d %B %Y" }}
+        </p>
+        <p class="hero-location-name">{{ current_exhibition.location | default: "Bermondsey, London" }}</p>
+      </div>
+
+      <div class="hero-actions-centered">
+        <a href="{{ current_exhibition.url | relative_url }}" class="hero-btn-minimal">
+          <span class="btn-arrow">→</span> Find out more
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- Scroll Down Indicator -->
-  <div class="scroll-indicator">
-    <span class="scroll-text">{{ t.common.scroll_down | default: "SCROLL" }}</span>
-    <div class="scroll-mouse">
-      <div class="scroll-wheel"></div>
+  <!-- Scroll Down Indicator (Preserved) -->
+  <div class="scroll-indicator-minimal">
+    <div class="scroll-mouse-minimal">
+      <div class="scroll-wheel-minimal"></div>
     </div>
   </div>
 </section>
 
 <!-- 2. FEATURED EXHIBITIONS - CLEAN GRID -->
 <section class="section">
-  <div class="container">
-    <div class="gallery-section-header">
-      <h2 class="gallery-section-title">{{ t.gallery.current_exhibitions }}</h2>
-      <p class="gallery-section-description">
-        {{ t.exhibitions.subtitle }}
-      </p>
-    </div>
+  <div class="container-wide">
 
     {% assign current_exhibitions = site.exhibitions | where: "status", "current" %}
     {% if current_exhibitions.size > 0 %}
-    <div class="exhibition-grid">
-      {% for exhibition in current_exhibitions limit: 3 %}
-      <a href="{{ exhibition.url | relative_url }}" class="exhibition-card">
-        <div class="exhibition-image">
-          <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
-          <div class="exhibition-status status-current">{{ t.exhibitions.current }}</div>
+    <div class="exhibition-split-container">
+      {% for exhibition in current_exhibitions limit: 1 %}
+      <div class="exhibition-split-content">
+        <!-- Left Side: Text Info -->
+        <div class="exhibition-split-text">
+          <div class="exhibition-split-header">
+            <h2 class="exhibition-split-artist">
+              {{ exhibition.artists | join: ", " | default: exhibition.artist }}
+            </h2>
+            <h3 class="exhibition-split-title"><i>{{ exhibition.title }}</i></h3>
+            <div class="exhibition-split-meta">
+              <p class="exhibition-split-date">
+                {{ exhibition.start_date | date: "%d %B" }} – {{ exhibition.end_date | date: "%d %B %Y" }}
+              </p>
+              <p class="exhibition-split-location">{{ exhibition.location | default: "Bermondsey, London" }}</p>
+            </div>
+          </div>
+
+          <div class="exhibition-split-description text-content">
+            {{ exhibition.description | default: "Discover a new body of work where conceptual grounds meet sensory
+            perception. This exhibition explores the boundaries of consciousness and materiality through experimental
+            forms." | truncatewords: 35 }}
+          </div>
+
+          <div class="exhibition-split-actions">
+            <a href="{{ exhibition.url | relative_url }}" class="visit-link-minimal">
+              <span class="link-arrow">→</span> Visit exhibition
+            </a>
+          </div>
         </div>
-        <div class="exhibition-info">
-          <h3 class="exhibition-title">{{ exhibition.title }}</h3>
-          <p class="exhibition-curator">{{ t.exhibitions.curator }}: {{ exhibition.curator }}</p>
-          <p class="exhibition-dates">{{ exhibition.start_date | date: "%b %d" }} — {{ exhibition.end_date | date: "%b
-            %d, %Y" }}</p>
+
+        <!-- Right Side: Large Image -->
+        <div class="exhibition-split-image-wrap">
+          <a href="{{ exhibition.url | relative_url }}" class="exhibition-image-link">
+            <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}"
+              class="exhibition-split-img" loading="lazy">
+          </a>
         </div>
-      </a>
+      </div>
       {% endfor %}
-    </div>
-    <div class="text-center mt-8">
-      <a href="{{ '/gallery/exhibitions' | relative_url }}" class="btn">
-        {{ t.common.view_all }}
-      </a>
     </div>
     {% else %}
     <div class="empty-state text-center">
@@ -99,7 +118,7 @@ relative_url %}
 
     <div class="artist-grid">
       {% assign featured_artists = site.artists | where: "featured", true %}
-      {% for artist in featured_artists limit: 4 %}
+      {% for artist in featured_artists limit: 6 %}
       <a href="{{ artist.url | relative_url }}" class="artist-card">
         <div class="artist-card-image">
           <img src="{{ artist.featured_image | relative_url }}" alt="{{ artist.name }}" loading="lazy">

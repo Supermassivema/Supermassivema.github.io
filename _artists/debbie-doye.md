@@ -1,30 +1,27 @@
-﻿---
+---
 layout: artist
 name: "Debbie Doye"
 slug: "debbie-doye"
-medium: "Mixed Media, Abstract"
+medium: "Ceramic Sculpture"
 nationality: "Australian"
 location: "Inverell, NSW"
-featured_image: /assets/images/work/Debbie Doye/work (1).jpeg
+featured_image: "/assets/images/work/Debbie Doye/profile.jpg"
 website: ""
 instagram: ""
-bio_short: "Debbie Doye creates vibrant abstract compositions that explore color relationships and emotional resonance through mixed media techniques."
-featured: false
+bio_short: "Debbie Doye is a ceramic sculptor whose practice is deeply informed by her connection to landscape, material, and light, investigating the relationship between solidity and transience."
+featured: true
 ---
 
-Debbie Doye is an Inverell-based abstract artist whose work celebrates the interplay of color, texture, and form. Working primarily in mixed media, Doye creates layered compositions that invite viewers into contemplative spaces filled with energy and movement.
+Based in the Northern Tablelands of New South Wales, Debbie is a ceramic sculptor whose practice is deeply informed by her connection to landscape, material, and light.
 
-Her practice is rooted in intuitive mark-making and a deep exploration of materiality. Each piece evolves organically, with layers of paint, collage, and mixed media building upon one another to create rich, tactile surfaces. Doye's color palette ranges from bold, saturated hues to subtle, nuanced tones, reflecting her interest in emotional expression through chromatic relationships.
+Working primarily with raw clay, she investigates the relationship between solidity and transience through sculptural form. Her process embraces the inherent qualities of the material, allowing hand-worked marks to remain visible. These tactile surfaces emphasise the integrity of the clay while inviting shifting light to activate each piece.
 
-Drawing inspiration from both natural landscapes and urban environments, Doye's abstractions exist in a liminal space between representation and pure form. Her works don't depict specific places or objects but rather capture the essence of experience?봳he feeling of light shifting across a surface, the energy of a bustling street, the quiet contemplation of solitude.
+Debbie has exhibited extensively throughout the Northern Tablelands, including in Inverell, Glen Innes, Lismore, and Tamworth. Her practice continues to reflect an ongoing exploration of earth-derived form and the subtle presence of shadow within sculptural space.
 
-## Artistic Approach
+## Exhibition Statement — Chasing Shadows
 
-Doye's creative process begins with spontaneity and experimentation. She often starts with bold gestural marks, allowing the work to guide her decisions as it develops. This intuitive approach results in compositions that feel both dynamic and harmonious, with each element finding its natural place within the whole.
+Chasing Shadows explores the quiet tension between permanence and impermanence. Working with clay — a material drawn directly from the earth — Debbie creates forms that feel grounded and substantial, yet are only fully realised through light.
 
-Texture plays a crucial role in her work. By incorporating various materials and techniques?봣rom thick impasto to delicate washes, from collaged elements to scraped surfaces?봁oye creates visual and physical depth that rewards close viewing. Her surfaces invite touch, even as they remain purely visual experiences.
+In this body of work, shadow is not incidental but integral. As light shifts, edges soften, silhouettes extend, and negative space becomes active. The sculptures are never fixed; they evolve throughout the day, inviting viewers to slow down and notice subtle movement within stillness.
 
-## Recognition
-
-Doye's work has been featured in private collections throughout Australia and internationally. She continues to develop her practice through ongoing experimentation with materials and color theory.
-
+Each piece embodies both presence and absence — solid clay holding an echo of something fleeting. Chasing Shadows is an exploration of form in transition and of the quiet moments where light, earth, and time converge.

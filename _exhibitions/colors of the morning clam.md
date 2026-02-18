@@ -6,11 +6,12 @@ end_date: 2026-06-29
 status: current
 featured_image: "/assets/images/work/Geum Sahong/work.jpg"
 upcoming_design: halftone
+location: Inverall, NSW, Australia
 artists:
   - Geum Sahong
 ---
 
-"Abstract Reflections" brings together two accomplished contemporary artists whose work explores the boundaries of abstraction and representation. This exhibition showcases Debbie Doye's luminous abstract compositions alongside Geum Sahong's contemplative mixed-media works, creating a dialogue between different approaches to abstract expression.
+"Colors of the Morning Calm" brings together two accomplished contemporary artists whose work explores the boundaries of abstraction and representation. This exhibition showcases Debbie Doye's luminous abstract compositions alongside Geum Sahong's contemplative mixed-media works, creating a dialogue between different approaches to abstract expression.
 
 Doye's paintings in this exhibition feature her signature use of layered colors and translucent forms, creating works that seem to shift and change as viewers move through the gallery space. Her intuitive approach to composition results in pieces that feel both spontaneous and carefully considered, inviting extended contemplation.
 
