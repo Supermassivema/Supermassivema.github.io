@@ -413,7 +413,8 @@ lang: en
 <body class="gateway-page">
     <div class="background-video-container">
         {% assign first_video = video_files | first %}
-        <video id="bg-video-1" class="active" muted playsinline autoplay loop preload="auto" src="{{ first_video }}"
+        <video id="bg-video-1" class="active" muted playsinline autoplay loop preload="auto"
+            src="{{ '/assets/video/art_gallery_hyperlapse.mp4' | relative_url }}"
             poster="{{ '/assets/images/Gallery Background photo/space (3).jpg' | relative_url }}">
         </video>
         <video id="bg-video-2" muted playsinline preload="auto"></video>
