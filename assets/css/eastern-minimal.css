@@ -12,27 +12,25 @@
 :root {
     /* COLOR PALETTE - Natural & Subtle */
 
-    /* Primary Colors - 먹과 한지 (Ink & Rice Paper) */
-    --ink-black: #1a1a1a;
-    --rice-paper: #faf8f3;
-    --charcoal: #4a4a4a;
-    --stone-grey: #8b8b8b;
+    /* Primary Colors - White Cube (Pure & Stark) */
+    --ink-black: #000000;
+    --rice-paper: #ffffff;
+    --charcoal: #1a1a1a;
+    --stone-grey: #666666;
 
-    /* Accent Colors - Traditional */
-    --celadon: #a8c5b5;
-    /* 청자색 */
-    --celadon-dark: #8ba899;
-    --bronze: #8b7355;
-    /* 청동색 */
-    --bronze-light: #a89078;
-    --vermillion: #c44536;
-    /* 주홍 (minimal use) */
+    /* Accent Colors - Minimal & Discrete */
+    --celadon: #000000;
+    /* Accents become monochromatic */
+    --celadon-dark: #000000;
+    --bronze: #333333;
+    --bronze-light: #444444;
+    --vermillion: #000000;
 
     /* Neutral Tones */
-    --warm-white: #f5f3ed;
-    --cool-grey: #e8e6e0;
-    --soft-beige: #ede9e0;
-    --mist-grey: #f0eeea;
+    --warm-white: #ffffff;
+    --cool-grey: #f2f2f2;
+    --soft-beige: #ffffff;
+    --mist-grey: #f8f8f8;
 
     /* Semantic Colors */
     --text-primary: var(--ink-black);
@@ -40,15 +38,17 @@
     --text-tertiary: var(--stone-grey);
     --background-primary: var(--rice-paper);
     --background-secondary: var(--warm-white);
-    --border-subtle: var(--cool-grey);
-    --accent-primary: var(--celadon);
-    --accent-secondary: var(--bronze);
+    --border-subtle: #eeeeee;
+    --accent-primary: var(--ink-black);
+    --accent-secondary: var(--charcoal);
 
     /* TYPOGRAPHY SYSTEM */
 
     /* Font Families */
-    --font-serif-en: 'Playfair Display', Georgia, serif;
-    --font-serif-kr: 'Noto Serif KR', serif;
+    /* Font Families - Modern Sans Focus */
+    --font-serif-en: 'Inter', sans-serif;
+    /* Shift away from serif */
+    --font-serif-kr: 'Noto Sans KR', sans-serif;
     --font-sans-en: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-sans-kr: 'Noto Sans KR', sans-serif;
 
@@ -88,13 +88,13 @@
     --leading-relaxed: 1.8;
     --leading-loose: 2.0;
 
-    /* Letter Spacing */
+    /* Letter Spacing - Wide & Premium */
     --tracking-tighter: -0.05em;
     --tracking-tight: -0.025em;
     --tracking-normal: 0;
-    --tracking-wide: 0.025em;
-    --tracking-wider: 0.05em;
-    --tracking-widest: 0.1em;
+    --tracking-wide: 0.1em;
+    --tracking-wider: 0.2em;
+    --tracking-widest: 0.4em;
 
     /* SPACING SYSTEM - Generous (여백의 미) */
 
@@ -130,8 +130,7 @@
     --container-wide: 1400px;
     --container-header: 1600px;
     --container-footer: 1600px;
-    --container-padding: 3.75rem;
-    /* 60px */
+    --container-padding: 4rem;
 
     /* BORDER & RADIUS */
 
@@ -453,22 +452,22 @@ img {
 }
 
 .logo-line-1 {
-    font-family: var(--font-serif-en);
-    font-size: 1.5rem;
-    font-weight: var(--weight-semibold);
-    letter-spacing: 0.2em;
+    font-family: var(--font-sans-en);
+    font-size: 1.8rem;
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.05em;
     color: var(--ink-black);
-    margin-bottom: 2px;
+    margin-bottom: 0;
 }
 
 .logo-line-2 {
     font-family: var(--font-sans-en);
-    font-size: 0.7rem;
-    font-weight: var(--weight-medium);
-    letter-spacing: 0.5em;
-    color: var(--text-tertiary);
+    font-size: 0.75rem;
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.3em;
+    color: var(--ink-black);
     text-transform: uppercase;
-    padding-left: 2px;
+    margin-top: -2px;
 }
 
 .main-nav {
@@ -484,25 +483,28 @@ img {
 }
 
 .nav-link {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
-    letter-spacing: var(--tracking-wide);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--text-secondary);
-    transition: color var(--duration-base) var(--ease-elegant);
+    color: var(--text-primary);
+    transition: opacity var(--duration-base) var(--ease-elegant);
     position: relative;
-    padding-bottom: var(--space-1);
+    padding-bottom: 0;
+}
+
+.nav-link:hover {
+    opacity: 0.5;
 }
 
 .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: var(--accent-primary);
-    transition: width var(--duration-base) var(--ease-elegant);
+    display: none;
+    /* Removed underline */
+}
+
+/* Fixed Syntax Errors in Nav Section */
+#main-nav .nav-menu {
+    gap: var(--space-8);
 }
 
 .nav-link:hover,
@@ -516,36 +518,29 @@ img {
 }
 
 /* ============================================
-   BUTTONS - Minimal & Elegant
+   BUTTONS & ACTIONS
    ============================================ */
 
 .btn {
     display: inline-block;
-    padding: var(--space-3) var(--space-6);
-    font-family: inherit;
-    font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
-    letter-spacing: var(--tracking-wider);
+    padding: var(--space-3) var(--space-8);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-widest);
     text-transform: uppercase;
-    text-align: center;
-    border: var(--border-subtle);
-    background-color: transparent;
-    color: var(--text-primary);
-    cursor: pointer;
-    transition: all var(--duration-base) var(--ease-elegant);
     text-decoration: none;
+    transition: all var(--duration-base) var(--ease-elegant);
+    cursor: pointer;
+    border: 1px solid var(--ink-black);
+    background-color: transparent;
+    color: var(--ink-black);
+    border-radius: 0;
+    /* Stark corners */
 }
 
 .btn:hover {
     background-color: var(--ink-black);
-    border-color: var(--ink-black);
-    color: var(--rice-paper);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-.btn:active {
-    transform: translateY(0);
+    color: #ffffff;
 }
 
 .btn-primary {
