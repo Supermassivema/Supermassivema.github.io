@@ -22,7 +22,6 @@ title: "Collection"
       <button class="filter-btn" data-filter="{{ artist }}">{{ artist | upcase }}</button>
       {% endfor %}
       <button class="filter-btn" data-filter="available">{{ t.collection.available }}</button>
-      <button class="filter-btn" data-filter="sold">{{ t.collection.sold }}</button>
     </div>
 
     <!-- Collection Count -->
@@ -47,8 +46,6 @@ title: "Collection"
             <p class="artwork-meta">{{ artwork.dimensions }}</p>
             {% if artwork.status == 'available' %}
             <p class="artwork-status status-available">{{ artwork.price }}</p>
-            {% elsif artwork.status == 'sold' %}
-            <p class="artwork-status status-sold">{{ t.collection.sold }}</p>
             {% endif %}
           </div>
         </a>

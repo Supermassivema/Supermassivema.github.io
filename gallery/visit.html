@@ -1,6 +1,6 @@
 ---
 layout: gallery-page
-title: "Visit"
+title: "About"
 ---
 {% assign lang = page.lang | default: site.default_lang | default: "en" %}
 {% assign t = site.data.translations[lang] %}
@@ -47,6 +47,20 @@ title: "Visit"
 </section>
 
 <section class="section bg-secondary">
+  <div class="container">
+    <div class="gallery-section-header">
+      <h2 class="gallery-section-title">Staff</h2>
+    </div>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-8);">
+      <div class="card p-8">
+        <h3 class="text-xl mb-4">Director</h3>
+        <p class="text-secondary" style="font-size: var(--text-lg);">김기림 (Kim Girim)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
   <div class="container text-center">
     <h2 class="mb-8">{{ t.visit.entry_free }}</h2>
     <p class="text-lg max-w-narrow mx-auto mb-12">

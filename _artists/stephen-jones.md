@@ -3,7 +3,7 @@ layout: artist
 name: "Stephen Jones"
 slug: "stephen-jones"
 medium: "Sculpture, Installation"
-nationality: "British-Australian"
+nationality: "Australian"
 location: "Inverell, NSW"
 featured_image: "/assets/images/work/Stephen Jones/Work_01.jpg"
 website: ""
@@ -14,7 +14,7 @@ featured: true
 
 ## Biography
 
-Stephen Jones is a British-Australian artist whose sculptural practice investigates the fundamental relationships between form, material, and space. Based in Melbourne, Jones creates works that range from intimate table-top sculptures to large-scale installations that transform architectural environments.
+Stephen Jones is a Australian artist whose sculptural practice investigates the fundamental relationships between form, material, and space. Based in Melbourne, Jones creates works that range from intimate table-top sculptures to large-scale installations that transform architectural environments.
 
 With a background in both fine arts and architecture, Jones brings a unique understanding of spatial dynamics to his practice. His works often play with perception, creating visual phenomena that shift as viewers move around them. Through careful manipulation of materials—metal, wood, stone, and found objects—Jones creates pieces that feel both timeless and thoroughly contemporary.
 

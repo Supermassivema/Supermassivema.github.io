@@ -1,11 +1,11 @@
 ---
 layout: artwork
-title: "Stephen Jones - Work 2"
+title: "Stephen Jones - Work 3"
 artist: "Stephen Jones"
 medium: "Sculpture, Installation"
 dimensions: "Various"
 year: "2024"
-image: /assets/images/work/Stephen Jones/Work (2).jpg
+image: /assets/images/work/Stephen Jones/Work_03.jpg
 featured: true
 status: "available"
 price: "Contact for price"

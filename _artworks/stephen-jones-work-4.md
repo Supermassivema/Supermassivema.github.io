@@ -1,6 +1,6 @@
 ---
 layout: artwork
-title: "Stephen Jones - Work 2"
+title: "Stephen Jones - Work 4"
 artist: "Stephen Jones"
 medium: "Sculpture, Installation"
 dimensions: "Various"

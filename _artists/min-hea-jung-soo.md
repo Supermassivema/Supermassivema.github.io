@@ -2,8 +2,8 @@
 layout: artist
 name: "Min Hea Jung Soo"
 slug: "min-hea-jung-soo"
-medium: "Photography, Digital Art"
-nationality: "Korean-Australian"
+medium: "Artist"
+nationality: "Korean"
 location: "Inverell, NSW"
 featured_image: "/assets/images/work/MinHeaJungSoo/profile.jpg"
 website: ""
@@ -15,7 +15,7 @@ featured: true
 
 ## Biography
 
-Min Hea Jung Soo is a Korean-Australian artist working at the intersection of photography, digital media, and installation. Based in Inverell, Min Hea's practice explores the complexities of cultural identity, personal memory, and the ways we construct and reconstruct narratives about ourselves and our communities.
+Min Hea Jung Soo is a Korean artist working at the intersection of photography, digital media, and installation. Based in Inverell, Min Hea's practice explores the complexities of cultural identity, personal memory, and the ways we construct and reconstruct narratives about ourselves and our communities.
 
 Born in Korea and raised in Australia, Min Hea brings a nuanced perspective to questions of belonging, hybridity, and the immigrant experience. Their work often layers imagery, text, and found materials to create rich visual compositions that function both as personal narratives and broader cultural commentary.
 
