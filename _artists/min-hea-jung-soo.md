@@ -19,7 +19,7 @@ Min Hea Jung Soo is a Korean artist working at the intersection of photography, 
 
 Born in Korea and raised in Australia, Min Hea brings a nuanced perspective to questions of belonging, hybridity, and the immigrant experience. Their work often layers imagery, text, and found materials to create rich visual compositions that function both as personal narratives and broader cultural commentary.
 
-Min Hea's photographic work ranges from documentary-style portraiture to highly constructed, conceptual imagery. They are particularly interested in how photography—despite its association with objective truth—is always an act of interpretation and storytelling.
+Min Hea's photographic work ranges from documentary-style portraiture to highly constructed, conceptual imagery. They are particularly interested in how photography—despite its association with objective truth—is always an act of interpretation and storytelling. 바보바ㅣ보보
 
 ## Artistic Practice
 
