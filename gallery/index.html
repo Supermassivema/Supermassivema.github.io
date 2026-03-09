@@ -1,174 +1,577 @@
 ---
 layout: gallery-page
 title: "Home"
-description: "44BYRON STUDIO - Contemporary art space in Inverell showcasing curated exhibitions"
+description: "ART SPACE BYRON - Contemporary art space in Inverell"
 header_transparent: true
 ---
 
-<!-- ========================================
-     SPOTIFY-INSPIRED DESIGN SYSTEM
-     Bold, Vibrant, Modern
-     Black + Yellow + White
-     ======================================== -->
+<style>
+  /* ── Kukje-Style Main Page ── */
+  .main-page { background: #fff; }
 
-{% assign lang = page.lang | default: site.default_lang | default: "en" %}
-{% assign t = site.data.translations[lang] %}
+  /* ── Hero: Full-width current exhibition ── */
+  .main-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-<!-- 1. HERO SECTION - WHITE CUBE CENTERED STYLE -->
-{% assign current_exhibition = site.exhibitions | where: "status", "current" | first %}
-{% assign hero_bg = current_exhibition.featured_image | default: '/assets/images/Gallery Background photo/gallery.png' |
-relative_url %}
+  .main-hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+  }
 
-<section class="gallery-hero-v2" style="background-image: url('{{ hero_bg }}');">
-  <div class="gallery-hero-overlay-minimal"></div>
-  <div class="container gallery-hero-content-centered">
-    <div class="hero-text-wrap">
-      <h2 class="hero-artist-name">
-        {{ current_exhibition.artists | join: ", " | default: current_exhibition.artist }}
-      </h2>
-      <h1 class="hero-exhibition-title"><i>{{ current_exhibition.title }}</i></h1>
+  .main-hero-slide.active {
+    opacity: 1;
+  }
 
-      <div class="hero-meta-centered">
-        <p class="hero-date-range">
-          {{ current_exhibition.start_date | date: "%d %B" }} – {{ current_exhibition.end_date | date: "%d %B %Y" }}
-        </p>
-        <p class="hero-location-name">{{ current_exhibition.location | default: "Bermondsey, London" }}</p>
-      </div>
+  /* Slide indicators */
+  .main-hero-indicators {
+    position: absolute;
+    bottom: 70px;
+    right: 48px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
 
-      <div class="hero-actions-centered">
-        <a href="{{ current_exhibition.url | relative_url }}" class="hero-btn-minimal">
-          <span class="btn-arrow">→</span> Find out more
-        </a>
-      </div>
+  .hero-indicator {
+    width: 24px;
+    height: 2px;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .hero-indicator.active {
+    background: rgba(255,255,255,0.9);
+  }
+
+  .main-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 60px 48px 48px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  }
+
+  .main-hero-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin: 0 0 10px;
+  }
+
+  .main-hero-title {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px;
+    line-height: 1.2;
+  }
+
+  .main-hero-artist {
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    color: rgba(255,255,255,0.85);
+    margin: 0 0 8px;
+  }
+
+  .main-hero-dates {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+    margin: 0 0 20px;
+  }
+
+  .main-hero-link {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 4px;
+    transition: border-color 0.2s;
+  }
+
+  .main-hero-link:hover {
+    border-color: #fff;
+  }
+
+  /* Scroll indicator */
+  .main-scroll-indicator {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 10;
+  }
+
+  .main-scroll-mouse {
+    width: 20px;
+    height: 32px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 12px;
+    position: relative;
+  }
+
+  .main-scroll-wheel {
+    width: 3px;
+    height: 8px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollBounce 1.5s ease-in-out infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.3; transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── Section Container ── */
+  .main-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 64px 48px;
+  }
+
+  .main-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .main-section-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0;
+  }
+
+  .main-section-viewall {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #999;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .main-section-viewall:hover {
+    color: #000;
+  }
+
+  /* ── Exhibition Cards (2-col) ── */
+  .main-exh-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px;
+  }
+
+  .main-exh-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .main-exh-card-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #f5f5f5;
+    margin-bottom: 14px;
+  }
+
+  .main-exh-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .main-exh-card:hover .main-exh-card-img img {
+    transform: scale(1.03);
+  }
+
+  .main-exh-card-location {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 6px;
+  }
+
+  .main-exh-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+    line-height: 1.35;
+  }
+
+  .main-exh-card-dates {
+    font-size: 0.75rem;
+    color: #888;
+    margin: 0;
+  }
+
+  /* ── Artist Grid (name list style) ── */
+  .main-artist-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 36px;
+  }
+
+  .main-artist-item {
+    text-decoration: none;
+    color: #000;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: color 0.2s;
+    display: block;
+  }
+
+  .main-artist-item:hover {
+    color: #666;
+  }
+
+  /* ── News Cards ── */
+  .main-news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .main-news-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .main-news-card-img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #f5f5f5;
+    margin-bottom: 14px;
+  }
+
+  .main-news-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .main-news-card:hover .main-news-card-img img {
+    transform: scale(1.03);
+  }
+
+  .main-news-card-date {
+    font-size: 0.65rem;
+    color: #999;
+    letter-spacing: 0.06em;
+    margin: 0 0 6px;
+  }
+
+  .main-news-card-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin: 0 0 6px;
+    line-height: 1.4;
+  }
+
+  .main-news-card-excerpt {
+    font-size: 0.78rem;
+    color: #888;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── Artwork Featured Row ── */
+  .main-artwork-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .main-artwork-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .main-artwork-card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #f5f5f5;
+    margin-bottom: 10px;
+  }
+
+  .main-artwork-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .main-artwork-card:hover .main-artwork-card-img img {
+    transform: scale(1.03);
+  }
+
+  .main-artwork-card-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin: 0 0 2px;
+  }
+
+  .main-artwork-card-artist {
+    font-size: 0.72rem;
+    color: #888;
+    margin: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .main-section { padding: 48px 24px; }
+    .main-exh-grid { grid-template-columns: 1fr; }
+    .main-artist-grid { grid-template-columns: repeat(2, 1fr); }
+    .main-news-grid { grid-template-columns: 1fr; }
+    .main-artwork-grid { grid-template-columns: repeat(2, 1fr); }
+    .main-hero-overlay { padding: 40px 24px 32px; }
+  }
+
+  @media (max-width: 480px) {
+    .main-artist-grid { grid-template-columns: 1fr; }
+    .main-artwork-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<div class="main-page">
+
+  <!-- 1. HERO: Current Exhibition Full Screen -->
+  {% assign current_exhibition = site.exhibitions | where: "status", "current" | first %}
+  {% assign hero_bg = current_exhibition.featured_image | default: '/assets/images/Gallery Background photo/gallery.png' | relative_url %}
+
+  <section class="main-hero">
+    <!-- Slideshow Images (round-robin: Stephen → Debbie → Geum) -->
+    {% assign jones_works = site.artworks | where: "artist", "Stephen Jones" %}
+    {% assign doye_works = site.artworks | where: "artist", "Debbie Doye" %}
+    {% assign geum_works = site.artworks | where: "artist", "Geum Sahong" %}
+    {% assign slide_filtered = "" | split: "" %}
+    {% for i in (0..3) %}
+      {% assign gw = geum_works[i] %}
+      {% assign dw = doye_works[i] %}
+      {% assign jw = jones_works[i] %}
+      {% if gw %}{% assign slide_filtered = slide_filtered | push: gw %}{% endif %}
+      {% if dw %}{% assign slide_filtered = slide_filtered | push: dw %}{% endif %}
+      {% if jw %}{% assign slide_filtered = slide_filtered | push: jw %}{% endif %}
+    {% endfor %}
+    {% for artwork in slide_filtered limit: 12 %}
+    <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" class="main-hero-slide {% if forloop.first %}active{% endif %}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+    {% endfor %}
+
+    <div class="main-hero-overlay">
+      <p class="main-hero-label">Current Exhibition</p>
+      <p class="main-hero-artist">{{ current_exhibition.artists | join: ", " | default: current_exhibition.artist }}</p>
+      <h1 class="main-hero-title">{{ current_exhibition.title }}</h1>
+      <p class="main-hero-dates">
+        {{ current_exhibition.start_date | date: "%B %d" }} — {{ current_exhibition.end_date | date: "%B %d, %Y" }}
+      </p>
+      <a href="{{ current_exhibition.url | relative_url }}" class="main-hero-link">View Exhibition →</a>
     </div>
-  </div>
 
-  <!-- Scroll Down Indicator (Preserved) -->
-  <div class="scroll-indicator-minimal">
-    <div class="scroll-mouse-minimal">
-      <div class="scroll-wheel-minimal"></div>
-    </div>
-  </div>
-</section>
-
-<!-- 2. FEATURED EXHIBITIONS - CLEAN GRID -->
-<section class="section">
-  <div class="container-wide">
-
-    {% assign current_exhibitions = site.exhibitions | where: "status", "current" %}
-    {% if current_exhibitions.size > 0 %}
-    <div class="exhibition-split-container">
-      {% for exhibition in current_exhibitions limit: 1 %}
-      <div class="exhibition-split-content">
-        <!-- Left Side: Text Info -->
-        <div class="exhibition-split-text">
-          <div class="exhibition-split-header">
-            <h2 class="exhibition-split-artist">
-              {{ exhibition.artists | join: ", " | default: exhibition.artist }}
-            </h2>
-            <h3 class="exhibition-split-title"><i>{{ exhibition.title }}</i></h3>
-            <div class="exhibition-split-meta">
-              <p class="exhibition-split-date">
-                {{ exhibition.start_date | date: "%d %B" }} – {{ exhibition.end_date | date: "%d %B %Y" }}
-              </p>
-              <p class="exhibition-split-location">{{ exhibition.location | default: "Bermondsey, London" }}</p>
-            </div>
-          </div>
-
-          <div class="exhibition-split-description text-content">
-            {{ exhibition.description | default: "Discover a new body of work where conceptual grounds meet sensory
-            perception. This exhibition explores the boundaries of consciousness and materiality through experimental
-            forms." | truncatewords: 35 }}
-          </div>
-
-          <div class="exhibition-split-actions">
-            <a href="{{ exhibition.url | relative_url }}" class="visit-link-minimal">
-              <span class="link-arrow">→</span> Visit exhibition
-            </a>
-          </div>
-        </div>
-
-        <!-- Right Side: Large Image -->
-        <div class="exhibition-split-image-wrap">
-          <a href="{{ exhibition.url | relative_url }}" class="exhibition-image-link">
-            <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}"
-              class="exhibition-split-img" loading="lazy">
-          </a>
-        </div>
-      </div>
+    <!-- Slide indicators -->
+    <div class="main-hero-indicators">
+      {% for artwork in slide_filtered limit: 10 %}
+      <span class="hero-indicator {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}"></span>
       {% endfor %}
     </div>
-    {% else %}
-    <div class="empty-state text-center">
-      <p>{{ t.exhibitions.upcoming }}...</p>
+
+    <div class="main-scroll-indicator">
+      <div class="main-scroll-mouse">
+        <div class="main-scroll-wheel"></div>
+      </div>
     </div>
-    {% endif %}
+  </section>
+
+  <!-- 2. EXHIBITIONS -->
+  <div class="main-section">
+    <div class="main-section-header">
+      <h2 class="main-section-title">Exhibitions</h2>
+      <a href="{{ '/gallery/exhibitions' | relative_url }}" class="main-section-viewall">View All →</a>
+    </div>
+
+    {% assign all_exhibitions = site.exhibitions %}
+    <div class="main-exh-grid">
+      {% for exhibition in all_exhibitions limit: 4 %}
+      <a href="{{ exhibition.url | relative_url }}" class="main-exh-card">
+        <div class="main-exh-card-img">
+          {% if exhibition.featured_image %}
+          <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
+          {% endif %}
+        </div>
+        <p class="main-exh-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
+        <p class="main-exh-card-title">{{ exhibition.title }}</p>
+        <p class="main-exh-card-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B %d, %Y" }}</p>
+      </a>
+      {% endfor %}
+    </div>
   </div>
-</section>
 
-<!-- 3. FEATURED ARTISTS - ELEGANT CIRLCES -->
-<section class="section bg-secondary">
-  <div class="container">
-    <div class="gallery-section-header">
-      <h2 class="gallery-section-title">{{ t.gallery.featured_artists }}</h2>
-      <p class="gallery-section-description">
-        {{ t.artists.subtitle }}
-      </p>
+  <!-- 3. ARTISTS -->
+  <div class="main-section">
+    <div class="main-section-header">
+      <h2 class="main-section-title">Artists</h2>
+      <a href="{{ '/gallery/artists' | relative_url }}" class="main-section-viewall">View All →</a>
     </div>
 
-    <div class="artist-grid">
+    <div class="main-artist-grid">
       {% assign featured_artists = site.artists | where: "featured", true %}
       {% for artist in featured_artists limit: 6 %}
-      <a href="{{ artist.url | relative_url }}" class="artist-card">
-        <div class="artist-card-image">
-          <img src="{{ artist.featured_image | relative_url }}" alt="{{ artist.name }}" loading="lazy">
-        </div>
-        <div class="artist-info">
-          <h3 class="artist-name">{{ artist.name }}</h3>
-          <p class="artist-specialty">{{ artist.medium }}</p>
-        </div>
-      </a>
+      <a href="{{ artist.url | relative_url }}" class="main-artist-item">{{ artist.name }}</a>
       {% endfor %}
     </div>
-    <div class="text-center mt-8">
-      <a href="{{ '/gallery/artists' | relative_url }}" class="btn">
-        {{ t.gallery.featured_artists }} {{ t.common.view_all }}
-      </a>
-    </div>
   </div>
-</section>
 
-<!-- 4. COLLECTION PREVIEW -->
-<section class="section">
-  <div class="container">
-    <div class="gallery-section-header">
-      <h2 class="gallery-section-title">{{ t.gallery.from_collection }}</h2>
-      <p class="gallery-section-description">
-        {{ t.collection.subtitle }}
-      </p>
+  <!-- 4. FROM THE COLLECTION -->
+  <div class="main-section">
+    <div class="main-section-header">
+      <h2 class="main-section-title">From the Collection</h2>
+      <a href="{{ '/gallery/collection' | relative_url }}" class="main-section-viewall">View All →</a>
     </div>
 
     {% assign featured_artworks = site.artworks | where: "featured", true %}
-    {% if featured_artworks.size > 0 %}
-    <div class="artwork-grid">
-      {% for artwork in featured_artworks limit: 4 %}
-      <a href="{{ artwork.url | relative_url }}" class="artwork-card">
-        <div class="artwork-card-image">
+    <div class="main-artwork-grid">
+      {% for artwork in featured_artworks limit: 8 %}
+      <a href="{{ artwork.url | relative_url }}" class="main-artwork-card">
+        <div class="main-artwork-card-img">
+          {% if artwork.image %}
           <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">
+          {% endif %}
         </div>
-        <div class="artwork-card-info">
-          <h3 class="artwork-title">{{ artwork.title }}</h3>
-          <p class="artwork-artist">{{ artwork.artist }}</p>
-          <p class="artwork-meta">{{ artwork.medium }}, {{ artwork.dimensions }}</p>
-        </div>
+        <p class="main-artwork-card-title">{{ artwork.title }}</p>
+        <p class="main-artwork-card-artist">{{ artwork.artist }}</p>
       </a>
       {% endfor %}
     </div>
-    <div class="text-center mt-8">
-      <a href="{{ '/gallery/collection' | relative_url }}" class="btn btn-primary">
-        {{ t.collection.title }} {{ t.common.view_all }}
-      </a>
-    </div>
-    {% endif %}
   </div>
-</section>
+
+  <!-- 5. NEWS -->
+  <div class="main-section">
+    <div class="main-section-header">
+      <h2 class="main-section-title">News</h2>
+      <a href="{{ '/gallery/news' | relative_url }}" class="main-section-viewall">View All →</a>
+    </div>
+
+    <div class="main-news-grid">
+      {% assign news_posts = site.posts | default: site.pages %}
+      {% for exhibition in site.exhibitions limit: 3 %}
+      <a href="{{ exhibition.url | relative_url }}" class="main-news-card">
+        <div class="main-news-card-img">
+          {% if exhibition.featured_image %}
+          <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
+          {% endif %}
+        </div>
+        <p class="main-news-card-date">{{ exhibition.start_date | date: "%B %Y" }}</p>
+        <p class="main-news-card-title">{{ exhibition.title }}</p>
+        <p class="main-news-card-excerpt">{{ exhibition.location | default: "Inverell, NSW" }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- 6. MEDIA -->
+  <div class="main-section">
+    <div class="main-section-header">
+      <h2 class="main-section-title">Media</h2>
+      <a href="{{ '/gallery/collection' | relative_url }}" class="main-section-viewall">View All →</a>
+    </div>
+
+    {% assign media_artworks = site.artworks | where: "featured", true %}
+    <div class="main-artwork-grid">
+      {% for artwork in media_artworks limit: 4 offset: 8 %}
+      <a href="{{ artwork.url | relative_url }}" class="main-artwork-card">
+        <div class="main-artwork-card-img">
+          {% if artwork.image %}
+          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">
+          {% endif %}
+        </div>
+        <p class="main-artwork-card-title">{{ artwork.title }}</p>
+        <p class="main-artwork-card-artist">{{ artwork.artist }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Hero Slideshow - 3 second interval
+  (function() {
+    const slides = document.querySelectorAll('.main-hero-slide');
+    const indicators = document.querySelectorAll('.hero-indicator');
+    if (slides.length <= 1) return;
+
+    let current = 0;
+    let interval;
+
+    function goTo(index) {
+      slides[current].classList.remove('active');
+      indicators[current].classList.remove('active');
+      current = index % slides.length;
+      slides[current].classList.add('active');
+      indicators[current].classList.add('active');
+    }
+
+    function next() {
+      goTo(current + 1);
+    }
+
+    function startAutoplay() {
+      interval = setInterval(next, 3000);
+    }
+
+    indicators.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        clearInterval(interval);
+        goTo(i);
+        startAutoplay();
+      });
+    });
+
+    startAutoplay();
+  })();
+</script>
