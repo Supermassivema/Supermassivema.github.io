@@ -400,7 +400,7 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
       {% if dw %}{% assign slide_filtered = slide_filtered | push: dw %}{% endif %}
       {% if jw %}{% assign slide_filtered = slide_filtered | push: jw %}{% endif %}
     {% endfor %}
-    {% for artwork in slide_filtered limit: 12 %}
+    {% for artwork in slide_filtered limit: 10 %}
     <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" class="main-hero-slide {% if forloop.first %}active{% endif %}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
     {% endfor %}
 
@@ -558,7 +558,7 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     }
 
     function next() {
-      goTo(current + 1);
+      goTo((current + 1) % slides.length);
     }
 
     function startAutoplay() {
