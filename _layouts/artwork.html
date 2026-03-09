@@ -1,441 +1,911 @@
 {% assign lang = page.lang | default: site.default_lang | default: "en" %}
 {% assign t = site.data.translations[lang] %}
 
-<div class="artwork-editorial-wrapper" lang="{{ lang }}">
-  <nav class="editorial-nav">
-    <a href="{{ '/gallery/collection/' | relative_url }}" class="nav-btn-back">
-      <span class="nav-icon"></span>
-      <span class="nav-text">{{ t.common.back_to_list | default: 'COLLECTION' }}</span>
+<div class="artwork-gallery-wrapper" lang="{{ lang }}">
+
+  <!-- Entrance overlay -->
+  <div class="gallery-curtain"></div>
+
+  <!-- Back navigation -->
+  <nav class="gallery-nav">
+    <a href="{{ '/gallery/collection/' | relative_url }}" class="gallery-back">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span>COLLECTION</span>
     </a>
   </nav>
 
-  <div class="editorial-container">
-    <!-- 2. VISUAL STAGE (Single Image Focus) -->
-    <div class="visual-stage">
-      <div class="artwork-frame-outer">
-        <div class="artwork-frame-inner">
-          <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="main-artwork-image">
-          <div class="stage-shadow"></div>
+  <div class="gallery-scene">
+
+    <!-- LEFT: Artwork display -->
+    <div class="gallery-wall">
+      <div class="artwork-spotlight">
+        <div class="artwork-mount" data-animate="artwork">
+          <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="artwork-canvas">
         </div>
+        <div class="floor-reflection"></div>
       </div>
     </div>
 
-    <!-- 3. DOCUMENTARY CONTENT -->
-    <div class="content-stage">
-      <div class="content-measure">
-        <header class="editorial-header">
-          <div class="eyebrow-container">
-            <span class="serial-no">NO. {{ page.year | slice: -2, 2 }}{{ page.title | size | prepend: '00' | slice: -3,
-              3 }}</span>
-            <span class="separator">/</span>
-            <span class="category">FINE ART CATALOGUE</span>
-          </div>
+    <!-- RIGHT: Info panel -->
+    <div class="gallery-info">
+      <div class="info-scroll">
 
-          <h1 class="entry-title">{{ page.title }}</h1>
+        <div class="info-block" data-animate="1">
+          <span class="info-eyebrow">FINE ART CATALOGUE</span>
+          <h1 class="info-title">{{ page.title }}</h1>
+        </div>
 
-          {% if page.artist %}
-          {% assign artist = site.artists | where: "name", page.artist | first %}
-          <div class="artist-signature">
-            <span class="small-caps">BY</span>
+        {% if page.artist %}
+        {% assign artist = site.artists | where: "name", page.artist | first %}
+        <div class="info-block" data-animate="2">
+          <div class="info-artist">
+            <span class="info-artist-label">BY</span>
             {% if artist %}
-            <a href="{{ artist.url | relative_url }}" class="artist-link">{{ page.artist }}</a>
+            <a href="{{ artist.url | relative_url }}" class="info-artist-name">{{ page.artist }}</a>
             {% else %}
-            <span class="artist-name">{{ page.artist }}</span>
+            <span class="info-artist-name">{{ page.artist }}</span>
             {% endif %}
-            <div class="signature-line"></div>
           </div>
-          {% endif %}
-        </header>
+        </div>
+        {% endif %}
 
-        <div class="museum-label-section">
-          <div class="label-grid">
-            <div class="label-item">
-              <span class="label-key">{{ t.artwork.year | default: 'YEAR' }}</span>
-              <span class="label-val">{{ page.year }}</span>
+        <div class="info-block" data-animate="3">
+          <div class="info-details">
+            {% if page.year and page.year != "" %}
+            <div class="detail-row">
+              <span class="detail-label">{{ t.artwork.year | default: 'Year' }}</span>
+              <span class="detail-value">{{ page.year }}</span>
             </div>
-            <div class="label-item">
-              <span class="label-key">{{ t.artwork.medium | default: 'MEDIUM' }}</span>
-              <span class="label-val">{{ page.medium }}</span>
+            {% endif %}
+            {% if page.medium and page.medium != "" %}
+            <div class="detail-row">
+              <span class="detail-label">{{ t.artwork.medium | default: 'Medium' }}</span>
+              <span class="detail-value">{{ page.medium }}</span>
             </div>
-            <div class="label-item">
-              <span class="label-key">{{ t.artwork.dimensions | default: 'DIMENSIONS' }}</span>
-              <span class="label-val">{{ page.dimensions }}</span>
+            {% endif %}
+            {% if page.dimensions and page.dimensions != "" %}
+            <div class="detail-row">
+              <span class="detail-label">{{ t.artwork.dimensions | default: 'Dimensions' }}</span>
+              <span class="detail-value">{{ page.dimensions }}</span>
             </div>
-            <div class="label-item highlight">
-              <span class="label-key">{{ t.artwork.status | default: 'STATUS' }}</span>
-              <span class="label-val">
+            {% endif %}
+            <div class="detail-row detail-status">
+              <span class="detail-label">{{ t.artwork.status | default: 'Status' }}</span>
+              <span class="detail-value">
                 {% if page.status == 'available' %}
-                <span class="price-emphasis">{{ page.price | default: 'Price upon request' }}</span>
+                <span class="status-available">{{ page.price | default: 'Price upon request' }}</span>
                 {% else %}
-                <span class="sold-out">{{ t.collection.sold | default: 'PRIVATE COLLECTION' }}</span>
+                <span class="status-sold">{{ t.collection.sold | default: 'Private Collection' }}</span>
                 {% endif %}
               </span>
             </div>
           </div>
         </div>
 
-        <section class="narrative-body">
-          <h2 class="section-hint">{{ t.artwork.description | default: 'ARTIST STATEMENT' | upcase }}</h2>
-          <div class="prose-rich">
-            {{ content }}
+        {% if content != "" and content != nil %}
+        <div class="info-block" data-animate="4">
+          <div class="info-statement">
+            <h2 class="statement-label">{{ t.artwork.description | default: 'Artist Statement' }}</h2>
+            <div class="statement-text">
+              {{ content }}
+            </div>
           </div>
-        </section>
+        </div>
+        {% endif %}
 
         {% if page.exhibition %}
         {% assign exhibition = site.exhibitions | where: "title", page.exhibition | first %}
-        <footer class="editorial-footer">
-          <div class="context-pill">
-            <span class="pill-head">{{ t.artwork.exhibition | default: 'EXHIBITION' }}</span>
-            <div class="pill-body">
-              <h3 class="context-name">{{ page.exhibition }}</h3>
-              {% if exhibition %}
-              <a href="{{ exhibition.url | relative_url }}" class="context-discover">EXPLORE EXHIBITION <span
-                  class="arr">→</span></a>
-              {% endif %}
-            </div>
+        <div class="info-block" data-animate="5">
+          <div class="info-exhibition">
+            <span class="exhibition-label">Exhibition</span>
+            <h3 class="exhibition-name">{{ page.exhibition }}</h3>
+            {% if exhibition %}
+            <a href="{{ exhibition.url | relative_url }}" class="exhibition-link">View Exhibition <span>→</span></a>
+            {% endif %}
           </div>
-
-          <div class="action-dock">
-            <a href="mailto:{{ site.email }}?subject=Inquiry: {{ page.title | uri_escape }}"
-              class="btn-primary-editorial">
-              {{ t.collection.inquiry_title | default: 'INQUIRE ABOUT THIS WORK' | upcase }}
-            </a>
-          </div>
-        </footer>
+        </div>
         {% endif %}
+
+        <div class="info-block" data-animate="6">
+          <button type="button" class="inquiry-btn" onclick="openInquiryModal()">
+            {{ t.collection.inquiry_title | default: 'Inquire About This Work' | upcase }}
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Inquiry Modal -->
+  <div class="inquiry-modal-overlay" id="inquiryModal">
+    <div class="inquiry-modal">
+      <button type="button" class="inquiry-modal-close" onclick="closeInquiryModal()">&times;</button>
+      <div class="inquiry-modal-header">
+        <h2 class="inquiry-modal-title">Inquire About This Work</h2>
+        <p class="inquiry-modal-subtitle">Please fill out the form below and we will get back to you via email with pricing and purchase details.</p>
+      </div>
+      <div class="inquiry-modal-artwork">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+        <div class="inquiry-modal-artwork-info">
+          <span class="inquiry-artwork-title">{{ page.title }}</span>
+          {% if page.artist %}<span class="inquiry-artwork-artist">{{ page.artist }}</span>{% endif %}
+          {% if page.medium and page.medium != "" %}<span class="inquiry-artwork-detail">{{ page.medium }}</span>{% endif %}
+        </div>
+      </div>
+      <form class="inquiry-form" id="inquiryForm" onsubmit="submitInquiry(event)">
+        <input type="hidden" name="artwork" value="{{ page.title }}">
+        <input type="hidden" name="artist" value="{{ page.artist }}">
+        <div class="inquiry-form-row">
+          <div class="inquiry-form-field">
+            <label for="inquiry-name">Name *</label>
+            <input type="text" id="inquiry-name" name="name" required placeholder="Your full name">
+          </div>
+          <div class="inquiry-form-field">
+            <label for="inquiry-email">Email *</label>
+            <input type="email" id="inquiry-email" name="email" required placeholder="your@email.com">
+          </div>
+        </div>
+        <div class="inquiry-form-field">
+          <label for="inquiry-phone">Phone</label>
+          <input type="tel" id="inquiry-phone" name="phone" placeholder="Optional">
+        </div>
+        <div class="inquiry-form-field">
+          <label for="inquiry-type">Inquiry Type *</label>
+          <select id="inquiry-type" name="type" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="pricing">Pricing Information</option>
+            <option value="purchase">Purchase Process</option>
+            <option value="availability">Availability</option>
+            <option value="shipping">Shipping & Delivery</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="inquiry-form-field">
+          <label for="inquiry-message">Message</label>
+          <textarea id="inquiry-message" name="message" rows="4" placeholder="Any additional questions or details..."></textarea>
+        </div>
+        <button type="submit" class="inquiry-form-submit">Send Inquiry</button>
+      </form>
+      <div class="inquiry-success" id="inquirySuccess">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#b8996f" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h3>Thank You</h3>
+        <p>Your inquiry has been sent successfully. We will respond to your email within 1–2 business days with pricing and purchase details.</p>
+        <button type="button" class="inquiry-form-submit" onclick="closeInquiryModal()" style="margin-top:16px;">Close</button>
       </div>
     </div>
   </div>
+
 </div>
 
 <style>
   :root {
-    --art-accent: #c5a982;
-    --art-ink: #000000;
-    --art-paper: #ffffff;
-    --art-rice: #fcfbf8;
-    --art-mono: 'Space Grotesk', 'Inter', sans-serif;
-    --art-serif: 'Playfair Display', serif;
-    --art-serif-ko: 'Noto Serif KR', serif;
-    --art-ease: cubic-bezier(0.23, 1, 0.32, 1);
-    --view-padding: 6vw;
+    --gw-bg: #f5f3ef;
+    --gw-wall: #eae7e0;
+    --gw-ink: #1a1a1a;
+    --gw-mute: #999;
+    --gw-accent: #b8996f;
+    --gw-white: #ffffff;
+    --gw-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --gw-ease-out: cubic-bezier(0, 0, 0.2, 1);
   }
 
-  .artwork-editorial-wrapper {
-    background-color: var(--art-paper);
-    color: var(--art-ink);
+  .artwork-gallery-wrapper {
+    background: var(--gw-bg);
     min-height: 100vh;
-    font-size: 16px;
+    overflow: hidden;
+    position: relative;
   }
 
-  /* 1. NAVIGATION */
-  .editorial-nav {
+  /* ── Entrance curtain ── */
+  .gallery-curtain {
+    position: fixed;
+    inset: 0;
+    background: var(--gw-ink);
+    z-index: 1000;
+    animation: curtainReveal 1s var(--gw-ease) 0.1s forwards;
+  }
+
+  @keyframes curtainReveal {
+    0% { transform: scaleY(1); transform-origin: top; }
+    100% { transform: scaleY(0); transform-origin: top; }
+  }
+
+  /* ── Navigation ── */
+  .gallery-nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px;
+    height: 72px;
     z-index: 100;
-    padding: 0 var(--view-padding);
+    padding: 0 40px;
     display: flex;
     align-items: center;
-    pointer-events: none;
+    opacity: 0;
+    animation: fadeIn 0.6s var(--gw-ease) 0.8s forwards;
   }
 
-  .nav-btn-back {
-    pointer-events: auto;
+  .gallery-back {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     text-decoration: none;
-    color: var(--art-ink);
-    font-family: var(--art-mono);
+    color: var(--gw-ink);
+    font-size: 0.65rem;
     font-weight: 700;
-    font-size: 11px;
     letter-spacing: 0.2em;
-    transition: transform 0.3s var(--art-ease);
+    transition: transform 0.4s var(--gw-ease), opacity 0.3s;
   }
 
-  .nav-icon {
-    width: 20px;
-    height: 1px;
-    background: var(--art-ink);
-    position: relative;
-    transition: 0.3s var(--art-ease);
+  .gallery-back:hover {
+    transform: translateX(-6px);
+    opacity: 0.6;
   }
 
-  .nav-icon::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: -4px;
-    width: 6px;
-    height: 6px;
-    border-left: 1px solid var(--art-ink);
-    border-top: 1px solid var(--art-ink);
-    transform: rotate(-45deg);
-  }
-
-  .nav-btn-back:hover {
-    transform: translateX(-10px);
-  }
-
-  /* 2. LAYOUT */
-  .editorial-container {
+  /* ── Scene layout ── */
+  .gallery-scene {
     display: flex;
     min-height: 100vh;
   }
 
-  .visual-stage {
-    flex: 0 0 50%;
-    background-color: var(--art-rice);
+  /* ── Left: Gallery wall ── */
+  .gallery-wall {
+    flex: 0 0 55%;
+    background: var(--gw-wall);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: var(--view-padding);
     position: sticky;
     top: 0;
     height: 100vh;
+    overflow: hidden;
+    perspective: 1200px;
   }
 
-  .artwork-frame-outer {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
-
-  .artwork-frame-inner {
-    position: relative;
-    z-index: 2;
-    transition: transform 0.6s var(--art-ease);
-  }
-
-  .main-artwork-image {
-    display: block;
-    max-width: 90%;
-    max-height: 80vh;
-    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.15);
-    background: white;
-  }
-
-  .stage-shadow {
+  /* Subtle wall texture */
+  .gallery-wall::before {
+    content: '';
     position: absolute;
-    bottom: -30px;
-    left: 5%;
-    width: 90%;
-    height: 40px;
-    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
-    z-index: 1;
-    filter: blur(10px);
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.06) 0%, transparent 50%);
+    pointer-events: none;
   }
 
-  /* 3. CONTENT */
-  .content-stage {
+  .artwork-spotlight {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+    animation: artworkReveal 1.2s var(--gw-ease) 0.5s forwards;
+  }
+
+  @keyframes artworkReveal {
+    0% {
+      opacity: 0;
+      transform: scale(0.92) translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .artwork-mount {
+    position: relative;
+    padding: 16px;
+    background: var(--gw-white);
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.04),
+      0 8px 24px rgba(0,0,0,0.08),
+      0 40px 80px -20px rgba(0,0,0,0.12);
+    transition: transform 0.6s var(--gw-ease), box-shadow 0.6s var(--gw-ease);
+  }
+
+  .artwork-mount:hover {
+    transform: scale(1.02) translateY(-4px);
+    box-shadow:
+      0 4px 8px rgba(0,0,0,0.06),
+      0 16px 40px rgba(0,0,0,0.1),
+      0 60px 120px -20px rgba(0,0,0,0.15);
+  }
+
+  .artwork-canvas {
+    display: block;
+    max-width: min(70vw, 500px);
+    max-height: 70vh;
+    object-fit: contain;
+  }
+
+  .floor-reflection {
+    width: 80%;
+    height: 30px;
+    margin-top: 24px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.06) 0%, transparent 70%);
+    filter: blur(8px);
+  }
+
+  /* ── Right: Info panel ── */
+  .gallery-info {
     flex: 1;
-    padding: 120px var(--view-padding) 80px;
-    background-color: var(--art-paper);
+    background: var(--gw-white);
     display: flex;
     justify-content: center;
+    border-left: 1px solid rgba(0,0,0,0.06);
   }
 
-  .content-measure {
+  .info-scroll {
     width: 100%;
-    max-width: 580px;
+    max-width: 480px;
+    padding: 120px 48px 80px;
   }
 
-  .eyebrow-container {
-    font-family: var(--art-mono);
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    font-weight: 700;
-    color: var(--art-accent);
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  /* ── Staggered animations ── */
+  .info-block {
+    opacity: 0;
+    transform: translateY(30px);
   }
 
-  .entry-title {
-    font-family: var(--art-serif);
-    font-size: clamp(40px, 4.5vw, 68px);
-    line-height: 1.1;
+  .info-block[data-animate="1"] { animation: slideUp 0.8s var(--gw-ease) 0.7s forwards; }
+  .info-block[data-animate="2"] { animation: slideUp 0.8s var(--gw-ease) 0.85s forwards; }
+  .info-block[data-animate="3"] { animation: slideUp 0.8s var(--gw-ease) 1.0s forwards; }
+  .info-block[data-animate="4"] { animation: slideUp 0.8s var(--gw-ease) 1.15s forwards; }
+  .info-block[data-animate="5"] { animation: slideUp 0.8s var(--gw-ease) 1.3s forwards; }
+  .info-block[data-animate="6"] { animation: slideUp 0.8s var(--gw-ease) 1.45s forwards; }
+
+  @keyframes slideUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  /* ── Typography ── */
+  .info-eyebrow {
+    display: block;
+    font-size: 0.6rem;
     font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--gw-accent);
     margin-bottom: 20px;
   }
 
-  [lang="ko"] .entry-title {
-    font-family: var(--art-serif-ko);
-    line-height: 1.35;
+  .info-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--gw-ink);
+    margin-bottom: 24px;
   }
 
-  .artist-signature {
+  [lang="ko"] .info-title {
+    font-family: 'Noto Serif KR', serif;
+    line-height: 1.4;
+  }
+
+  .info-artist {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 60px;
+    gap: 12px;
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid #eee;
   }
 
-  .artist-link {
-    font-family: var(--art-serif);
-    font-size: 24px;
+  .info-artist-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--gw-mute);
+  }
+
+  .info-artist-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem;
     font-style: italic;
-    color: var(--art-ink);
+    color: var(--gw-ink);
     text-decoration: none;
+    transition: color 0.3s;
   }
 
-  [lang="ko"] .artist-link {
-    font-family: var(--art-serif-ko);
+  a.info-artist-name:hover {
+    color: var(--gw-accent);
+  }
+
+  [lang="ko"] .info-artist-name {
+    font-family: 'Noto Serif KR', serif;
     font-style: normal;
   }
 
-  .signature-line {
-    flex: 1;
-    height: 1px;
-    background: #f0f0f0;
-    margin-left: 20px;
+  /* ── Details grid ── */
+  .info-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 48px;
   }
 
-  /* LABEL */
-  .museum-label-section {
-    margin-bottom: 80px;
-    padding-bottom: 40px;
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 16px 0;
     border-bottom: 1px solid #f0f0f0;
   }
 
-  .label-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px 60px;
+  .detail-row:first-child {
+    border-top: 1px solid #f0f0f0;
   }
 
-  .label-item {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .label-key {
-    font-family: var(--art-mono);
-    font-size: 9px;
-    font-weight: 800;
-    color: #999;
+  .detail-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    color: var(--gw-mute);
   }
 
-  .label-val {
-    font-size: 15px;
+  .detail-value {
+    font-size: 0.9rem;
     font-weight: 500;
+    color: var(--gw-ink);
+    text-align: right;
   }
 
-  .highlight .label-val {
-    font-size: 18px;
+  .status-available {
+    color: var(--gw-accent);
     font-weight: 700;
   }
 
-  .price-emphasis {
-    font-size: 22px;
+  .status-sold {
+    font-size: 0.7rem;
     font-weight: 700;
-    color: var(--art-accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gw-mute);
   }
 
-  /* BODY */
-  .narrative-body {
-    margin-bottom: 80px;
+  /* ── Statement ── */
+  .info-statement {
+    margin-bottom: 48px;
   }
 
-  .section-hint {
-    font-family: var(--art-mono);
-    font-size: 10px;
-    letter-spacing: 0.4em;
-    color: #bbb;
-    margin-bottom: 30px;
+  .statement-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #ccc;
+    margin-bottom: 24px;
   }
 
-  .prose-rich {
-    font-size: 18px;
+  .statement-text {
+    font-size: 0.95rem;
     line-height: 1.9;
-    color: #333;
+    color: #444;
   }
 
-  [lang="ko"] .prose-rich {
-    font-family: var(--font-sans-kr);
+  .statement-text p {
+    margin-bottom: 1em;
+  }
+
+  [lang="ko"] .statement-text {
     word-break: keep-all;
   }
 
-  /* FOOTER */
-  .context-pill {
-    background: var(--art-rice);
-    display: flex;
-    margin-bottom: 60px;
+  /* ── Exhibition pill ── */
+  .info-exhibition {
+    background: var(--gw-bg);
+    padding: 28px 32px;
+    margin-bottom: 32px;
   }
 
-  .pill-head {
-    writing-mode: vertical-lr;
-    transform: rotate(180deg);
-    font-family: var(--art-mono);
-    font-size: 9px;
-    font-weight: 800;
-    padding: 20px 15px;
-    background: var(--art-ink);
-    color: var(--art-paper);
-  }
-
-  .pill-body {
-    padding: 30px 40px;
-    flex: 1;
-  }
-
-  .context-name {
-    font-family: var(--art-serif);
-    font-size: 24px;
-    margin-bottom: 15px;
-  }
-
-  .context-discover {
-    font-family: var(--art-mono);
-    font-size: 11px;
+  .exhibition-label {
+    font-size: 0.55rem;
     font-weight: 700;
-    color: var(--art-accent);
-    text-decoration: none;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gw-mute);
+    margin-bottom: 12px;
+    display: block;
   }
 
-  .btn-primary-editorial {
+  .exhibition-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--gw-ink);
+  }
+
+  .exhibition-link {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gw-accent);
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+
+  .exhibition-link:hover {
+    opacity: 0.6;
+  }
+
+  .exhibition-link span {
+    transition: transform 0.3s var(--gw-ease);
+    display: inline-block;
+  }
+
+  .exhibition-link:hover span {
+    transform: translateX(4px);
+  }
+
+  /* ── Inquiry button ── */
+  .inquiry-btn {
     display: block;
     width: 100%;
-    padding: 24px;
-    background: var(--art-ink);
-    color: var(--art-paper);
+    padding: 20px;
+    background: var(--gw-ink);
+    color: var(--gw-white);
     text-align: center;
-    font-family: var(--art-mono);
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
     text-decoration: none;
-    transition: 0.4s;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s var(--gw-ease);
   }
 
-  .btn-primary-editorial:hover {
+  .inquiry-btn:hover {
     background: transparent;
-    color: var(--art-ink);
-    box-shadow: inset 0 0 0 1px var(--art-ink);
+    color: var(--gw-ink);
+    box-shadow: inset 0 0 0 1.5px var(--gw-ink);
   }
 
-  @media (max-width: 1200px) {
-    .editorial-container {
+  /* ── Inquiry Modal ── */
+  .inquiry-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--gw-ease);
+    backdrop-filter: blur(4px);
+    padding: 20px;
+  }
+
+  .inquiry-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .inquiry-modal {
+    background: var(--gw-white);
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 48px 40px;
+    position: relative;
+    transform: translateY(30px) scale(0.96);
+    transition: transform 0.5s var(--gw-ease);
+  }
+
+  .inquiry-modal-overlay.active .inquiry-modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .inquiry-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--gw-mute);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s;
+    padding: 4px;
+  }
+
+  .inquiry-modal-close:hover {
+    color: var(--gw-ink);
+  }
+
+  .inquiry-modal-header {
+    margin-bottom: 28px;
+  }
+
+  .inquiry-modal-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gw-ink);
+    margin-bottom: 8px;
+  }
+
+  .inquiry-modal-subtitle {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--gw-mute);
+  }
+
+  .inquiry-modal-artwork {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--gw-bg);
+    margin-bottom: 28px;
+  }
+
+  .inquiry-modal-artwork img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+  }
+
+  .inquiry-modal-artwork-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .inquiry-artwork-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--gw-ink);
+  }
+
+  .inquiry-artwork-artist {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--gw-mute);
+  }
+
+  .inquiry-artwork-detail {
+    font-size: 0.7rem;
+    color: #bbb;
+  }
+
+  /* ── Form ── */
+  .inquiry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .inquiry-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .inquiry-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .inquiry-form-field label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gw-mute);
+  }
+
+  .inquiry-form-field input,
+  .inquiry-form-field select,
+  .inquiry-form-field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e0e0e0;
+    background: var(--gw-white);
+    font-size: 0.85rem;
+    color: var(--gw-ink);
+    font-family: inherit;
+    transition: border-color 0.3s;
+    outline: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+
+  .inquiry-form-field input:focus,
+  .inquiry-form-field select:focus,
+  .inquiry-form-field textarea:focus {
+    border-color: var(--gw-ink);
+  }
+
+  .inquiry-form-field input::placeholder,
+  .inquiry-form-field textarea::placeholder {
+    color: #ccc;
+  }
+
+  .inquiry-form-field textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .inquiry-form-field select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23999' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  .inquiry-form-submit {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: var(--gw-ink);
+    color: var(--gw-white);
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s var(--gw-ease);
+  }
+
+  .inquiry-form-submit:hover {
+    background: var(--gw-accent);
+  }
+
+  /* ── Success state ── */
+  .inquiry-success {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .inquiry-success h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    margin: 20px 0 12px;
+    color: var(--gw-ink);
+  }
+
+  .inquiry-success p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--gw-mute);
+  }
+
+  /* ── Responsive modal ── */
+  @media (max-width: 640px) {
+    .inquiry-modal {
+      padding: 36px 24px;
+    }
+
+    .inquiry-form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .gallery-scene {
       flex-direction: column;
     }
 
-    .visual-stage {
+    .gallery-wall {
+      flex: none;
       width: 100%;
-      height: 70vh;
+      height: 60vh;
       position: relative;
     }
 
-    .content-stage {
-      padding-top: 60px;
+    .artwork-canvas {
+      max-width: 80vw;
+      max-height: 50vh;
+    }
+
+    .gallery-info {
+      border-left: none;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .info-scroll {
+      padding: 60px 32px 80px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .gallery-wall {
+      height: 50vh;
+    }
+
+    .artwork-mount {
+      padding: 10px;
+    }
+
+    .artwork-canvas {
+      max-width: 85vw;
+      max-height: 42vh;
+    }
+
+    .info-scroll {
+      padding: 40px 20px 60px;
+    }
+
+    .info-title {
+      font-size: 1.6rem;
+    }
+
+    .gallery-nav {
+      padding: 0 20px;
     }
   }
 </style>
+
+<script>
+  function openInquiryModal() {
+    document.getElementById('inquiryModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeInquiryModal() {
+    document.getElementById('inquiryModal').classList.remove('active');
+    document.body.style.overflow = '';
+    // Reset form after close
+    setTimeout(function() {
+      document.getElementById('inquiryForm').style.display = '';
+      document.getElementById('inquirySuccess').style.display = 'none';
+      document.getElementById('inquiryForm').reset();
+    }, 400);
+  }
+
+  // Close modal on overlay click
+  document.getElementById('inquiryModal').addEventListener('click', function(e) {
+    if (e.target === this) closeInquiryModal();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeInquiryModal();
+  });
+
+  function submitInquiry(e) {
+    e.preventDefault();
+    var form = document.getElementById('inquiryForm');
+    var data = new FormData(form);
+
+    var subject = 'Artwork Inquiry: ' + data.get('artwork');
+    var body = 'Name: ' + data.get('name') + '\n'
+      + 'Email: ' + data.get('email') + '\n'
+      + 'Phone: ' + (data.get('phone') || 'N/A') + '\n'
+      + 'Inquiry Type: ' + data.get('type') + '\n'
+      + 'Artwork: ' + data.get('artwork') + '\n'
+      + 'Artist: ' + data.get('artist') + '\n\n'
+      + 'Message:\n' + (data.get('message') || 'N/A');
+
+    // Open mailto with form data
+    var mailto = 'mailto:{{ site.author.email }}'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(body);
+    window.location.href = mailto;
+
+    // Show success state
+    form.style.display = 'none';
+    document.getElementById('inquirySuccess').style.display = 'block';
+  }
+</script>
