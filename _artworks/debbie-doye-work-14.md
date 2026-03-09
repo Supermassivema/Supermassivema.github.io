@@ -5,7 +5,7 @@ artist: "Debbie Doye"
 medium: "Ceramics"
 dimensions: ""
 year: ""
-image: /assets/images/work/DebbieDoye/work14.png
+image: /assets/images/work/DebbieDoye/work14.jpg
 status: "available"
 price: "Contact for price"
 description: ""

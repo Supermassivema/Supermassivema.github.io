@@ -384,7 +384,7 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
 
   <!-- 1. HERO: Current Exhibition Full Screen -->
   {% assign current_exhibition = site.exhibitions | where: "status", "current" | first %}
-  {% assign hero_bg = current_exhibition.featured_image | default: '/assets/images/Gallery Background photo/gallery.png' | relative_url %}
+  {% assign hero_bg = current_exhibition.featured_image | default: '/assets/images/Gallery Background photo/gallery.jpg' | relative_url %}
 
   <section class="main-hero">
     <!-- Slideshow Images (round-robin: Stephen → Debbie → Geum) -->
