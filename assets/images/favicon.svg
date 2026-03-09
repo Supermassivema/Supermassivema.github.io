@@ -1,5 +1,6 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" fill="#000"/>
-  <text x="50%" y="38%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="7" letter-spacing="0.8" fill="#fff">ART SPACE</text>
-  <text x="50%" y="68%" dominant-baseline="middle" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-style="italic" font-size="12" fill="#fff">B</text>
+<svg width="32" height="32" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="256,48 443,144 443,336 256,432 69,336 69,144" fill="none" stroke="#000000" stroke-width="16"/>
+  <rect x="136" y="136" width="240" height="240" fill="none" stroke="#000000" stroke-width="10" transform="rotate(15, 256, 256)"/>
+  <polygon points="256,108 418,380 94,380" fill="none" stroke="#000000" stroke-width="8"/>
+  <circle cx="256" cy="256" r="6" fill="#000000"/>
 </svg>
