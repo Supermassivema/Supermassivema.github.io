@@ -269,6 +269,102 @@ section: gallery
     color: #666;
   }
 
+  /* ── Artist News Section ── */
+  .artist-news-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px 60px;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .artist-news-heading {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+    padding: 40px 0 12px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 0;
+  }
+
+  .artist-news-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    padding: 40px 0;
+    border-bottom: 1px solid #e0e0e0;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    align-items: center;
+  }
+
+  .artist-news-item:hover {
+    opacity: 0.7;
+  }
+
+  .artist-news-thumb {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: #f0f0f0;
+  }
+
+  .artist-news-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .artist-news-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .artist-news-artist {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+  .artist-news-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #000;
+    letter-spacing: -0.01em;
+  }
+
+  .artist-news-excerpt {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  .artist-news-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .artist-news-pub {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+  .artist-news-date {
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: #bbb;
+  }
+
   /* ── Press List ── */
   .press-list-section {
     max-width: 1400px;
@@ -331,6 +427,7 @@ section: gallery
     .news-filters,
     .news-featured,
     .news-grid-section,
+    .artist-news-section,
     .press-list-section {
       padding-left: 32px;
       padding-right: 32px;
@@ -356,6 +453,11 @@ section: gallery
       border-right: 1px solid #e0e0e0;
       padding: 36px 0;
     }
+
+    .artist-news-item {
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+    }
   }
 
   @media (max-width: 640px) {
@@ -363,6 +465,7 @@ section: gallery
     .news-filters,
     .news-featured,
     .news-grid-section,
+    .artist-news-section,
     .press-list-section {
       padding-left: 20px;
       padding-right: 20px;
@@ -370,6 +473,11 @@ section: gallery
 
     .news-grid {
       grid-template-columns: 1fr;
+    }
+
+    .artist-news-item {
+      grid-template-columns: 1fr;
+      gap: 16px;
     }
 
     .press-item {
@@ -474,6 +582,66 @@ section: gallery
       </a>
 
     </div>
+  </div>
+
+  <!-- Artist News -->
+  <div class="artist-news-section">
+    <p class="artist-news-heading">Artist News</p>
+
+    <a href="https://www.inverelltimes.com.au/story/6401553/vicki-mcgregor-named-inverell-art-prize-grand-champion-for-eve-sculpture/" target="_blank" rel="noopener noreferrer" class="artist-news-item">
+      <div class="artist-news-thumb">
+        {% assign doye_works = site.artworks | where: "artist", "Debbie Doye" %}
+        {% if doye_works.size > 0 %}
+          <img src="{{ doye_works.first.image | relative_url }}" alt="Debbie Doye">
+        {% endif %}
+      </div>
+      <div class="artist-news-body">
+        <span class="artist-news-artist">Debbie Doye</span>
+        <h3 class="artist-news-title">Debbie Doye Wins 2nd Place Ceramics at Inverell Art Prize</h3>
+        <p class="artist-news-excerpt">Inverell-based ceramicist Debbie Doye was awarded second place in the ceramics category at the 2019 Inverell Art Prize for her work "Seeds of Change."</p>
+        <div class="artist-news-meta">
+          <span class="artist-news-pub">The Inverell Times</span>
+          <span class="artist-news-date">September 2019</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.sac.or.kr/site/main/show/show_view?SN=23823" target="_blank" rel="noopener noreferrer" class="artist-news-item">
+      <div class="artist-news-thumb">
+        {% assign lee_works = site.artworks | where: "artist", "Lee Sang-kwon" %}
+        {% if lee_works.size > 0 %}
+          <img src="{{ lee_works.first.image | relative_url }}" alt="Lee Sang-kwon">
+        {% endif %}
+      </div>
+      <div class="artist-news-body">
+        <span class="artist-news-artist">Lee Sang-kwon</span>
+        <h3 class="artist-news-title">Lee Sang-kwon Solo Exhibition: Landscape — Weight and Depth of Time</h3>
+        <p class="artist-news-excerpt">After relocating his studio to Paju, Lee Sang-kwon turned his focus to the natural landscape, capturing the shifting light and colour through layered brushwork. His solo exhibition was held at the Seoul Arts Center.</p>
+        <div class="artist-news-meta">
+          <span class="artist-news-pub">Seoul Arts Center</span>
+          <span class="artist-news-date"></span>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.hani.co.kr/arti/culture/music/1138434.html" target="_blank" rel="noopener noreferrer" class="artist-news-item">
+      <div class="artist-news-thumb">
+        {% assign geum_works = site.artworks | where: "artist", "Geum Sahong" %}
+        {% if geum_works.size > 0 %}
+          <img src="{{ geum_works.first.image | relative_url }}" alt="Geum Sahong">
+        {% endif %}
+      </div>
+      <div class="artist-news-body">
+        <span class="artist-news-artist">Geum Sahong</span>
+        <h3 class="artist-news-title">Running Through the Mud Flats of Venice, Crying Out Against Environmental Catastrophe</h3>
+        <p class="artist-news-excerpt">Geum Sahong's environmental art performance at the Venice Biennale — racing through mud flats in a visceral protest against ecological disaster — was featured in The Hankyoreh, one of South Korea's leading national newspapers.</p>
+        <div class="artist-news-meta">
+          <span class="artist-news-pub">The Hankyoreh (한겨레)</span>
+          <span class="artist-news-date">April 2024</span>
+        </div>
+      </div>
+    </a>
+
   </div>
 
   <!-- Press List -->
