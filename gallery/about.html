@@ -5,6 +5,19 @@ title: "About"
 {% assign lang = page.lang | default: site.default_lang | default: "en" %}
 {% assign t = site.data.translations[lang] %}
 
+<!-- Floor Plan Section -->
+<section class="floorplan-section">
+  <div class="floorplan-container">
+    <div class="floorplan-header">
+      <h2 class="floorplan-title">GALLERY FLOOR PLAN</h2>
+      <p class="floorplan-sub">Exhibition spaces and wall references for artwork display planning</p>
+    </div>
+    <div class="floorplan-wrap">
+      <img src="{{ '/assets/images/floorplan.svg' | relative_url }}" alt="ART SPACE BYRON Floor Plan" class="floorplan-img">
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
     <div class="gallery-section-header">
@@ -127,6 +140,59 @@ title: "About"
 </section>
 
 <style>
+  /* ── Floor Plan ── */
+  .floorplan-section {
+    background: #fff;
+    padding: 60px 0 40px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .floorplan-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .floorplan-header {
+    margin-bottom: 32px;
+  }
+
+  .floorplan-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #000;
+    margin-bottom: 8px;
+  }
+
+  .floorplan-sub {
+    font-size: 0.85rem;
+    color: #999;
+  }
+
+  .floorplan-wrap {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    padding: 24px;
+    overflow-x: auto;
+  }
+
+  .floorplan-img {
+    width: 100%;
+    min-width: 800px;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 640px) {
+    .floorplan-container {
+      padding: 0 20px;
+    }
+    .floorplan-wrap {
+      padding: 12px;
+    }
+  }
+
   .prose p {
     margin-bottom: var(--space-6);
     line-height: var(--leading-loose);
