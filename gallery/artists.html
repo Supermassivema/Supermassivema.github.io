@@ -1,36 +1,403 @@
 ---
 layout: gallery-page
 title: Artists
-subtitle: Meet the talented creators behind our collection
+section: gallery
 ---
-{% assign lang = page.lang | default: site.default_lang | default: "en" %}
-{% assign t = site.data.translations[lang] %}
 
-<section class="section">
-  <div class="container">
-    <div class="gallery-section-header">
-      <h1 class="gallery-section-title">{{ t.artists.title }}</h1>
-      <p class="gallery-section-description">
-        {{ t.artists.subtitle }}
-      </p>
-    </div>
+<style>
+  .artists-page {
+    background: #fff;
+    min-height: 100vh;
+  }
 
-    <div class="artist-grid">
-      {% for artist in site.artists %}
-      <a href="{{ artist.url | relative_url }}" class="artist-card">
-        <div class="artist-card-image">
-          <img src="{{ artist.featured_image | default: artist.image | relative_url }}" alt="{{ artist.name }}"
-            loading="lazy">
-        </div>
-        <div class="artist-info">
-          <h3 class="artist-name">{{ artist.name }}</h3>
-          {% if artist.nationality %}
-          <p class="artist-nationality">{{ artist.nationality }}</p>
-          {% endif %}
-          <p class="artist-specialty">{{ artist.medium }}</p>
-        </div>
-      </a>
-      {% endfor %}
+  /* ── Header ── */
+  .artists-header {
+    border-bottom: 1px solid #000;
+    padding: 60px 0 32px;
+  }
+
+  .artists-header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .artists-page-title {
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #000;
+    line-height: 1;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  /* ── Search ── */
+  .artists-search {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 48px 44px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .artists-search-box {
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+  }
+
+  .artists-search-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #000;
+    padding: 12px 32px 12px 0;
+    font-size: 0.85rem;
+    font-family: inherit;
+    letter-spacing: 0.06em;
+    color: #000;
+    background: transparent;
+    outline: none;
+    text-align: center;
+  }
+
+  .artists-search-icon {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  .artists-search-input::placeholder {
+    color: #bbb;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  /* ── Tabs ── */
+  .artists-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #e0e0e0;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .artists-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 18px 28px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .artists-tab:hover { color: #000; }
+
+  .artists-tab.active {
+    color: #000;
+    border-bottom-color: #000;
+  }
+
+  /* ── Artist Name List ── */
+  .artists-list-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 48px 100px;
+    position: relative;
+  }
+
+  .artists-name-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    columns: 2;
+    column-gap: 60px;
+  }
+
+  .artists-name-list li {
+    break-inside: avoid;
+    padding: 0;
+    margin: 0;
+  }
+
+  .artist-name-link {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+  }
+
+  /* ── Featured Works Grid ── */
+  .artists-works {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px 100px;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .artists-works-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000;
+    padding: 28px 0;
+    margin: 0;
+  }
+
+  .artists-works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+  }
+
+  .artists-work-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .artists-work-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #f5f5f5;
+    margin-bottom: 14px;
+  }
+
+  .artists-work-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .artists-work-name {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: #000;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .artists-header-inner,
+    .artists-search,
+    .artists-tabs,
+    .artists-list-wrap {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .artists-page-title {
+      font-size: clamp(2rem, 10vw, 3.5rem);
+    }
+
+    .artists-name-list {
+      columns: 1;
+    }
+
+    .artists-tab {
+      padding: 14px 18px;
+      font-size: 0.65rem;
+    }
+
+    .artists-works {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .artists-works-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+</style>
+
+<div class="artists-page">
+
+  <!-- Header -->
+  <div class="artists-header">
+    <div class="artists-header-inner">
+      <h1 class="artists-page-title">Artists</h1>
     </div>
   </div>
-</section>
+
+  <!-- Search -->
+  <div class="artists-search">
+    <div class="artists-search-box">
+      <input type="text" class="artists-search-input" id="artistSearch" placeholder="Search artists...">
+      <svg class="artists-search-icon" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/>
+        <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="artists-tabs">
+    <button class="artists-tab active" data-tab="artists">Artists</button>
+    <button class="artists-tab" data-tab="project">Project With</button>
+  </div>
+
+  <!-- Artists List -->
+  <div class="artists-list-wrap" id="tab-artists">
+    <ul class="artists-name-list" id="artistsList">
+      <li>
+        <a href="{{ '/gallery/artists/cho-chang-hwan/' | relative_url }}" class="artist-name-link">
+          Cho Chang-hwan
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/gallery/artists/debbie-doye/' | relative_url }}" class="artist-name-link">
+          Debbie Doye
+
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/gallery/artists/geum-sahong/' | relative_url }}" class="artist-name-link">
+          Geum Sahong
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/gallery/artists/lee-sang-kwon/' | relative_url }}" class="artist-name-link">
+          Lee Sang-kwon
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/gallery/artists/min-hea-jung-soo/' | relative_url }}" class="artist-name-link">
+          Min Hea Jung Soo
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/gallery/artists/stephen-jones/' | relative_url }}" class="artist-name-link">
+          Stephen Jones
+
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Project With List -->
+  <div class="artists-list-wrap" id="tab-project" style="display:none;">
+    <ul class="artists-name-list">
+      <li>
+        <a href="{{ '/gallery/artists/geum-sahong/' | relative_url }}" class="artist-name-link">
+          Geum Sahong
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/gallery/artists/debbie-doye/' | relative_url }}" class="artist-name-link">
+          Debbie Doye
+
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/gallery/artists/stephen-jones/' | relative_url }}" class="artist-name-link">
+          Stephen Jones
+
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Featured Works -->
+  <div class="artists-works">
+    <p class="artists-works-title">Featured Works</p>
+    <div class="artists-works-grid">
+
+      <a href="{{ '/gallery/artists/cho-chang-hwan/' | relative_url }}" class="artists-work-card">
+        <div class="artists-work-img">
+          <img src="{{ '/assets/images/work/조창환 작가/work_01.jpg' | relative_url }}" alt="Cho Chang-hwan" loading="lazy">
+        </div>
+        <p class="artists-work-name">Cho Chang-hwan</p>
+      </a>
+
+      <a href="{{ '/gallery/artists/debbie-doye/' | relative_url }}" class="artists-work-card">
+        <div class="artists-work-img">
+          <img src="{{ '/assets/images/work/DebbieDoye/work01.jpeg' | relative_url }}" alt="Debbie Doye" loading="lazy">
+        </div>
+        <p class="artists-work-name">Debbie Doye</p>
+      </a>
+
+      <a href="{{ '/gallery/artists/geum-sahong/' | relative_url }}" class="artists-work-card">
+        <div class="artists-work-img">
+          <img src="{{ '/assets/images/work/Geum Sahong/work(10).jpg' | relative_url }}" alt="Geum Sahong" loading="lazy">
+        </div>
+        <p class="artists-work-name">Geum Sahong</p>
+      </a>
+
+      <a href="{{ '/gallery/artists/lee-sang-kwon/' | relative_url }}" class="artists-work-card">
+        <div class="artists-work-img">
+          <img src="{{ '/assets/images/work/이상권 작가/1_sumun.jpg' | relative_url }}" alt="Lee Sang-kwon" loading="lazy">
+        </div>
+        <p class="artists-work-name">Lee Sang-kwon</p>
+      </a>
+
+      <a href="{{ '/gallery/artists/min-hea-jung-soo/' | relative_url }}" class="artists-work-card">
+        <div class="artists-work-img">
+          <img src="{{ '/assets/images/work/MinHeaJungSoo/work_01.jpg' | relative_url }}" alt="Min Hea Jung Soo" loading="lazy">
+        </div>
+        <p class="artists-work-name">Min Hea Jung Soo</p>
+      </a>
+
+      <a href="{{ '/gallery/artists/stephen-jones/' | relative_url }}" class="artists-work-card">
+        <div class="artists-work-img">
+          <img src="{{ '/assets/images/work/Stephen Jones/Work_01.jpg' | relative_url }}" alt="Stephen Jones" loading="lazy">
+        </div>
+        <p class="artists-work-name">Stephen Jones</p>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.artists-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.artists-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      document.getElementById('tab-artists').style.display = tab === 'artists' ? '' : 'none';
+      document.getElementById('tab-project').style.display = tab === 'project' ? '' : 'none';
+    });
+  });
+
+  // Search filter
+  document.getElementById('artistSearch').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('#artistsList li').forEach(li => {
+      const name = li.textContent.toLowerCase();
+      li.style.display = name.includes(q) ? '' : 'none';
+    });
+  });
+</script>

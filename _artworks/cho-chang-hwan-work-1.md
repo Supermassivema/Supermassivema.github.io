@@ -1,13 +1,13 @@
 ---
 layout: artwork
-title: "Spatial Study 01"
+title: "SOOM (Breath)"
 artist: "Cho Chang-hwan"
-medium: "Contemporary Art"
-dimensions: "Various"
-year: "2024"
+medium: ""
+dimensions: ""
+year: ""
 image: /assets/images/work/조창환 작가/work_01.jpg
 status: "available"
 price: "Contact for price"
-description: "An inquiry into the relationship between form and architectural space."
+description: ""
 featured: true
 ---

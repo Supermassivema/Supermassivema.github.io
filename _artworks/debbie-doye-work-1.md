@@ -1,13 +1,13 @@
 ---
 layout: artwork
-title: "Debbie Doye - Work 1"
+title: ""
 artist: "Debbie Doye"
-medium: "Mixed Media, Abstract"
-dimensions: "Various"
-year: "2024"
+medium: "Ceramics"
+dimensions: ""
+year: ""
 image: /assets/images/work/DebbieDoye/work01.jpeg
-featured: true
 status: "available"
 price: "Contact for price"
-description: "A vibrant abstract composition exploring color relationships."
+description: ""
+featured: true
 ---

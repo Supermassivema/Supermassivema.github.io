@@ -2,83 +2,445 @@
 layout: gallery-page
 title: "About"
 ---
-{% assign lang = page.lang | default: site.default_lang | default: "en" %}
-{% assign t = site.data.translations[lang] %}
-
-<section class="section">
-  <div class="container">
-    <div class="gallery-section-header">
-      <h1 class="gallery-section-title">{{ t.visit.plan_visit }}</h1>
-      <p class="gallery-section-description">
-        We welcome you to experience contemporary art in a contemplative setting.
-        Our gallery is designed to provide an unhurried, intimate encounter with exceptional works.
-      </p>
-    </div>
-
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8);">
-      <div class="card p-8">
-        <h3 class="text-xl mb-4">{{ t.visit.location }}</h3>
-        <p class="text-secondary">
-          <strong>44BYRON STUDIO</strong><br>
-          44 Byron St<br>
-          Inverell NSW 2360<br>
-          Australia
-        </p>
-      </div>
-
-      <div class="card p-8">
-        <h3 class="text-xl mb-4">{{ t.visit.hours }}</h3>
-        <ul class="text-secondary" style="list-style: none;">
-          <li class="mb-2"><strong>Tuesday - Friday:</strong> 8:00 AM - 5:00 PM</li>
-          <li class="mb-2"><strong>Saturday:</strong> 8:00 AM - 3:00 PM</li>
-          <li class="mb-2"><strong>Sunday - Monday:</strong> Closed</li>
-        </ul>
-      </div>
-
-      <div class="card p-8">
-        <h3 class="text-xl mb-4">{{ t.visit.accessibility }}</h3>
-        <p class="text-secondary">
-          44BYRON STUDIO is committed to providing an inclusive experience for all visitors. wheelchair accessible
-          entrance via main street.
-        </p>
-      </div>
-
-      <div class="card p-8">
-        <h3 class="text-xl mb-4">Staff</h3>
-        <p class="text-secondary">
-          <strong>Director:</strong> Kim Ki Lim<br><br>
-          MFA, South Korea. Former creative agency director bringing artistic vision and business acumen to the gallery.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container text-center">
-    <h2 class="mb-8">{{ t.visit.entry_free }}</h2>
-    <p class="text-lg max-w-narrow mx-auto mb-12">
-      {{ t.visit.free_desc }}
-    </p>
-    <div class="contact-info">
-      <p class="text-xl mb-4">{{ t.contact.phone }}: 0455 616 983</p>
-      <p class="text-xl">{{ t.contact.email }}: <a href="mailto:{{ site.email }}" class="text-accent">{{ site.email
-          }}</a></p>
-    </div>
-  </div>
-</section>
 
 <style>
-  .p-8 {
-    padding: var(--space-8);
+  .about-page {
+    background: #fff;
+    color: #000;
   }
 
-  .max-w-narrow {
-    max-width: var(--container-narrow);
+  /* ── Hero ── */
+  .about-hero {
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px 40px;
   }
 
-  .mx-auto {
-    margin-left: auto;
-    margin-right: auto;
+  .about-hero-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    color: #000;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 40px 0 0;
+    align-self: flex-start;
+    padding-left: calc((100% - 1100px) / 2);
+  }
+
+  @media (max-width: 1180px) {
+    .about-hero-title { padding-left: 0; }
+  }
+
+  /* ── Layout Wrapper ── */
+  .about-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  /* ── Statement Section ── */
+  .about-statement {
+    padding: 100px 0 80px;
+    border-bottom: 1px solid #e0e0e0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+    padding-top: 6px;
+  }
+
+  .about-statement-text h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: #000;
+    margin: 0 0 40px;
+  }
+
+  .about-statement-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 20px;
+  }
+
+  /* ── Korean Statement ── */
+  .about-kr {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .about-kr h2 {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 500;
+    line-height: 1.4;
+    color: #000;
+    margin: 0 0 32px;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  .about-kr p {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: #555;
+    margin-bottom: 18px;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  /* ── Two-col Info ── */
+  .about-info {
+    padding: 80px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .about-info-block {
+    padding: 0 48px 0 0;
+    border-right: 1px solid #e0e0e0;
+    margin-right: 48px;
+  }
+
+  .about-info-block:last-child {
+    border-right: none;
+    margin-right: 0;
+  }
+
+  .about-info-heading {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .about-info-block p,
+  .about-info-block address {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #333;
+    font-style: normal;
+    margin-bottom: 16px;
+  }
+
+  .about-info-block a {
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+    transition: border-color 0.2s;
+  }
+
+  .about-info-block a:hover {
+    border-color: #000;
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #333;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .hours-row:last-child {
+    border-bottom: none;
+  }
+
+  .hours-day { color: #666; }
+  .hours-time { font-weight: 500; }
+  .hours-closed { color: #bbb; }
+
+  /* ── Image Strip ── */
+  .about-image-strip {
+    padding: 80px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .about-image-strip-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .image-strip-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+  }
+
+  .image-strip-grid img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── Mission Section ── */
+  .about-mission {
+    padding: 100px 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .about-mission-text h3 {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 24px;
+    line-height: 1.3;
+  }
+
+  .about-mission-text p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 18px;
+  }
+
+  .about-mission-text .kr-block h3 {
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  .about-mission-text .kr-block p {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #555;
+  }
+
+  .about-mission-text .kr-block {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  /* ── Contact CTA ── */
+  .about-contact-cta {
+    padding: 80px 0 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .about-contact-cta h3 {
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .about-contact-cta h3 span {
+    display: block;
+    font-size: 0.85em;
+    font-weight: 400;
+    color: #888;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 8px;
+  }
+
+  .cta-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+    flex-shrink: 0;
+  }
+
+  .cta-link {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+
+  .cta-link:hover { opacity: 0.4; }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .about-wrap { padding: 0 40px; }
+    .about-statement,
+    .about-mission { grid-template-columns: 1fr; gap: 40px; }
+    .about-info { grid-template-columns: 1fr 1fr; }
+    .about-info-block:last-child { grid-column: span 2; border-right: none; margin: 0; padding: 40px 0 0; border-top: 1px solid #e0e0e0; }
+    .about-hero-overlay { padding: 40px; }
+  }
+
+  @media (max-width: 640px) {
+    .about-wrap { padding: 0 24px; }
+    .about-info { grid-template-columns: 1fr; }
+    .about-info-block { border-right: none; margin: 0; padding: 0 0 40px; border-bottom: 1px solid #e0e0e0; }
+    .about-info-block:last-child { grid-column: span 1; }
+    .image-strip-grid { grid-template-columns: 1fr; }
+    .about-contact-cta { flex-direction: column; align-items: flex-start; }
+    .cta-links { align-items: flex-start; }
   }
 </style>
+
+<div class="about-page">
+
+  <!-- Hero: Flat Floor Plan — 44 Byron St (actual building) -->
+  <div class="about-hero">
+    <h1 class="about-hero-title">About</h1>
+  </div>
+
+  <div class="about-wrap">
+
+    <!-- Statement -->
+    <div class="about-statement">
+      <div class="about-label">About the Gallery</div>
+      <div class="about-statement-text">
+        <h2>A sanctuary for contemporary art and community in Inverell, New South Wales.</h2>
+        <p>
+          Art Space Byron is an independent contemporary art gallery located at 44 Byron Street, Inverell. Founded with the belief that exceptional art should be accessible beyond the boundaries of major cities, the gallery presents a programme of exhibitions, events, and artist residencies that engage both local communities and international audiences.
+        </p>
+        <p>
+          The gallery occupies a thoughtfully restored heritage building in the heart of Inverell, offering 250 square metres of flexible exhibition space across multiple rooms. Each space has been designed to create an intimate, unhurried environment in which visitors may encounter art with focus and openness.
+        </p>
+        <p>
+          Art Space Byron works with a diverse range of Australian and international artists, with a particular commitment to supporting emerging practitioners and fostering long-term relationships between artists and audiences.
+        </p>
+
+        <!-- Korean -->
+        <div class="about-kr">
+          <h2>뉴사우스웨일스 인버렐에 위치한 동시대 예술과 지역 커뮤니티를 위한 공간.</h2>
+          <p>
+            아트 스페이스 바이런은 인버렐 바이런 스트리트 44번지에 자리한 독립 현대미술 갤러리입니다. 뛰어난 예술이 대도시의 경계를 넘어 더 많은 사람들에게 닿을 수 있어야 한다는 신념을 바탕으로 설립된 이 갤러리는 전시, 행사, 아티스트 레지던시 프로그램을 통해 지역 커뮤니티와 국제 관람객 모두와 교류하고 있습니다.
+          </p>
+          <p>
+            갤러리는 인버렐 도심에 위치한 유서 깊은 건물을 세심하게 복원하여 사용하고 있으며, 여러 공간에 걸쳐 총 250제곱미터의 유연한 전시 공간을 제공합니다. 각 공간은 관람객이 집중적이고 열린 마음으로 예술을 만날 수 있도록 친밀하고 여유로운 환경으로 설계되었습니다.
+          </p>
+          <p>
+            아트 스페이스 바이런은 국내외 다양한 작가들과 협력하며, 특히 신진 작가를 지원하고 작가와 관람객 사이의 지속적인 관계를 육성하는 데 깊이 헌신합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Blocks -->
+    <div class="about-info">
+      <div class="about-info-block">
+        <p class="about-info-heading">Location</p>
+        <address>
+          Art Space Byron<br>
+          44 Byron Street<br>
+          Inverell NSW 2360<br>
+          Australia
+        </address>
+      </div>
+
+      <div class="about-info-block">
+        <p class="about-info-heading">Opening Hours</p>
+        <div class="hours-row">
+          <span class="hours-day">Tuesday – Friday</span>
+          <span class="hours-time">8:00 AM – 5:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Saturday</span>
+          <span class="hours-time">8:00 AM – 3:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Sunday – Monday</span>
+          <span class="hours-closed">Closed</span>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.8rem; color: #888;">Admission is free. All are welcome.</p>
+      </div>
+
+      <div class="about-info-block">
+        <p class="about-info-heading">Contact</p>
+        <p>
+          <a href="mailto:44byronthegallerycafe@gmail.com">44byronthegallerycafe@gmail.com</a>
+        </p>
+        <p>
+          <a href="tel:0455616983">0455 616 983</a>
+        </p>
+        <p style="margin-top: 24px;">
+          <a href="https://www.instagram.com/44byron_thegallerycafe/" target="_blank">Instagram</a><br>
+          <a href="https://www.facebook.com/profile.php?id=61581779518291" target="_blank">Facebook</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Image Strip -->
+    <div class="about-image-strip">
+      <p class="about-image-strip-label">The Space</p>
+      <div class="image-strip-grid">
+        <img src="{{ '/assets/images/Gallery Background photo/space (1).jpg' | relative_url }}" alt="Main Hall">
+        <img src="{{ '/assets/images/Gallery Background photo/space (8).jpg' | relative_url }}" alt="Gallery Room">
+        <img src="{{ '/assets/images/Gallery Background photo/space (14).jpg' | relative_url }}" alt="Detail">
+      </div>
+    </div>
+
+    <!-- Mission -->
+    <div class="about-mission">
+      <div class="about-label">Mission</div>
+      <div class="about-mission-text">
+        <h3>Committed to art that challenges, connects, and endures.</h3>
+        <p>
+          Our programming spans painting, sculpture, photography, and new media, with an emphasis on works that reflect the complexity of contemporary life. We are committed to fostering dialogue between artists, collectors, and the wider public — creating a space where art is not merely viewed, but genuinely felt.
+        </p>
+        <p>
+          The gallery is wheelchair accessible and entry is free of charge. We believe that openness — to people, to ideas, and to new forms of expression — is foundational to what a gallery can be.
+        </p>
+
+        <div class="kr-block">
+          <h3>도전하고, 연결하며, 지속되는 예술을 향한 헌신.</h3>
+          <p>
+            갤러리의 프로그램은 회화, 조각, 사진, 뉴미디어를 아우르며, 동시대적 삶의 복잡성을 반영하는 작품들에 주목합니다. 우리는 작가, 컬렉터, 그리고 더 넓은 대중 사이의 대화를 이끌어내고자 합니다. 예술을 단순히 바라보는 것이 아니라 진정으로 느낄 수 있는 공간을 만드는 것이 우리의 목표입니다.
+          </p>
+          <p>
+            갤러리는 휠체어 이용이 가능하며 입장은 무료입니다. 사람에 대한, 아이디어에 대한, 그리고 새로운 표현 형식에 대한 개방성이 갤러리가 존재할 수 있는 근본임을 믿습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="about-contact-cta">
+      <h3>
+        Get in Touch
+        <span>문의하기</span>
+      </h3>
+      <div class="cta-links">
+        <a href="mailto:44byronthegallerycafe@gmail.com" class="cta-link">Send an Email</a>
+        <a href="tel:0455616983" class="cta-link">0455 616 983</a>
+      </div>
+    </div>
+
+  </div>
+</div>

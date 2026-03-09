@@ -1,98 +1,321 @@
 ---
-layout: default
+layout: gallery-page
 ---
 
-<article class="exhibition-detail">
+<style>
+  .exh-detail {
+    background: #fff;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px 100px;
+  }
 
-  <header class="exhibition-header">
-    <div class="container">
-      {% if page.featured_image %}
-      <div class="exhibition-featured-image">
-        <img src="{{ page.featured_image | relative_url }}" alt="{{ page.title | escape }}" loading="lazy">
-      </div>
+  .exh-hero-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #f5f5f5;
+    margin-bottom: 36px;
+  }
+
+  .exh-hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .exh-header-info {
+    margin-bottom: 48px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 32px;
+  }
+
+  .exh-title {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+
+  .exh-curator {
+    font-size: 0.82rem;
+    color: #666;
+    margin: 0 0 8px;
+  }
+
+  .exh-dates {
+    font-size: 0.82rem;
+    color: #888;
+    margin: 0 0 10px;
+  }
+
+  .exh-status {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: 1px solid #000;
+    color: #000;
+  }
+
+  /* ── Section Labels ── */
+  .exh-lang-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  /* ── English Section ── */
+  .exh-section-en {
+    margin-bottom: 56px;
+  }
+
+  .exh-section-en h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 16px;
+  }
+
+  .exh-section-en .exh-body {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: #333;
+  }
+
+  .exh-section-en .exh-body p {
+    margin: 0 0 16px;
+  }
+
+  /* ── Korean Section ── */
+  .exh-section-kr {
+    margin-bottom: 56px;
+    padding-top: 8px;
+  }
+
+  .exh-section-kr h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 12px;
+  }
+
+  .exh-kr-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 6px;
+  }
+
+  .exh-kr-curator {
+    font-size: 0.82rem;
+    color: #666;
+    margin: 0 0 8px;
+  }
+
+  .exh-kr-dates {
+    font-size: 0.82rem;
+    color: #888;
+    margin: 0 0 20px;
+  }
+
+  .exh-kr-body {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: #333;
+  }
+
+  .exh-kr-body p {
+    margin: 0 0 16px;
+  }
+
+  /* ── Artists & Artworks ── */
+  .exh-artists-section,
+  .exh-artworks-section {
+    margin-bottom: 48px;
+  }
+
+  .exh-artists-section h2,
+  .exh-artworks-section h2 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .exh-artist-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .exh-artist-card a {
+    text-decoration: none;
+    color: #000;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .exh-artist-card a:hover {
+    color: #666;
+  }
+
+  .exh-artwork-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .exh-artwork-card a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .exh-artwork-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #f5f5f5;
+    margin-bottom: 8px;
+  }
+
+  .exh-artwork-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .exh-artwork-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin: 0 0 2px;
+  }
+
+  .exh-artwork-artist {
+    font-size: 0.75rem;
+    color: #888;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .exh-detail {
+      padding: 0 24px 60px;
+    }
+
+    .exh-artwork-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+<article class="exh-detail">
+
+  {% if page.featured_image %}
+  <div class="exh-hero-img">
+    <img src="{{ page.featured_image | relative_url }}" alt="{{ page.title | escape }}" loading="lazy">
+  </div>
+  {% endif %}
+
+  <!-- ── English Section ── -->
+  <div class="exh-section-en">
+    <p class="exh-lang-label">English</p>
+
+    <div class="exh-header-info">
+      <h1 class="exh-title">{{ page.title | escape }}</h1>
+      {% if page.start_date and page.end_date %}
+      <p class="exh-dates">
+        <time datetime="{{ page.start_date }}">{{ page.start_date | date: "%B %d, %Y" }}</time> —
+        <time datetime="{{ page.end_date }}">{{ page.end_date | date: "%B %d, %Y" }}</time>
+      </p>
       {% endif %}
-      <div class="exhibition-header-info">
-        <h1 class="exhibition-title">{{ page.title | escape }}</h1>
-        {% if page.curator %}
-        <p class="exhibition-curator">Curated by {{ page.curator }}</p>
-        {% endif %}
-        {% if page.start_date and page.end_date %}
-        <p class="exhibition-dates">
-          <time datetime="{{ page.start_date }}">{{ page.start_date | date: "%B %d, %Y" }}</time> -
-          <time datetime="{{ page.end_date }}">{{ page.end_date | date: "%B %d, %Y" }}</time>
-        </p>
-        {% endif %}
-        {% if page.status %}
-        <span class="exhibition-status status-{{ page.status }}">{{ page.status | capitalize }}</span>
-        {% endif %}
-      </div>
+      {% if page.status %}
+      <span class="exh-status">{{ page.status | capitalize }}</span>
+      {% endif %}
     </div>
-  </header>
 
-  <div class="exhibition-content">
-    <div class="container">
-
-      <section class="exhibition-description">
-        <h2>About This Exhibition</h2>
-        {{ content }}
-      </section>
-
-      {% if page.artists %}
-      <section class="exhibition-artists">
-        <h2>Featured Artists</h2>
-        <div class="artist-list">
-          {% for artist_name in page.artists %}
-            {% assign artist = site.artists | where: "name", artist_name | first %}
-            {% if artist %}
-            <div class="artist-card">
-              <a href="{{ artist.url | relative_url }}">
-                {% if artist.image %}
-                <div class="artist-card-image">
-                  <img src="{{ artist.image | relative_url }}" alt="{{ artist.name | escape }}" loading="lazy">
-                </div>
-                {% endif %}
-                <div class="artist-card-info">
-                  <h3>{{ artist.name }}</h3>
-                  {% if artist.nationality %}
-                  <p>{{ artist.nationality }}</p>
-                  {% endif %}
-                </div>
-              </a>
-            </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-      </section>
-      {% endif %}
-
-      {% assign exhibition_artworks = site.artworks | where: "exhibition", page.title %}
-      {% if exhibition_artworks.size > 0 %}
-      <section class="exhibition-artworks">
-        <h2>Artworks in This Exhibition</h2>
-        <div class="artwork-grid">
-          {% for artwork in exhibition_artworks %}
-          <div class="artwork-card">
-            <a href="{{ artwork.url | relative_url }}">
-              {% if artwork.image %}
-              <div class="artwork-image">
-                <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title | escape }}" loading="lazy">
-              </div>
-              {% endif %}
-              <div class="artwork-info">
-                <h3 class="artwork-title">{{ artwork.title }}</h3>
-                <p class="artwork-artist">{{ artwork.artist }}</p>
-                {% if artwork.year %}
-                <p class="artwork-year">{{ artwork.year }}</p>
-                {% endif %}
-              </div>
-            </a>
-          </div>
-          {% endfor %}
-        </div>
-      </section>
-      {% endif %}
-
+    <h2>About This Exhibition</h2>
+    <div class="exh-body">
+      {{ content }}
     </div>
   </div>
+
+  <!-- ── Korean Section ── -->
+  {% if page.title_kr or page.description_kr %}
+  <div class="exh-section-kr">
+    <p class="exh-lang-label">한국어</p>
+
+    {% if page.title_kr %}
+    <p class="exh-kr-title">{{ page.title_kr }}</p>
+    {% endif %}
+    {% if page.start_date and page.end_date %}
+    <p class="exh-kr-dates">
+      {{ page.start_date | date: "%Y년 %m월 %d일" }} — {{ page.end_date | date: "%Y년 %m월 %d일" }}
+    </p>
+    {% endif %}
+
+    {% if page.description_kr %}
+    <h2>전시 소개</h2>
+    <div class="exh-kr-body">
+      {{ page.description_kr | markdownify }}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <!-- ── Featured Artists ── -->
+  {% if page.artists %}
+  <div class="exh-artists-section">
+    <h2>Featured Artists</h2>
+    <div class="exh-artist-list">
+      {% for artist_name in page.artists %}
+        {% assign artist = site.artists | where: "name", artist_name | first %}
+        {% if artist %}
+        <div class="exh-artist-card">
+          <a href="{{ artist.url | relative_url }}">{{ artist.name }}</a>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ── Artworks ── -->
+  {% assign exhibition_artworks = site.artworks | where: "exhibition", page.title %}
+  {% if exhibition_artworks.size > 0 %}
+  <div class="exh-artworks-section">
+    <h2>Artworks in This Exhibition</h2>
+    <div class="exh-artwork-grid">
+      {% for artwork in exhibition_artworks %}
+      <div class="exh-artwork-card">
+        <a href="{{ artwork.url | relative_url }}">
+          {% if artwork.image %}
+          <div class="exh-artwork-img">
+            <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title | escape }}" loading="lazy">
+          </div>
+          {% endif %}
+          <p class="exh-artwork-title">{{ artwork.title }}</p>
+          <p class="exh-artwork-artist">{{ artwork.artist }}</p>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
 
 </article>

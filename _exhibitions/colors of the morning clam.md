@@ -1,22 +1,24 @@
 ---
-title: "Geum Sahong: Colors of the Morning Calm"
+title: "ART SPACE BYRON Inaugural Exhibition"
+title_kr: "ART SPACE BYRON 개관전"
 curator: Kim Ki Lim
-start_date: 2026-01-01
-end_date: 2026-06-29
+curator_kr: 김기림
+start_date: 2026-03-02
+end_date: 2026-06-05
 status: current
 featured_image: "/assets/images/work/Geum Sahong/work.jpg"
 upcoming_design: halftone
-location: Inverall, NSW, Australia
+location: Inverell, NSW, Australia
 artists:
+  - Debbie Doye
+  - Stephen Jones
   - Geum Sahong
+description_kr: |
+  ART SPACE BYRON의 첫 번째 전시이다. 인버렐 지역에서 활동하는 작가 데비 도예, 스티븐 존스와 한국 작가 금사홍이 함께 참여한다. 호주 로컬 지역에 동아시아 미술을 소개하고, 지역 작가들과 자연스럽게 교류하는 작은 자리를 마련하고자 했다.
+
+  세라믹, 회화, 동양화 등 각기 다른 매체의 작품을 한 공간에서 만나볼 수 있다. 오프닝 리셉션은 3월 28일 토요일에 진행될 예정이다.
 ---
 
-"Colors of the Morning Calm" brings together two accomplished contemporary artists whose work explores the boundaries of abstraction and representation. This exhibition showcases Debbie Doye's luminous abstract compositions alongside Geum Sahong's contemplative mixed-media works, creating a dialogue between different approaches to abstract expression.
+This is the first exhibition at ART SPACE BYRON. Local Inverell artists Debbie Doye and Stephen Jones are joined by Korean artist Geum Sahong, bringing together ceramics, painting, and East Asian ink painting under one roof.
 
-Doye's paintings in this exhibition feature her signature use of layered colors and translucent forms, creating works that seem to shift and change as viewers move through the gallery space. Her intuitive approach to composition results in pieces that feel both spontaneous and carefully considered, inviting extended contemplation.
-
-Geum Sahong's contributions to the exhibition explore the intersection of traditional Korean aesthetics and contemporary abstract practice. Using a combination of traditional materials and modern techniques, Sahong creates works that bridge cultural and temporal boundaries, offering fresh perspectives on abstraction's possibilities.
-
-The exhibition features eighteen works total, including several pieces created specifically for this show. The curatorial approach emphasizes the conversation between the artists' distinct visual languages, highlighting both their individual strengths and the surprising resonances that emerge when their works are placed in dialogue.
-
-"Abstract Reflections" opens June 20th, 2026, with artist talks, curator tours, and a published exhibition catalogue.
+The exhibition is a small occasion to introduce East Asian art to the local community in regional Australia, while creating an opportunity for local and international artists to share the same space. The opening reception will be held on Saturday, March 28.

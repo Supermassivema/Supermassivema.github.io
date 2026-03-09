@@ -1,479 +1,494 @@
 ---
 layout: gallery-page
 ---
-{% assign lang = page.lang | default: site.default_lang | default: "en" %}
-{% assign t = site.data.translations[lang] %}
 
-<div class="artist-edge-wrapper">
-  <!-- 1. MODERN HERO: Splitted Typography & Interlocking Visuals -->
-  <section class="edge-hero">
-    <div class="edge-container">
-      <div class="edge-hero-typography">
-        <div class="edge-badge">PROFILE / {{ page.slug | upcase }}</div>
-        <h1 class="edge-main-name">
-          <span class="name-first">{{ page.name | split: " " | first }}</span>
-          <span class="name-last">{{ page.name | split: " " | last }}</span>
-        </h1>
-        <div class="edge-hero-meta">
-          <div class="meta-item">
-            <span class="label">MEDIUM</span>
-            <span class="value">{{ page.medium }}</span>
-          </div>
-          <div class="meta-item">
-            <span class="label">LOCATION</span>
-            <span class="value">{{ page.location }} [{{ page.nationality }}]</span>
-          </div>
-        </div>
-      </div>
+<div class="artist-detail">
 
-      <div class="edge-hero-visual">
-        <div class="visual-frame">
-          <img src="{{ page.featured_image | relative_url }}" alt="{{ page.name }}" class="edge-hero-img">
-          <div class="visual-accent-box"></div>
-        </div>
-        <div class="ghost-text" aria-hidden="true">{{ page.name | split: " " | last | upcase }}</div>
-      </div>
+  <!-- Hero: Large artist image + name -->
+  <section class="artist-hero">
+    <div class="artist-hero-img-wrap">
+      <img src="{{ page.featured_image | relative_url }}" alt="{{ page.name }}" class="artist-hero-img">
+    </div>
+    <div class="artist-hero-info">
+      <h1 class="artist-hero-name">{{ page.name }}{% if page.name_kr and page.name_kr != "" %} <span class="artist-hero-name-kr">{{ page.name_kr }}</span>{% endif %}</h1>
+      <p class="artist-hero-meta">{% if page.born and page.born != "" %}{{ page.born }}{% else %}{{ page.nationality }}{% if page.location %}, {{ page.location }}{% endif %}{% endif %}</p>
     </div>
   </section>
 
-  <!-- 2. NARRATIVE SECTION: Asymmetric Grid with Mechanical Lines -->
-  <section class="edge-narrative section">
-    <div class="container-wide">
-      <div class="edge-grid-layout">
-        <div class="narrative-sidebar">
-          <div class="sidebar-sticky">
-            <h2 class="edge-section-label">BIOGRAPHY</h2>
-            <div class="mechanical-separator"></div>
-            <p class="edge-lead-text">{{ page.bio_short }}</p>
-          </div>
+  <!-- Tabs -->
+  <div class="artist-tabs">
+    <button class="artist-tab active" data-tab="bio">Biography</button>
+    <button class="artist-tab" data-tab="works">Works</button>
+    <button class="artist-tab" data-tab="exhibitions">Exhibitions</button>
+  </div>
+
+  <!-- Biography Tab -->
+  <div class="artist-tab-content" id="tab-bio">
+    <div class="artist-bio-wrap">
+      <div class="artist-bio-sidebar">
+        {% if page.born and page.born != "" %}
+        <div class="artist-bio-block">
+          <span class="artist-bio-label">Born</span>
+          <span class="artist-bio-value">{{ page.born }}</span>
         </div>
-
-        <div class="narrative-content">
-          <div class="content-prose">
-            {{ content }}
-          </div>
-
-          {% if page.philosophy %}
-          <div class="philosophy-block">
-            <h3 class="edge-sub-label">PHILOSOPHY</h3>
-            <div class="philosophy-quote">
-              {{ page.philosophy | markdownify }}
-            </div>
-          </div>
+        {% endif %}
+        {% if page.education and page.education != "" %}
+        <div class="artist-bio-block">
+          <span class="artist-bio-label">Education</span>
+          <span class="artist-bio-value">{{ page.education }}</span>
+        </div>
+        {% endif %}
+        <div class="artist-bio-block">
+          <span class="artist-bio-label">Medium</span>
+          <span class="artist-bio-value">{{ page.medium }}</span>
+          {% if page.medium_kr and page.medium_kr != "" %}
+          <span class="artist-bio-value-kr">{{ page.medium_kr }}</span>
           {% endif %}
         </div>
+        {% if page.location %}
+        <div class="artist-bio-block">
+          <span class="artist-bio-label">Based in</span>
+          <span class="artist-bio-value">{{ page.location }}</span>
+        </div>
+        {% endif %}
+        {% if page.website and page.website != "" %}
+        <div class="artist-bio-block">
+          <span class="artist-bio-label">Website</span>
+          <span class="artist-bio-value"><a href="https://{{ page.website }}" target="_blank" style="color:#000;text-decoration:underline;">{{ page.website }}</a></span>
+        </div>
+        {% endif %}
+        {% if page.instagram and page.instagram != "" %}
+        <div class="artist-bio-block">
+          <span class="artist-bio-label">Instagram</span>
+          <span class="artist-bio-value"><a href="https://www.instagram.com/{{ page.instagram | remove: '@' }}/" target="_blank" style="color:#000;text-decoration:underline;">{{ page.instagram }}</a></span>
+        </div>
+        {% endif %}
+      </div>
+      <div class="artist-bio-main">
+        {% if page.bio_short %}
+        <p class="artist-bio-lead">{{ page.bio_short }}</p>
+        {% endif %}
+        {% if page.bio_short_kr and page.bio_short_kr != "" %}
+        <p class="artist-bio-lead-kr">{{ page.bio_short_kr }}</p>
+        {% endif %}
+        <div class="artist-bio-content">
+          {{ content }}
+        </div>
+        {% if page.philosophy %}
+        <blockquote class="artist-philosophy">
+          <p>{{ page.philosophy }}</p>
+          {% if page.philosophy_kr and page.philosophy_kr != "" %}
+          <p class="philosophy-kr">{{ page.philosophy_kr }}</p>
+          {% endif %}
+        </blockquote>
+        {% endif %}
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- 3. CATALOGUE: Technical Grid -->
+  <!-- Works Tab -->
   {% assign artist_artworks = site.artworks | where: "artist", page.name %}
-  {% if artist_artworks.size > 0 %}
-  <section class="edge-catalogue section" id="works">
-    <div class="container-wide">
-      <div class="catalogue-top-bar">
-        <h2 class="edge-section-label">SELECTED WORKS</h2>
-        <span class="catalogue-count">[{{ artist_artworks.size }}] ITEMS FOUND</span>
-      </div>
-      <div class="mechanical-separator mb-12"></div>
-
-      <div class="edge-work-grid">
-        {% for artwork in artist_artworks %}
-        <article class="edge-work-item">
-          <a href="{{ artwork.url | relative_url }}" class="work-link">
-            <div class="work-visual">
-              <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" class="work-img">
-              <div class="work-overlay">
-                <span class="view-details">VIEW ARCHIVE</span>
-              </div>
-            </div>
-            <div class="work-info">
-              <div class="info-top">
-                <h3 class="work-title">{{ artwork.title }}</h3>
-                <span class="work-year">{{ artwork.year }}</span>
-              </div>
-              <p class="work-params">{{ artwork.medium }}</p>
-              {% if artwork.status == 'sold' %}
-              <div class="status-indicator sold">SOLD / ARCHIVE</div>
-              {% else %}
-              <div class="status-indicator available">AVAILABLE</div>
-              {% endif %}
-            </div>
-          </a>
-        </article>
-        {% endfor %}
-      </div>
+  <div class="artist-tab-content" id="tab-works" style="display:none;">
+    {% if artist_artworks.size > 0 %}
+    <div class="artist-works-grid">
+      {% for artwork in artist_artworks %}
+      <a href="{{ artwork.url | relative_url }}" class="artist-work-card">
+        <div class="artist-work-img-wrap">
+          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">
+        </div>
+        <div class="artist-work-info">
+          <p class="artist-work-title">{{ artwork.title }}</p>
+          <p class="artist-work-detail">{{ artwork.year }}{% if artwork.medium %}, {{ artwork.medium }}{% endif %}</p>
+          {% if artwork.dimensions %}
+          <p class="artist-work-detail">{{ artwork.dimensions }}</p>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
     </div>
-  </section>
-  {% endif %}
+    {% else %}
+    <p class="artist-empty">No works currently on display.</p>
+    {% endif %}
+  </div>
+
+  <!-- Exhibitions Tab -->
+  <div class="artist-tab-content" id="tab-exhibitions" style="display:none;">
+    {% assign artist_exhibitions = site.exhibitions | where: "featured_artist", page.name %}
+    {% if artist_exhibitions.size > 0 %}
+    <div class="artist-exhibitions-list">
+      {% for exhibition in artist_exhibitions %}
+      <a href="{{ exhibition.url | relative_url }}" class="artist-exhibition-item">
+        {% if exhibition.featured_image %}
+        <div class="artist-exhibition-img">
+          <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
+        </div>
+        {% endif %}
+        <div class="artist-exhibition-info">
+          <p class="artist-exhibition-title">{{ exhibition.title }}</p>
+          <p class="artist-exhibition-date">{{ exhibition.start_date | date: "%b %d, %Y" }} — {{ exhibition.end_date | date: "%b %d, %Y" }}</p>
+          {% if exhibition.location %}
+          <p class="artist-exhibition-location">{{ exhibition.location }}</p>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="artist-empty">No exhibitions currently listed.</p>
+    {% endif %}
+  </div>
+
 </div>
 
 <style>
-  /* --- MODERN EDGE DESIGN SYSTEM 2026 --- */
-
-  :root {
-    --edge-accent: var(--celadon-dark);
-    --edge-ink: #000;
-    --edge-paper: #fff;
-    --edge-stone: #f0f0f0;
-    --edge-mono: 'Inter', -apple-system, sans-serif;
-    --transition-sharp: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  .artist-detail {
+    background: #fff;
+    color: #000;
+    min-height: 100vh;
   }
 
-  .artist-edge-wrapper {
-    background-color: var(--edge-paper);
-    color: var(--edge-ink);
-    position: relative;
-    overflow-x: hidden;
-  }
-
-  /* 1. HERO SECTION: BOLD & STRUCTURAL */
-  .edge-hero {
-    min-height: 70vh;
-    /* Reduced from 100vh */
-    padding-top: var(--space-20);
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-
-  .edge-container {
-    max-width: var(--container-wide);
+  /* ── Hero ── */
+  .artist-hero {
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 var(--container-padding);
-    display: flex;
-    gap: var(--space-12);
-    align-items: flex-end;
+    padding: 40px 48px 0;
   }
 
-  .edge-hero-typography {
-    flex: 0 0 50%;
-    z-index: 10;
+  .artist-hero-img-wrap {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    overflow: hidden;
+    background: #f5f5f5;
   }
 
-  .edge-badge {
-    font-family: var(--edge-mono);
-    font-size: var(--text-xs);
-    letter-spacing: 0.3em;
-    font-weight: 700;
-    color: var(--edge-accent);
-    margin-bottom: var(--space-6);
-  }
-
-  .edge-main-name {
-    font-family: var(--font-serif-en);
-    font-size: clamp(48px, 10vw, 120px);
-    /* Reduced scale */
-    line-height: 0.85;
-    margin-bottom: var(--space-8);
-    display: flex;
-    flex-direction: column;
-    letter-spacing: -0.04em;
-    font-weight: 700;
-  }
-
-  .name-last {
-    margin-left: 0.5em;
-    /* Staggered effect */
-    color: transparent;
-    -webkit-text-stroke: 1px var(--edge-ink);
-  }
-
-  .edge-hero-meta {
-    display: flex;
-    gap: var(--space-12);
-    border-top: 1px solid var(--edge-ink);
-    padding-top: var(--space-6);
-  }
-
-  .meta-item .label {
-    display: block;
-    font-family: var(--edge-mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--stone-grey);
-    margin-bottom: var(--space-2);
-  }
-
-  .meta-item .value {
-    font-size: var(--text-base);
-    font-weight: 600;
-  }
-
-  .edge-hero-visual {
-    flex: 1;
-    position: relative;
-  }
-
-  .visual-frame {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    max-height: 550px;
-    /* Capped scale */
-    background: var(--edge-stone);
-    overflow: visible;
-  }
-
-  .edge-hero-img {
+  .artist-hero-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    mix-blend-mode: multiply;
-    /* Artistic touch */
-    filter: grayscale(100%);
-    transition: var(--transition-sharp);
   }
 
-  .visual-frame:hover .edge-hero-img {
-    filter: grayscale(0%);
-    transform: scale(1.02);
+  .artist-hero-info {
+    padding: 28px 0 24px;
+    border-bottom: 1px solid #000;
   }
 
-  .visual-accent-box {
-    position: absolute;
-    top: -40px;
-    right: -40px;
-    width: 140px;
-    height: 140px;
-    border: 1px solid var(--edge-accent);
-    z-index: -1;
-  }
-
-  .ghost-text {
-    position: absolute;
-    bottom: -10%;
-    right: -20%;
-    font-size: 20vw;
-    font-weight: 900;
-    color: rgba(0, 0, 0, 0.02);
-    line-height: 1;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* 2. NARRATIVE: ASYMMETRIC CONTENT */
-  .edge-grid-layout {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: var(--space-20);
-    align-items: start;
-  }
-
-  .sidebar-sticky {
-    position: sticky;
-    top: 15vh;
-  }
-
-  .edge-section-label {
-    font-family: var(--edge-mono);
-    font-size: var(--text-xs);
-    letter-spacing: 0.4em;
+  .artist-hero-name {
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+    line-height: 1.1;
   }
 
-  .mechanical-separator {
-    width: 100%;
-    height: 1px;
-    background: var(--edge-ink);
-    margin: var(--space-4) 0 var(--space-8);
+  .artist-hero-name-kr {
+    font-weight: 400;
+    color: #888;
+    font-size: 0.65em;
+    margin-left: 8px;
   }
 
-  .edge-lead-text {
-    font-size: var(--text-xl);
-    line-height: 1.4;
-    font-weight: 500;
-    color: var(--edge-accent);
+  .artist-hero-meta {
+    font-size: 0.82rem;
+    color: #888;
+    margin: 0;
+    letter-spacing: 0.03em;
   }
 
-  .content-prose {
-    column-count: 2;
-    column-gap: var(--space-12);
-    font-size: var(--text-base);
-    line-height: 1.8;
-  }
-
-  .philosophy-block {
-    margin-top: var(--space-16);
-    background: var(--edge-stone);
-    padding: var(--space-12);
-    border-left: 4px solid var(--edge-ink);
-  }
-
-  .edge-sub-label {
-    font-family: var(--edge-mono);
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    margin-bottom: var(--space-8);
-  }
-
-  .philosophy-quote {
-    font-family: var(--font-serif-en);
-    font-size: var(--text-2xl);
-    font-style: italic;
-    line-height: 1.5;
-  }
-
-  /* 3. CATALOGUE: MODERN TECHNICAL GRID */
-  .catalogue-top-bar {
+  /* ── Tabs ── */
+  .artist-tabs {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    gap: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+    border-bottom: 1px solid #e0e0e0;
   }
 
-  .catalogue-count {
-    font-family: var(--edge-mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
+  .artist-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 16px 24px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
   }
 
-  .edge-work-grid {
+  .artist-tab:hover { color: #000; }
+
+  .artist-tab.active {
+    color: #000;
+    border-bottom-color: #000;
+  }
+
+  /* ── Tab Content ── */
+  .artist-tab-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 48px 80px;
+  }
+
+  /* ── Biography ── */
+  .artist-bio-wrap {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 60px;
+  }
+
+  .artist-bio-sidebar {
+    padding-top: 4px;
+  }
+
+  .artist-bio-block {
+    margin-bottom: 24px;
+  }
+
+  .artist-bio-label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 4px;
+  }
+
+  .artist-bio-value {
+    font-size: 0.88rem;
+    color: #000;
+    font-weight: 400;
+  }
+
+  .artist-bio-value-kr {
+    display: block;
+    font-size: 0.78rem;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  .artist-bio-lead {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #333;
+    margin: 0 0 12px;
+    font-weight: 400;
+  }
+
+  .artist-bio-lead-kr {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #888;
+    margin: 0 0 32px;
+    font-weight: 400;
+  }
+
+  .artist-bio-content {
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: #444;
+  }
+
+  .artist-bio-content h2,
+  .artist-bio-content h3 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000;
+    margin: 40px 0 16px;
+  }
+
+  .artist-bio-content p {
+    margin: 0 0 16px;
+  }
+
+  .artist-philosophy {
+    margin: 40px 0 0;
+    padding: 28px 0 0;
+    border-top: 1px solid #e0e0e0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #555;
+    font-style: italic;
+  }
+
+  .artist-philosophy p { margin: 0 0 8px; }
+
+  .philosophy-kr {
+    color: #999;
+    font-size: 0.9em;
+  }
+
+  /* ── Works Grid ── */
+  .artist-works-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--edge-stone);
-    /* Becomes grid lines */
-    border: 1px solid var(--edge-stone);
+    gap: 32px;
   }
 
-  .edge-work-item {
-    background: var(--edge-paper);
-    padding: var(--space-8);
-    transition: var(--transition-sharp);
+  .artist-work-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
   }
 
-  .edge-work-item:hover {
-    background: var(--edge-stone);
-  }
-
-  .work-visual {
-    aspect-ratio: 3 / 4;
+  .artist-work-img-wrap {
+    width: 100%;
+    aspect-ratio: 4 / 5;
     overflow: hidden;
-    position: relative;
-    margin-bottom: var(--space-6);
+    background: #f5f5f5;
+    margin-bottom: 12px;
   }
 
-  .work-img {
+  .artist-work-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: var(--transition-sharp);
+    display: block;
+    transition: transform 0.4s ease;
   }
 
-  .work-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.9);
+  .artist-work-card:hover .artist-work-img-wrap img {
+    transform: scale(1.03);
+  }
+
+  .artist-work-title {
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin: 0 0 4px;
+    color: #000;
+  }
+
+  .artist-work-detail {
+    font-size: 0.72rem;
+    color: #999;
+    margin: 0 0 2px;
+  }
+
+  /* ── Exhibitions List ── */
+  .artist-exhibitions-list {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: var(--transition-sharp);
+    flex-direction: column;
+    gap: 0;
   }
 
-  .view-details {
-    color: #fff;
-    font-family: var(--edge-mono);
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    border-bottom: 1px solid #fff;
-    padding-bottom: 4px;
+  .artist-exhibition-item {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 28px;
+    align-items: start;
+    text-decoration: none;
+    color: #000;
+    padding: 24px 0;
+    border-bottom: 1px solid #f0f0f0;
   }
 
-  .edge-work-item:hover .work-overlay {
-    opacity: 1;
+  .artist-exhibition-item:first-child {
+    padding-top: 0;
   }
 
-  .edge-work-item:hover .work-img {
-    transform: scale(1.1);
+  .artist-exhibition-img {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #f5f5f5;
   }
 
-  .info-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: var(--space-2);
+  .artist-exhibition-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
-  .work-title {
-    font-size: var(--text-lg);
+  .artist-exhibition-title {
+    font-size: 1rem;
     font-weight: 600;
+    margin: 0 0 6px;
+    color: #000;
+  }
+
+  .artist-exhibition-date {
+    font-size: 0.78rem;
+    color: #888;
+    margin: 0 0 4px;
+  }
+
+  .artist-exhibition-location {
+    font-size: 0.75rem;
+    color: #aaa;
     margin: 0;
   }
 
-  .work-year {
-    font-family: var(--edge-mono);
-    font-size: 11px;
-    color: var(--stone-grey);
+  .artist-empty {
+    font-size: 0.85rem;
+    color: #aaa;
+    padding: 40px 0;
   }
 
-  .work-params {
-    font-size: var(--text-sm);
-    color: var(--charcoal);
-    margin-bottom: var(--space-4);
-  }
-
-  .status-indicator {
-    font-family: var(--edge-mono);
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    font-weight: 700;
-    padding: 2px 6px;
-    display: inline-block;
-    border: 1px solid currentColor;
-  }
-
-  .status-indicator.sold {
-    color: var(--stone-grey);
-  }
-
-  .status-indicator.available {
-    color: var(--edge-accent);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 1200px) {
-    .edge-grid-layout {
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .artist-bio-wrap {
       grid-template-columns: 1fr;
-      gap: var(--space-12);
+      gap: 32px;
     }
 
-    .edge-work-grid {
+    .artist-works-grid {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .content-prose {
-      column-count: 1;
+    .artist-exhibition-item {
+      grid-template-columns: 200px 1fr;
     }
   }
 
   @media (max-width: 768px) {
-    .edge-container {
-      flex-direction: column-reverse;
-      align-items: flex-start;
+    .artist-hero,
+    .artist-tabs,
+    .artist-tab-content {
+      padding-left: 24px;
+      padding-right: 24px;
     }
 
-    .edge-hero-typography {
-      width: 100%;
+    .artist-hero-img-wrap {
+      aspect-ratio: 16 / 9;
     }
 
-    .edge-hero-visual {
-      width: 100%;
-      margin-bottom: var(--space-12);
+    .artist-works-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
     }
 
-    .edge-work-grid {
+    .artist-exhibition-item {
       grid-template-columns: 1fr;
+      gap: 14px;
     }
 
-    .edge-main-name {
-      font-size: 48px;
+    .artist-tab {
+      padding: 14px 16px;
+      font-size: 0.65rem;
     }
+  }
 
-    .edge-hero-meta {
-      flex-direction: column;
-      gap: var(--space-4);
+  @media (max-width: 480px) {
+    .artist-works-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
+
+<script>
+  document.querySelectorAll('.artist-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.artist-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.artist-tab-content').forEach(c => c.style.display = 'none');
+      document.getElementById('tab-' + tab).style.display = '';
+    });
+  });
+</script>

@@ -1,237 +1,325 @@
 ---
 layout: gallery-page
 title: Exhibitions
-subtitle: Curated collections and thematic showcases
 section: gallery
-show_header: true
 ---
-{% assign lang = page.lang | default: site.default_lang | default: "en" %}
-{% assign t = site.data.translations[lang] %}
-
-<section class="section">
-  <div class="container">
-    <div class="gallery-section-header">
-      <h1 class="gallery-section-title">{{ t.exhibitions.title }}</h1>
-      <p class="gallery-section-description">
-        {{ t.exhibitions.subtitle }}
-      </p>
-    </div>
-
-    <!-- Current Exhibitions -->
-    {% assign current_exhibitions = site.exhibitions | where: "status", "current" %}
-    {% if current_exhibitions.size > 0 %}
-    <div class="exhibition-category">
-      <h2 class="category-heading">{{ t.exhibitions.current }}</h2>
-      <div class="exhibition-grid">
-        {% for exhibition in current_exhibitions %}
-        <a href="{{ exhibition.url | relative_url }}" class="exhibition-card">
-          <div class="exhibition-image">
-            <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
-            <div class="exhibition-status status-current">{{ t.exhibitions.current }}</div>
-          </div>
-          <div class="exhibition-info">
-            <h3 class="exhibition-title">{{ exhibition.title }}</h3>
-            <p class="exhibition-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B
-              %d, %Y" }}</p>
-          </div>
-        </a>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-    <!-- Upcoming Exhibitions -->
-    {% assign upcoming_exhibitions = site.exhibitions | where: "status", "upcoming" %}
-    {% if upcoming_exhibitions.size > 0 %}
-    <div class="exhibition-category mt-16">
-      <h2 class="category-heading">{{ t.exhibitions.upcoming }}</h2>
-      <div class="exhibition-grid">
-        {% for exhibition in upcoming_exhibitions %}
-        <div class="exhibition-card">
-          <div class="exhibition-image">
-            {% if exhibition.featured_image %}
-            <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
-            {% else %}
-            <div class="mist-placeholder" style="aspect-ratio: 16/10; background: var(--mist-grey);"></div>
-            {% endif %}
-            <div class="exhibition-status status-upcoming">{{ t.exhibitions.upcoming }}</div>
-          </div>
-          <div class="exhibition-info">
-            <h3 class="exhibition-title">{{ exhibition.title }}</h3>
-            <p class="exhibition-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B
-              %d, %Y" }}</p>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-    <!-- Past Exhibitions -->
-    {% assign past_exhibitions = site.exhibitions | where: "status", "past" %}
-    {% if past_exhibitions.size > 0 %}
-    <div class="exhibition-category mt-16">
-      <h2 class="category-heading">{{ t.exhibitions.past }}</h2>
-      <div class="exhibition-grid">
-        {% for exhibition in past_exhibitions %}
-        <a href="{{ exhibition.url | relative_url }}" class="exhibition-card">
-          <div class="exhibition-image">
-            <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
-            <div class="exhibition-status status-past">{{ t.exhibitions.past }}</div>
-          </div>
-          <div class="exhibition-info">
-            <h3 class="exhibition-title">{{ exhibition.title }}</h3>
-          </div>
-        </a>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-  </div>
-</section>
-
-<!-- GALLERY SPACE SHOWCASE SECTION -->
-<section class="section bg-secondary">
-  <div class="container">
-    <div class="gallery-section-header">
-      <h2 class="gallery-section-title">{{ t.gallery.our_space | upcase }}</h2>
-      <p class="gallery-section-description">
-        A 250 sqm contemporary gallery space designed with clean lines, abundant natural light,
-        and versatile exhibition areas. Our space provides the perfect backdrop for experiencing
-        art in an intimate, contemplative setting.
-      </p>
-    </div>
-
-    <!-- Main Spaces Grid (3 Cards) -->
-    <div class="space-grid">
-      <!-- Main Exhibition Hall -->
-      <div class="space-card">
-        <div class="space-card-image">
-          <img src="{{ '/assets/images/Gallery Background photo/space (1).jpg' | relative_url }}"
-            alt="Main Exhibition Hall" loading="lazy">
-        </div>
-        <div class="space-card-info">
-          <h3 class="space-card-title">MAIN EXHIBITION HALL</h3>
-          <p class="space-card-specs">120 sqm • 4m Ceilings • Column-Free</p>
-          <p class="space-card-description">
-            Our largest exhibition space features soaring ceilings and an open floor plan,
-            providing maximum flexibility for installations and large-scale artworks.
-          </p>
-        </div>
-      </div>
-
-      <!-- North Gallery Wing -->
-      <div class="space-card">
-        <div class="space-card-image">
-          <img src="{{ '/assets/images/Gallery Background photo/space (2).jpg' | relative_url }}"
-            alt="North Gallery Wing" loading="lazy">
-        </div>
-        <div class="space-card-info">
-          <h3 class="space-card-title">NORTH GALLERY WING</h3>
-          <p class="space-card-specs">80 sqm • Natural Northern Light • Solo Shows</p>
-          <p class="space-card-description">
-            Bathed in consistent natural light from north-facing windows, this intimate
-            space is ideal for focused solo exhibitions and delicate works.
-          </p>
-        </div>
-      </div>
-
-      <!-- Project Room -->
-      <div class="space-card">
-        <div class="space-card-image">
-          <img src="{{ '/assets/images/Gallery Background photo/space (8).jpg' | relative_url }}" alt="Project Room"
-            loading="lazy">
-        </div>
-        <div class="space-card-info">
-          <h3 class="space-card-title">PROJECT ROOM - First</h3>
-          <p class="space-card-specs">50 sqm • Experimental Space • Emerging Artists</p>
-          <p class="space-card-description">
-            A dedicated space for experimental works, new media installations, and emerging
-            artists exploring innovative exhibition formats.
-          </p>
-        </div>
-      </div>
-
-      <!-- Project Room -->
-      <div class="space-card">
-        <div class="space-card-image">
-          <img src="{{ '/assets/images/Gallery Background photo/space (10).jpg' | relative_url }}" alt="Project Room"
-            loading="lazy">
-        </div>
-        <div class="space-card-info">
-          <h3 class="space-card-title">PROJECT ROOM - Second</h3>
-          <p class="space-card-specs">50 sqm • Experimental Space • Emerging Artists</p>
-          <p class="space-card-description">
-            A dedicated space for experimental works, new media installations, and emerging
-            artists exploring innovative exhibition formats.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Detail Images Grid (4 Smaller Images) -->
-    <div class="detail-image-grid">
-      <div class="detail-image-card">
-        <img src="{{ '/assets/images/Gallery Background photo/space (3).jpg' | relative_url }}"
-          alt="Architectural Details" loading="lazy">
-        <div class="detail-overlay">
-          <span class="detail-label">ARCHITECTURAL DETAILS</span>
-        </div>1
-      </div>
-
-      <div class="detail-image-card">
-        <img src="{{ '/assets/images/Gallery Background photo/space (14).jpg' | relative_url }}"
-          alt="Viewing Perspectives" loading="lazy">
-        <div class="detail-overlay">
-          <span class="detail-label">VIEWING PERSPECTIVES</span>
-        </div>
-      </div>
-
-      <div class="detail-image-card">
-        <img src="{{ '/assets/images/Gallery Background photo/space (16).jpg' | relative_url }}"
-          alt="Installation Views" loading="lazy">
-        <div class="detail-overlay">
-          <span class="detail-label">INSTALLATION VIEWS</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Features Section Removed -->
-
-    <!-- CTA Button -->
-    <div class="text-center mt-12">
-      <a href="{{ '/gallery/visit' | relative_url }}" class="btn btn-primary">
-        {{ t.gallery.plan_visit | upcase }}
-      </a>
-    </div>
-  </div>
-</section>
 
 <style>
-  .category-heading {
-    font-size: var(--text-sm);
-    font-weight: var(--weight-semibold);
-    letter-spacing: var(--tracking-widest);
-    color: var(--text-tertiary);
-    margin-bottom: var(--space-6);
+  .exhibitions-page {
+    background: #fff;
+    min-height: 100vh;
+    color: #000;
+  }
+
+  .exhibition-card {
+    background: #fff;
+  }
+
+  /* ── Header ── */
+  .exhibitions-header {
+    border-bottom: 1px solid #000;
+    padding: 60px 0 32px;
+  }
+
+  .exhibitions-header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .exhibitions-page-title {
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #000;
+    line-height: 1;
+    margin: 0;
     text-transform: uppercase;
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: var(--space-2);
   }
 
-  .mt-12 {
-    margin-top: var(--space-12);
+  /* ── Tabs ── */
+  .exhibitions-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #e0e0e0;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
   }
 
-  .mt-16 {
-    margin-top: var(--space-16);
+  .exhibitions-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 18px 28px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
   }
 
-  .feature-list li::before {
-    content: "•";
-    color: var(--accent-primary);
-    margin-right: var(--space-2);
-    font-weight: var(--weight-bold);
+  .exhibitions-tab:hover { color: #000; }
+
+  .exhibitions-tab.active {
+    color: #000;
+    border-bottom-color: #000;
+  }
+
+  /* ── Exhibition Grid ── */
+  .exhibitions-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 48px 48px 100px;
+  }
+
+  .exhibitions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 36px;
+  }
+
+  /* ── Exhibition Card ── */
+  .exhibition-card {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .exhibition-card-img {
+    width: 510px;
+    min-width: 510px;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .exhibition-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .exhibition-card:hover .exhibition-card-img img {
+    transform: scale(1.03);
+  }
+
+  .exhibition-card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5px;
+  }
+
+  .exhibition-card-location {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 8px;
+  }
+
+  .exhibition-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 8px;
+    line-height: 1.35;
+    color: #000;
+  }
+
+  .exhibition-card-dates {
+    font-size: 0.78rem;
+    color: #888;
+    margin: 0;
+  }
+
+  /* ── Empty state ── */
+  .exhibitions-empty {
+    font-size: 0.88rem;
+    color: #aaa;
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  /* ── Featured (single large card for current) ── */
+  .exhibition-featured {
+    margin-bottom: 48px;
+  }
+
+  .exhibition-featured .exhibition-card-img {
+    width: 630px;
+    min-width: 630px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .exhibition-featured .exhibition-card-title {
+    font-size: 1.4rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .exhibition-card {
+      flex-direction: column;
+    }
+
+    .exhibition-card-img,
+    .exhibition-featured .exhibition-card-img {
+      width: 100%;
+      min-width: unset;
+      max-width: 100%;
+    }
+
+    .exhibitions-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .exhibitions-header-inner,
+    .exhibitions-tabs,
+    .exhibitions-content {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .exhibitions-page-title {
+      font-size: clamp(2rem, 10vw, 3.5rem);
+    }
+
+    .exhibitions-tab {
+      padding: 14px 18px;
+      font-size: 0.65rem;
+    }
   }
 </style>
-```
+
+<div class="exhibitions-page">
+
+  <!-- Header -->
+  <div class="exhibitions-header">
+    <div class="exhibitions-header-inner">
+      <h1 class="exhibitions-page-title">Exhibitions</h1>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="exhibitions-tabs">
+    <button class="exhibitions-tab active" data-tab="current">Current</button>
+    <button class="exhibitions-tab" data-tab="upcoming">Upcoming</button>
+    <button class="exhibitions-tab" data-tab="past">Past</button>
+  </div>
+
+  <!-- Current Exhibitions -->
+  {% assign current_exhibitions = site.exhibitions | where: "status", "current" %}
+  <div class="exhibitions-content exhibitions-tab-content" id="tab-current">
+    {% if current_exhibitions.size > 0 %}
+      {% for exhibition in current_exhibitions limit: 1 %}
+      <div class="exhibition-featured">
+        <a href="{{ exhibition.url | relative_url }}" class="exhibition-card">
+          <div class="exhibition-card-img">
+            {% if exhibition.featured_image %}
+            <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="exhibition-card-info">
+            <p class="exhibition-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
+            <p class="exhibition-card-title">{{ exhibition.title }}</p>
+            <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B %d, %Y" }}</p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+
+      {% if current_exhibitions.size > 1 %}
+      <div class="exhibitions-grid">
+        {% for exhibition in current_exhibitions offset: 1 %}
+        <a href="{{ exhibition.url | relative_url }}" class="exhibition-card">
+          <div class="exhibition-card-img">
+            {% if exhibition.featured_image %}
+            <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="exhibition-card-info">
+            <p class="exhibition-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
+            <p class="exhibition-card-title">{{ exhibition.title }}</p>
+            <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B %d, %Y" }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    {% else %}
+      <p class="exhibitions-empty">No current exhibitions.</p>
+    {% endif %}
+  </div>
+
+  <!-- Upcoming Exhibitions -->
+  {% assign upcoming_exhibitions = site.exhibitions | where: "status", "upcoming" %}
+  <div class="exhibitions-content exhibitions-tab-content" id="tab-upcoming" style="display:none;">
+    {% if upcoming_exhibitions.size > 0 %}
+    <div class="exhibitions-grid">
+      {% for exhibition in upcoming_exhibitions %}
+      <div class="exhibition-card">
+        <div class="exhibition-card-img">
+          {% if exhibition.featured_image %}
+          <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
+          {% else %}
+          <div style="width:100%;height:100%;background:#f0f0f0;"></div>
+          {% endif %}
+        </div>
+        <p class="exhibition-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
+        <p class="exhibition-card-title">{{ exhibition.title }}</p>
+        <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B %d, %Y" }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p class="exhibitions-empty">No upcoming exhibitions at this time.</p>
+    {% endif %}
+  </div>
+
+  <!-- Past Exhibitions -->
+  {% assign past_exhibitions = site.exhibitions | where: "status", "past" %}
+  <div class="exhibitions-content exhibitions-tab-content" id="tab-past" style="display:none;">
+    {% if past_exhibitions.size > 0 %}
+    <div class="exhibitions-grid">
+      {% for exhibition in past_exhibitions %}
+      <a href="{{ exhibition.url | relative_url }}" class="exhibition-card">
+        <div class="exhibition-card-img">
+          {% if exhibition.featured_image %}
+          <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
+          {% endif %}
+        </div>
+        <p class="exhibition-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
+        <p class="exhibition-card-title">{{ exhibition.title }}</p>
+        <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B %d, %Y" }}</p>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p class="exhibitions-empty">No past exhibitions to display.</p>
+    {% endif %}
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.exhibitions-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.exhibitions-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.exhibitions-tab-content').forEach(c => c.style.display = 'none');
+      document.getElementById('tab-' + tab).style.display = '';
+    });
+  });
+</script>

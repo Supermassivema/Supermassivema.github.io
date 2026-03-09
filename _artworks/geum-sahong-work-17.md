@@ -1,12 +1,13 @@
 ---
 layout: artwork
-title: "Geum Sahong - Work 17"
+title: ""
 artist: "Geum Sahong"
-medium: "Contemporary Art"
-dimensions: "Various"
-year: "2024"
-image: /assets/images/work/Geum Sahong/work(9).jpg
+medium: "Acrylic, Oil on canvas"
+dimensions: ""
+year: ""
+image: /assets/images/work/Geum Sahong/work(17).jpg
 status: "available"
 price: "Contact for price"
-description: "A compelling contemporary piece by Geum Sahong, exploring themes of threshold and liminality."
+description: ""
+featured: true
 ---

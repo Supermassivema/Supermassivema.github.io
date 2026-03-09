@@ -1,13 +1,13 @@
 ---
 layout: artwork
-title: "Debbie Doye - Work 9"
+title: ""
 artist: "Debbie Doye"
-medium: "Mixed Media, Abstract"
-dimensions: "Various"
-year: "2024"
+medium: "Ceramics"
+dimensions: ""
+year: ""
 image: /assets/images/work/DebbieDoye/work09.jpeg
-featured: true
 status: "available"
 price: "Contact for price"
-description: "Layered textures and intuitive mark-making."
+description: ""
+featured: true
 ---

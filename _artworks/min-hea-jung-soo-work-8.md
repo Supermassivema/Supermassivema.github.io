@@ -1,12 +1,13 @@
 ---
 layout: artwork
-title: "Min Hea Jung Soo - Work 8"
+title: ""
 artist: "Min Hea Jung Soo"
-medium: "Contemporary Art"
-dimensions: "Various"
-year: "2024"
+medium: "Traditional Korean paper on canvas"
+dimensions: ""
+year: ""
 image: /assets/images/work/MinHeaJungSoo/work_08.jpg
 status: "available"
 price: "Contact for price"
-description: "A compelling contemporary piece by Min Hea Jung Soo, exploring themes of threshold and liminality."
+description: ""
+featured: true
 ---

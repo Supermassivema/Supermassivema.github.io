@@ -1,42 +1,26 @@
 ---
 layout: artist
 name: "Stephen Jones"
+name_kr: ""
 slug: "stephen-jones"
-medium: "Sculpture, Installation"
+medium: "Painting (Pencil, Charcoal, Acrylic)"
+medium_kr: "회화 (연필, 목탄, 아크릴)"
 nationality: "Australian"
 location: "Inverell, NSW"
+born: ""
+education: ""
 featured_image: "/assets/images/work/Stephen Jones/Work_01.jpg"
 website: ""
-instagram: ""
-bio_short: "Stephen Jones creates sculptural works and installations that explore the relationship between form, space, and materiality with a minimalist sensibility."
+instagram: "@steve_j_art"
+bio_short: "Stephen Jones is an Australian painter based in Inverell, NSW. Working primarily in pencil, charcoal, and acrylic, he creates portraits and figurative works from his studio in Inverell."
+bio_short_kr: "스티븐 존스는 호주 인버렐에 기반을 둔 화가로, 연필, 목탄, 아크릴을 주요 매체로 사용하여 인버렐 스튜디오에서 인물화와 구상 작품을 제작한다."
 featured: true
 ---
 
 ## Biography
 
-Stephen Jones is a Australian artist whose sculptural practice investigates the fundamental relationships between form, material, and space. Based in Melbourne, Jones creates works that range from intimate table-top sculptures to large-scale installations that transform architectural environments.
+Stephen Jones is an Australian painter based in Inverell, NSW. Working from his studio in Inverell, he creates portraits and figurative works primarily in pencil, charcoal, and acrylic. Portraiture is his favored subject, capturing character and expression through a range of drawing and painting techniques.
 
-With a background in both fine arts and architecture, Jones brings a unique understanding of spatial dynamics to his practice. His works often play with perception, creating visual phenomena that shift as viewers move around them. Through careful manipulation of materials—metal, wood, stone, and found objects—Jones creates pieces that feel both timeless and thoroughly contemporary.
+## 작가 소개
 
-There is a meditative quality to Jones's work. His sculptures don't shout for attention but rather invite contemplation. Clean lines, balanced compositions, and a restrained material palette create objects that feel inevitable, as though they couldn't exist in any other form. Yet despite this apparent simplicity, there is tremendous complexity in how his pieces interact with light, shadow, and surrounding space.
-
-## Sculptural Philosophy
-
-Jones approaches sculpture as a language of essential forms. He is interested in reduction rather than elaboration—stripping away the unnecessary to reveal the core visual and conceptual idea. This minimalist sensibility connects his work to traditions ranging from Japanese aesthetics to European modernism, yet his pieces maintain a distinct contemporary voice.
-
-Material choice is paramount in Jones's practice. He works extensively with metal—steel, bronze, aluminum—appreciating both their structural properties and their ability to capture and reflect light. Wood provides warmth and organic contrast, while stone grounds his compositions with weight and permanence. Found objects occasionally enter his work, their histories and patinas adding layers of meaning.
-
-## Process and Making
-
-Jones's studio practice combines traditional craftsmanship with contemporary fabrication techniques. He works directly with materials, allowing their properties to inform the evolution of each piece. Welding, carving, casting, and assemblage all play roles in his process, depending on what the work demands.
-
-Scale varies significantly across his practice. Some pieces are deliberately intimate, meant to be encountered closely in domestic or gallery settings. Others are architectural in ambition, designed to transform how we experience larger spaces. Regardless of scale, precision and attention to detail remain constant.
-
-## Exhibitions at 44BYRON STUDIO
-
-- **2026**: "Essential Forms" (Solo Exhibition, May 2026)
-- **2025**: "Material Dialogues" (Group Exhibition)
-
-## Recognition
-
-Jones's work has been exhibited in Australia, the UK, and across Asia. His sculptures are held in significant private collections and have been commissioned for public and corporate spaces in Melbourne, Inverell, and London.
+스티븐 존스는 호주 뉴사우스웨일스 인버렐에서 활동하는 화가이다. 인버렐의 스튜디오에서 연필, 목탄, 아크릴을 주요 매체로 사용하여 인물화와 구상 작품을 제작한다. 초상화를 가장 선호하는 주제로 삼아, 다양한 드로잉과 회화 기법을 통해 인물의 성격과 표정을 담아낸다.

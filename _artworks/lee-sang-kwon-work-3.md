@@ -1,13 +1,13 @@
 ---
 layout: artwork
-title: "The Old Garden 2"
+title: "Old Garden 2 (오래된 정원 2)"
 artist: "Lee Sang-kwon"
-medium: "Painting"
-dimensions: "Various"
-year: "2024"
+medium: "Oil on canvas"
+dimensions: "162.2 x 130.3 cm (100호)"
+year: ""
 image: /assets/images/work/이상권 작가/3_jeongwon.jpg
 status: "available"
 price: "Contact for price"
-description: "Capturing the nostalgic essence of an ancient garden."
+description: ""
 featured: true
 ---

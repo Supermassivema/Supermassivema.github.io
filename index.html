@@ -17,6 +17,7 @@ lang: en
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=Fraunces:ital,opsz,wght@1,144,700&display=swap" rel="stylesheet">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ '/assets/css/eastern-minimal.css' | relative_url }}">
@@ -60,14 +61,31 @@ lang: en
         }
 
         .gateway-title {
-            font-family: var(--font-serif-en);
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: var(--weight-semibold);
-            letter-spacing: var(--tracking-tight);
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.04em;
             color: var(--warm-white);
             margin-bottom: var(--space-6);
-            line-height: var(--leading-tight);
+            line-height: 1;
             text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title-artspace {
+            font-size: clamp(3.5rem, 9vw, 6.75rem);
+            line-height: 1;
+            margin-bottom: -0.15em;
+        }
+
+        .title-byron {
+            font-family: 'Fraunces', serif;
+            font-size: clamp(6rem, 17vw, 13rem);
+            font-weight: 700;
+            font-style: italic;
+            line-height: 0.95;
+            letter-spacing: 0.02em;
         }
 
         .gateway-tagline {
@@ -88,32 +106,30 @@ lang: en
         }
 
         .gateway-choices {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--space-8);
-            margin-top: var(--space-12);
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            display: flex;
+            justify-content: center;
+            margin-top: var(--space-10);
         }
 
         .gateway-choice {
             position: relative;
-            padding: var(--space-10) var(--space-6);
-            background-color: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px 52px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
             transition: all var(--duration-base) var(--ease-elegant);
             text-decoration: none;
-            display: block;
+            display: inline-block;
         }
 
         .gateway-choice:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-            border-color: var(--celadon);
-            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .gateway-choice-label {
@@ -146,19 +162,8 @@ lang: en
             font-weight: var(--weight-medium);
             letter-spacing: var(--tracking-wider);
             text-transform: uppercase;
-            color: var(--accent-primary);
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-2);
-        }
-
-        .gateway-choice-cta::after {
-            content: '→';
-            transition: transform var(--duration-base) var(--ease-elegant);
-        }
-
-        .gateway-choice:hover .gateway-choice-cta::after {
-            transform: translateX(4px);
+            color: var(--warm-white);
+            display: inline-block;
         }
 
         .gateway-footer {
@@ -226,6 +231,48 @@ lang: en
             .gateway-choice {
                 padding: var(--space-8) var(--space-5);
             }
+        }
+
+        .gateway-social {
+            margin-top: var(--space-6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .social-link {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .social-divider {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+        }
+
+        .address-tag {
+            position: fixed;
+            bottom: 24px;
+            right: 28px;
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: none;
+            z-index: 50;
+            pointer-events: none;
         }
 
         /* Fade-in Animation */
@@ -419,36 +466,136 @@ lang: en
         </video>
         <video id="bg-video-2" muted playsinline preload="auto"></video>
     </div>
-    <header class="gateway-header">
-        <div class="gateway-logo">
-            <span style="display: block; font-size: 1.5em; font-weight: 700; line-height: 1;">BYRON</span>
-            <span style="display: block; font-size: 0.8em; letter-spacing: 0.1em;">ART SPACE</span>
-        </div>
-        <!-- Language switcher removed as per user request -->
-    </header>
-
     <main class="gateway-container">
         <div class="gateway-content">
-            <h1 class="gateway-title">ART SPACE BYRON</h1>
-            <p class="gateway-tagline">Curating Space, Crafting Experience</p>
-
-            <div class="gateway-divider"></div>
+            <h1 class="gateway-title">
+                <span class="title-artspace">ART SPACE</span>
+                <span class="title-byron">BYRON</span>
+            </h1>
 
             <div class="gateway-choices">
                 <!-- Gallery Choice -->
                 <a href="{{ '/gallery/' | relative_url }}" class="gateway-choice"
                     style="max-width: 500px; margin: 0 auto;">
-                    <div class="gateway-choice-label">Art Space</div>
-                    <h2 class="gateway-choice-title">Gallery</h2>
-                    <p class="gateway-choice-description">
-                        Discover curated contemporary art at the intersection of tradition and innovation.
-                        A space for contemplation and artistic discovery.
-                    </p>
                     <span class="gateway-choice-cta">Enter Gallery</span>
                 </a>
             </div>
+
+            <div class="gateway-social">
+                <a href="https://www.instagram.com/44byron_thegallerycafe/" target="_blank" class="social-link">INSTAGRAM</a>
+                <span class="social-divider">│</span>
+                <a href="https://www.facebook.com/profile.php?id=61581779518291" target="_blank" class="social-link">FACEBOOK</a>
+            </div>
         </div>
     </main>
+
+    <!-- Geometric Cursor -->
+    <div id="geo-cursor">
+        <svg id="geo-cursor-svg" viewBox="-5 -5 70 70" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+            <polygon class="geo-shape geo-hex" points="30,4 52,17 52,43 30,56 8,43 8,17" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.2"/>
+            <rect class="geo-shape geo-rect" x="14" y="14" width="32" height="32" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
+            <polygon class="geo-shape geo-tri" points="30,12 48,46 12,46" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="0.7"/>
+            <circle class="geo-shape geo-dot" cx="30" cy="30" r="2.5" fill="rgba(255,255,255,0.95)"/>
+        </svg>
+    </div>
+
+    <style>
+        * { cursor: none !important; }
+
+        #geo-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            overflow: visible;
+        }
+
+        #geo-cursor-svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .geo-shape {
+            transform-origin: 30px 30px;
+            transform-box: fill-box;
+        }
+
+        .geo-hex {
+            animation: rotateHex 6s linear infinite;
+        }
+
+        .geo-rect {
+            animation: rotateRect 4s linear infinite reverse;
+        }
+
+        .geo-tri {
+            animation: rotateTri 8s linear infinite;
+        }
+
+        @keyframes rotateHex {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateRect {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateTri {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        /* 클릭 시 펄스 효과 */
+        #geo-cursor.clicking #geo-cursor-svg {
+            animation: cursorPulse 0.3s ease-out forwards;
+        }
+
+        @keyframes cursorPulse {
+            0%   { transform: scale(1); opacity: 1; }
+            50%  { transform: scale(1.5); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+
+    <script>
+        (function() {
+            const cursor = document.getElementById('geo-cursor');
+            let mouseX = -100, mouseY = -100;
+            let curX = -100, curY = -100;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            document.addEventListener('mousedown', () => {
+                cursor.classList.add('clicking');
+            });
+            document.addEventListener('mouseup', () => {
+                cursor.classList.remove('clicking');
+            });
+
+            // 부드러운 따라오기
+            function animate() {
+                curX += (mouseX - curX) * 0.12;
+                curY += (mouseY - curY) * 0.12;
+                cursor.style.left = curX + 'px';
+                cursor.style.top  = curY + 'px';
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+    </script>
+
+    <div class="address-tag">44 Byron St, Inverell NSW 2360</div>
 
     <div class="footer-trigger"></div>
     <footer class="gateway-footer">

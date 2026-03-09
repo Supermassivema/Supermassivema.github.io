@@ -1,128 +1,447 @@
 ---
 layout: gallery-page
-title: "Collection"
+title: "Media"
 ---
-{% assign lang = page.lang | default: site.default_lang | default: "en" %}
-{% assign t = site.data.translations[lang] %}
 
-<section class="section">
-  <div class="container">
-    <div class="gallery-section-header">
-      <h1 class="gallery-section-title">{{ t.collection.title }}</h1>
-      <p class="gallery-section-description">
-        {{ t.collection.subtitle }}
-      </p>
+<style>
+  .media-page {
+    background: #fff;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .media-header {
+    border-bottom: 1px solid #000;
+    padding: 60px 0 32px;
+  }
+
+  .media-header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .media-page-title {
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #000;
+    line-height: 1;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  /* ── Tabs ── */
+  .media-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #e0e0e0;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .media-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 18px 28px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .media-tab:hover { color: #000; }
+
+  .media-tab.active {
+    color: #000;
+    border-bottom-color: #000;
+  }
+
+  /* ── Content Area ── */
+  .media-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 48px 48px 100px;
+  }
+
+  /* ── Section Label ── */
+  .media-section-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 24px;
+  }
+
+  /* ── Video Grid ── */
+  .media-video-featured {
+    margin-bottom: 48px;
+  }
+
+  .media-video-featured .video-embed {
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    margin-bottom: 16px;
+  }
+
+  .media-video-featured .video-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .media-video-featured .video-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 4px;
+  }
+
+  .media-video-featured .video-date {
+    font-size: 0.78rem;
+    color: #888;
+    margin: 0;
+  }
+
+  .media-video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .media-video-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .media-video-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #f0f0f0;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .media-video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .media-video-card:hover .media-video-thumb img {
+    transform: scale(1.03);
+  }
+
+  .media-video-thumb .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .media-video-thumb .play-icon svg {
+    margin-left: 3px;
+  }
+
+  .media-video-card-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+    line-height: 1.35;
+  }
+
+  .media-video-card-date {
+    font-size: 0.72rem;
+    color: #888;
+    margin: 0;
+  }
+
+  /* ── Artwork Grid (Collection) ── */
+  .media-artwork-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .media-artwork-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .media-artwork-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #f5f5f5;
+    margin-bottom: 12px;
+  }
+
+  .media-artwork-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .media-artwork-card:hover .media-artwork-img img {
+    transform: scale(1.03);
+  }
+
+  .media-artwork-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+    line-height: 1.35;
+  }
+
+  .media-artwork-artist {
+    font-size: 0.78rem;
+    color: #666;
+    margin: 0 0 2px;
+  }
+
+  .media-artwork-meta {
+    font-size: 0.72rem;
+    color: #999;
+    margin: 0;
+  }
+
+  /* ── Publications ── */
+  .media-pub-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .media-pub-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .media-pub-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #f5f5f5;
+    margin-bottom: 12px;
+  }
+
+  .media-pub-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .media-pub-card:hover .media-pub-img img {
+    transform: scale(1.03);
+  }
+
+  .media-pub-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+    line-height: 1.35;
+  }
+
+  .media-pub-date {
+    font-size: 0.72rem;
+    color: #888;
+    margin: 0;
+  }
+
+  /* ── Empty State ── */
+  .media-empty {
+    font-size: 0.88rem;
+    color: #aaa;
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  /* ── Filter Buttons ── */
+  .media-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .media-filter-btn {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 6px 16px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .media-filter-btn:hover {
+    border-color: #000;
+    color: #000;
+  }
+
+  .media-filter-btn.active {
+    background: #000;
+    border-color: #000;
+    color: #fff;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .media-header-inner,
+    .media-tabs,
+    .media-content {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .media-page-title {
+      font-size: clamp(2rem, 10vw, 3.5rem);
+    }
+
+    .media-tab {
+      padding: 14px 18px;
+      font-size: 0.65rem;
+    }
+
+    .media-video-grid,
+    .media-artwork-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .media-pub-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .media-video-grid,
+    .media-artwork-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .media-pub-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+</style>
+
+<div class="media-page">
+
+  <!-- Header -->
+  <div class="media-header">
+    <div class="media-header-inner">
+      <h1 class="media-page-title">Media</h1>
     </div>
+  </div>
 
-    <!-- Filter Buttons -->
-    <div class="collection-filters">
-      <button class="filter-btn active" data-filter="all">ALL</button>
+  <!-- Tabs -->
+  <div class="media-tabs">
+    <button class="media-tab active" data-tab="collection">Collection</button>
+    <button class="media-tab" data-tab="video">Video</button>
+    <button class="media-tab" data-tab="publications">Publications</button>
+  </div>
+
+  <!-- Collection Tab -->
+  <div class="media-content media-tab-content" id="tab-collection">
+    <!-- Filters -->
+    <div class="media-filters">
+      <button class="media-filter-btn active" data-filter="all">All</button>
       {% assign artwork_artists = site.artworks | map: 'artist' | uniq | sort %}
       {% for artist in artwork_artists %}
-      <button class="filter-btn" data-filter="{{ artist }}">{{ artist | upcase }}</button>
+      <button class="media-filter-btn" data-filter="{{ artist }}">{{ artist }}</button>
       {% endfor %}
-      <button class="filter-btn" data-filter="available">{{ t.collection.available }}</button>
     </div>
 
-    <!-- Collection Count -->
-    <div class="collection-count mt-8">
-      <span id="artwork-count">{{ site.artworks | size }}</span> {{ t.collection.artworks }}
-    </div>
-
-    <!-- Artwork Grid -->
-    <div class="artwork-grid mt-8" id="collection-grid">
+    <div class="media-artwork-grid" id="collection-grid">
       {% assign sorted_artworks = site.artworks | sort: 'title' %}
       {% for artwork in sorted_artworks %}
-      <div class="artwork-card" data-artist="{{ artwork.artist }}" data-status="{{ artwork.status }}">
-        <a href="{{ artwork.url | relative_url }}">
-          <div class="artwork-card-image">
-            <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }} by {{ artwork.artist }}"
-              loading="lazy">
-          </div>
-          <div class="artwork-card-info">
-            <h3 class="artwork-title">{{ artwork.title }}</h3>
-            <p class="artwork-artist">{{ artwork.artist }}</p>
-            <p class="artwork-meta">{{ artwork.medium }}</p>
-            <p class="artwork-meta">{{ artwork.dimensions }}</p>
-            {% if artwork.status == 'available' %}
-            <p class="artwork-status status-available">{{ artwork.price }}</p>
-            {% endif %}
-          </div>
-        </a>
-      </div>
+      <a href="{{ artwork.url | relative_url }}" class="media-artwork-card" data-artist="{{ artwork.artist }}">
+        <div class="media-artwork-img">
+          {% if artwork.image %}
+          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">
+          {% endif %}
+        </div>
+        <p class="media-artwork-title">{{ artwork.title }}</p>
+        <p class="media-artwork-artist">{{ artwork.artist }}</p>
+        <p class="media-artwork-meta">{{ artwork.medium }}{% if artwork.year %}, {{ artwork.year }}{% endif %}</p>
+      </a>
       {% endfor %}
     </div>
+
+    {% if site.artworks.size == 0 %}
+    <p class="media-empty">No artworks in the collection yet.</p>
+    {% endif %}
   </div>
-</section>
 
-<!-- Acquisition Inquiries -->
-<section class="section bg-secondary">
-  <div class="container container-narrow text-center">
-    <div class="gallery-section-header">
-      <h2 class="gallery-section-title">{{ t.collection.inquiry_title }}</h2>
-      <p class="gallery-section-description">
-        {{ t.collection.inquiry_subtitle }}
-      </p>
-    </div>
-
-    <div class="contact-info mt-12">
-      <p class="text-xl serif italic mb-8" style="font-family: var(--font-serif-en);">{{ t.common.contact_email }}: <a
-          href="mailto:{{ site.email }}" class="text-accent">{{ site.email }}</a></p>
-      <p class="text-lg mb-12">
-        {{ t.collection.inquiry_details }}
-      </p>
-      <a href="{{ '/gallery/visit' | relative_url }}" class="btn btn-primary">{{ t.gallery.plan_visit | upcase }}</a>
-    </div>
+  <!-- Video Tab -->
+  <div class="media-content media-tab-content" id="tab-video" style="display:none;">
+    <p class="media-empty">No videos available at this time.</p>
   </div>
-</section>
 
-</section>
+  <!-- Publications Tab -->
+  <div class="media-content media-tab-content" id="tab-publications" style="display:none;">
+    <p class="media-empty">No publications available at this time.</p>
+  </div>
 
+</div>
 
 <script>
-  // Simple filter functionality
-  document.addEventListener('DOMContentLoaded', function () {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const artworkCards = document.querySelectorAll('.artwork-card');
-    const countDisplay = document.getElementById('artwork-count');
+  // Tab switching
+  document.querySelectorAll('.media-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.media-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.media-tab-content').forEach(c => c.style.display = 'none');
+      document.getElementById('tab-' + tab).style.display = '';
+    });
+  });
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', function () {
-        // Remove active class from all buttons
-        filterBtns.forEach(b => b.classList.remove('active'));
-
-        // Add active class to clicked button
-        this.classList.add('active');
-
-        const filter = this.getAttribute('data-filter');
-        let visibleCount = 0;
-
-        artworkCards.forEach(card => {
-          const artist = card.getAttribute('data-artist');
-          const status = card.getAttribute('data-status');
-
-          if (filter === 'all') {
-            card.style.display = 'block';
-            visibleCount++;
-          } else if (filter === 'available' || filter === 'sold') {
-            if (status === filter) {
-              card.style.display = 'block';
-              visibleCount++;
-            } else {
-              card.style.display = 'none';
-            }
-          } else {
-            if (artist === filter) {
-              card.style.display = 'block';
-              visibleCount++;
-            } else {
-              card.style.display = 'none';
-            }
-          }
-        });
-
-        // Update count
-        countDisplay.textContent = visibleCount;
+  // Collection filter
+  document.querySelectorAll('.media-filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.media-filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const filter = this.getAttribute('data-filter');
+      document.querySelectorAll('.media-artwork-card').forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-artist') === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
       });
     });
   });
