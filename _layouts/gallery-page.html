@@ -1357,6 +1357,7 @@
             var matched = null;
 
             var keywords = {
+                director: ['director', 'owner', 'manager', 'curator', 'ki kim', 'who runs', 'who owns', 'in charge', 'boss', '관장', '대표', '운영자', '큐레이터', '디렉터', '누가 운영', '사장', '주인', '책임자', '갤러리장'],
                 hours: ['hour', 'open', 'time', 'close', 'when', '시간', '오픈', '영업', '몇시', '운영', '열어', '닫', '휴관', '언제'],
                 location: ['where', 'location', 'address', 'direction', 'parking', 'find', '어디', '주소', '위치', '찾아', '오는길', '주차', '길'],
                 exhibition: ['exhibition', 'show', 'exhibit', 'current', 'display', '전시', '개관', '관람', '볼거리', '뭐해', '뭘해'],
@@ -1364,8 +1365,7 @@
                 artists: ['artist', 'painter', 'sculptor', 'who', '작가', '아티스트', '누구', '화가', '예술가'],
                 cafe: ['cafe', 'coffee', 'food', 'drink', 'eat', 'menu', '카페', '커피', '음식', '먹', '마시', '메뉴', '식사', '차'],
                 purchase: ['buy', 'purchase', 'artwork', 'sell', 'inquir', '구매', '구입', '사고싶', '살수', '작품', '판매'],
-                contact: ['contact', 'email', 'phone', 'call', 'reach', '연락', '이메일', '전화', '문의', '연락처'],
-                director: ['director', 'owner', 'manager', 'curator', 'ki kim', 'who runs', '관장', '대표', '운영자', '큐레이터', '디렉터', '누가 운영', '사장']
+                contact: ['contact', 'email', 'phone', 'call', 'reach', '연락', '이메일', '전화', '문의', '연락처']
             };
 
             for (var key in keywords) {
