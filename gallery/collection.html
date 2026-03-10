@@ -282,6 +282,427 @@ title: "Media"
     text-align: center;
   }
 
+  /* ── Book Viewer (Spread + Flip) ── */
+  .book-artist-select {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  .book-artist-btn {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 8px 20px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .book-artist-btn:hover { border-color: #000; color: #000; }
+  .book-artist-btn.active { background: #000; border-color: #000; color: #fff; }
+
+  .book-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    user-select: none;
+  }
+
+  .book-spread {
+    display: flex;
+    width: 100%;
+    aspect-ratio: 2 / 1.4;
+    border-radius: 6px;
+    box-shadow: 0 12px 50px rgba(0,0,0,0.12), 0 2px 10px rgba(0,0,0,0.06);
+    position: relative;
+    perspective: 2500px;
+    overflow: visible;
+    transition: width 1s cubic-bezier(0.4,0,0.15,1),
+                margin-left 1s cubic-bezier(0.4,0,0.15,1),
+                aspect-ratio 1s cubic-bezier(0.4,0,0.15,1);
+  }
+
+  /* Cover closed: single book centered */
+  .book-spread.cover-closed {
+    width: 46%;
+    margin-left: 27%;
+    aspect-ratio: 1 / 1.4;
+  }
+
+  .book-spine {
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 6px; height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.08), rgba(0,0,0,0.02) 40%, transparent 50%, rgba(0,0,0,0.02) 60%, rgba(0,0,0,0.08));
+    z-index: 20; pointer-events: none;
+    opacity: 1; transition: opacity 0.4s 0.6s;
+  }
+
+  .cover-closed .book-spine { opacity: 0; transition-delay: 0s; }
+
+  .book-spread::before {
+    content: '';
+    position: absolute; top: 0; left: calc(50% - 40px);
+    width: 80px; height: 100%;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.05) 0%, transparent 70%);
+    z-index: 15; pointer-events: none;
+    opacity: 1; transition: opacity 0.4s 0.6s;
+  }
+
+  .cover-closed::before { opacity: 0; transition-delay: 0s; }
+
+  .book-side {
+    width: 50%; height: 100%;
+    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 28px; box-sizing: border-box;
+    overflow: hidden;
+    opacity: 1; transition: opacity 0.4s 0.5s;
+  }
+
+  .book-side-left { background: #faf9f6; border-radius: 6px 0 0 6px; }
+  .book-side-right { background: #f7f6f2; border-radius: 0 6px 6px 0; }
+
+  /* Hide inner pages when cover is closed */
+  .cover-closed .book-side { opacity: 0; transition-delay: 0s; }
+
+  /* ── Cover overlay ── */
+  .book-cover-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 50;
+    pointer-events: none;
+    display: none;
+  }
+
+  .book-cover-overlay.active { display: block; pointer-events: auto; }
+
+  .book-cover-flap {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .book-cover-front {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+  }
+
+  .book-cover-back {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: rotateY(180deg);
+    background: #e8e5de;
+    border-radius: 6px;
+  }
+
+  .book-cover-back-inner {
+    width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 28px,
+      rgba(0,0,0,0.03) 28px, rgba(0,0,0,0.03) 29px
+    );
+    border-radius: 6px;
+  }
+
+  /* Cover page */
+  .book-cover {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-end;
+    width: 100%; height: 100%;
+    background: #1a1a1a;
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book-cover-bg-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 30%,
+      rgba(0,0,0,0.25) 60%,
+      rgba(0,0,0,0.5) 100%
+    );
+    z-index: 1;
+  }
+
+  .book-cover-glass {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 24px 28px 48px;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex; flex-direction: column;
+    align-items: center;
+  }
+
+  .book-cover-line {
+    width: 40px; height: 1px;
+    background: rgba(255,255,255,0.35);
+    margin: 10px auto;
+  }
+
+  .book-cover-artist {
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin: 0;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  }
+
+  .book-cover-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    margin: 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+
+  .book-cover-gallery {
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    margin: 10px 0 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+
+  /* Profile page */
+  .book-profile {
+    display: flex; flex-direction: column;
+    align-items: flex-start; justify-content: flex-start;
+    width: 100%; height: 100%;
+    padding: 10px 4px;
+    overflow-y: auto;
+    text-align: left;
+  }
+
+  .book-profile-name {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #1a1a1a;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+  }
+
+  .book-profile-sub {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: #999;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+
+  .book-profile-divider {
+    width: 40px; height: 1px;
+    background: #ddd;
+    margin: 0 0 14px;
+  }
+
+  .book-profile-section {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #b8996f;
+    margin: 0 0 6px;
+  }
+
+  .book-profile-text {
+    font-size: 0.75rem;
+    line-height: 1.7;
+    color: #444;
+    margin: 0 0 14px;
+  }
+
+  .book-profile-list {
+    font-size: 0.72rem;
+    line-height: 1.8;
+    color: #555;
+    margin: 0 0 14px;
+    padding-left: 14px;
+  }
+
+  .book-profile-list li { margin-bottom: 2px; }
+
+  /* Artwork page with caption */
+  .book-artwork-page {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    width: 100%; height: 100%;
+  }
+
+  .book-artwork-img-wrap {
+    flex: 1; display: flex;
+    align-items: center; justify-content: center;
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .book-artwork-img-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .book-artwork-caption {
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px solid #e8e6e0;
+    margin-top: 10px;
+    flex-shrink: 0;
+  }
+
+  .book-artwork-caption-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 2px;
+    font-style: italic;
+  }
+
+  .book-artwork-caption-meta {
+    font-size: 0.65rem;
+    color: #888;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .book-side-empty {
+    color: #ccc; font-size: 0.8rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  /* Flip animation */
+  .book-flip-container {
+    position: absolute; top: 0;
+    width: 50%; height: 100%;
+    z-index: 30; pointer-events: none;
+    perspective: 2000px; display: none;
+  }
+
+  .book-flip-container.active { display: block; }
+  .book-flip-container.flip-forward { left: 50%; }
+  .book-flip-container.flip-backward { left: 0; }
+
+  .book-flip-page {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+
+  .flip-forward .book-flip-page { transform-origin: left center; }
+  .flip-forward .book-flip-page.flipping { transform: rotateY(-180deg); }
+  .flip-backward .book-flip-page { transform-origin: right center; }
+  .flip-backward .book-flip-page.flipping { transform: rotateY(180deg); }
+
+  .book-flip-front, .book-flip-back {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 28px; box-sizing: border-box;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    overflow: hidden;
+  }
+
+  .flip-forward .book-flip-front { background: #f7f6f2; border-radius: 0 6px 6px 0; box-shadow: -4px 0 12px rgba(0,0,0,0.1); }
+  .flip-forward .book-flip-back { background: #faf9f6; transform: rotateY(180deg); border-radius: 6px 0 0 6px; box-shadow: 4px 0 12px rgba(0,0,0,0.1); }
+  .flip-backward .book-flip-front { background: #faf9f6; border-radius: 6px 0 0 6px; box-shadow: 4px 0 12px rgba(0,0,0,0.1); }
+  .flip-backward .book-flip-back { background: #f7f6f2; transform: rotateY(-180deg); border-radius: 0 6px 6px 0; box-shadow: -4px 0 12px rgba(0,0,0,0.1); }
+  .book-flip-front img, .book-flip-back img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+  /* Navigation */
+  .book-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.92); border: 1px solid #e0e0e0;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 40; transition: all 0.2s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  }
+
+  .book-nav:hover { background: #000; border-color: #000; }
+  .book-nav:hover svg { stroke: #fff; }
+  .book-nav.prev { left: -28px; }
+  .book-nav.next { right: -28px; }
+  .book-nav svg { width: 20px; height: 20px; stroke: #000; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .book-counter {
+    text-align: center; margin-top: 20px;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.12em; color: #999;
+  }
+
+  .book-dots {
+    display: flex; justify-content: center;
+    gap: 6px; margin-top: 12px; flex-wrap: wrap;
+  }
+
+  .book-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #ddd; cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .book-dot.active { background: #000; transform: scale(1.3); }
+
+  @media (max-width: 900px) {
+    .book-nav.prev { left: 8px; }
+    .book-nav.next { right: 8px; }
+    .book-nav { width: 40px; height: 40px; }
+    .book-side { padding: 16px; }
+    .book-cover { padding: 24px; }
+    .book-profile-text { font-size: 0.68rem; }
+  }
+
+  @media (max-width: 600px) {
+    .book-spread { aspect-ratio: 2 / 1.8; }
+    .book-nav { width: 36px; height: 36px; }
+    .book-nav svg { width: 16px; height: 16px; }
+    .book-side { padding: 12px; }
+    .book-cover-artist { font-size: 1.1rem; }
+  }
+
   /* ── Filter Buttons ── */
   .media-filters {
     display: flex;
@@ -372,6 +793,7 @@ title: "Media"
     <button class="media-tab active" data-tab="collection">Collection</button>
     <button class="media-tab" data-tab="video">Video</button>
     <button class="media-tab" data-tab="publications">Publications</button>
+    <button class="media-tab" data-tab="book">Book</button>
   </div>
 
   <!-- Collection Tab -->
@@ -416,6 +838,73 @@ title: "Media"
     <p class="media-empty">No publications available at this time.</p>
   </div>
 
+  <!-- Book Tab -->
+  <div class="media-content media-tab-content" id="tab-book" style="display:none;">
+    <p class="media-section-label">Artist Book</p>
+
+    <!-- Artist Select -->
+    <div class="book-artist-select">
+      {% assign book_artists = site.artworks | map: 'artist' | uniq | sort %}
+      {% for artist in book_artists %}
+      <button class="book-artist-btn{% if forloop.first %} active{% endif %}" data-artist="{{ artist }}">{{ artist }}</button>
+      {% endfor %}
+    </div>
+
+    <!-- Book Viewer -->
+    <div class="book-wrapper" id="bookWrapper">
+      <div class="book-spread" id="bookSpread">
+        <!-- Left page -->
+        <div class="book-side book-side-left" id="bookLeft">
+          <span class="book-side-empty">—</span>
+        </div>
+        <!-- Right page -->
+        <div class="book-side book-side-right" id="bookRight">
+          <span class="book-side-empty">—</span>
+        </div>
+        <!-- Spine -->
+        <div class="book-spine" id="bookSpine"></div>
+        <!-- Cover overlay -->
+        <div class="book-cover-overlay active" id="bookCoverOverlay">
+          <div class="book-cover-flap" id="bookCoverFlap" onclick="bookNav(1)">
+            <div class="book-cover-front" id="bookCoverFront"></div>
+            <div class="book-cover-back">
+              <div class="book-cover-back-inner"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Flip animation container -->
+        <div class="book-flip-container" id="bookFlipContainer">
+          <div class="book-flip-page" id="bookFlipPage">
+            <div class="book-flip-front" id="bookFlipFront"></div>
+            <div class="book-flip-back" id="bookFlipBack"></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="book-nav prev" onclick="bookNav(-1)">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="book-nav next" onclick="bookNav(1)">
+        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+      </button>
+
+      <div class="book-counter" id="bookCounter">1–2 / 0</div>
+      <div class="book-dots" id="bookDots"></div>
+    </div>
+
+    <!-- Hidden data source -->
+    <div id="bookPagesData" style="display:none;">
+      {% for artwork in site.artworks %}
+      <div class="book-data-item"
+           data-artist="{{ artwork.artist }}"
+           data-title="{{ artwork.title }}"
+           data-medium="{{ artwork.medium }}"
+           data-image="{{ artwork.image | relative_url }}">
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -445,4 +934,419 @@ title: "Media"
       });
     });
   });
+
+  // ── Book Viewer (Cover + Profile + Artworks with Captions) ──
+  var bookRawData = [];
+  var bookPages = [];
+  var bookCoverHTML = '';
+  var bookIsCover = true;
+  var bookSpreadIdx = 0;
+  var bookFlipping = false;
+
+  // Artist profiles
+  var artistProfiles = {
+    'Cho Chang-hwan': {
+      ko: '조창환',
+      medium: 'Mixed Media',
+      profileImg: '/assets/images/work/조창환 작가/profile.jpg',
+      coverImg: '/assets/images/work/조창환 작가/work_01.jpg',
+      bio: 'Cho Chang-hwan is a Korean contemporary artist whose work explores the essence of life force and energy. Through his expressive mixed media approach, he creates works that resonate with primal vitality.',
+      bioKo: '조창환은 생명력과 에너지의 본질을 탐구하는 한국 현대미술 작가입니다. 표현적인 혼합 매체 기법을 통해 원초적 생명력이 공명하는 작품을 창작합니다.',
+      statement: 'His series "SOOM (Breath)" investigates the invisible currents of energy that sustain all living beings — the rhythmic pulse between inhalation and exhalation, tension and release.',
+      statementKo: '"숨(SOOM)" 시리즈는 모든 생명체를 지탱하는 보이지 않는 에너지의 흐름을 탐구합니다 — 들숨과 날숨, 긴장과 이완 사이의 리드미컬한 맥동을 담고 있습니다.',
+      highlights: ['SOOM (Breath) Series', 'Mixed media on canvas', 'Exhibited across Korea and Australia']
+    },
+    'Debbie Doye': {
+      ko: '',
+      medium: 'Ceramics',
+      profileImg: '/assets/images/work/DebbieDoye/profile.jpg',
+      coverImg: '/assets/images/work/DebbieDoye/work01.jpeg',
+      bio: 'Debbie Doye is a celebrated ceramicist based in Inverell, NSW. She creates expressive handbuilt and wheel-thrown ceramic works that honour the traditions of clay while pushing into contemporary territory.',
+      bioKo: '데비 도이는 NSW 인버렐에 기반을 둔 저명한 도예가입니다. 전통적인 도자기의 전통을 존중하면서도 현대적 영역으로 나아가는 표현적인 핸드빌트 및 물레 도자기 작품을 제작합니다.',
+      statement: 'Her pieces explore the dialogue between form and texture, drawing inspiration from the Australian landscape and the inherent qualities of clay as a living material.',
+      statementKo: '그녀의 작품은 형태와 질감 사이의 대화를 탐구하며, 호주의 풍경과 살아있는 재료로서의 점토가 지닌 고유한 특성에서 영감을 얻습니다.',
+      highlights: ['Handbuilt & wheel-thrown ceramics', 'Inverell-based studio artist', 'Prominent figure in regional arts']
+    },
+    'Geum Sahong': {
+      ko: '금사홍',
+      medium: 'Acrylic, Oil on Canvas',
+      profileImg: '/assets/images/work/Geum Sahong/profile.jpg',
+      coverImg: '/assets/images/work/Geum Sahong/work(10).jpg',
+      bio: 'Geum Sahong is a Korean contemporary painter known for his pantheistic landscapes rendered in acrylic and oil. His works explore the spiritual connection between nature and humanity.',
+      bioKo: '금사홍은 아크릴과 유화로 범신론적 풍경을 그리는 것으로 알려진 한국 현대 화가입니다. 그의 작품은 자연과 인간 사이의 영적 연결을 탐구합니다.',
+      statement: 'Through layers of colour and gestural brushwork, Geum creates atmospheric compositions that dissolve the boundary between the physical and metaphysical — inviting viewers into meditative encounters with the natural world.',
+      statementKo: '색채의 층위와 제스처적 붓질을 통해 금사홍은 물리적 세계와 형이상학적 세계의 경계를 허무는 분위기 있는 구성을 만들어내며, 관람자를 자연과의 명상적 만남으로 초대합니다.',
+      highlights: ['Pantheistic landscape painting', 'Acrylic & oil on canvas', 'Venice Biennale participant', 'Featured in Hankyoreh']
+    },
+    'Lee Sang-kwon': {
+      ko: '이상권',
+      medium: 'Acrylic on Canvas',
+      profileImg: '/assets/images/work/이상권 작가/프로필 사진.jpg',
+      coverImg: '/assets/images/work/이상권 작가/1_sumun.jpg',
+      bio: 'Lee Sang-kwon (b. 1965, Chuncheon) graduated from Hongik University, Department of Painting in 1991. He has held 21 solo exhibitions since 1995 and participated in numerous group shows including Seoul Museum of Art, Seoul Arts Center, and Sejong Center. His work focuses on landscapes that examine the weight and depth of time, reconstructing familiar scenery through complex colour layers and brushstrokes.',
+      bioKo: '이상권(1965년 춘천 출생)은 1991년 홍익대학교 회화과를 졸업했습니다. 1995년부터 21회의 개인전을 개최하였으며, 서울시립미술관, 예술의전당, 세종문화회관 등에서 다수의 단체전에 참여했습니다. 자연을 통해 시간의 무게와 깊이를 탐구하며, 익숙한 풍경을 복합적인 색층과 붓질로 재구성합니다.',
+      statement: 'I have always worked by looking at my surroundings. My interest lies in living things — people, nature, and the stories that flow within them. Whether it is a landscape of mountains and fields, or a city crowded with buildings, there are always people, life unfolding, and stories imbued with joy and sorrow. Colour is an important language in my work — vivid and varied colours evoke sensations beyond reality, becoming a passage through which viewers can project their own memories and emotions.',
+      statementKo: '나는 늘 주변을 바라보며 작업을 이어왔다. 나의 관심은 살아 있는 것들, 곧 사람과 자연, 그리고 그 속에서 흘러가는 이야기들에 있다. 나의 작업은 단순히 자연을 그리는 것이 아니라, 그 속에 스며든 인간의 존재와 감정을 드러내는 과정이다. 색채는 나의 작업에서 중요한 언어다. 강렬하고 다양한 색은 현실을 넘어선 감각을 불러일으키며, 관람자가 자신의 기억과 감정을 투영할 수 있는 통로가 된다.',
+      highlights: ['Finding a Hidden Path series', 'Oil on canvas', 'Seoul Arts Center exhibition', 'Lyrical landscape tradition']
+    },
+    'Min Hea Jung Soo': {
+      ko: '민혜정수',
+      medium: 'Korean Paper (Hanji) on Canvas',
+      profileImg: '/assets/images/work/MinHeaJungSoo/profile.jpg',
+      coverImg: '/assets/images/work/MinHeaJungSoo/work_01.jpg',
+      bio: 'Min Hea Jung Soo is a Korean artist working with traditional Korean paper (hanji) on canvas, creating works that bridge Eastern heritage with contemporary expression.',
+      bioKo: '민혜정수는 전통 한지를 캔버스 위에 활용하여 동양의 유산과 현대적 표현을 잇는 작품을 창작하는 한국 작가입니다.',
+      statement: 'By layering and texturing hanji on canvas, Min creates surfaces that hold centuries of Korean papermaking tradition while speaking a distinctly modern visual language.',
+      statementKo: '한지를 캔버스 위에 층층이 쌓고 질감을 만들어냄으로써, 수백 년 한국 제지 전통을 담으면서도 뚜렷한 현대적 시각 언어를 구사하는 표면을 만들어냅니다.',
+      highlights: ['Traditional hanji technique', 'Korean paper on canvas', 'East-West cultural fusion']
+    },
+    'Stephen Jones': {
+      ko: '',
+      medium: 'Pencil, Charcoal, Acrylic',
+      profileImg: '',
+      coverImg: '/assets/images/work/Stephen Jones/Work_01.jpg',
+      bio: 'Stephen Jones is an Australian artist working across pencil, charcoal, and acrylic. His detailed, contemplative works capture the quiet beauty of natural and rural subjects.',
+      bioKo: '스티븐 존스는 연필, 목탄, 아크릴을 넘나들며 작업하는 호주 작가입니다. 세밀하고 사색적인 그의 작품은 자연과 시골 풍경의 고요한 아름다움을 포착합니다.',
+      statement: 'Jones\'s practice is rooted in close observation — patient mark-making that reveals the character of a subject through accumulated detail and tonal depth.',
+      statementKo: '존스의 작업은 면밀한 관찰에 뿌리를 두고 있습니다 — 축적된 디테일과 톤의 깊이를 통해 대상의 성격을 드러내는 인내심 있는 표현이 특징입니다.',
+      highlights: ['Pencil, charcoal & acrylic', 'Australian landscapes & subjects', 'Detailed observational style']
+    }
+  };
+
+  // Load artwork data
+  document.querySelectorAll('.book-data-item').forEach(function(el) {
+    bookRawData.push({
+      artist: el.getAttribute('data-artist'),
+      title: el.getAttribute('data-title'),
+      medium: el.getAttribute('data-medium'),
+      image: el.getAttribute('data-image')
+    });
+  });
+
+  function buildBookPages(artist) {
+    var pages = [];
+    var profile = artistProfiles[artist] || {};
+    var works = bookRawData.filter(function(d) { return d.artist === artist; });
+
+    // Cover HTML (separate, not in pages array)
+    var coverBg = profile.coverImg || (works.length > 0 ? works[0].image : '');
+    bookCoverHTML =
+      '<div class="book-cover" style="background-image:url(\'' + coverBg + '\');">' +
+        '<div class="book-cover-bg-overlay"></div>' +
+        '<div class="book-cover-glass">' +
+          '<p class="book-cover-sub">Artist Book</p>' +
+          '<div class="book-cover-line"></div>' +
+          '<h2 class="book-cover-artist">' + artist + '</h2>' +
+          (profile.ko ? '<p class="book-cover-sub" style="margin-top:6px;font-size:0.8rem;letter-spacing:0.06em;">' + profile.ko + '</p>' : '') +
+          '<div class="book-cover-line"></div>' +
+          '<p class="book-cover-gallery">Art Space Byron</p>' +
+        '</div>' +
+      '</div>';
+
+    // Page 0 (left): Artist profile photo
+    var profileImg = profile.profileImg || (works.length > 0 ? works[0].image : '');
+    pages.push(
+      '<div class="book-artwork-page">' +
+        '<div class="book-artwork-img-wrap">' +
+          (profileImg ? '<img src="' + profileImg + '" alt="' + artist + '" loading="lazy" style="border-radius:4px;object-fit:cover;object-position:center top;">' : '') +
+        '</div>' +
+        '<div class="book-artwork-caption" style="text-align:center;">' +
+          '<p class="book-artwork-caption-title" style="font-style:normal;font-weight:700;font-size:0.9rem;">' + artist + '</p>' +
+          (profile.ko ? '<p class="book-artwork-caption-meta">' + profile.ko + '</p>' : '') +
+        '</div>' +
+      '</div>'
+    );
+
+    // Page 1 (right): Biography & Statement
+    pages.push(
+      '<div class="book-profile">' +
+        '<p class="book-profile-name">' + artist + '</p>' +
+        (profile.ko ? '<p class="book-profile-sub">' + profile.ko + '</p>' : '') +
+        '<p class="book-profile-sub">' + (profile.medium || '') + '</p>' +
+        '<div class="book-profile-divider"></div>' +
+        '<p class="book-profile-section">Biography</p>' +
+        '<p class="book-profile-text">' + (profile.bio || '') + '</p>' +
+        (profile.bioKo ? '<p class="book-profile-text" style="color:#777;font-size:0.7rem;">' + profile.bioKo + '</p>' : '') +
+        '<p class="book-profile-section">Artist Statement</p>' +
+        '<p class="book-profile-text">' + (profile.statement || '') + '</p>' +
+        (profile.statementKo ? '<p class="book-profile-text" style="color:#777;font-size:0.7rem;">' + profile.statementKo + '</p>' : '') +
+      '</div>'
+    );
+
+    // Artwork pages with captions
+    works.forEach(function(w) {
+      var caption = '<div class="book-artwork-caption">';
+      if (w.title) caption += '<p class="book-artwork-caption-title">' + w.title + '</p>';
+      caption += '<p class="book-artwork-caption-meta">' + w.artist;
+      if (w.medium) caption += ' · ' + w.medium;
+      caption += '</p></div>';
+
+      pages.push(
+        '<div class="book-artwork-page">' +
+          '<div class="book-artwork-img-wrap">' +
+            '<img src="' + w.image + '" alt="' + (w.title || w.artist) + '" loading="lazy">' +
+          '</div>' +
+          caption +
+        '</div>'
+      );
+    });
+
+    // Pad to even number
+    if (pages.length % 2 !== 0) {
+      pages.push('<span class="book-side-empty"></span>');
+    }
+
+    return pages;
+  }
+
+  function bookGetSpreadCount() {
+    return bookPages.length / 2;
+  }
+
+  function bookRenderSpread() {
+    var leftEl = document.getElementById('bookLeft');
+    var rightEl = document.getElementById('bookRight');
+    var coverOverlay = document.getElementById('bookCoverOverlay');
+    var coverFlap = document.getElementById('bookCoverFlap');
+    var coverFront = document.getElementById('bookCoverFront');
+    var spread = document.getElementById('bookSpread');
+
+    if (bookIsCover) {
+      // Show cover on top, closed & centered
+      coverFront.innerHTML = bookCoverHTML;
+      coverOverlay.classList.add('active');
+      coverOverlay.style.display = '';
+      coverFlap.className = 'book-cover-flap';
+      coverFlap.style.width = '';
+      coverFlap.style.transform = '';
+      coverFlap.style.transition = '';
+      spread.classList.add('cover-closed');
+      // Pre-render first spread behind cover
+      leftEl.innerHTML = bookPages[0] || '';
+      rightEl.innerHTML = bookPages[1] || '';
+    } else {
+      coverOverlay.classList.remove('active');
+      coverOverlay.style.display = 'none';
+      spread.classList.remove('cover-closed');
+      var leftIdx = bookSpreadIdx * 2;
+      var rightIdx = leftIdx + 1;
+      leftEl.innerHTML = bookPages[leftIdx] || '';
+      rightEl.innerHTML = bookPages[rightIdx] || '';
+    }
+
+    bookUpdateUI();
+  }
+
+  function bookUpdateUI() {
+    var total = bookGetSpreadCount();
+    var counter = document.getElementById('bookCounter');
+
+    if (bookIsCover) {
+      counter.textContent = 'Cover';
+    } else {
+      counter.textContent = total > 0 ? (bookSpreadIdx + 1) + ' / ' + total : '';
+    }
+
+    var dotsWrap = document.getElementById('bookDots');
+    dotsWrap.innerHTML = '';
+
+    // Cover dot
+    var coverDot = document.createElement('span');
+    coverDot.className = 'book-dot' + (bookIsCover ? ' active' : '');
+    coverDot.onclick = function() { if (!bookIsCover) bookFlipTo(-1); };
+    dotsWrap.appendChild(coverDot);
+
+    for (var i = 0; i < total; i++) {
+      var dot = document.createElement('span');
+      dot.className = 'book-dot' + (!bookIsCover && i === bookSpreadIdx ? ' active' : '');
+      dot.setAttribute('data-idx', i);
+      dot.onclick = function() {
+        var target = parseInt(this.getAttribute('data-idx'));
+        if (bookIsCover) {
+          bookFlipTo(0);
+          if (target > 0) setTimeout(function() { bookFlipTo(target); }, 1000);
+        } else if (target !== bookSpreadIdx) {
+          bookFlipTo(target);
+        }
+      };
+      dotsWrap.appendChild(dot);
+    }
+  }
+
+  function bookFlipTo(targetIdx) {
+    if (bookFlipping) return;
+
+    // Opening from cover
+    if (bookIsCover && targetIdx === 0) {
+      bookFlipping = true;
+
+      var coverFlap = document.getElementById('bookCoverFlap');
+      var coverOverlay = document.getElementById('bookCoverOverlay');
+      var spread = document.getElementById('bookSpread');
+
+      // Step 1: Expand spread to full width (cover rides along)
+      spread.classList.remove('cover-closed');
+
+      // Step 2: After spread starts expanding, shrink cover to 50% and flip
+      setTimeout(function() {
+        coverFlap.style.transition = 'width 0.4s cubic-bezier(0.4,0,0.15,1), transform 0.9s cubic-bezier(0.4,0,0.15,1) 0.1s';
+        coverFlap.style.width = '50%';
+        coverFlap.style.transform = 'rotateY(-170deg)';
+      }, 200);
+
+      // Step 3: Done - hide cover overlay
+      setTimeout(function() {
+        bookIsCover = false;
+        bookSpreadIdx = 0;
+        coverOverlay.classList.remove('active');
+        coverOverlay.style.display = 'none';
+        coverFlap.style.transition = '';
+        coverFlap.style.width = '';
+        coverFlap.style.transform = '';
+        bookUpdateUI();
+        bookFlipping = false;
+      }, 1400);
+      return;
+    }
+
+    // Going back to cover
+    if (!bookIsCover && targetIdx === -1) {
+      bookFlipping = true;
+
+      var coverFlap2 = document.getElementById('bookCoverFlap');
+      var coverOverlay2 = document.getElementById('bookCoverOverlay');
+      var coverFront2 = document.getElementById('bookCoverFront');
+      var spread2 = document.getElementById('bookSpread');
+
+      // Show cover overlay flipped open at 50%
+      coverFront2.innerHTML = bookCoverHTML;
+      coverOverlay2.classList.add('active');
+      coverOverlay2.style.display = '';
+      coverFlap2.style.transition = 'none';
+      coverFlap2.style.width = '50%';
+      coverFlap2.style.transform = 'rotateY(-170deg)';
+      void coverFlap2.offsetWidth;
+
+      // Step 1: Flip cover closed
+      coverFlap2.style.transition = 'transform 0.9s cubic-bezier(0.4,0,0.15,1)';
+      coverFlap2.style.transform = 'rotateY(0deg)';
+
+      // Step 2: After flip, expand cover to 100% and shrink spread
+      setTimeout(function() {
+        coverFlap2.style.transition = 'width 0.5s cubic-bezier(0.4,0,0.15,1)';
+        coverFlap2.style.width = '100%';
+        spread2.classList.add('cover-closed');
+      }, 950);
+
+      // Step 3: Done
+      setTimeout(function() {
+        bookIsCover = true;
+        bookSpreadIdx = 0;
+        coverFlap2.style.transition = '';
+        coverFlap2.style.width = '';
+        coverFlap2.style.transform = '';
+        bookRenderSpread();
+        bookFlipping = false;
+      }, 1550);
+      return;
+    }
+
+    if (targetIdx === bookSpreadIdx) return;
+    bookFlipping = true;
+
+    var forward = targetIdx > bookSpreadIdx;
+    var flipContainer = document.getElementById('bookFlipContainer');
+    var flipPage = document.getElementById('bookFlipPage');
+    var flipFront = document.getElementById('bookFlipFront');
+    var flipBack = document.getElementById('bookFlipBack');
+
+    flipContainer.classList.remove('active', 'flip-forward', 'flip-backward');
+    flipPage.classList.remove('flipping');
+
+    if (forward) {
+      flipContainer.classList.add('flip-forward');
+      flipFront.innerHTML = bookPages[bookSpreadIdx * 2 + 1] || '';
+      flipBack.innerHTML = bookPages[targetIdx * 2] || '';
+      document.getElementById('bookRight').innerHTML = bookPages[targetIdx * 2 + 1] || '';
+    } else {
+      flipContainer.classList.add('flip-backward');
+      flipFront.innerHTML = bookPages[bookSpreadIdx * 2] || '';
+      flipBack.innerHTML = bookPages[targetIdx * 2 + 1] || '';
+      document.getElementById('bookLeft').innerHTML = bookPages[targetIdx * 2] || '';
+    }
+
+    flipContainer.classList.add('active');
+    void flipPage.offsetWidth;
+
+    requestAnimationFrame(function() {
+      flipPage.classList.add('flipping');
+    });
+
+    setTimeout(function() {
+      bookSpreadIdx = targetIdx;
+      bookRenderSpread();
+      flipPage.classList.remove('flipping');
+      flipContainer.classList.remove('active', 'flip-forward', 'flip-backward');
+      bookFlipping = false;
+    }, 850);
+  }
+
+  window.bookNav = function(dir) {
+    if (bookPages.length === 0 || bookFlipping) return;
+    var total = bookGetSpreadCount();
+
+    // Cover mode: only forward opens
+    if (bookIsCover) {
+      if (dir > 0) bookFlipTo(0); // open book
+      return;
+    }
+
+    // At first spread going back → return to cover
+    if (bookSpreadIdx === 0 && dir < 0) {
+      bookFlipTo(-1);
+      return;
+    }
+
+    var target = bookSpreadIdx + dir;
+    if (target < 0) target = 0;
+    if (target >= total) target = total - 1;
+    if (target !== bookSpreadIdx) bookFlipTo(target);
+  };
+
+  function bookSelectArtist(artist) {
+    bookSpreadIdx = 0;
+    bookIsCover = true;
+    bookPages = buildBookPages(artist);
+    bookRenderSpread();
+  }
+
+  document.querySelectorAll('.book-artist-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.book-artist-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      bookSelectArtist(btn.getAttribute('data-artist'));
+    });
+  });
+
+  document.addEventListener('keydown', function(e) {
+    var bookTab = document.getElementById('tab-book');
+    if (bookTab.style.display === 'none') return;
+    if (e.key === 'ArrowRight') bookNav(1);
+    if (e.key === 'ArrowLeft') bookNav(-1);
+  });
+
+  (function() {
+    var spread = document.getElementById('bookSpread');
+    var startX = 0;
+    spread.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+    spread.addEventListener('touchend', function(e) {
+      var diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) bookNav(diff > 0 ? 1 : -1);
+    }, { passive: true });
+  })();
+
+  (function() {
+    var firstBtn = document.querySelector('.book-artist-btn.active');
+    if (firstBtn) bookSelectArtist(firstBtn.getAttribute('data-artist'));
+  })();
 </script>

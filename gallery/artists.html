@@ -22,7 +22,7 @@ section: gallery
     padding: 0 48px;
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: center;
     gap: 40px;
   }
 
@@ -87,6 +87,7 @@ section: gallery
   /* ── Tabs ── */
   .artists-tabs {
     display: flex;
+    justify-content: center;
     gap: 0;
     border-bottom: 1px solid #e0e0e0;
     max-width: 1400px;
@@ -126,10 +127,11 @@ section: gallery
 
   .artists-name-list {
     list-style: none;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     columns: 2;
     column-gap: 60px;
+    max-width: 600px;
   }
 
   .artists-name-list li {
@@ -149,6 +151,7 @@ section: gallery
     padding: 14px 0;
     border-bottom: 1px solid #f0f0f0;
     position: relative;
+    text-align: left;
   }
 
   /* ── Featured Works Grid ── */
@@ -167,6 +170,7 @@ section: gallery
     color: #000;
     padding: 28px 0;
     margin: 0;
+    text-align: center;
   }
 
   .artists-works-grid {
@@ -174,6 +178,7 @@ section: gallery
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     max-width: 1000px;
+    margin: 0 auto;
   }
 
   .artists-work-card {
