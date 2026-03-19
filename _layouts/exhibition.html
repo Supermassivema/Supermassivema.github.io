@@ -7,22 +7,136 @@ layout: gallery-page
     background: #fff;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 48px 100px;
+    padding: 80px 48px 100px;
   }
 
-  .exh-hero-img {
+  /* ── Hero Slideshow ── */
+  .exh-slideshow {
+    position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
     background: #f5f5f5;
     margin-bottom: 36px;
   }
 
-  .exh-hero-img img {
+  .exh-slideshow-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .exh-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .exh-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  .exh-slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 28px 16px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.55));
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .exh-slide:hover .exh-slide-caption {
+    opacity: 1;
+  }
+
+  .exh-slide-caption .caption-artist {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 2px;
+  }
+
+  .exh-slide-caption .caption-title {
+    font-size: 0.78rem;
+    font-weight: 400;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  /* Slideshow Controls */
+  .exh-slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 2;
+  }
+
+  .exh-slide-btn:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  .exh-slide-prev { left: 16px; }
+  .exh-slide-next { right: 16px; }
+
+  /* Dots */
+  .exh-slide-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+
+  .exh-slide-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .exh-slide-dot.active {
+    background: #fff;
+    transform: scale(1.25);
+  }
+
+  /* Counter */
+  .exh-slide-counter {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.75);
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(4px);
+    padding: 4px 10px;
+    z-index: 2;
   }
 
   .exh-header-info {
@@ -174,6 +288,173 @@ layout: gallery-page
     color: #666;
   }
 
+  /* ── Exhibition Views Slideshow ── */
+  .exh-views-section {
+    margin-bottom: 48px;
+  }
+
+  .exh-views-section h2 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .exh-views-slideshow {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+
+  .exh-views-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .exh-views-slide {
+    min-width: 100%;
+    height: 100%;
+  }
+
+  .exh-views-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .exh-views-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 2;
+  }
+
+  .exh-views-btn:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  .exh-views-prev { left: 16px; }
+  .exh-views-next { right: 16px; }
+
+  .exh-views-counter {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.75);
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(4px);
+    padding: 4px 10px;
+    z-index: 2;
+  }
+
+  .exh-views-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+
+  .exh-views-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .exh-views-dot.active {
+    background: #fff;
+    transform: scale(1.25);
+  }
+
+  /* ── Lightbox ── */
+  .exh-lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+
+  .exh-lightbox.active {
+    display: flex;
+  }
+
+  .exh-lightbox img {
+    max-width: 92%;
+    max-height: 92vh;
+    object-fit: contain;
+  }
+
+  .exh-lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    color: #fff;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .exh-lightbox-close:hover {
+    opacity: 1;
+  }
+
+  .exh-slide,
+  .exh-views-slide {
+    cursor: zoom-in;
+  }
+
+  /* ── Artist Group in Artworks ── */
+  .exh-artist-group {
+    margin-bottom: 48px;
+  }
+
+  .exh-artist-group-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
   .exh-artwork-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -199,6 +480,11 @@ layout: gallery-page
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.4s;
+  }
+
+  .exh-artwork-card a:hover .exh-artwork-img img {
+    transform: scale(1.03);
   }
 
   .exh-artwork-title {
@@ -221,14 +507,99 @@ layout: gallery-page
     .exh-artwork-grid {
       grid-template-columns: repeat(2, 1fr);
     }
+
+    .exh-views-btn {
+      width: 34px;
+      height: 34px;
+      font-size: 0.9rem;
+    }
+
+    .exh-views-prev { left: 10px; }
+    .exh-views-next { right: 10px; }
+
+    .exh-slide-btn {
+      width: 34px;
+      height: 34px;
+      font-size: 0.9rem;
+    }
+
+    .exh-slide-prev { left: 10px; }
+    .exh-slide-next { right: 10px; }
   }
 </style>
 
 <article class="exh-detail">
 
+  <!-- ── Hero Slideshow ── -->
+  {% comment %}
+    First slide = featured_image, then round-robin artworks across artists
+    (skipping the featured_image to avoid duplicate). Up to 12 total.
+  {% endcomment %}
+  {% assign slide_artworks = "" | split: "" %}
+  {% assign slide_images = "" | split: "" %}
+
   {% if page.featured_image %}
-  <div class="exh-hero-img">
-    <img src="{{ page.featured_image | relative_url }}" alt="{{ page.title | escape }}" loading="lazy">
+    {% assign slide_images = slide_images | push: page.featured_image %}
+  {% endif %}
+
+  {% if page.artists %}
+    {% assign num_artists = page.artists | size %}
+    {% assign per_artist = 12 | divided_by: num_artists %}
+
+    {% for round in (0..per_artist) %}
+      {% for artist_name in page.artists %}
+        {% if slide_artworks.size < 11 %}
+          {% assign artist_works = site.artworks | where: "artist", artist_name %}
+          {% assign idx = 0 %}
+          {% for work in artist_works %}
+            {% if idx == round and slide_artworks.size < 11 %}
+              {% unless work.image == page.featured_image %}
+                {% assign slide_artworks = slide_artworks | push: work %}
+              {% endunless %}
+            {% endif %}
+            {% assign idx = idx | plus: 1 %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+
+  {% assign total_slides = slide_artworks.size | plus: 1 %}
+
+  {% if total_slides > 0 %}
+  <div class="exh-slideshow" id="exhSlideshow">
+    <div class="exh-slide-counter">
+      <span id="slideCurrentNum">1</span> / {{ total_slides }}
+    </div>
+    <div class="exh-slideshow-track" id="exhTrack">
+      {% if page.featured_image %}
+      <div class="exh-slide">
+        <img src="{{ page.featured_image | relative_url }}" alt="{{ page.title | escape }}" loading="eager">
+        <div class="exh-slide-caption">
+          <p class="caption-artist">Geum Sahong</p>
+          <p class="caption-title">일월오봉도</p>
+        </div>
+      </div>
+      {% endif %}
+      {% for work in slide_artworks %}
+      <div class="exh-slide">
+        <img src="{{ work.image | relative_url }}" alt="{{ work.title | default: work.artist | escape }}" loading="lazy">
+        <div class="exh-slide-caption">
+          <p class="caption-artist">{{ work.artist }}</p>
+          {% if work.title and work.title != "" %}
+          <p class="caption-title">{{ work.title }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="exh-slide-btn exh-slide-prev" id="slidePrev" aria-label="Previous slide">&#8592;</button>
+    <button class="exh-slide-btn exh-slide-next" id="slideNext" aria-label="Next slide">&#8594;</button>
+    <div class="exh-slide-dots" id="slideDots">
+      {% for i in (1..total_slides) %}
+      <button class="exh-slide-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></button>
+      {% endfor %}
+    </div>
   </div>
   {% endif %}
 
@@ -295,27 +666,232 @@ layout: gallery-page
   </div>
   {% endif %}
 
-  <!-- ── Artworks ── -->
-  {% assign exhibition_artworks = site.artworks | where: "exhibition", page.title %}
-  {% if exhibition_artworks.size > 0 %}
-  <div class="exh-artworks-section">
-    <h2>Artworks in This Exhibition</h2>
-    <div class="exh-artwork-grid">
-      {% for artwork in exhibition_artworks %}
-      <div class="exh-artwork-card">
-        <a href="{{ artwork.url | relative_url }}">
-          {% if artwork.image %}
-          <div class="exh-artwork-img">
-            <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title | escape }}" loading="lazy">
-          </div>
-          {% endif %}
-          <p class="exh-artwork-title">{{ artwork.title }}</p>
-          <p class="exh-artwork-artist">{{ artwork.artist }}</p>
-        </a>
+
+  <!-- ── Exhibition Views (전시전경) ── -->
+  {% assign view_images = "1.jpg,2.jpg,3.jpg,4.jpg,5.jpg,6.jpg,7.jpg,8.jpg,9.jpg,10.jpg,11.jpg,12.jpg,13.jpg" | split: "," %}
+  <div class="exh-views-section">
+    <h2>Exhibition Views &middot; 전시 전경</h2>
+    <div class="exh-views-slideshow" id="viewsSlideshow">
+      <div class="exh-views-counter">
+        <span id="viewsCurrentNum">1</span> / {{ view_images | size }}
       </div>
-      {% endfor %}
+      <div class="exh-views-track" id="viewsTrack">
+        {% for img in view_images %}
+        <div class="exh-views-slide">
+          <img src="{{ '/assets/images/전시전경/' | append: img | relative_url }}" alt="Exhibition view {{ forloop.index }}" loading="lazy">
+        </div>
+        {% endfor %}
+      </div>
+      <button class="exh-views-btn exh-views-prev" id="viewsPrev" aria-label="Previous">&#8592;</button>
+      <button class="exh-views-btn exh-views-next" id="viewsNext" aria-label="Next">&#8594;</button>
+      <div class="exh-views-dots" id="viewsDots">
+        {% for img in view_images %}
+        <button class="exh-views-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Go to view {{ forloop.index }}"></button>
+        {% endfor %}
+      </div>
     </div>
   </div>
-  {% endif %}
+
+  <!-- Lightbox -->
+  <div class="exh-lightbox" id="exhLightbox" onclick="closeLightbox(event)">
+    <button class="exh-lightbox-close" aria-label="Close">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
 
 </article>
+
+<script>
+(function() {
+  var slideshow = document.getElementById('exhSlideshow');
+  if (!slideshow) return;
+
+  var track = document.getElementById('exhTrack');
+  var slides = track.querySelectorAll('.exh-slide');
+  var total = slides.length;
+  if (total <= 1) return;
+
+  var current = 0;
+  var animating = false;
+  var counter = document.getElementById('slideCurrentNum');
+  var dots = document.querySelectorAll('.exh-slide-dot');
+  var autoInterval = null;
+
+  function goTo(index) {
+    if (animating) return;
+    if (index === current) return;
+    if (index < 0) index = total - 1;
+    if (index >= total) index = 0;
+
+    animating = true;
+    current = index;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    counter.textContent = current + 1;
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  // Unlock after transition ends
+  track.addEventListener('transitionend', function() {
+    animating = false;
+  });
+
+  document.getElementById('slideNext').addEventListener('click', function() {
+    goTo(current + 1);
+    resetAuto();
+  });
+
+  document.getElementById('slidePrev').addEventListener('click', function() {
+    goTo(current - 1);
+    resetAuto();
+  });
+
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      goTo(parseInt(this.getAttribute('data-index')));
+      resetAuto();
+    });
+  });
+
+  // Auto-advance every 4 seconds
+  function startAuto() {
+    if (autoInterval) clearInterval(autoInterval);
+    autoInterval = setInterval(function() { goTo(current + 1); }, 4000);
+  }
+  function resetAuto() {
+    clearInterval(autoInterval);
+    autoInterval = null;
+    startAuto();
+  }
+  startAuto();
+
+  // Pause on hover
+  slideshow.addEventListener('mouseenter', function() {
+    clearInterval(autoInterval);
+    autoInterval = null;
+  });
+  slideshow.addEventListener('mouseleave', function() { startAuto(); });
+
+  // Keyboard navigation
+  slideshow.setAttribute('tabindex', '0');
+  slideshow.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') { goTo(current - 1); resetAuto(); }
+    if (e.key === 'ArrowRight') { goTo(current + 1); resetAuto(); }
+  });
+
+  // Touch swipe
+  var touchStartX = 0;
+  slideshow.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  slideshow.addEventListener('touchend', function(e) {
+    var diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goTo(current + 1);
+      else goTo(current - 1);
+      resetAuto();
+    }
+  }, { passive: true });
+})();
+
+// Lightbox
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('exhLightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e) {
+  if (e && e.target.tagName === 'IMG') return;
+  document.getElementById('exhLightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// Attach click to hero slides
+document.querySelectorAll('.exh-slide').forEach(function(slide) {
+  slide.addEventListener('click', function(e) {
+    if (e.target.closest('.exh-slide-btn')) return;
+    var img = this.querySelector('img');
+    if (img) openLightbox(img.src);
+  });
+});
+
+// Attach click to views slides
+document.querySelectorAll('.exh-views-slide').forEach(function(slide) {
+  slide.addEventListener('click', function(e) {
+    if (e.target.closest('.exh-views-btn')) return;
+    var img = this.querySelector('img');
+    if (img) openLightbox(img.src);
+  });
+});
+
+// Exhibition Views slideshow
+(function() {
+  var ss = document.getElementById('viewsSlideshow');
+  if (!ss) return;
+
+  var track = document.getElementById('viewsTrack');
+  var slides = track.querySelectorAll('.exh-views-slide');
+  var total = slides.length;
+  if (total <= 1) return;
+
+  var current = 0;
+  var animating = false;
+  var counter = document.getElementById('viewsCurrentNum');
+  var dots = document.querySelectorAll('.exh-views-dot');
+  var autoInterval = null;
+
+  function goTo(index) {
+    if (animating) return;
+    if (index === current) return;
+    if (index < 0) index = total - 1;
+    if (index >= total) index = 0;
+    animating = true;
+    current = index;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    counter.textContent = current + 1;
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  track.addEventListener('transitionend', function() { animating = false; });
+
+  document.getElementById('viewsNext').addEventListener('click', function() { goTo(current + 1); resetAuto(); });
+  document.getElementById('viewsPrev').addEventListener('click', function() { goTo(current - 1); resetAuto(); });
+
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      goTo(parseInt(this.getAttribute('data-index')));
+      resetAuto();
+    });
+  });
+
+  function startAuto() {
+    if (autoInterval) clearInterval(autoInterval);
+    autoInterval = setInterval(function() { goTo(current + 1); }, 5000);
+  }
+  function resetAuto() {
+    clearInterval(autoInterval);
+    autoInterval = null;
+    startAuto();
+  }
+  startAuto();
+
+  ss.addEventListener('mouseenter', function() { clearInterval(autoInterval); autoInterval = null; });
+  ss.addEventListener('mouseleave', function() { startAuto(); });
+
+  // Touch swipe
+  var touchStartX = 0;
+  ss.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+  ss.addEventListener('touchend', function(e) {
+    var diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goTo(current + 1); else goTo(current - 1);
+      resetAuto();
+    }
+  }, { passive: true });
+})();
+</script>
