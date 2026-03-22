@@ -98,12 +98,12 @@ sass:
   style: compressed
 
 # SEO Settings (Enhanced)
-logo: /assets/images/shared/logo.png
+logo: /assets/images/og-image.jpg
 favicon: /assets/images/favicon.svg
 twitter:
   username: 44BYRON
   card: summary_large_image
-image: /assets/images/shared/logo.png
+image: /assets/images/og-image.jpg
 
 # Social Links
 social:
