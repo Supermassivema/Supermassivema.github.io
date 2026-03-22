@@ -1148,15 +1148,27 @@ img {
   }
 
   .gallery-nav {
-    padding: var(--space-2) var(--space-3);
-    grid-template-columns: 1fr;
+    padding: 8px var(--space-3);
+    grid-template-columns: auto 1fr;
     gap: var(--space-2);
   }
 
+  .gallery-nav-logo a {
+    font-size: 14px !important;
+  }
+
+  .gallery-nav-logo a span:last-child {
+    font-size: 0.5em !important;
+  }
+
   .gallery-nav-menu {
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: var(--space-2);
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .gallery-nav-menu li a {
+    font-size: 0.65rem;
   }
 
   .spotify-hero {

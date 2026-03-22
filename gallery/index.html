@@ -377,7 +377,14 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
   /* ── Responsive ── */
   @media (max-width: 900px) {
     .main-section { padding: 48px 24px; }
-    .main-exh-row { grid-template-columns: 1fr; }
+    .main-exh-row {
+      flex-direction: column;
+      gap: 24px;
+    }
+    .main-exh-poster img {
+      max-height: none;
+      width: 100%;
+    }
     .main-artist-grid { grid-template-columns: repeat(2, 1fr); }
     .main-news-grid { grid-template-columns: 1fr; }
     .main-artwork-grid { grid-template-columns: repeat(2, 1fr); }

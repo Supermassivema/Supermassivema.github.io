@@ -114,7 +114,7 @@
 
         /* Content Padding: Offsets the fixed header for non-hero pages */
         .gallery-page:not(.header-transparent) #main-content {
-            padding-top: 90px !important;
+            padding-top: 45px !important;
         }
 
         .gallery-page.header-transparent #main-content {
@@ -201,8 +201,8 @@
                 display: flex !important;
                 flex-direction: column !important;
                 justify-content: space-between !important;
-                width: 28px !important;
-                height: 18px !important;
+                width: 20px !important;
+                height: 14px !important;
                 background: none !important;
                 border: none !important;
                 padding: 0 !important;
@@ -212,16 +212,36 @@
             .site-header--white-cube .hamburger-line {
                 display: block !important;
                 width: 100% !important;
-                height: 2px !important;
+                height: 1.5px !important;
                 background-color: #FFFFFF !important;
                 transition: all 0.3s ease !important;
+            }
+
+            .site-header--white-cube {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .site-header--white-cube .container-wide {
+                padding: 0 12px !important;
+                margin: 0 !important;
             }
 
             .site-header--white-cube .header-content-v2 {
                 display: flex !important;
                 justify-content: center !important;
-                padding: 20px 0 !important;
+                padding: 10px 0 !important;
                 position: relative !important;
+                min-height: 0 !important;
+            }
+
+            .site-header--white-cube .site-logo-minimal {
+                font-size: 14px !important;
+                line-height: 1 !important;
+            }
+
+            .site-header--white-cube .header-mobile-toggle {
+                right: 12px !important;
             }
         }
     </style>
@@ -1017,6 +1037,15 @@
                     menuToggle.classList.remove('is-active');
                     body.style.overflow = '';
                 });
+            });
+
+            // Close menu on overlay background click
+            mainNav.addEventListener('click', function (e) {
+                if (e.target === mainNav) {
+                    mainNav.classList.remove('is-open');
+                    menuToggle.classList.remove('is-active');
+                    body.style.overflow = '';
+                }
             });
         });
     </script>
