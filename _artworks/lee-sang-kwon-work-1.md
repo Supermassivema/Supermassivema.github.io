@@ -1,10 +1,10 @@
 ---
 layout: artwork
-title: "Finding a Hidden Path 6 (숨은 길 찾기 6)"
+title: "A Hidden Path (숨은 길 찾기)"
 artist: "Lee Sang-kwon"
-medium: "Oil on canvas"
-dimensions: "90.9 x 72.7 cm (30호)"
-year: ""
+medium: "Acrylic on canvas"
+dimensions: "80 x 80 cm (30호)"
+year: "2022"
 image: /assets/images/work/이상권 작가/1_sumun.jpg
 status: "available"
 price: "Contact for price"

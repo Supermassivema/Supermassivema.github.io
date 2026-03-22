@@ -327,34 +327,33 @@ layout: gallery-page
   /* ── Works Grid ── */
   .artist-works-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
   }
 
   .artist-work-card {
     text-decoration: none;
     color: #000;
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   .artist-work-img-wrap {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    height: 200px;
     overflow: hidden;
-    background: #f5f5f5;
-    margin-bottom: 12px;
+    background: #f7f7f7;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .artist-work-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     display: block;
-    transition: transform 0.4s ease;
-  }
-
-  .artist-work-card:hover .artist-work-img-wrap img {
-    transform: scale(1.03);
   }
 
   .artist-work-title {
@@ -438,7 +437,7 @@ layout: gallery-page
     }
 
     .artist-works-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
 
     .artist-exhibition-item {
@@ -460,7 +459,11 @@ layout: gallery-page
 
     .artist-works-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 16px;
+    }
+
+    .artist-work-img-wrap {
+      height: 160px;
     }
 
     .artist-exhibition-item {
@@ -476,7 +479,7 @@ layout: gallery-page
 
   @media (max-width: 480px) {
     .artist-works-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>
