@@ -188,22 +188,24 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     color: #000;
   }
 
-  /* ── Exhibition Cards (2-col) ── */
-  .main-exh-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  /* ── Exhibition Row (thumbnail + poster) ── */
+  .main-exh-row {
+    display: flex;
     gap: 36px;
+    align-items: start;
+    margin-bottom: 48px;
   }
 
   .main-exh-card {
     text-decoration: none;
     color: #000;
     display: block;
+    flex: 1;
+    min-width: 0;
   }
 
   .main-exh-card-img {
     width: 100%;
-    aspect-ratio: 4 / 3;
     overflow: hidden;
     background: #f5f5f5;
     margin-bottom: 14px;
@@ -211,10 +213,18 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
 
   .main-exh-card-img img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
     display: block;
     transition: transform 0.5s ease;
+  }
+
+  .main-exh-poster {
+    flex-shrink: 0;
+  }
+
+  .main-exh-poster img {
+    display: block;
+    max-height: 500px;
+    width: auto;
   }
 
   .main-exh-card:hover .main-exh-card-img img {
@@ -367,7 +377,7 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
   /* ── Responsive ── */
   @media (max-width: 900px) {
     .main-section { padding: 48px 24px; }
-    .main-exh-grid { grid-template-columns: 1fr; }
+    .main-exh-row { grid-template-columns: 1fr; }
     .main-artist-grid { grid-template-columns: repeat(2, 1fr); }
     .main-news-grid { grid-template-columns: 1fr; }
     .main-artwork-grid { grid-template-columns: repeat(2, 1fr); }
@@ -436,8 +446,8 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     </div>
 
     {% assign all_exhibitions = site.exhibitions %}
-    <div class="main-exh-grid">
-      {% for exhibition in all_exhibitions limit: 4 %}
+    {% for exhibition in all_exhibitions limit: 4 %}
+    <div class="main-exh-row">
       <a href="{{ exhibition.url | relative_url }}" class="main-exh-card">
         <div class="main-exh-card-img">
           {% if exhibition.featured_image %}
@@ -448,8 +458,11 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
         <p class="main-exh-card-title">{{ exhibition.title }}</p>
         <p class="main-exh-card-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B %d, %Y" }}</p>
       </a>
-      {% endfor %}
+      <div class="main-exh-poster">
+        <img src="{{ '/assets/images/Inaugural Exhibition Poster.jpg' | relative_url }}" alt="{{ exhibition.title }} Poster" loading="lazy">
+      </div>
     </div>
+    {% endfor %}
   </div>
 
   <!-- 3. ARTISTS -->
