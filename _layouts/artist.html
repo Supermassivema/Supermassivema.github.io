@@ -15,15 +15,9 @@ layout: gallery-page
     </div>
   </section>
 
-  <!-- Tabs -->
-  <div class="artist-tabs">
-    <button class="artist-tab active" data-tab="bio">Biography</button>
-    <button class="artist-tab" data-tab="works">Works</button>
-    <button class="artist-tab" data-tab="exhibitions">Exhibitions</button>
-  </div>
-
-  <!-- Biography Tab -->
-  <div class="artist-tab-content" id="tab-bio">
+  <!-- Biography Section -->
+  <div class="artist-section" id="section-bio">
+    <div class="artist-section-label">Biography</div>
     <div class="artist-bio-wrap">
       <div class="artist-bio-sidebar">
         {% if page.born and page.born != "" %}
@@ -38,6 +32,7 @@ layout: gallery-page
           <span class="artist-bio-value">{{ page.education }}</span>
         </div>
         {% endif %}
+        {% if page.medium and page.medium != "" %}
         <div class="artist-bio-block">
           <span class="artist-bio-label">Medium</span>
           <span class="artist-bio-value">{{ page.medium }}</span>
@@ -45,22 +40,41 @@ layout: gallery-page
           <span class="artist-bio-value-kr">{{ page.medium_kr }}</span>
           {% endif %}
         </div>
+        {% endif %}
         {% if page.location %}
         <div class="artist-bio-block">
           <span class="artist-bio-label">Based in</span>
           <span class="artist-bio-value">{{ page.location }}</span>
         </div>
         {% endif %}
+        {% if page.cv_pdf and page.cv_pdf != "" %}
+        <div class="artist-bio-link">
+          <a href="{{ page.cv_pdf | relative_url }}" target="_blank" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Download CV</span>
+          </a>
+        </div>
+        {% endif %}
+        <div class="artist-bio-link">
+          <a href="#" class="share-link" onclick="event.preventDefault();shareArtist();">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            <span>Share</span>
+          </a>
+        </div>
         {% if page.website and page.website != "" %}
-        <div class="artist-bio-block">
-          <span class="artist-bio-label">Website</span>
-          <span class="artist-bio-value"><a href="https://{{ page.website }}" target="_blank" style="color:#000;text-decoration:underline;">{{ page.website }}</a></span>
+        <div class="artist-bio-link">
+          <a href="https://{{ page.website }}" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            <span>{{ page.website }}</span>
+          </a>
         </div>
         {% endif %}
         {% if page.instagram and page.instagram != "" %}
-        <div class="artist-bio-block">
-          <span class="artist-bio-label">Instagram</span>
-          <span class="artist-bio-value"><a href="https://www.instagram.com/{{ page.instagram | remove: '@' }}/" target="_blank" style="color:#000;text-decoration:underline;">{{ page.instagram }}</a></span>
+        <div class="artist-bio-link">
+          <a href="https://www.instagram.com/{{ page.instagram | remove: '@' }}/" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <span>{{ page.instagram }}</span>
+          </a>
         </div>
         {% endif %}
       </div>
@@ -71,26 +85,53 @@ layout: gallery-page
         {% if page.bio_short_kr and page.bio_short_kr != "" %}
         <p class="artist-bio-lead-kr">{{ page.bio_short_kr }}</p>
         {% endif %}
-        <div class="artist-bio-content">
-          {{ content }}
-        </div>
-        {% if page.philosophy %}
-        <blockquote class="artist-philosophy">
-          <p>{{ page.philosophy }}</p>
-          {% if page.philosophy_kr and page.philosophy_kr != "" %}
-          <p class="philosophy-kr">{{ page.philosophy_kr }}</p>
+        <button class="artist-bio-toggle" id="bioToggle" onclick="toggleBio()">Read Full Biography →</button>
+        <div class="artist-bio-full" id="bioFull" style="display:none;">
+          <div class="artist-bio-content">
+            {{ content }}
+          </div>
+          {% if page.philosophy %}
+          <blockquote class="artist-philosophy">
+            <p>{{ page.philosophy }}</p>
+            {% if page.philosophy_kr and page.philosophy_kr != "" %}
+            <p class="philosophy-kr">{{ page.philosophy_kr }}</p>
+            {% endif %}
+          </blockquote>
           {% endif %}
-        </blockquote>
-        {% endif %}
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Works Tab -->
+  <!-- Works Section -->
   {% assign artist_artworks = site.artworks | where: "artist", page.name %}
-  <div class="artist-tab-content" id="tab-works" style="display:none;">
+  <div class="artist-section" id="section-works">
+    <div class="artist-section-label" style="display:flex;justify-content:space-between;align-items:center;">
+      <span>Works</span>
+      {% if artist_artworks.size > 4 %}
+      <a href="#" class="artist-works-toggle" id="worksToggle" onclick="event.preventDefault();toggleWorks();">View All →</a>
+      {% endif %}
+    </div>
     {% if artist_artworks.size > 0 %}
-    <div class="artist-works-grid">
+    <!-- Featured 2x2 grid -->
+    <div class="artist-works-grid artist-works-featured" id="worksFeatured">
+      {% for artwork in artist_artworks limit:4 %}
+      <a href="{{ artwork.url | relative_url }}" class="artist-work-card">
+        <div class="artist-work-img-wrap artist-work-img-large">
+          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">
+        </div>
+        <div class="artist-work-info">
+          <p class="artist-work-title">{{ artwork.title }}</p>
+          <p class="artist-work-detail">{{ artwork.year }}{% if artwork.medium %}, {{ artwork.medium }}{% endif %}</p>
+          {% if artwork.dimensions %}
+          <p class="artist-work-detail">{{ artwork.dimensions }}</p>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <!-- All works grid -->
+    <div class="artist-works-grid" id="worksAll" style="display:none;">
       {% for artwork in artist_artworks %}
       <a href="{{ artwork.url | relative_url }}" class="artist-work-card">
         <div class="artist-work-img-wrap">
@@ -109,13 +150,57 @@ layout: gallery-page
     {% else %}
     <p class="artist-empty">No works currently on display.</p>
     {% endif %}
+
   </div>
 
-  <!-- Exhibitions Tab -->
-  <div class="artist-tab-content" id="tab-exhibitions" style="display:none;">
+  <!-- Exhibitions Section -->
+  <div class="artist-section" id="section-exhibitions">
+    <div class="artist-section-label">Exhibitions</div>
+
+    {% if page.exhibition_records %}
+    {% for exh in page.exhibition_records %}
+    <div class="artist-exh-record" id="exhRecord{{ forloop.index }}">
+      {% assign base_path = "/assets/images/work/" | append: page.name | append: "/전시전경/" | append: exh.folder %}
+
+      <!-- Default: poster + info -->
+      <div class="artist-exh-card" id="exhCard{{ forloop.index }}">
+        <div class="artist-exh-poster">
+          <img src="{{ base_path | append: '/poster.png' | relative_url }}" alt="{{ exh.title }} poster" loading="lazy">
+        </div>
+        <div class="artist-exh-info">
+          <p class="artist-exh-title">{{ exh.title }}</p>
+          <p class="artist-exh-date">{{ exh.date }}</p>
+          <p class="artist-exh-location">{{ exh.location }}</p>
+          <a href="#" class="artist-works-toggle" onclick="event.preventDefault();toggleExhViews({{ forloop.index }});">View All →</a>
+        </div>
+      </div>
+
+      <!-- Expanded: 2x2 grid photos -->
+      <div class="artist-exh-views" id="exhViews{{ forloop.index }}" style="display:none;">
+        <div class="artist-exh-views-header">
+          <div>
+            <span class="artist-exh-title">{{ exh.title }}</span>
+            <span class="artist-exh-date" style="margin-left:12px;">{{ exh.date }} · {{ exh.location }}</span>
+          </div>
+          <a href="#" class="artist-works-toggle" onclick="event.preventDefault();toggleExhViews({{ forloop.index }});">Close ←</a>
+        </div>
+        <div class="artist-works-grid artist-works-featured">
+          {% for i in (1..exh.photo_count) %}
+          <div class="artist-work-card">
+            <div class="artist-work-img-wrap artist-work-img-large">
+              <img src="{{ base_path | append: '/' | append: i | append: '.jpg' | relative_url }}" alt="{{ exh.title }} view {{ i }}" loading="lazy">
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
     {% assign artist_exhibitions = site.exhibitions | where: "featured_artist", page.name %}
     {% if artist_exhibitions.size > 0 %}
-    <div class="artist-exhibitions-list">
+    <div class="artist-exhibitions-list" style="margin-top:32px;">
       {% for exhibition in artist_exhibitions %}
       <a href="{{ exhibition.url | relative_url }}" class="artist-exhibition-item">
         {% if exhibition.featured_image %}
@@ -133,8 +218,6 @@ layout: gallery-page
       </a>
       {% endfor %}
     </div>
-    {% else %}
-    <p class="artist-empty">No exhibitions currently listed.</p>
     {% endif %}
   </div>
 
@@ -195,42 +278,22 @@ layout: gallery-page
     letter-spacing: 0.03em;
   }
 
-  /* ── Tabs ── */
-  .artist-tabs {
-    display: flex;
-    gap: 0;
+  /* ── Section ── */
+  .artist-section {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 48px;
-    border-bottom: 1px solid #e0e0e0;
+    padding: 40px 48px 60px;
   }
 
-  .artist-tab {
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    padding: 16px 24px;
+  .artist-section-label {
     font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #999;
-    cursor: pointer;
-    transition: color 0.2s, border-color 0.2s;
-  }
-
-  .artist-tab:hover { color: #000; }
-
-  .artist-tab.active {
     color: #000;
-    border-bottom-color: #000;
-  }
-
-  /* ── Tab Content ── */
-  .artist-tab-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 40px 48px 80px;
+    padding-bottom: 14px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #e0e0e0;
   }
 
   /* ── Biography ── */
@@ -307,6 +370,145 @@ layout: gallery-page
     margin: 0 0 16px;
   }
 
+  /* ── Bio Links ── */
+  .artist-bio-link {
+    margin-bottom: 10px;
+  }
+
+  .artist-bio-link a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #000;
+    text-decoration: none;
+    font-size: 0.78rem;
+    transition: opacity 0.2s;
+  }
+
+  .artist-bio-link a:hover {
+    opacity: 0.5;
+  }
+
+  .artist-bio-link svg {
+    flex-shrink: 0;
+  }
+
+  /* ── Exhibition Record ── */
+  .artist-exh-record {
+    margin-bottom: 36px;
+  }
+
+  .artist-exh-card {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .artist-exh-poster {
+    width: 180px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .artist-exh-poster img {
+    width: 100%;
+    display: block;
+  }
+
+  .artist-exh-info {
+    flex: 1;
+  }
+
+  .artist-exh-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 6px;
+  }
+
+  .artist-exh-date {
+    font-size: 0.78rem;
+    color: #888;
+    margin: 0 0 4px;
+  }
+
+  .artist-exh-location {
+    font-size: 0.78rem;
+    color: #999;
+    margin: 0 0 14px;
+  }
+
+  .artist-exh-views-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  @media (max-width: 768px) {
+    .artist-exh-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .artist-exh-poster {
+      width: 140px;
+    }
+
+    .artist-exh-views-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }
+
+  .artist-works-featured {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px !important;
+  }
+
+  .artist-work-img-large {
+    height: 320px !important;
+  }
+
+  .artist-works-toggle {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #999;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .artist-works-toggle:hover {
+    color: #000;
+  }
+
+  .artist-bio-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 20px 0 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s;
+    display: inline-block;
+  }
+
+  .artist-bio-toggle:hover {
+    color: #000;
+  }
+
+  .artist-bio-full {
+    margin-top: 32px;
+  }
+
   .artist-philosophy {
     margin: 40px 0 0;
     padding: 28px 0 0;
@@ -354,6 +556,10 @@ layout: gallery-page
     max-height: 100%;
     object-fit: contain;
     display: block;
+  }
+
+  .artist-work-info {
+    text-align: center;
   }
 
   .artist-work-title {
@@ -447,8 +653,7 @@ layout: gallery-page
 
   @media (max-width: 768px) {
     .artist-hero,
-    .artist-tabs,
-    .artist-tab-content {
+    .artist-section {
       padding-left: 24px;
       padding-right: 24px;
     }
@@ -471,10 +676,6 @@ layout: gallery-page
       gap: 14px;
     }
 
-    .artist-tab {
-      padding: 14px 16px;
-      font-size: 0.65rem;
-    }
   }
 
   @media (max-width: 480px) {
@@ -485,13 +686,51 @@ layout: gallery-page
 </style>
 
 <script>
-  document.querySelectorAll('.artist-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.artist-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tab = btn.dataset.tab;
-      document.querySelectorAll('.artist-tab-content').forEach(c => c.style.display = 'none');
-      document.getElementById('tab-' + tab).style.display = '';
+  function shareArtist() {
+    navigator.clipboard.writeText(window.location.href).then(function() {
+      var btn = document.querySelector('.share-link');
+      btn.textContent = 'Copied!';
+      setTimeout(function() { btn.textContent = 'Share ↗'; }, 1500);
     });
-  });
+  }
+
+  function toggleExhViews(idx) {
+    var card = document.getElementById('exhCard' + idx);
+    var views = document.getElementById('exhViews' + idx);
+    if (views.style.display === 'none') {
+      card.style.display = 'none';
+      views.style.display = '';
+    } else {
+      views.style.display = 'none';
+      card.style.display = '';
+    }
+  }
+
+  function toggleWorks() {
+    var featured = document.getElementById('worksFeatured');
+    var all = document.getElementById('worksAll');
+    var btn = document.getElementById('worksToggle');
+    if (all.style.display === 'none') {
+      featured.style.display = 'none';
+      all.style.display = '';
+      btn.textContent = 'Featured ←';
+    } else {
+      all.style.display = 'none';
+      featured.style.display = '';
+      btn.textContent = 'View All →';
+    }
+  }
+
+  function toggleBio() {
+    var full = document.getElementById('bioFull');
+    var btn = document.getElementById('bioToggle');
+    if (full.style.display === 'none') {
+      full.style.display = 'block';
+      btn.textContent = 'Close Biography ↑';
+    } else {
+      full.style.display = 'none';
+      btn.textContent = 'Read Full Biography →';
+    }
+  }
+
 </script>
