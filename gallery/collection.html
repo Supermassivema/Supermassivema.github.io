@@ -988,7 +988,7 @@ title: "Media"
       ko: '금사홍',
       medium: 'Acrylic, Oil on Canvas',
       profileImg: '/assets/images/work/Geum Sahong/profile.jpg',
-      coverImg: '/assets/images/work/Geum Sahong/Artwork No.0816 호작도-150호F사이즈-227.3x181.8cm-Acrylic on canvas-2026.jpg',
+      coverImg: '/assets/images/work/Geum Sahong/Artwork No.0816 일월오봉도-150호F사이즈-227.3x181.8cm-Acrylic on canvas-2026.jpg',
       bio: 'Geum Sahong is a Korean contemporary painter known for his pantheistic landscapes rendered in acrylic and oil. His works explore the spiritual connection between nature and humanity.',
       bioKo: '금사홍은 아크릴과 유화로 범신론적 풍경을 그리는 것으로 알려진 한국 현대 화가입니다. 그의 작품은 자연과 인간 사이의 영적 연결을 탐구합니다.',
       statement: 'Through layers of colour and gestural brushwork, Geum creates atmospheric compositions that dissolve the boundary between the physical and metaphysical — inviting viewers into meditative encounters with the natural world.',
@@ -1020,7 +1020,7 @@ title: "Media"
     'Stephen Jones': {
       ko: '',
       medium: 'Pencil, Charcoal, Acrylic',
-      profileImg: '/assets/images/work/Stephen Jones/1.jpg',
+      profileImg: '/assets/images/work/Stephen Jones/프로필 사진.jpg',
       coverImg: '/assets/images/work/Stephen Jones/1.jpg',
       bio: 'Stephen Jones is an Australian artist working across pencil, charcoal, and acrylic. His detailed, contemplative works capture the quiet beauty of natural and rural subjects.',
       bioKo: '스티븐 존스는 연필, 목탄, 아크릴을 넘나들며 작업하는 호주 작가입니다. 세밀하고 사색적인 그의 작품은 자연과 시골 풍경의 고요한 아름다움을 포착합니다.',
@@ -1284,12 +1284,16 @@ title: "Media"
       flipContainer.classList.add('flip-forward');
       flipFront.innerHTML = bookPages[bookSpreadIdx * 2 + 1] || '';
       flipBack.innerHTML = bookPages[targetIdx * 2] || '';
+      // Pre-set both sides for target spread
+      document.getElementById('bookLeft').innerHTML = bookPages[targetIdx * 2] || '';
       document.getElementById('bookRight').innerHTML = bookPages[targetIdx * 2 + 1] || '';
     } else {
       flipContainer.classList.add('flip-backward');
       flipFront.innerHTML = bookPages[bookSpreadIdx * 2] || '';
       flipBack.innerHTML = bookPages[targetIdx * 2 + 1] || '';
+      // Pre-set both sides for target spread
       document.getElementById('bookLeft').innerHTML = bookPages[targetIdx * 2] || '';
+      document.getElementById('bookRight').innerHTML = bookPages[targetIdx * 2 + 1] || '';
     }
 
     flipContainer.classList.add('active');
@@ -1301,9 +1305,9 @@ title: "Media"
 
     setTimeout(function() {
       bookSpreadIdx = targetIdx;
-      bookRenderSpread();
-      flipPage.classList.remove('flipping');
+      bookUpdateUI();
       flipContainer.classList.remove('active', 'flip-forward', 'flip-backward');
+      flipPage.classList.remove('flipping');
       bookFlipping = false;
     }, 850);
   }
@@ -1325,8 +1329,12 @@ title: "Media"
     }
 
     var target = bookSpreadIdx + dir;
+    if (target >= total) {
+      // Last page → return to cover
+      bookFlipTo(-1);
+      return;
+    }
     if (target < 0) target = 0;
-    if (target >= total) target = total - 1;
     if (target !== bookSpreadIdx) bookFlipTo(target);
   };
 
