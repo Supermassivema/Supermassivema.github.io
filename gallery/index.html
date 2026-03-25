@@ -452,8 +452,8 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
       <a href="{{ '/gallery/exhibitions' | relative_url }}" class="main-section-viewall">View All →</a>
     </div>
 
-    {% assign all_exhibitions = site.exhibitions %}
-    {% for exhibition in all_exhibitions limit: 4 %}
+    {% assign all_exhibitions = site.exhibitions | where: "status", "current" %}
+    {% for exhibition in all_exhibitions limit: 1 %}
     <div class="main-exh-row">
       <a href="{{ exhibition.url | relative_url }}" class="main-exh-card">
         <div class="main-exh-card-img">
