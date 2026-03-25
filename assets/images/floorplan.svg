@@ -1,224 +1,207 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif">
   <defs>
     <style>
-      .wall { fill: none; stroke: #1a1a1a; stroke-width: 6; stroke-linecap: square; }
-      .wall-thin { fill: none; stroke: #1a1a1a; stroke-width: 4; stroke-linecap: square; }
-      .door-arc { fill: none; stroke: #999; stroke-width: 1.5; stroke-dasharray: 4,3; }
-      .door-line { fill: none; stroke: #999; stroke-width: 2; }
-      .dim-line { fill: none; stroke: #b0b0b0; stroke-width: 0.8; }
-      .dim-text { font-size: 11px; fill: #888; text-anchor: middle; font-weight: 500; }
-      .room-label { font-size: 14px; fill: #1a1a1a; text-anchor: middle; font-weight: 700; letter-spacing: 0.1em; }
-      .room-sub { font-size: 10px; fill: #999; text-anchor: middle; font-weight: 400; }
-      .room-dim { font-size: 9px; fill: #b0b0b0; text-anchor: middle; font-weight: 400; }
-      .room-fill-a { fill: #f7f5f0; }
-      .room-fill-b { fill: #f0ede6; }
-      .room-fill-util { fill: #eaeaea; }
-      .title-text { font-size: 16px; fill: #1a1a1a; font-weight: 800; letter-spacing: 0.15em; }
-      .legend-text { font-size: 10px; fill: #666; font-weight: 400; }
-      .north-arrow { fill: #1a1a1a; }
-      .wall-label { font-size: 8px; fill: #cc8855; text-anchor: middle; font-weight: 600; letter-spacing: 0.05em; }
+      .wall { fill: none; stroke: #1a1a1a; stroke-width: 5; stroke-linecap: square; }
+      .wall-int { fill: none; stroke: #1a1a1a; stroke-width: 3.5; stroke-linecap: square; }
+      .door-arc { fill: none; stroke: #aaa; stroke-width: 1.2; stroke-dasharray: 3,2; }
+      .door-leaf { fill: none; stroke: #aaa; stroke-width: 1.5; }
+      .dim-line { fill: none; stroke: #b0b0b0; stroke-width: 0.7; }
+      .dim-tick { fill: none; stroke: #b0b0b0; stroke-width: 0.7; }
+      .dim-text { font-size: 10px; fill: #999; text-anchor: middle; font-weight: 400; }
+      .room-label { font-size: 13px; fill: #1a1a1a; text-anchor: middle; font-weight: 700; letter-spacing: 0.08em; }
+      .room-sub { font-size: 9px; fill: #aaa; text-anchor: middle; font-weight: 400; }
+      .room-fill-gallery { fill: #f5f2eb; }
+      .room-fill-cafe { fill: #eef2e8; }
+      .room-fill-util { fill: #f0f0f0; }
+      .room-fill-office { fill: #ebe8f0; }
+      .title-text { font-size: 14px; fill: #1a1a1a; font-weight: 800; letter-spacing: 0.15em; }
+      .legend-text { font-size: 9px; fill: #666; }
+      .wall-id { font-size: 7px; fill: #cc8855; text-anchor: middle; font-weight: 600; }
     </style>
   </defs>
 
-  <!-- Background -->
-  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect width="1200" height="600" fill="#ffffff"/>
 
   <!-- ====== OUTER WALLS ====== -->
-  <!-- Top wall -->
-  <line x1="100" y1="80" x2="1100" y2="80" class="wall"/>
-  <!-- Bottom wall -->
-  <line x1="100" y1="520" x2="1100" y2="520" class="wall"/>
-  <!-- Left wall -->
-  <line x1="100" y1="80" x2="100" y2="520" class="wall"/>
-  <!-- Right wall -->
-  <line x1="1100" y1="80" x2="1100" y2="520" class="wall"/>
+  <line x1="80" y1="70" x2="1080" y2="70" class="wall"/>
+  <line x1="80" y1="490" x2="1080" y2="490" class="wall"/>
+  <line x1="80" y1="70" x2="80" y2="490" class="wall"/>
+  <line x1="1080" y1="70" x2="1080" y2="490" class="wall"/>
 
-  <!-- ====== HORIZONTAL CENTER DIVIDER ====== -->
-  <!-- Center horizontal wall (with gaps for doors) -->
-  <line x1="100" y1="290" x2="240" y2="290" class="wall-thin"/>
-  <!-- gap for door -->
-  <line x1="310" y1="290" x2="460" y2="290" class="wall-thin"/>
-  <line x1="460" y1="290" x2="540" y2="290" class="wall-thin"/>
-  <!-- gap for corridor -->
-  <line x1="610" y1="290" x2="700" y2="290" class="wall-thin"/>
-  <!-- gap for door -->
-  <line x1="770" y1="290" x2="1100" y2="290" class="wall-thin"/>
+  <!-- ====== CENTER HORIZONTAL WALL ====== -->
+  <!-- Left portion -->
+  <line x1="80" y1="270" x2="170" y2="270" class="wall-int"/>
+  <!-- gap (door to corridor from left) -->
+  <line x1="240" y1="270" x2="350" y2="270" class="wall-int"/>
+  <line x1="350" y1="270" x2="440" y2="270" class="wall-int"/>
+  <!-- gap (center passage) -->
+  <line x1="510" y1="270" x2="580" y2="270" class="wall-int"/>
+  <!-- gap (passage) -->
+  <line x1="640" y1="270" x2="710" y2="270" class="wall-int"/>
+  <!-- gap (door) -->
+  <line x1="770" y1="270" x2="1080" y2="270" class="wall-int"/>
 
-  <!-- ====== VERTICAL DIVIDERS - TOP ROW ====== -->
-  <!-- Wall between Gallery A and utility -->
-  <line x1="420" y1="80" x2="420" y2="290" class="wall-thin"/>
-  <!-- Wall between utility and Gallery B -->
-  <line x1="700" y1="80" x2="700" y2="290" class="wall-thin"/>
+  <!-- ====== TOP ROW VERTICAL WALLS ====== -->
+  <!-- Wall: top-left room right side -->
+  <line x1="350" y1="70" x2="350" y2="270" class="wall-int"/>
 
-  <!-- ====== UTILITY / CENTER TOP ROOMS ====== -->
-  <!-- Small rooms in center top -->
-  <line x1="420" y1="170" x2="540" y2="170" class="wall-thin"/>
-  <line x1="540" y1="80" x2="540" y2="290" class="wall-thin"/>
-  <line x1="610" y1="80" x2="610" y2="290" class="wall-thin"/>
-  <line x1="540" y1="185" x2="610" y2="185" class="wall-thin"/>
+  <!-- Center cluster small rooms -->
+  <line x1="440" y1="70" x2="440" y2="270" class="wall-int"/>
+  <line x1="510" y1="70" x2="510" y2="270" class="wall-int"/>
 
-  <!-- ====== VERTICAL DIVIDERS - BOTTOM ROW ====== -->
-  <!-- Wall: Office / Storage -->
-  <line x1="280" y1="290" x2="280" y2="520" class="wall-thin"/>
-  <!-- Wall: between bottom rooms -->
-  <line x1="500" y1="290" x2="500" y2="520" class="wall-thin"/>
-  <line x1="500" y1="370" x2="620" y2="370" class="wall-thin"/>
-  <line x1="620" y1="290" x2="620" y2="520" class="wall-thin"/>
-  <!-- Wall: Gallery D / E divider -->
-  <line x1="820" y1="290" x2="820" y2="520" class="wall-thin"/>
+  <!-- Horizontal divider inside center cluster -->
+  <line x1="350" y1="165" x2="440" y2="165" class="wall-int"/>
+  <line x1="440" y1="175" x2="510" y2="175" class="wall-int"/>
 
-  <!-- ====== DOORS (arcs + lines) ====== -->
-  <!-- Door: Gallery A to corridor (left center) -->
-  <path d="M 240 290 A 70 70 0 0 0 310 290" class="door-arc"/>
-  <line x1="240" y1="290" x2="242" y2="285" class="door-line"/>
+  <!-- Wall: between center cluster and top-right room -->
+  <line x1="580" y1="70" x2="580" y2="165" class="wall-int"/>
+  <!-- gap (door opening) -->
+  <line x1="580" y1="220" x2="580" y2="270" class="wall-int"/>
 
-  <!-- Door: corridor to Gallery C bottom-left -->
-  <path d="M 280 340 A 50 50 0 0 1 280 290" class="door-arc" transform="translate(-45,0)"/>
+  <!-- ====== BOTTOM ROW VERTICAL WALLS ====== -->
+  <!-- Wall: bottom-left entry area -->
+  <line x1="200" y1="270" x2="200" y2="490" class="wall-int"/>
 
-  <!-- Door: Center corridor -->
-  <path d="M 540 290 A 70 70 0 0 1 610 290" class="door-arc"/>
+  <!-- Wall: separating bottom rooms -->
+  <line x1="380" y1="270" x2="380" y2="490" class="wall-int"/>
 
-  <!-- Door: Gallery B to corridor -->
-  <path d="M 700 290 A 70 70 0 0 1 770 290" class="door-arc"/>
+  <!-- Stub walls from center (bottom room dividers) -->
+  <line x1="540" y1="380" x2="540" y2="490" class="wall-int"/>
+  <line x1="540" y1="270" x2="540" y2="320" class="wall-int"/>
 
-  <!-- Door: Right entrance -->
-  <path d="M 1100 370 A 50 50 0 0 0 1100 420" class="door-arc"/>
-  <line x1="1100" y1="370" x2="1095" y2="372" class="door-line"/>
+  <line x1="700" y1="270" x2="700" y2="490" class="wall-int"/>
 
-  <!-- Door: Left entrance -->
-  <path d="M 100 340 A 50 50 0 0 1 100 390" class="door-arc"/>
-  <line x1="100" y1="340" x2="105" y2="342" class="door-line"/>
+  <!-- ====== DOOR ARCS ====== -->
+  <!-- Left exterior door (bottom-left) -->
+  <path d="M 80 320 A 55 55 0 0 1 80 375" class="door-arc"/>
+  <line x1="80" y1="320" x2="110" y2="345" class="door-leaf"/>
+
+  <!-- Door: corridor left to top-left room -->
+  <path d="M 170 270 A 70 70 0 0 0 240 270" class="door-arc"/>
+  <line x1="170" y1="270" x2="175" y2="263" class="door-leaf"/>
+
+  <!-- Door: top-left room to center -->
+  <path d="M 350 120 A 50 50 0 0 1 350 170" class="door-arc"/>
+  <line x1="350" y1="120" x2="355" y2="125" class="door-leaf"/>
+
+  <!-- Small door in center cluster -->
+  <path d="M 460 175 A 30 30 0 0 0 490 175" class="door-arc"/>
+
+  <!-- Door: top-right room (cafe) from center -->
+  <path d="M 580 165 A 55 55 0 0 0 580 220" class="door-arc"/>
+  <line x1="580" y1="165" x2="585" y2="170" class="door-leaf"/>
+
+  <!-- Door: center passage bottom -->
+  <path d="M 440 270 A 70 70 0 0 1 510 270" class="door-arc"/>
+
+  <!-- Door: bottom passage -->
+  <path d="M 640 270 A 70 70 0 0 0 710 270" class="door-arc"/>
+
+  <!-- Door: bottom-left room -->
+  <path d="M 200 330 A 60 60 0 0 1 200 390" class="door-arc"/>
+  <line x1="200" y1="330" x2="205" y2="335" class="door-leaf"/>
+
+  <!-- Right exterior door -->
+  <path d="M 1080 340 A 55 55 0 0 0 1080 395" class="door-arc"/>
+  <line x1="1080" y1="340" x2="1075" y2="345" class="door-leaf"/>
 
   <!-- ====== ROOM FILLS ====== -->
-  <!-- Gallery A -->
-  <rect x="103" y="83" width="314" height="204" class="room-fill-a" opacity="0.5"/>
-  <!-- Gallery B -->
-  <rect x="703" y="83" width="394" height="204" class="room-fill-a" opacity="0.5"/>
-  <!-- Gallery C -->
-  <rect x="103" y="293" width="174" height="224" class="room-fill-b" opacity="0.5"/>
-  <!-- Gallery D -->
-  <rect x="623" y="293" width="194" height="224" class="room-fill-b" opacity="0.5"/>
-  <!-- Gallery E -->
-  <rect x="823" y="293" width="274" height="224" class="room-fill-a" opacity="0.5"/>
-  <!-- Utility rooms -->
-  <rect x="423" y="83" width="114" height="84" class="room-fill-util" opacity="0.5"/>
-  <rect x="423" y="173" width="114" height="114" class="room-fill-util" opacity="0.4"/>
-  <rect x="543" y="83" width="64" height="99" class="room-fill-util" opacity="0.5"/>
-  <rect x="543" y="188" width="64" height="99" class="room-fill-util" opacity="0.4"/>
+  <!-- Top-left: Gallery -->
+  <rect x="83" y="73" width="264" height="194" class="room-fill-gallery" opacity="0.6"/>
 
-  <!-- Storage / Office -->
-  <rect x="283" y="293" width="214" height="224" class="room-fill-util" opacity="0.3"/>
-  <rect x="503" y="293" width="114" height="74" class="room-fill-util" opacity="0.3"/>
-  <rect x="503" y="373" width="114" height="144" class="room-fill-util" opacity="0.3"/>
+  <!-- Center cluster: WC / Utility (smallest rooms - excluded) -->
+  <rect x="353" y="73" width="84" height="89" class="room-fill-util" opacity="0.5"/>
+  <rect x="353" y="168" width="84" height="99" class="room-fill-util" opacity="0.5"/>
+  <rect x="443" y="73" width="64" height="99" class="room-fill-util" opacity="0.5"/>
+  <rect x="443" y="178" width="64" height="89" class="room-fill-util" opacity="0.5"/>
+
+  <!-- Top-right: CAFE (biggest space) -->
+  <rect x="583" y="73" width="494" height="194" class="room-fill-cafe" opacity="0.5"/>
+
+  <!-- Bottom-left entry + Gallery -->
+  <rect x="83" y="273" width="114" height="214" class="room-fill-gallery" opacity="0.5"/>
+  <rect x="203" y="273" width="174" height="214" class="room-fill-gallery" opacity="0.6"/>
+
+  <!-- Bottom-center: Storage / Office (attached to cafe) -->
+  <rect x="383" y="273" width="154" height="214" class="room-fill-office" opacity="0.4"/>
+  <rect x="543" y="273" width="154" height="214" class="room-fill-office" opacity="0.4"/>
+
+  <!-- Bottom-right: Gallery -->
+  <rect x="703" y="273" width="374" height="214" class="room-fill-gallery" opacity="0.6"/>
 
   <!-- ====== ROOM LABELS ====== -->
-  <!-- Gallery A -->
-  <text x="260" y="180" class="room-label">GALLERY A</text>
-  <text x="260" y="198" class="room-sub">Main Exhibition</text>
-  <text x="260" y="215" class="room-dim">4.9m × 2.5m</text>
+  <!-- Top-left Gallery -->
+  <text x="215" y="165" class="room-label">GALLERY A</text>
+  <text x="215" y="180" class="room-sub">Main Exhibition</text>
 
-  <!-- Gallery B -->
-  <text x="900" y="180" class="room-label">GALLERY B</text>
-  <text x="900" y="198" class="room-sub">Main Exhibition</text>
-  <text x="900" y="215" class="room-dim">6.1m × 2.5m</text>
+  <!-- Center small rooms -->
+  <text x="395" y="125" class="room-sub">WC</text>
+  <text x="395" y="225" class="room-sub">WC</text>
+  <text x="475" y="130" class="room-sub">Kitchen</text>
+  <text x="475" y="225" class="room-sub">Utility</text>
 
-  <!-- Gallery C -->
-  <text x="190" y="410" class="room-label">GALLERY C</text>
-  <text x="190" y="428" class="room-sub">Project Space</text>
-  <text x="190" y="445" class="room-dim">2.7m × 3.4m</text>
+  <!-- Top-right CAFE -->
+  <text x="830" y="165" class="room-label">CAFÉ</text>
+  <text x="830" y="182" class="room-sub">Dining &amp; Lounge</text>
 
-  <!-- Gallery D -->
-  <text x="720" y="410" class="room-label">GALLERY D</text>
-  <text x="720" y="428" class="room-sub">Exhibition</text>
-  <text x="720" y="445" class="room-dim">3.0m × 3.4m</text>
+  <!-- Bottom-left entry -->
+  <text x="140" y="395" class="room-label">HALL</text>
+  <text x="140" y="410" class="room-sub">Entry</text>
 
-  <!-- Gallery E -->
-  <text x="960" y="410" class="room-label">GALLERY E</text>
-  <text x="960" y="428" class="room-sub">Exhibition</text>
-  <text x="960" y="445" class="room-dim">4.3m × 3.4m</text>
+  <!-- Bottom Gallery (left of storage) -->
+  <text x="290" y="385" class="room-label">GALLERY B</text>
+  <text x="290" y="400" class="room-sub">Exhibition</text>
 
-  <!-- Utility rooms -->
-  <text x="480" y="132" class="room-sub">Kitchen</text>
-  <text x="480" y="232" class="room-sub">Storage</text>
-  <text x="575" y="136" class="room-sub">WC</text>
-  <text x="575" y="240" class="room-sub">WC</text>
+  <!-- Storage -->
+  <text x="460" y="385" class="room-label">STORAGE</text>
+  <text x="460" y="400" class="room-sub"></text>
 
-  <!-- Office / Storage bottom -->
-  <text x="390" y="405" class="room-sub">Office /</text>
-  <text x="390" y="420" class="room-sub">Storage</text>
-  <text x="556" y="330" class="room-sub">Utility</text>
-  <text x="556" y="440" class="room-sub">Storage</text>
+  <!-- Office -->
+  <text x="620" y="385" class="room-label">OFFICE</text>
+  <text x="620" y="400" class="room-sub"></text>
 
-  <!-- ====== WALL LABELS (for DP planning) ====== -->
-  <!-- Gallery A walls -->
-  <text x="260" y="97" class="wall-label">WALL A-1 (4.9m)</text>
-  <text x="260" y="282" class="wall-label">WALL A-2 (4.9m)</text>
-  <text x="113" y="190" class="wall-label" transform="rotate(-90, 113, 190)">WALL A-3 (2.5m)</text>
-  <text x="410" y="190" class="wall-label" transform="rotate(-90, 410, 190)">WALL A-4 (2.5m)</text>
+  <!-- Bottom-right Gallery -->
+  <text x="890" y="385" class="room-label">GALLERY C</text>
+  <text x="890" y="400" class="room-sub">Exhibition</text>
 
-  <!-- Gallery B walls -->
-  <text x="900" y="97" class="wall-label">WALL B-1 (6.1m)</text>
-  <text x="900" y="282" class="wall-label">WALL B-2 (6.1m)</text>
-  <text x="713" y="190" class="wall-label" transform="rotate(-90, 713, 190)">WALL B-3 (2.5m)</text>
-  <text x="1090" y="190" class="wall-label" transform="rotate(-90, 1090, 190)">WALL B-4 (2.5m)</text>
+  <!-- ====== WALL IDs (for DP) ====== -->
+  <text x="215" y="86" class="wall-id">WALL A-N</text>
+  <text x="215" y="264" class="wall-id">WALL A-S</text>
+  <text x="94" y="175" class="wall-id" transform="rotate(-90, 94, 175)">WALL A-W</text>
+  <text x="340" y="175" class="wall-id" transform="rotate(-90, 340, 175)">WALL A-E</text>
 
-  <!-- Gallery C walls -->
-  <text x="190" y="308" class="wall-label">WALL C-1</text>
-  <text x="190" y="512" class="wall-label">WALL C-2</text>
+  <text x="290" y="284" class="wall-id">WALL B-N</text>
+  <text x="290" y="484" class="wall-id">WALL B-S</text>
 
-  <!-- Gallery D walls -->
-  <text x="720" y="308" class="wall-label">WALL D-1</text>
-  <text x="720" y="512" class="wall-label">WALL D-2</text>
-
-  <!-- Gallery E walls -->
-  <text x="960" y="308" class="wall-label">WALL E-1</text>
-  <text x="960" y="512" class="wall-label">WALL E-2</text>
-
-  <!-- ====== DIMENSION LINES ====== -->
-  <!-- Top overall -->
-  <line x1="100" y1="55" x2="1100" y2="55" class="dim-line"/>
-  <line x1="100" y1="50" x2="100" y2="60" class="dim-line"/>
-  <line x1="1100" y1="50" x2="1100" y2="60" class="dim-line"/>
-  <text x="600" y="50" class="dim-text">19.3m</text>
-
-  <!-- Left height -->
-  <line x1="75" y1="80" x2="75" y2="520" class="dim-line"/>
-  <line x1="70" y1="80" x2="80" y2="80" class="dim-line"/>
-  <line x1="70" y1="520" x2="80" y2="520" class="dim-line"/>
-  <text x="62" y="304" class="dim-text" transform="rotate(-90, 62, 304)">8.5m</text>
-
-  <!-- Right side dimensions -->
-  <line x1="1125" y1="80" x2="1125" y2="290" class="dim-line"/>
-  <line x1="1120" y1="80" x2="1130" y2="80" class="dim-line"/>
-  <line x1="1120" y1="290" x2="1130" y2="290" class="dim-line"/>
-  <text x="1145" y="189" class="dim-text" transform="rotate(-90, 1145, 189)">4.1m</text>
-
-  <line x1="1125" y1="290" x2="1125" y2="520" class="dim-line"/>
-  <line x1="1120" y1="520" x2="1130" y2="520" class="dim-line"/>
-  <text x="1145" y="409" class="dim-text" transform="rotate(-90, 1145, 409)">4.4m</text>
+  <text x="890" y="284" class="wall-id">WALL C-N</text>
+  <text x="890" y="484" class="wall-id">WALL C-S</text>
+  <text x="714" y="385" class="wall-id" transform="rotate(-90, 714, 385)">WALL C-W</text>
+  <text x="1068" y="385" class="wall-id" transform="rotate(-90, 1068, 385)">WALL C-E</text>
 
   <!-- ====== ENTRANCE MARKERS ====== -->
-  <!-- Left entrance -->
-  <text x="85" y="372" class="room-sub" text-anchor="end" font-weight="700" fill="#cc8855">ENTRANCE</text>
-  <!-- Right entrance -->
-  <text x="1115" y="400" class="room-sub" text-anchor="start" font-weight="700" fill="#cc8855">ENTRANCE</text>
+  <text x="65" y="352" class="room-sub" text-anchor="end" font-weight="700" fill="#cc8855" font-size="8">ENTRANCE</text>
+  <text x="1095" y="372" class="room-sub" text-anchor="start" font-weight="700" fill="#cc8855" font-size="8">ENTRANCE</text>
 
   <!-- ====== TITLE & LEGEND ====== -->
-  <text x="100" y="590" class="title-text">ART SPACE BYRON — FLOOR PLAN</text>
-  <text x="100" y="608" class="legend-text">44 Byron St, Inverell NSW 2360 · Total area approx. 164 m²</text>
+  <text x="80" y="555" class="title-text">ART SPACE BYRON — FLOOR PLAN</text>
+  <text x="80" y="572" class="legend-text">44 Byron St, Inverell NSW 2360</text>
 
-  <!-- Legend items -->
-  <rect x="700" y="580" width="16" height="16" fill="#f7f5f0" stroke="#ccc" stroke-width="1"/>
-  <text x="722" y="593" class="legend-text">Gallery Space</text>
-  <rect x="820" y="580" width="16" height="16" fill="#f0ede6" stroke="#ccc" stroke-width="1"/>
-  <text x="842" y="593" class="legend-text">Project Space</text>
-  <rect x="950" y="580" width="16" height="16" fill="#eaeaea" stroke="#ccc" stroke-width="1"/>
-  <text x="972" y="593" class="legend-text">Utility / Office</text>
+  <rect x="640" y="546" width="14" height="14" fill="#f5f2eb" stroke="#ccc" stroke-width="0.8"/>
+  <text x="660" y="557" class="legend-text">Gallery</text>
+
+  <rect x="720" y="546" width="14" height="14" fill="#eef2e8" stroke="#ccc" stroke-width="0.8"/>
+  <text x="740" y="557" class="legend-text">Café</text>
+
+  <rect x="790" y="546" width="14" height="14" fill="#ebe8f0" stroke="#ccc" stroke-width="0.8"/>
+  <text x="810" y="557" class="legend-text">Office / Storage</text>
+
+  <rect x="910" y="546" width="14" height="14" fill="#f0f0f0" stroke="#ccc" stroke-width="0.8"/>
+  <text x="930" y="557" class="legend-text">WC / Utility</text>
 
   <!-- North arrow -->
-  <g transform="translate(1070, 575)">
-    <polygon points="0,-18 -6,0 0,-6 6,0" class="north-arrow"/>
-    <text x="0" y="14" text-anchor="middle" font-size="9" font-weight="700" fill="#1a1a1a">N</text>
+  <g transform="translate(1050, 545)">
+    <polygon points="0,-16 -5,0 0,-5 5,0" fill="#1a1a1a"/>
+    <text x="0" y="12" text-anchor="middle" font-size="8" font-weight="700" fill="#1a1a1a">N</text>
   </g>
 
 </svg>

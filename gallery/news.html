@@ -52,6 +52,7 @@ section: gallery
     background: none;
     border: none;
     border-bottom: 3px solid transparent;
+    text-decoration: none;
     padding: 16px 24px;
     font-size: 0.7rem;
     font-weight: 700;
@@ -97,13 +98,17 @@ section: gallery
   .featured-article-image {
     aspect-ratio: 4/3;
     overflow: hidden;
-    background: #f0f0f0;
+    background: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .featured-article-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
     transition: transform 0.6s ease;
   }
 
@@ -221,16 +226,20 @@ section: gallery
   }
 
   .news-card-image {
-    aspect-ratio: 3/2;
+    height: 250px;
     overflow: hidden;
-    background: #f0f0f0;
+    background: #f7f7f7;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .news-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
   }
 
   .news-card-meta {
@@ -304,15 +313,19 @@ section: gallery
   }
 
   .artist-news-thumb {
-    aspect-ratio: 1/1;
+    aspect-ratio: 1;
     overflow: hidden;
-    background: #f0f0f0;
+    background: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .artist-news-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
   }
 
   .artist-news-body {
@@ -498,39 +511,112 @@ section: gallery
 
   <!-- Filter Tabs -->
   <div class="news-filters">
-    <button class="filter-btn active">All</button>
-    <button class="filter-btn">Exhibitions</button>
-    <button class="filter-btn">Events</button>
-    <button class="filter-btn">Press</button>
-    <button class="filter-btn">Artists</button>
+    <a href="#" class="filter-btn active" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});">All</a>
+    <a href="#section-exhibitions" class="filter-btn" onclick="event.preventDefault();document.getElementById('section-exhibitions').scrollIntoView({behavior:'smooth',block:'start'});">Exhibitions</a>
+    <a href="#section-events" class="filter-btn" onclick="event.preventDefault();document.getElementById('section-events').scrollIntoView({behavior:'smooth',block:'start'});">Events</a>
+    <a href="#section-artists" class="filter-btn" onclick="event.preventDefault();document.getElementById('section-artists').scrollIntoView({behavior:'smooth',block:'start'});">Press</a>
+    <a href="#section-artists" class="filter-btn" onclick="event.preventDefault();document.getElementById('section-artists').scrollIntoView({behavior:'smooth',block:'start'});">Artists</a>
   </div>
 
   <!-- Event: Opening Reception -->
-  <div class="news-featured">
+  <div class="news-featured" id="section-exhibitions">
 
     <article class="featured-article">
       <div class="featured-article-image">
-        <img src="{{ '/assets/images/Gallery Background photo/space (1).jpg' | relative_url }}" alt="ART SPACE BYRON Inaugural Exhibition Opening Reception">
+        <img src="{{ '/assets/images/work/Geum Sahong/Artwork No.0816 호작도-150호F사이즈-227.3x181.8cm-Acrylic on canvas-2026.jpg' | relative_url }}" alt="ART SPACE BYRON Inaugural Exhibition">
+      </div>
+      <div class="featured-article-body">
+        <span class="article-category">Exhibition · Current</span>
+        <span class="article-date">02.03.2026 — 05.06.2026</span>
+        <h2 class="featured-article-title">ART SPACE BYRON Inaugural Exhibition</h2>
+        <p class="featured-article-excerpt">
+          The first exhibition at ART SPACE BYRON brings together Korean artist Geum Sahong with local Inverell artists Debbie Doye and Stephen Jones — ceramics, painting, and acrylic on canvas under one roof.
+        </p>
+        <p class="featured-article-excerpt" style="color:#888;font-size:0.88rem;">
+          ART SPACE BYRON의 첫 번째 전시가 열렸습니다. 한국 작가 금사홍과 인버렐 지역 작가 데비 도이, 스티븐 존스가 함께 참여하여, 세라믹, 회화, 아크릴 페인팅 등 다양한 매체의 작품을 한 공간에서 만나볼 수 있습니다.
+        </p>
+        <span class="article-details" style="font-size: 0.8rem; line-height: 1.8; color: #666;">
+          Featured Artists: Geum Sahong · Debbie Doye · Stephen Jones<br>
+          Opening Reception: Saturday, 28 March 2026<br>
+          Venue: ART SPACE BYRON, 44 Byron St, Inverell NSW 2360
+        </span>
+        <a href="{{ '/gallery/exhibitions/colors-of-the-morning-clam/' | relative_url }}" class="article-read-more" style="margin-top:20px;display:inline-block;">View Exhibition →</a>
+      </div>
+    </article>
+
+    <article class="featured-article reverse">
+      <div class="featured-article-image">
+        <img src="{{ '/assets/images/Inaugural Exhibition Poster.jpg' | relative_url }}" alt="Opening Reception Poster">
       </div>
       <div class="featured-article-body">
         <span class="article-category">Event</span>
-        <span class="article-date">Saturday, March 28, 2026</span>
-        <h2 class="featured-article-title">Opening Reception: ART SPACE BYRON Inaugural Exhibition</h2>
+        <span class="article-date">Saturday, 28 March 2026</span>
+        <h2 class="featured-article-title">Opening Reception</h2>
         <p class="featured-article-excerpt">
-          Join us on Saturday, March 28 for the opening reception of ART SPACE BYRON's inaugural exhibition, featuring works by Geum Sahong, Debbie Doye, and Stephen Jones. The exhibition brings together East Asian and local artistic perspectives in Inverell's newest contemporary art space. Light refreshments will be served. All are welcome.
+          Join us for the opening reception of ART SPACE BYRON. Meet the artists, view the exhibition, and celebrate the launch of Inverell's newest contemporary art space. Light refreshments served. All welcome.
+        </p>
+        <p class="featured-article-excerpt" style="color:#888;font-size:0.88rem;">
+          개관 기념 오프닝 리셉션에 여러분을 초대합니다. 참여 작가 금사홍, 데비 도이, 스티븐 존스와 함께하는 자리입니다. 간단한 다과가 준비됩니다. 누구나 환영합니다.
         </p>
         <span class="article-details" style="font-size: 0.8rem; line-height: 1.8; color: #666;">
-          Exhibition: 2 March – 5 June 2026<br>
-          Opening Reception: Saturday, 28 March 2026<br>
-          Venue: ART SPACE BYRON, 44 Byron St, Inverell NSW 2360
+          Date: Saturday, 28 March 2026<br>
+          Venue: ART SPACE BYRON, 44 Byron St, Inverell NSW 2360<br>
+          Free Entry
         </span>
       </div>
     </article>
 
   </div>
 
+  <!-- Upcoming Exhibitions -->
+  <div class="news-grid-section" id="section-events">
+    <p class="news-grid-heading">Upcoming Exhibitions</p>
+    <div class="news-grid">
+
+      <div class="news-card">
+        <div class="news-card-image">
+          <img src="{{ '/assets/images/work/MinHeaJungSoo/work_01.jpg' | relative_url }}" alt="Min Hea Jung Soo">
+        </div>
+        <div class="news-card-meta">
+          <span class="news-card-category">Exhibition</span>
+          <span class="news-card-date">05.06 — 07.08.2026</span>
+        </div>
+        <h3 class="news-card-title">Min Hea Jung Soo Solo Exhibition</h3>
+        <p class="news-card-excerpt">A solo exhibition transforming hazy memories into vivid imagery through details of birds, flowers, bees, and leaves.</p>
+        <p class="news-card-excerpt" style="color:#aaa;font-size:0.78rem;">민해정수 작가 개인전</p>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-image">
+          <img src="{{ '/assets/images/work/이상권 작가/1_sumun.jpg' | relative_url }}" alt="Lee Sang-kwon">
+        </div>
+        <div class="news-card-meta">
+          <span class="news-card-category">Exhibition</span>
+          <span class="news-card-date">11.08 — 09.10.2026</span>
+        </div>
+        <h3 class="news-card-title">Lee Sang-kwon Solo Exhibition</h3>
+        <p class="news-card-excerpt">Landscape paintings that examine the weight and depth of time through nature, reconstructed with complex colour layers.</p>
+        <p class="news-card-excerpt" style="color:#aaa;font-size:0.78rem;">이상권 작가 개인전</p>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-image">
+          <img src="{{ '/assets/images/work/조창환 작가/KakaoTalk_20260324_151400092_01.jpg' | relative_url }}" alt="Cho Chang-hwan">
+        </div>
+        <div class="news-card-meta">
+          <span class="news-card-category">Exhibition</span>
+          <span class="news-card-date">13.10 — 18.12.2026</span>
+        </div>
+        <h3 class="news-card-title">Cho Chang-hwan Solo Exhibition</h3>
+        <p class="news-card-excerpt">The SOOM (Breath) series — visually manifesting the essential element of life through layered strokes on canvas.</p>
+        <p class="news-card-excerpt" style="color:#aaa;font-size:0.78rem;">조창환 작가 개인전</p>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Artist News -->
-  <div class="artist-news-section">
+  <div class="artist-news-section" id="section-artists">
     <p class="artist-news-heading">Artist News</p>
 
     <a href="https://www.inverelltimes.com.au/story/6401553/vicki-mcgregor-named-inverell-art-prize-grand-champion-for-eve-sculpture/" target="_blank" rel="noopener noreferrer" class="artist-news-item">
@@ -593,7 +679,6 @@ section: gallery
 </div>
 
 <script>
-  // Filter tab interaction
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));

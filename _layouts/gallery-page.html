@@ -90,10 +90,13 @@
             width: 100% !important;
             z-index: 1000 !important;
             background: #000000 !important;
-            /* Solid black for sub-pages */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
             top: 0 !important;
-            transition: background 0.4s ease, padding 0.4s ease !important;
+            transition: background 0.4s ease, padding 0.4s ease, transform 0.4s ease !important;
+        }
+
+        .gallery-page .site-header.header-hidden {
+            transform: translateY(-100%) !important;
         }
 
         /* Transparent Override for Hero Pages (Index) */
@@ -114,7 +117,7 @@
 
         /* Content Padding: Offsets the fixed header for non-hero pages */
         .gallery-page:not(.header-transparent) #main-content {
-            padding-top: 45px !important;
+            padding-top: 70px !important;
         }
 
         .gallery-page.header-transparent #main-content {
@@ -1017,6 +1020,48 @@
             });
         });
 
+        // Header auto-hide on scroll down, show on scroll up or idle
+        (function() {
+            var header = document.querySelector('.site-header');
+            if (!header) return;
+            var lastScroll = 0;
+            var idleTimer = null;
+
+            function showHeader() {
+                header.classList.remove('header-hidden');
+            }
+
+            function hideHeader() {
+                header.classList.add('header-hidden');
+            }
+
+            function resetIdleTimer() {
+                clearTimeout(idleTimer);
+                idleTimer = setTimeout(showHeader, 3000);
+            }
+
+            window.addEventListener('scroll', function() {
+                var currentScroll = window.pageYOffset;
+                if (currentScroll <= 50) {
+                    showHeader();
+                    clearTimeout(idleTimer);
+                    lastScroll = currentScroll;
+                    return;
+                }
+
+                if (currentScroll > lastScroll) {
+                    // scrolling down
+                    hideHeader();
+                    resetIdleTimer();
+                } else {
+                    // scrolling up
+                    showHeader();
+                    clearTimeout(idleTimer);
+                }
+                lastScroll = currentScroll;
+            }, { passive: true });
+        })();
+
         // Mobile Menu Toggle
         document.addEventListener('DOMContentLoaded', function () {
             const menuToggle = document.querySelector('.menu-toggle');
@@ -1457,7 +1502,7 @@
                 admission: ['admission', 'fee', 'ticket', 'price', 'cost', 'free', 'entry', '입장', '무료', '요금', '돈', '비용', '입장료', '티켓'],
                 artists: ['artist', 'painter', 'sculptor', 'who', '작가', '아티스트', '누구', '화가', '예술가'],
                 cafe: ['cafe', 'coffee', 'food', 'drink', 'eat', 'menu', 'lunch', 'breakfast', 'snack', '카페', '커피', '음식', '먹', '마시', '메뉴', '식사', '차', '점심', '간식'],
-                purchase: ['buy', 'purchase', 'artwork for sale', 'sell', 'inquir', 'how much', '구매', '구입', '사고싶', '살수', '판매', '얼마'],
+                purchase: ['buy', 'purchase', 'artwork for sale', 'sell', 'inquir', 'how much', 'price', 'cost', 'afford', 'collect', 'acquire', 'want to buy', 'interested in buying', '구매', '구입', '사고싶', '사고 싶', '살수', '살 수', '판매', '얼마', '가격', '작품 사', '살려', '사려', '사줘', '사요', '살까', '구매하고', '구입하고', '어떻게 사'],
                 shipping: ['ship', 'deliver', 'send', 'freight', 'pack', 'post', '배송', '택배', '운송', '보내'],
                 commission: ['commission', 'custom', 'order', 'request', 'bespoke', '커미션', '주문제작', '맞춤', '의뢰'],
                 gift: ['gift', 'present', 'souvenir', 'certificate', '선물', '기념품', '기프트', '증정'],

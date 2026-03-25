@@ -46,13 +46,119 @@ title: "About"
   }
 
   /* ── Statement Section ── */
+  .about-section-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #000;
+    padding: 0 0 24px;
+    margin-bottom: 0;
+  }
+
+  .about-two-col {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+    padding: 40px 0 60px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .about-col-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-col-left .about-info-block {
+    padding: 0;
+    border-right: none;
+    margin-bottom: 28px;
+  }
+
+  /* Space Slideshow */
+  .about-space-slideshow {
+    position: relative;
+    width: 100%;
+    height: 65vh;
+    overflow: hidden;
+    background: #f7f7f7;
+    margin: 40px 0 60px;
+  }
+
+  .about-space-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .about-space-slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-space-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .about-space-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(0,0,0,0.15);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 2;
+  }
+
+  .about-space-btn:hover { background: rgba(0,0,0,0.6); }
+  .about-space-prev { left: 16px; }
+  .about-space-next { right: 16px; }
+
+  .about-space-counter {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(4px);
+    padding: 4px 10px;
+    z-index: 2;
+  }
+
   .about-statement {
-    padding: 100px 0 80px;
+    padding: 48px 0 80px;
     border-bottom: 1px solid #e0e0e0;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 280px 1fr;
     gap: 80px;
     align-items: start;
+  }
+
+  .about-statement-sidebar {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-statement-sidebar .about-info-block {
+    padding: 0;
+    border-right: none;
+    margin-bottom: 28px;
   }
 
   .about-label {
@@ -104,7 +210,27 @@ title: "About"
     font-family: 'Noto Sans KR', sans-serif;
   }
 
-  /* ── Two-col Info ── */
+  /* ── Info + Mission Layout ── */
+  .about-info-mission {
+    padding: 80px 0;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .about-info-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .about-mission-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* legacy compat */
   .about-info {
     padding: 80px 0;
     display: grid;
@@ -147,31 +273,36 @@ title: "About"
   .about-info-block a {
     color: #000;
     text-decoration: none;
-    border-bottom: 1px solid #ccc;
-    transition: border-color 0.2s;
+    border-bottom: none;
+    transition: opacity 0.2s;
   }
 
   .about-info-block a:hover {
-    border-color: #000;
+    opacity: 0.5;
   }
 
   .hours-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: #333;
     padding: 6px 0;
-    border-bottom: 1px solid #f0f0f0;
   }
 
-  .hours-row:last-child {
-    border-bottom: none;
+  .hours-day {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #000;
   }
 
-  .hours-day { color: #666; }
-  .hours-time { font-weight: 500; }
-  .hours-closed { color: #bbb; }
+  .hours-time {
+    display: block;
+    font-size: 0.8rem;
+    color: #888;
+  }
+
+  .hours-closed {
+    display: block;
+    font-size: 0.8rem;
+    color: #bbb;
+  }
 
   /* ── Image Strip ── */
   .about-image-strip {
@@ -296,6 +427,7 @@ title: "About"
     .about-wrap { padding: 0 40px; }
     .about-statement,
     .about-mission { grid-template-columns: 1fr; gap: 40px; }
+    .about-two-col { grid-template-columns: 1fr; gap: 40px; }
     .about-info { grid-template-columns: 1fr 1fr; }
     .about-info-block:last-child { grid-column: span 2; border-right: none; margin: 0; padding: 40px 0 0; border-top: 1px solid #e0e0e0; }
     .about-hero-overlay { padding: 40px; }
@@ -303,6 +435,7 @@ title: "About"
 
   @media (max-width: 640px) {
     .about-wrap { padding: 0 24px; }
+    .about-two-col { grid-template-columns: 1fr; gap: 24px; }
     .about-info { grid-template-columns: 1fr; }
     .about-info-block { border-right: none; margin: 0; padding: 0 0 40px; border-bottom: 1px solid #e0e0e0; }
     .about-info-block:last-child { grid-column: span 1; }
@@ -369,126 +502,103 @@ title: "About"
 
   <div class="about-wrap">
 
-    <!-- Statement -->
-    <div class="about-statement">
-      <div class="about-label">About the Gallery</div>
-      <div class="about-statement-text">
-        <h2>A sanctuary for contemporary art and community in Inverell, New South Wales.</h2>
-        <p>
-          Art Space Byron is an independent contemporary art gallery located at 44 Byron Street, Inverell. Founded with the belief that exceptional art should be accessible beyond the boundaries of major cities, the gallery presents a programme of exhibitions, events, and artist residencies that engage both local communities and international audiences.
-        </p>
-        <p>
-          The gallery occupies a thoughtfully restored heritage building in the heart of Inverell, offering 250 square metres of flexible exhibition space across multiple rooms. Each space has been designed to create an intimate, unhurried environment in which visitors may encounter art with focus and openness.
-        </p>
-        <p>
-          Art Space Byron works with a diverse range of Australian and international artists, with a particular commitment to supporting emerging practitioners and fostering long-term relationships between artists and audiences.
-        </p>
-
-        <!-- Korean -->
-        <div class="about-kr">
-          <h2>뉴사우스웨일스 인버렐에 위치한 동시대 예술과 지역 커뮤니티를 위한 공간.</h2>
-          <p>
-            아트 스페이스 바이런은 인버렐 바이런 스트리트 44번지에 자리한 독립 현대미술 갤러리입니다. 뛰어난 예술이 대도시의 경계를 넘어 더 많은 사람들에게 닿을 수 있어야 한다는 신념을 바탕으로 설립된 이 갤러리는 전시, 행사, 아티스트 레지던시 프로그램을 통해 지역 커뮤니티와 국제 관람객 모두와 교류하고 있습니다.
-          </p>
-          <p>
-            갤러리는 인버렐 도심에 위치한 유서 깊은 건물을 세심하게 복원하여 사용하고 있으며, 여러 공간에 걸쳐 총 250제곱미터의 유연한 전시 공간을 제공합니다. 각 공간은 관람객이 집중적이고 열린 마음으로 예술을 만날 수 있도록 친밀하고 여유로운 환경으로 설계되었습니다.
-          </p>
-          <p>
-            아트 스페이스 바이런은 국내외 다양한 작가들과 협력하며, 특히 신진 작가를 지원하고 작가와 관람객 사이의 지속적인 관계를 육성하는 데 깊이 헌신합니다.
+    <!-- About the Gallery -->
+    <div class="about-two-col">
+      <div class="about-col-left">
+        <div class="about-info-block">
+          <p class="about-info-heading">Location</p>
+          <address>Art Space Byron<br>44 Byron Street<br>Inverell NSW 2360<br>Australia</address>
+        </div>
+        <div class="about-info-block">
+          <p class="about-info-heading">Opening Hours</p>
+          <div class="hours-row"><span class="hours-day">Tuesday – Friday</span><span class="hours-time">8:00 AM – 5:00 PM</span></div>
+          <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">8:00 AM – 3:00 PM</span></div>
+          <div class="hours-row"><span class="hours-day">Sunday – Monday</span><span class="hours-closed">Closed</span></div>
+          <p style="margin-top: 16px; font-size: 0.8rem; color: #888;">Admission is free.</p>
+        </div>
+        <div class="about-info-block">
+          <p class="about-info-heading">Contact</p>
+          <p><a href="#" class="copy-link" onclick="event.preventDefault();copyText('admin@artspacebyron.com.au',this);">admin@artspacebyron.com.au</a></p>
+          <p><a href="#" class="copy-link" onclick="event.preventDefault();copyText('0455616983',this);">0455 616 983</a></p>
+          <p style="margin-top: 16px;">
+            <a href="https://www.instagram.com/44byron_thegallerycafe/" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram</a><br>
+            <a href="https://www.facebook.com/profile.php?id=61581779518291" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a>
           </p>
         </div>
       </div>
-    </div>
-
-    <!-- Info Blocks -->
-    <div class="about-info">
-      <div class="about-info-block">
-        <p class="about-info-heading">Location</p>
-        <address>
-          Art Space Byron<br>
-          44 Byron Street<br>
-          Inverell NSW 2360<br>
-          Australia
-        </address>
-      </div>
-
-      <div class="about-info-block">
-        <p class="about-info-heading">Opening Hours</p>
-        <div class="hours-row">
-          <span class="hours-day">Tuesday – Friday</span>
-          <span class="hours-time">8:00 AM – 5:00 PM</span>
+      <div class="about-col-right">
+        <div class="about-statement-text">
+          <h2>Where art meets place, and place shapes art.</h2>
+          <p>Art Space Byron is an independent contemporary art gallery located at 44 Byron Street, Inverell, NSW. Established in 2026, the gallery was founded on a simple belief: that meaningful encounters with art can happen anywhere — and that the most powerful experiences often emerge in unexpected settings.</p>
+          <p>Our programme brings together Australian and East Asian artists, fostering cross-cultural dialogue through painting, ceramics, and mixed media. We believe that when different traditions share the same space, something new and vital emerges — for artists and audiences alike.</p>
+          <p>Art Space Byron is more than an exhibition venue. It is a gathering place — a space to slow down, to look closely, and to discover something unexpected. We are committed to keeping our doors open to everyone, with free admission and an environment designed for genuine encounter with art.</p>
+          <div class="about-kr">
+            <h2 style="color:#888;">예술이 장소를 만나고, 장소가 예술을 빚는 곳.</h2>
+            <p style="color:#888;">아트 스페이스 바이런은 NSW 인버렐 바이런 스트리트 44번지에 위치한 독립 현대미술 갤러리입니다. 2026년에 설립된 이 갤러리는, 의미 있는 예술 경험은 어디에서든 일어날 수 있으며 가장 강렬한 경험은 종종 예상치 못한 곳에서 탄생한다는 믿음에서 출발했습니다.</p>
+            <p style="color:#888;">호주와 동아시아의 작가들을 한 공간에 모아 회화, 도자, 혼합 매체를 통해 문화 간 대화를 이끌어냅니다.</p>
+            <p style="color:#888;">아트 스페이스 바이런은 단순한 전시 공간이 아닙니다. 천천히 걸음을 멈추고 가까이 들여다보며 예상치 못한 발견을 하는 곳입니다.</p>
+          </div>
         </div>
-        <div class="hours-row">
-          <span class="hours-day">Saturday</span>
-          <span class="hours-time">8:00 AM – 3:00 PM</span>
-        </div>
-        <div class="hours-row">
-          <span class="hours-day">Sunday – Monday</span>
-          <span class="hours-closed">Closed</span>
-        </div>
-        <p style="margin-top: 20px; font-size: 0.8rem; color: #888;">Admission is free. All are welcome.</p>
-      </div>
-
-      <div class="about-info-block">
-        <p class="about-info-heading">Contact</p>
-        <p>
-          <a href="mailto:admin@artspacebyron.com.au">admin@artspacebyron.com.au</a>
-        </p>
-        <p>
-          <a href="tel:0455616983">0455 616 983</a>
-        </p>
-        <p style="margin-top: 24px;">
-          <a href="https://www.instagram.com/44byron_thegallerycafe/" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>Instagram</a><br>
-          <a href="https://www.facebook.com/profile.php?id=61581779518291" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px;"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a>
-        </p>
-      </div>
-    </div>
-
-    <!-- Image Strip -->
-    <div class="about-image-strip">
-      <p class="about-image-strip-label">The Space</p>
-      <div class="image-strip-grid">
-        <img src="{{ '/assets/images/Gallery Background photo/space (1).jpg' | relative_url }}" alt="Main Hall">
-        <img src="{{ '/assets/images/Gallery Background photo/space (8).jpg' | relative_url }}" alt="Gallery Room">
-        <img src="{{ '/assets/images/Gallery Background photo/space (14).jpg' | relative_url }}" alt="Detail">
       </div>
     </div>
 
     <!-- Mission -->
-    <div class="about-mission">
-      <div class="about-label">Mission</div>
-      <div class="about-mission-text">
-        <h3>Committed to art that challenges, connects, and endures.</h3>
-        <p>
-          Our programming spans painting, sculpture, photography, and new media, with an emphasis on works that reflect the complexity of contemporary life. We are committed to fostering dialogue between artists, collectors, and the wider public — creating a space where art is not merely viewed, but genuinely felt.
-        </p>
-        <p>
-          The gallery is wheelchair accessible and entry is free of charge. We believe that openness — to people, to ideas, and to new forms of expression — is foundational to what a gallery can be.
-        </p>
-
-        <div class="kr-block">
-          <h3>도전하고, 연결하며, 지속되는 예술을 향한 헌신.</h3>
-          <p>
-            갤러리의 프로그램은 회화, 조각, 사진, 뉴미디어를 아우르며, 동시대적 삶의 복잡성을 반영하는 작품들에 주목합니다. 우리는 작가, 컬렉터, 그리고 더 넓은 대중 사이의 대화를 이끌어내고자 합니다. 예술을 단순히 바라보는 것이 아니라 진정으로 느낄 수 있는 공간을 만드는 것이 우리의 목표입니다.
-          </p>
-          <p>
-            갤러리는 휠체어 이용이 가능하며 입장은 무료입니다. 사람에 대한, 아이디어에 대한, 그리고 새로운 표현 형식에 대한 개방성이 갤러리가 존재할 수 있는 근본임을 믿습니다.
-          </p>
+    <div class="about-two-col">
+      <div class="about-col-left"></div>
+      <div class="about-col-right">
+        <div class="about-mission-text">
+          <h3>Curating Space, Crafting Experience.</h3>
+          <p>Our programme is built around long-term relationships with artists — not one-off shows, but sustained partnerships that allow ideas to develop and audiences to grow alongside them. We are dedicated to introducing East Asian art — from Korea, Japan, and beyond — to Australian audiences, creating meaningful encounters between traditions that rarely share the same stage.</p>
+          <p>Every exhibition is an invitation to see the world differently. We prioritise depth over spectacle, dialogue over display, and genuine connection over passing attention. By bringing together contemporary voices from Australia and East Asia, we aim to build a lasting cultural bridge — one exhibition at a time.</p>
+          <div class="kr-block">
+            <h3 style="color:#888;">공간을 큐레이팅하고, 경험을 만들다.</h3>
+            <p style="color:#888;">일회성 전시가 아닌 작가와의 지속적인 파트너십을 통해 아이디어가 발전하고 관람객이 함께 성장하는 프로그램을 지향합니다. 한국, 일본 등 동아시아 미술을 호주 관람객에게 소개하고, 좀처럼 같은 무대에 서지 못하는 전통들 사이에 의미 있는 만남을 만들어가는 데 헌신합니다.</p>
+            <p style="color:#888;">모든 전시는 세상을 다르게 바라보는 초대장입니다. 화려함보다 깊이를, 진열보다 대화를, 스쳐 지나가는 관심보다 진정한 연결을 추구합니다. 호주와 동아시아의 동시대 목소리를 한데 모아, 전시 하나하나를 통해 지속적인 문화의 다리를 놓아가겠습니다.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Contact CTA -->
-    <div class="about-contact-cta">
-      <h3>
-        Get in Touch
-        <span>문의하기</span>
-      </h3>
-      <div class="cta-links">
-        <a href="mailto:admin@artspacebyron.com.au" class="cta-link">Send an Email</a>
-        <a href="tel:0455616983" class="cta-link">0455 616 983</a>
-      </div>
-    </div>
+
 
   </div>
 </div>
+
+<script>
+function copyText(text, el) {
+  navigator.clipboard.writeText(text).then(function() {
+    var orig = el.textContent;
+    el.textContent = 'Copied!';
+    setTimeout(function() { el.textContent = orig; }, 1500);
+  });
+}
+
+(function() {
+  var ss = document.getElementById('spaceSlideshow');
+  if (!ss) return;
+  var track = document.getElementById('spaceTrack');
+  var slides = track.querySelectorAll('.about-space-slide');
+  var total = slides.length;
+  if (total <= 1) return;
+  var current = 0, animating = false, autoInterval = null;
+  var counter = document.getElementById('spaceNum');
+
+  function goTo(i) {
+    if (animating || i === current) return;
+    if (i < 0) i = total - 1;
+    if (i >= total) i = 0;
+    animating = true;
+    current = i;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    counter.textContent = current + 1;
+  }
+  track.addEventListener('transitionend', function() { animating = false; });
+  document.getElementById('spaceNext').addEventListener('click', function() { goTo(current + 1); resetAuto(); });
+  document.getElementById('spacePrev').addEventListener('click', function() { goTo(current - 1); resetAuto(); });
+  function startAuto() { autoInterval = setInterval(function() { goTo(current + 1); }, 5000); }
+  function resetAuto() { clearInterval(autoInterval); startAuto(); }
+  startAuto();
+  ss.addEventListener('mouseenter', function() { clearInterval(autoInterval); });
+  ss.addEventListener('mouseleave', function() { startAuto(); });
+})();
+</script>

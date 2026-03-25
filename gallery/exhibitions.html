@@ -78,8 +78,8 @@ section: gallery
 
   .exhibitions-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 48px 36px;
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
 
   /* ── Exhibition Card ── */
@@ -95,14 +95,19 @@ section: gallery
   .exhibition-card-img {
     width: 510px;
     min-width: 510px;
+    height: 380px;
     overflow: hidden;
-    background: #fff;
+    background: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .exhibition-card-img img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     display: block;
-    transition: transform 0.5s ease;
   }
 
   .exhibition-card:hover .exhibition-card-img img {
@@ -156,7 +161,7 @@ section: gallery
   .exhibition-featured .exhibition-card-img {
     width: 630px;
     min-width: 630px;
-    aspect-ratio: 4 / 3;
+    height: 380px;
   }
 
   .exhibition-featured .exhibition-card-title {
@@ -230,7 +235,7 @@ section: gallery
           <div class="exhibition-card-info">
             <p class="exhibition-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
             <p class="exhibition-card-title">{{ exhibition.title }}</p>
-            <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B %d, %Y" }}</p>
+            <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%d.%m.%Y" }} — {{ exhibition.end_date | date: "%d.%m.%Y" }}</p>
           </div>
         </a>
       </div>
@@ -248,7 +253,7 @@ section: gallery
           <div class="exhibition-card-info">
             <p class="exhibition-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
             <p class="exhibition-card-title">{{ exhibition.title }}</p>
-            <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B %d, %Y" }}</p>
+            <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%d.%m.%Y" }} — {{ exhibition.end_date | date: "%d.%m.%Y" }}</p>
           </div>
         </a>
         {% endfor %}
@@ -260,25 +265,25 @@ section: gallery
   </div>
 
   <!-- Upcoming Exhibitions -->
-  {% assign upcoming_exhibitions = site.exhibitions | where: "status", "upcoming" %}
+  {% assign upcoming_exhibitions = site.exhibitions | where: "status", "upcoming" | sort: "start_date" %}
   <div class="exhibitions-content exhibitions-tab-content" id="tab-upcoming" style="display:none;">
     {% if upcoming_exhibitions.size > 0 %}
-    <div class="exhibitions-grid">
-      {% for exhibition in upcoming_exhibitions %}
-      <div class="exhibition-card">
+    {% for exhibition in upcoming_exhibitions %}
+    <div class="exhibition-featured">
+      <a href="{{ exhibition.url | relative_url }}" class="exhibition-card">
         <div class="exhibition-card-img">
           {% if exhibition.featured_image %}
           <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
-          {% else %}
-          <div style="width:100%;height:100%;background:#f0f0f0;"></div>
           {% endif %}
         </div>
-        <p class="exhibition-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
-        <p class="exhibition-card-title">{{ exhibition.title }}</p>
-        <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B %d, %Y" }}</p>
-      </div>
-      {% endfor %}
+        <div class="exhibition-card-info">
+          <p class="exhibition-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
+          <p class="exhibition-card-title">{{ exhibition.title }}</p>
+          <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%d.%m.%Y" }} — {{ exhibition.end_date | date: "%d.%m.%Y" }}</p>
+        </div>
+      </a>
     </div>
+    {% endfor %}
     {% else %}
       <p class="exhibitions-empty">No upcoming exhibitions at this time.</p>
     {% endif %}
@@ -298,7 +303,7 @@ section: gallery
         </div>
         <p class="exhibition-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
         <p class="exhibition-card-title">{{ exhibition.title }}</p>
-        <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B %d, %Y" }}</p>
+        <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%d.%m.%Y" }} — {{ exhibition.end_date | date: "%d.%m.%Y" }}</p>
       </a>
       {% endfor %}
     </div>

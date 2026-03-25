@@ -1,0 +1,26 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hexagon (outer) -->
+  <polygon
+    points="256,48 443,144 443,336 256,432 69,336 69,144"
+    fill="none"
+    stroke="#000000"
+    stroke-width="16"
+  />
+  <!-- Rectangle (middle, rotated 15deg) -->
+  <rect
+    x="136" y="136" width="240" height="240"
+    fill="none"
+    stroke="#000000"
+    stroke-width="10"
+    transform="rotate(15, 256, 256)"
+  />
+  <!-- Triangle (inner) -->
+  <polygon
+    points="256,108 418,380 94,380"
+    fill="none"
+    stroke="#000000"
+    stroke-width="8"
+  />
+  <!-- Center dot -->
+  <circle cx="256" cy="256" r="6" fill="#000000"/>
+</svg>
