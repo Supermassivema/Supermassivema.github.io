@@ -13,11 +13,12 @@ layout: gallery-page
   /* ── Hero Slideshow ── */
   .exh-slideshow {
     position: relative;
-    width: 100%;
-    height: 65vh;
+    width: 100vw;
+    height: calc(100vh - 80px);
     overflow: hidden;
     background: #f5f5f5;
     margin-bottom: 36px;
+    margin-left: calc(-50vw + 50%);
   }
 
   .exh-slideshow-track {
@@ -36,8 +37,8 @@ layout: gallery-page
   }
 
   .exh-slide img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 85%;
+    max-height: 85%;
     object-fit: contain;
     display: block;
   }
@@ -507,7 +508,11 @@ layout: gallery-page
 
   @media (max-width: 768px) {
     .exh-detail {
-      padding: 0 24px 60px;
+      padding: 60px 24px 60px;
+    }
+
+    .exh-slideshow {
+      margin-top: -60px;
     }
 
     .exh-artwork-grid {
@@ -538,34 +543,29 @@ layout: gallery-page
 
   <!-- ── Hero Slideshow ── -->
   {% comment %}
-    First slide = featured_image, then round-robin artworks across artists
-    (skipping the featured_image to avoid duplicate). Up to 12 total.
+    First slide = featured_image, then all artworks in round-robin order across artists.
   {% endcomment %}
   {% assign slide_artworks = "" | split: "" %}
-  {% assign slide_images = "" | split: "" %}
-
-  {% if page.featured_image %}
-    {% assign slide_images = slide_images | push: page.featured_image %}
-  {% endif %}
 
   {% if page.artists %}
-    {% assign num_artists = page.artists | size %}
-    {% assign per_artist = 12 | divided_by: num_artists %}
+    {% assign max_works = 0 %}
+    {% for artist_name in page.artists %}
+      {% assign aw = site.artworks | where: "artist", artist_name %}
+      {% if aw.size > max_works %}{% assign max_works = aw.size %}{% endif %}
+    {% endfor %}
 
-    {% for round in (0..per_artist) %}
+    {% for round in (0..max_works) %}
       {% for artist_name in page.artists %}
-        {% if slide_artworks.size < 11 %}
-          {% assign artist_works = site.artworks | where: "artist", artist_name %}
-          {% assign idx = 0 %}
-          {% for work in artist_works %}
-            {% if idx == round and slide_artworks.size < 11 %}
-              {% unless work.image == page.featured_image %}
-                {% assign slide_artworks = slide_artworks | push: work %}
-              {% endunless %}
-            {% endif %}
-            {% assign idx = idx | plus: 1 %}
-          {% endfor %}
-        {% endif %}
+        {% assign artist_works = site.artworks | where: "artist", artist_name %}
+        {% assign idx = 0 %}
+        {% for work in artist_works %}
+          {% if idx == round %}
+            {% unless work.image == page.featured_image %}
+              {% assign slide_artworks = slide_artworks | push: work %}
+            {% endunless %}
+          {% endif %}
+          {% assign idx = idx | plus: 1 %}
+        {% endfor %}
       {% endfor %}
     {% endfor %}
   {% endif %}
@@ -583,7 +583,7 @@ layout: gallery-page
         <img src="{{ page.featured_image | relative_url }}" alt="{{ page.title | escape }}" loading="eager">
         <div class="exh-slide-caption">
           <p class="caption-artist">Geum Sahong</p>
-          <p class="caption-title">일월오봉도</p>
+          <p class="caption-title">호작도 (No.0816)</p>
         </div>
       </div>
       {% endif %}

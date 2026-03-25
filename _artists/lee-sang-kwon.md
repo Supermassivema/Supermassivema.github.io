@@ -3,13 +3,19 @@ layout: artist
 name: "Lee Sang-kwon"
 name_kr: "이상권"
 slug: "lee-sang-kwon"
-medium: "Acrylic on Canvas"
-medium_kr: "캔버스에 아크릴"
+medium: ""
+medium_kr: ""
 nationality: "Korean"
-location: "Paju, South Korea"
-born: "1965"
-education: "Hongik University, Dept. of Painting (1991)"
+location: ""
+born: ""
+education: ""
 featured_image: "/assets/images/work/이상권 작가/프로필 사진.jpg"
+cv_pdf: "/assets/images/work/이상권 작가/이상원 작가 이력.pdf"
+exhibition_views_simple:
+  - path: "/assets/images/work/이상권 작가/전시전경/Exhibition(01).jpg"
+  - path: "/assets/images/work/이상권 작가/전시전경/exhibition(02).jpg"
+  - path: "/assets/images/work/이상권 작가/전시전경/exhibition(03).jpg"
+  - path: "/assets/images/work/이상권 작가/전시전경/exhibition(04).jpg"
 website: ""
 instagram: ""
 bio_short: "Lee Sang-kwon (b. 1965, Chuncheon) graduated from Hongik University in 1991. With 21 solo exhibitions since 1995, his work examines the weight and depth of time through nature, reconstructing familiar landscapes with complex colour layers and brushstrokes."
@@ -140,3 +146,19 @@ His interest lies in living things — people, nature, and the stories that flow
 - *달빛 산책 (Moonlight Walk)* — 91×72cm, acrylic on canvas, 2025
 - *숲속에서 (In the Forest)* — 117×117cm, acrylic on canvas, 2025
 - *흐르는 달 (Flowing Moon)* — 163×97cm, acrylic on canvas, 2024
+
+## Artist Statement / 작가 소개글 — 나의 작업은
+
+나는 늘 주변을 바라보며 작업을 이어왔다. 나의 관심은 살아 있는 것들, 곧 사람과 자연, 그리고 그 속에서 흘러가는 이야기들에 있다. 산과 들의 변치는 풍경의 빛, 빼빼한 건물들 사이로 내비치는 도시의 동네길, 쉬지 않고 걸어가는 사람들을 관찰하며, 나는 매번 그 속에서 드러나는 감정과 시간의 결을 포착해왔다.
+
+색채는 나의 작업에서 중요한 언어다. 강렬하고 다양한 색의 현실 너머의 감각을 불러일으키며, 관람자가 자기만의 기억과 감정을 투영할 수 있는 통로가 된다. 나는 매번 풍경 속에 머물며, 그 안에서 무엇이 보이고 무엇이 느껴지는지를 천천히 따라간다.
+
+나의 그리는 풍경은 단순한 배경이 아니라 삶이 무대다. 작은 인물들이고, 바쁘고, 바라보는 모습은 인간의 존재와 여정을 암시한다. 복잡한 도시의 사람들, 한적한 곳의 산책을 즐기는 가지에 의하여 서는 사람들, 뚜렷이 어딘가를 향한 길, 가을빛에 물든 골목, 비나무늘이 걷고 있는 숲의 나무 하나하나까지. 나는 이러한 순간들이 빚어내는 일상의 숭고함을 그려내고자 한다.
+
+결국 나의 작업은 사람과 자연, 그리고 그 이야기를 매개로 관심에서 출발한다. 나는 그러한 풍경을 통해 인간의 삶을 이야기하고, 그 삶의 흔적을 색과 형태로 재구성한다. 나무와 숲, 강과 길, 그 모든 공간은 인간의 삶이 스며든 장소이며, 나의 그림은 그 삶의 이야기를 담아내는 또 하나의 기록이다.
+
+## 작가노트
+
+나는 도시의 일상성을 가까이에서 탐색하는 작업에 집중해왔다. 일상의 획일성 속에서 미세하게 포착되는 '차이의 풍경'에 관심을 두었고, 그것이 정서적 공감과 위로의 형식이 되기를 기대했다. 무엇보다 표정, 몸짓, 실루엣으로 드러나는 '사람풍경'에 집중했고, 삶이 지속되는 공간인 집, 거리, 동네가 어우러진 정서적 풍경을 표현하고자 했다.
+
+최근에는 대상과의 거리두기와 주체의 시선이동을 다각도로 실험하고 있다. 우연히 눈에 들어온 풍경에 착안해, 익숙함과 낯섦, 보일 듯 말 듯 한 길의 모호함, 기억과 상상의 불완전함을 이미지화하였다. 겹겹이 쌓인 오래된 집들의 풍경은 언뜻 획일화된 도시의 비정함을 느끼게 하지만, 그 속에는 일상을 살아가는 사람들의 각기 다른 숨은 이야기가 담겨 있으리라 상상해본다. 사실적 방법에 변화를 주면서 도시와 자연, 인간과 비인간, 현재와 과거, 기억과 상상이 교차하는 모호함을 이미지화 하는 작업을 지속하고 있다.

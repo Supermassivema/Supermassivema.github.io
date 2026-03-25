@@ -11,7 +11,7 @@ layout: gallery-page
     </div>
     <div class="artist-hero-info">
       <h1 class="artist-hero-name">{{ page.name }}{% if page.name_kr and page.name_kr != "" %} <span class="artist-hero-name-kr">{{ page.name_kr }}</span>{% endif %}</h1>
-      <p class="artist-hero-meta">{% if page.born and page.born != "" %}{{ page.born }}{% else %}{{ page.nationality }}{% if page.location %}, {{ page.location }}{% endif %}{% endif %}</p>
+      <p class="artist-hero-meta">{% if page.born and page.born != "" %}{{ page.born }}{% else %}{{ page.nationality }}{% if page.location and page.location != "" %}, {{ page.location }}{% endif %}{% endif %}</p>
     </div>
   </section>
 
@@ -41,7 +41,7 @@ layout: gallery-page
           {% endif %}
         </div>
         {% endif %}
-        {% if page.location %}
+        {% if page.location and page.location != "" %}
         <div class="artist-bio-block">
           <span class="artist-bio-label">Based in</span>
           <span class="artist-bio-value">{{ page.location }}</span>
@@ -216,6 +216,18 @@ layout: gallery-page
           {% endif %}
         </div>
       </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if page.exhibition_views_simple %}
+    <div class="artist-works-grid artist-works-featured" style="margin-top:32px;">
+      {% for view in page.exhibition_views_simple %}
+      <div class="artist-work-card">
+        <div class="artist-work-img-wrap artist-work-img-large">
+          <img src="{{ view.path | relative_url }}" alt="Exhibition view" loading="lazy">
+        </div>
+      </div>
       {% endfor %}
     </div>
     {% endif %}
