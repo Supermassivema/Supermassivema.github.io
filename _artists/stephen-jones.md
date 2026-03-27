@@ -9,7 +9,7 @@ nationality: "Australian"
 location: ""
 born: ""
 education: ""
-featured_image: "/assets/images/work/Stephen Jones/1.jpg"
+featured_image: "/assets/images/work/Stephen Jones/프로필 사진.jpg"
 exhibition_views_simple:
   - path: "/assets/images/work/Stephen Jones/전경/Exhibition_01.jpg"
   - path: "/assets/images/work/Stephen Jones/전경/Exhibition_02.jpg"
