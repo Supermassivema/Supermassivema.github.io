@@ -595,4 +595,119 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
 
     startAutoplay();
   })();
+
+  // Easter Holiday Notice Popup
+  (function() {
+    var now = new Date();
+    var showFrom = new Date('2026-03-25');
+    var showUntil = new Date('2026-04-05');
+    var dismissed = sessionStorage.getItem('easter-notice-dismissed');
+
+    if (now >= showFrom && now <= showUntil && !dismissed) {
+      var overlay = document.createElement('div');
+      overlay.id = 'holidayNotice';
+      overlay.innerHTML = '<div class="holiday-popup">'
+        + '<button class="holiday-close" onclick="closeHolidayNotice()">&times;</button>'
+        + '<p class="holiday-label">HOLIDAY NOTICE</p>'
+        + '<h3 class="holiday-title">Easter Holiday Closure</h3>'
+        + '<p class="holiday-text">The gallery will be closed for the Easter holiday period.</p>'
+        + '<p class="holiday-dates">03 April — 04 April, 2026</p>'
+        + '<p class="holiday-text">We will reopen on <strong>Tuesday, 7 April</strong>. Wishing everyone a happy Easter!</p>'
+        + '<p class="holiday-text" style="color:#aaa;font-size:0.78rem;margin-top:12px;">이스터 연휴로 인해 4월 3일~4일 휴무합니다. 4월 7일(화) 정상 운영합니다.</p>'
+        + '<button class="holiday-btn" onclick="closeHolidayNotice()">OK, Got it</button>'
+        + '</div>';
+      document.body.appendChild(overlay);
+    }
+  })();
+
+  function closeHolidayNotice() {
+    var el = document.getElementById('holidayNotice');
+    if (el) el.remove();
+    sessionStorage.setItem('easter-notice-dismissed', '1');
+  }
 </script>
+
+<style>
+  #holidayNotice {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .holiday-popup {
+    background: #fff;
+    max-width: 420px;
+    width: 100%;
+    padding: 48px 40px;
+    position: relative;
+    text-align: center;
+  }
+
+  .holiday-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .holiday-close:hover { color: #000; }
+
+  .holiday-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #999;
+    margin: 0 0 16px;
+  }
+
+  .holiday-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 16px;
+  }
+
+  .holiday-dates {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 16px;
+    padding: 16px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+
+  .holiday-text {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0 0 8px;
+  }
+
+  .holiday-btn {
+    margin-top: 24px;
+    padding: 14px 40px;
+    background: #000;
+    color: #fff;
+    border: none;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .holiday-btn:hover { background: #333; }
+</style>
