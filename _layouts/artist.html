@@ -233,6 +233,40 @@ layout: gallery-page
     {% endif %}
   </div>
 
+  <!-- Studio Photos Section -->
+  {% if page.studio_photos %}
+  <div class="artist-section" id="section-studio">
+    <div class="artist-section-label" style="display:flex;justify-content:space-between;align-items:center;">
+      <span>Studio</span>
+      {% if page.studio_photos.size > 4 %}
+      <a href="#" class="artist-works-toggle" id="studioToggle" onclick="event.preventDefault();toggleStudio();">View All →</a>
+      {% endif %}
+    </div>
+    <!-- Featured 2x2 -->
+    <div class="artist-works-grid artist-works-featured" id="studioFeatured">
+      {% for photo in page.studio_photos limit:4 %}
+      <div class="artist-work-card">
+        <div class="artist-work-img-wrap artist-work-img-large">
+          <img src="{{ photo.path | relative_url }}" alt="Studio photo" loading="lazy">
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- All photos -->
+    {% if page.studio_photos.size > 4 %}
+    <div class="artist-works-grid" id="studioAll" style="display:none;">
+      {% for photo in page.studio_photos %}
+      <div class="artist-work-card">
+        <div class="artist-work-img-wrap">
+          <img src="{{ photo.path | relative_url }}" alt="Studio photo" loading="lazy">
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
   <!-- Lightbox -->
   <div class="artist-lightbox" id="artistLightbox" onclick="closeArtistLightbox(event)">
     <button class="artist-lightbox-close" aria-label="Close">&times;</button>
@@ -792,6 +826,21 @@ layout: gallery-page
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeArtistLightbox();
   });
+
+  function toggleStudio() {
+    var featured = document.getElementById('studioFeatured');
+    var all = document.getElementById('studioAll');
+    var btn = document.getElementById('studioToggle');
+    if (all.style.display === 'none') {
+      featured.style.display = 'none';
+      all.style.display = '';
+      btn.textContent = 'Featured ←';
+    } else {
+      all.style.display = 'none';
+      featured.style.display = '';
+      btn.textContent = 'View All →';
+    }
+  }
 
   function toggleExhViews(idx) {
     var card = document.getElementById('exhCard' + idx);
