@@ -1,13 +1,13 @@
 ---
 layout: artwork
-title: ""
+title: "Three Tiny Group Horses"
 artist: "Debbie Doye"
-medium: "Ceramics"
+medium: "Mixed Media, Ceramic"
 dimensions: ""
 year: ""
-image: /assets/images/work/DebbieDoye/Tiny Group Horse.jpg
+image: /assets/images/work/DebbieDoye/Three Tiny Group Horses-Mixed Media-Ceramic-65aud.jpg
 status: "available"
-price: "Contact for price"
+price: "65 AUD"
 description: ""
 featured: true
 ---

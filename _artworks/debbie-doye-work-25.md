@@ -1,13 +1,13 @@
 ---
 layout: artwork
-title: ""
+title: "Two Shadow Horses (Blue, Medium)"
 artist: "Debbie Doye"
-medium: "Ceramics"
+medium: "Mixed Media, Ceramic"
 dimensions: ""
 year: ""
-image: /assets/images/work/DebbieDoye/Medium Shadow Horse Blue.jpg
+image: /assets/images/work/DebbieDoye/Two Shadow Horses(Blue, Medium)-Mixed Media-Ceramic-250aud.jpg
 status: "available"
-price: "Contact for price"
+price: "250 AUD"
 description: ""
 featured: true
 ---

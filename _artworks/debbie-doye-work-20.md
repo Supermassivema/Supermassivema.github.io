@@ -1,13 +1,13 @@
 ---
 layout: artwork
-title: ""
+title: "Fig Plates (Small)"
 artist: "Debbie Doye"
-medium: "Ceramics"
+medium: "Mixed Media, Ceramic"
 dimensions: ""
 year: ""
-image: /assets/images/work/DebbieDoye/8.jpg
+image: /assets/images/work/DebbieDoye/Fig Plates (small)-Mixed Media-Cermic Each 25 aud.jpg
 status: "available"
-price: "Contact for price"
+price: "25 AUD each"
 description: ""
 featured: true
 ---

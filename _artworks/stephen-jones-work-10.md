@@ -1,13 +1,13 @@
 ---
 layout: artwork
-title: ""
+title: "Milan"
 artist: "Stephen Jones"
-medium: "Pencil, Charcoal, Acrylic"
-dimensions: ""
+medium: "Acrylic on Canvas"
+dimensions: "63 x 43 cm"
 year: ""
-image: /assets/images/work/Stephen Jones/2.jpg
+image: /assets/images/work/Stephen Jones/Milan-Acrylic on Canvas-63x43cm -1,100aud.jpg
 status: "available"
-price: "Contact for price"
+price: "1,100 AUD"
 description: ""
 featured: true
 ---

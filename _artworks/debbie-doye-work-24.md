@@ -1,8 +1,8 @@
 ---
 layout: artwork
-title: ""
+title: "Large Horse"
 artist: "Debbie Doye"
-medium: "Ceramics"
+medium: "Mixed Media, Ceramic"
 dimensions: ""
 year: ""
 image: /assets/images/work/DebbieDoye/Large Horse.jpg

@@ -8,9 +8,10 @@
 
   <!-- Back navigation -->
   <nav class="gallery-nav">
-    <a href="#" onclick="event.preventDefault(); history.back();" class="gallery-back">
+    {% assign artist = site.artists | where: "name", page.artist | first %}
+    <a href="{% if artist %}{{ artist.url | relative_url }}{% else %}{{ '/gallery/artists' | relative_url }}{% endif %}" class="gallery-back">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      <span>BACK</span>
+      <span>{{ page.artist | upcase }}</span>
     </a>
   </nav>
 
@@ -75,7 +76,10 @@
                 {% if page.status == 'available' %}
                 <span class="status-available">{{ page.price | default: 'Price upon request' }}</span>
                 {% else %}
-                <span class="status-sold">{{ t.collection.sold | default: 'Private Collection' }}</span>
+                <span class="status-sold"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#c44536;margin-right:6px;vertical-align:middle;"></span>Sold</span>
+                {% if page.price and page.price != "Contact for price" %}
+                <span style="display:block;font-size:0.78rem;color:#bbb;margin-top:4px;">{{ page.price }}</span>
+                {% endif %}
                 {% endif %}
               </span>
             </div>
@@ -107,15 +111,51 @@
         {% endif %}
 
         <div class="info-block" data-animate="6">
+          {% if page.status == 'sold' %}
+          <button type="button" class="inquiry-btn" disabled style="opacity:0.3;cursor:not-allowed;">
+            SOLD — NO LONGER AVAILABLE
+          </button>
+          {% else %}
           <button type="button" class="inquiry-btn" onclick="openInquiryModal()">
             {{ t.collection.inquiry_title | default: 'Inquire About This Work' | upcase }}
           </button>
+          {% endif %}
         </div>
 
       </div>
     </div>
 
   </div>
+
+  <!-- More by this artist -->
+  {% if page.artist %}
+  {% assign artist_works = site.artworks | where: "artist", page.artist %}
+  {% if artist_works.size > 1 %}
+  <div class="more-works-section">
+    <div class="more-works-header">
+      <span class="more-works-label">More by {{ page.artist }}</span>
+    </div>
+    <div class="more-works-slider" id="moreWorksSlider">
+      <button class="more-works-btn more-works-prev" id="moreWorksPrev">&#8592;</button>
+      <div class="more-works-track-wrap">
+        <div class="more-works-track" id="moreWorksTrack">
+          {% for work in artist_works %}
+          {% unless work.url == page.url %}
+          <a href="{{ work.url | relative_url }}" class="more-works-item">
+            <div class="more-works-thumb">
+              <img src="{{ work.image | relative_url }}" alt="{{ work.title }}" loading="lazy">
+            </div>
+            <p class="more-works-title">{{ work.title }}</p>
+          </a>
+          {% endunless %}
+          {% endfor %}
+        </div>
+      </div>
+      <button class="more-works-btn more-works-next" id="moreWorksNext">&#8594;</button>
+    </div>
+  </div>
+  {% endif %}
+  {% endif %}
 
   <!-- Inquiry Modal -->
   <div class="inquiry-modal-overlay" id="inquiryModal">
@@ -855,6 +895,124 @@
       padding: 0 20px;
     }
   }
+
+  /* ── More Works Slider ── */
+  .more-works-section {
+    background: var(--gw-white);
+    border-top: 1px solid #eee;
+    padding: 40px 0 48px;
+  }
+
+  .more-works-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 20px;
+  }
+
+  .more-works-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gw-mute);
+  }
+
+  .more-works-slider {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .more-works-track-wrap {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .more-works-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .more-works-item {
+    flex: 0 0 140px;
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .more-works-thumb {
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    background: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .more-works-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s;
+  }
+
+  .more-works-item:hover .more-works-thumb img {
+    transform: scale(1.05);
+  }
+
+  .more-works-title {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #000;
+    margin: 0;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .more-works-btn {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: #f0f0f0;
+    border: none;
+    color: #000;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    border-radius: 50%;
+  }
+
+  .more-works-btn:hover {
+    background: #ddd;
+  }
+
+  @media (max-width: 640px) {
+    .more-works-slider {
+      padding: 0 20px;
+    }
+
+    .more-works-item {
+      flex: 0 0 110px;
+    }
+
+    .more-works-thumb {
+      width: 110px;
+      height: 110px;
+    }
+  }
 </style>
 
 <script>
@@ -908,4 +1066,93 @@
     form.style.display = 'none';
     document.getElementById('inquirySuccess').style.display = 'block';
   }
+
+  // Artwork Zoom + Pan
+  (function() {
+    var wall = document.querySelector('.gallery-wall');
+    var mount = document.querySelector('.artwork-mount');
+    if (!wall || !mount) return;
+    var scale = 1, posX = 0, posY = 0;
+    var dragging = false, startX = 0, startY = 0, startPosX = 0, startPosY = 0;
+
+    function applyTransform(smooth) {
+      mount.style.transition = smooth ? 'transform 0.3s ease' : 'none';
+      mount.style.transform = 'translate(' + posX + 'px,' + posY + 'px) scale(' + scale + ')';
+      mount.style.cursor = scale > 1 ? (dragging ? 'grabbing' : 'grab') : 'zoom-in';
+    }
+
+    wall.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      var delta = e.deltaY > 0 ? -0.15 : 0.15;
+      var newScale = Math.min(4, Math.max(1, scale + delta));
+      if (newScale === 1) { posX = 0; posY = 0; }
+      scale = newScale;
+      applyTransform(true);
+    }, { passive: false });
+
+    mount.addEventListener('dblclick', function() {
+      if (scale > 1) { scale = 1; posX = 0; posY = 0; }
+      else { scale = 2.5; }
+      applyTransform(true);
+    });
+
+    mount.addEventListener('mousedown', function(e) {
+      if (scale <= 1) return;
+      e.preventDefault();
+      dragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      startPosX = posX;
+      startPosY = posY;
+      mount.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (!dragging) return;
+      posX = startPosX + (e.clientX - startX);
+      posY = startPosY + (e.clientY - startY);
+      applyTransform(false);
+    });
+
+    document.addEventListener('mouseup', function() {
+      if (!dragging) return;
+      dragging = false;
+      mount.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+    });
+
+    mount.style.cursor = 'zoom-in';
+  })();
+
+  // More Works Slider
+  (function() {
+    var track = document.getElementById('moreWorksTrack');
+    if (!track) return;
+    var items = track.querySelectorAll('.more-works-item');
+    if (items.length === 0) return;
+
+    var itemWidth = items[0].offsetWidth + 20; // width + gap
+    var visibleCount = Math.floor(track.parentElement.offsetWidth / itemWidth);
+    var maxShift = Math.max(0, items.length - visibleCount);
+    var pos = 0;
+
+    function update() {
+      track.style.transform = 'translateX(-' + (pos * itemWidth) + 'px)';
+    }
+
+    document.getElementById('moreWorksNext').addEventListener('click', function() {
+      if (pos < maxShift) { pos++; update(); }
+    });
+
+    document.getElementById('moreWorksPrev').addEventListener('click', function() {
+      if (pos > 0) { pos--; update(); }
+    });
+
+    window.addEventListener('resize', function() {
+      itemWidth = items[0].offsetWidth + 20;
+      visibleCount = Math.floor(track.parentElement.offsetWidth / itemWidth);
+      maxShift = Math.max(0, items.length - visibleCount);
+      if (pos > maxShift) pos = maxShift;
+      update();
+    });
+  })();
 </script>

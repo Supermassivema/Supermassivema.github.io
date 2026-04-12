@@ -1,8 +1,8 @@
 ---
 layout: artwork
-title: ""
+title: "Untitled"
 artist: "Debbie Doye"
-medium: "Ceramics"
+medium: "Mixed Media, Ceramic"
 dimensions: ""
 year: ""
 image: /assets/images/work/DebbieDoye/1.jpg

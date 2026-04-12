@@ -1,11 +1,11 @@
 ---
 layout: artwork
-title: ""
+title: "XOXO Vase"
 artist: "Debbie Doye"
-medium: "Ceramics"
+medium: "Mixed Media, Ceramic"
 dimensions: ""
 year: ""
-image: /assets/images/work/DebbieDoye/XOXO Vase.jpg
+image: /assets/images/work/DebbieDoye/XOXO Vase-Mixed Media-Ceramic.jpg
 status: "available"
 price: "Contact for price"
 description: ""

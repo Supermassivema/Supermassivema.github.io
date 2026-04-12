@@ -1,13 +1,13 @@
 ---
 layout: artwork
-title: ""
+title: "Banksia Vase Ⅱ"
 artist: "Debbie Doye"
-medium: "Ceramics"
+medium: "Mixed Media, Ceramic"
 dimensions: ""
 year: ""
-image: /assets/images/work/DebbieDoye/6.jpg
+image: /assets/images/work/DebbieDoye/Banksia VaseⅡ-Mixed Media-Ceramic-120aud.jpg
 status: "available"
-price: "Contact for price"
+price: "120 AUD"
 description: ""
 featured: true
 ---
