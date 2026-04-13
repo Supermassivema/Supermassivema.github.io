@@ -1,51 +1,276 @@
 ---
 layout: gallery-page
-title: Artworks
-subtitle: Browse our complete collection
+title: "Available Artworks"
 section: gallery
-show_header: true
 ---
 
-<section class="artworks-section">
+<style>
+  .artworks-page { background: #fff; min-height: 100vh; }
 
-  <div class="artworks-intro">
-    <p>
-      Explore our diverse collection of contemporary artworks spanning various mediums, styles,
-      and artistic approaches. Each piece represents a unique creative vision and artistic excellence.
-    </p>
+  .artworks-header { border-bottom: 1px solid #000; padding: 60px 0 32px; }
+  .artworks-header-inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+  .artworks-page-title { font-family: "Inter", "Helvetica Neue", Arial, sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.02em; color: #000; line-height: 1; margin: 0; text-transform: uppercase; }
+  .artworks-page-sub { font-size: 0.82rem; color: #888; margin: 12px 0 0; }
+
+  .artworks-filters { max-width: 1400px; margin: 0 auto; padding: 24px 48px; display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid #eee; }
+  .aw-filter-btn { background: none; border: 1px solid #ddd; padding: 8px 20px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #999; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+  .aw-filter-btn:hover { border-color: #000; color: #000; }
+  .aw-filter-btn.active { background: #000; border-color: #000; color: #fff; }
+
+  .aw-artist-section { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+  .aw-artist-header { display: flex; justify-content: space-between; align-items: center; padding: 40px 0 20px; border-bottom: 1px solid #eee; margin-bottom: 32px; }
+  .aw-artist-name { font-size: 1.2rem; font-weight: 600; color: #000; margin: 0; }
+  .aw-artist-name a { color: #000; text-decoration: none; }
+  .aw-artist-count { font-size: 0.72rem; color: #999; }
+
+  .aw-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; padding-bottom: 48px; }
+
+  .aw-card { text-decoration: none; color: #000; display: flex; flex-direction: column; }
+  .aw-card-img { width: 100%; height: 240px; overflow: hidden; background: #f7f7f7; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; position: relative; }
+  .aw-card-img img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; transition: transform 0.4s; }
+  .aw-card:hover .aw-card-img img { transform: scale(1.03); }
+
+  .aw-card-status { position: absolute; top: 10px; left: 10px; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; }
+  .aw-card-status.available { background: #000; color: #fff; }
+  .aw-card-status.sold { background: #c44536; color: #fff; }
+
+  .aw-card-info { text-align: center; }
+  .aw-card-title { font-size: 0.78rem; font-weight: 500; margin: 0 0 3px; }
+  .aw-card-artist { font-size: 0.72rem; color: #888; margin: 0 0 3px; }
+  .aw-card-detail { font-size: 0.68rem; color: #aaa; margin: 0 0 6px; }
+  .aw-card-price { font-size: 0.75rem; font-weight: 600; color: #000; margin: 0; }
+  .aw-card-price.sold-price { color: #c44536; text-decoration: line-through; font-weight: 400; }
+
+  .aw-inquire { display: inline-block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #000; border: 1px solid #000; padding: 6px 16px; margin-top: 8px; transition: all 0.2s; }
+  .aw-card:hover .aw-inquire { background: #000; color: #fff; }
+
+  @media (max-width: 1024px) { .aw-grid { grid-template-columns: repeat(3, 1fr); } }
+  /* Auth Banner */
+  .aw-auth-banner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .aw-auth-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 0;
+    border-bottom: 1px solid #eee;
+    gap: 24px;
+  }
+
+  .aw-auth-text {
+    flex: 1;
+  }
+
+  .aw-auth-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 4px;
+  }
+
+  .aw-auth-desc {
+    font-size: 0.78rem;
+    color: #888;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .aw-auth-actions {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .aw-auth-btn {
+    padding: 10px 24px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .aw-auth-btn-primary {
+    background: #000;
+    color: #fff;
+    border: 1px solid #000;
+  }
+
+  .aw-auth-btn-primary:hover {
+    background: #333;
+  }
+
+  .aw-auth-btn-secondary {
+    background: #fff;
+    color: #000;
+    border: 1px solid #ddd;
+  }
+
+  .aw-auth-btn-secondary:hover {
+    border-color: #000;
+  }
+
+  .aw-auth-btn svg {
+    flex-shrink: 0;
+  }
+
+  /* Logged in welcome */
+  .aw-auth-welcome {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .aw-auth-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f0f0f0;
+  }
+
+  .aw-auth-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .aw-auth-user {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #000;
+  }
+
+  @media (max-width: 768px) {
+    .aw-auth-inner { flex-direction: column; align-items: flex-start; }
+    .aw-auth-banner { padding: 0 24px; }
+    .aw-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .aw-artist-section, .artworks-header-inner, .artworks-filters { padding-left: 24px; padding-right: 24px; }
+    .aw-card-img { height: 180px; }
+  }
+  @media (max-width: 480px) { .aw-grid { grid-template-columns: 1fr; } }
+</style>
+
+<div class="artworks-page">
+  <div class="artworks-header">
+    <div class="artworks-header-inner">
+      <h1 class="artworks-page-title">Available Artworks</h1>
+      <p class="artworks-page-sub">Works currently on display at ART SPACE BYRON.</p>
+    </div>
+  </div>
+
+  <!-- Auth Banner -->
+  <div class="aw-auth-banner">
+    <div class="aw-auth-inner" id="awAuthBanner">
+      <div class="aw-auth-text">
+        <p class="aw-auth-title">Sign in to view pricing and purchase details</p>
+        <p class="aw-auth-desc">Create a free account to access full artwork information, submit inquiries, and receive updates.</p>
+      </div>
+      <div class="aw-auth-actions" id="awAuthActions">
+        <a href="{{ '/gallery/account' | relative_url }}" class="aw-auth-btn aw-auth-btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Create Account
+        </a>
+        <button class="aw-auth-btn aw-auth-btn-secondary" id="awSignInBtn">
+          <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Sign In
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="artworks-filters">
-    <button class="filter-btn active" data-filter="all">All Artworks</button>
-    <button class="filter-btn" data-filter="available">Available</button>
-    <button class="filter-btn" data-filter="sold">Sold</button>
+    <button class="aw-filter-btn active" data-filter="all">All Artists</button>
+    {% assign current_exh = site.exhibitions | where: "status", "current" | first %}
+    {% if current_exh.artists %}
+    {% for artist_name in current_exh.artists %}
+    <button class="aw-filter-btn" data-filter="{{ artist_name }}">{{ artist_name }}</button>
+    {% endfor %}
+    {% endif %}
   </div>
 
-  <div class="artwork-grid">
-    {% for artwork in site.artworks %}
-    <div class="artwork-card" data-status="{{ artwork.status }}">
-      <a href="{{ artwork.url | relative_url }}">
-        {% if artwork.image %}
-        <div class="artwork-image">
-          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title | escape }}" loading="lazy">
-          {% if artwork.status == 'sold' %}
-          <span class="artwork-badge badge-sold">Sold</span>
-          {% endif %}
+  {% if current_exh.artists %}
+  {% for artist_name in current_exh.artists %}
+  {% assign artist_works = site.artworks | where: "artist", artist_name %}
+  {% if artist_works.size > 0 %}
+  <div class="aw-artist-section" data-artist="{{ artist_name }}">
+    <div class="aw-artist-header">
+      {% assign artist = site.artists | where: "name", artist_name | first %}
+      <h2 class="aw-artist-name">{% if artist %}<a href="{{ artist.url | relative_url }}">{{ artist_name }}</a>{% else %}{{ artist_name }}{% endif %}</h2>
+      <span class="aw-artist-count">{{ artist_works.size }} works</span>
+    </div>
+    <div class="aw-grid">
+      {% for artwork in artist_works %}
+      <a href="{{ artwork.url | relative_url }}" class="aw-card">
+        <div class="aw-card-img">
+          {% if artwork.status == 'sold' %}<span class="aw-card-status sold">Sold</span>{% else %}<span class="aw-card-status available">Available</span>{% endif %}
+          {% if artwork.image %}<img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">{% endif %}
         </div>
-        {% endif %}
-        <div class="artwork-info">
-          <h3 class="artwork-title">{{ artwork.title }}</h3>
-          <p class="artwork-artist">{{ artwork.artist }}</p>
-          {% if artwork.year %}
-          <p class="artwork-year">{{ artwork.year }}</p>
-          {% endif %}
-          {% if artwork.medium %}
-          <p class="artwork-medium">{{ artwork.medium }}</p>
-          {% endif %}
+        <div class="aw-card-info">
+          {% if artwork.title and artwork.title != "" %}<p class="aw-card-title">{{ artwork.title }}</p>{% endif %}
+          <p class="aw-card-artist">{{ artwork.artist }}</p>
+          {% if artwork.medium and artwork.medium != "" %}<p class="aw-card-detail">{{ artwork.medium }}{% if artwork.dimensions and artwork.dimensions != "" %}, {{ artwork.dimensions }}{% endif %}</p>{% endif %}
+          {% if artwork.price and artwork.price != "Contact for price" %}<p class="aw-card-price {% if artwork.status == 'sold' %}sold-price{% endif %}">{{ artwork.price }}</p>{% else %}<p class="aw-card-price">Price on request</p>{% endif %}
+          {% unless artwork.status == 'sold' %}<span class="aw-inquire">Inquire</span>{% endunless %}
         </div>
       </a>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+</div>
 
-</section>
+<script>
+  // Filters
+  document.querySelectorAll('.aw-filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.aw-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      var filter = this.getAttribute('data-filter');
+      document.querySelectorAll('.aw-artist-section').forEach(function(sec) {
+        sec.style.display = (filter === 'all' || sec.getAttribute('data-artist') === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  // Auth banner
+  (function() {
+    if (!firebase || !firebase.auth) return;
+    var auth = firebase.auth();
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+    var banner = document.getElementById('awAuthBanner');
+    var actions = document.getElementById('awAuthActions');
+    var textEl = banner.querySelector('.aw-auth-text');
+    var signInBtn = document.getElementById('awSignInBtn');
+
+    signInBtn.addEventListener('click', function() {
+      auth.signInWithPopup(provider).catch(function(err) {
+        alert('Sign in failed: ' + err.message);
+      });
+    });
+
+    auth.onAuthStateChanged(function(user) {
+      if (user) {
+        textEl.innerHTML = '<p class="aw-auth-title">Welcome, ' + (user.displayName || 'Member') + '</p>'
+          + '<p class="aw-auth-desc">You have full access to pricing and purchase inquiries.</p>';
+        actions.innerHTML = '<div class="aw-auth-welcome">'
+          + (user.photoURL ? '<div class="aw-auth-avatar"><img src="' + user.photoURL + '" alt=""></div>' : '')
+          + '<span class="aw-auth-user">' + user.email + '</span>'
+          + '</div>';
+      }
+    });
+  })();
+</script>

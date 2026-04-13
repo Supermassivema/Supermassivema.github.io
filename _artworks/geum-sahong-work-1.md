@@ -1,6 +1,6 @@
 ---
 layout: artwork
-title: "Tiger and Magpie (호작도) No.0811"
+title: "Artwork No.0811 호작도 (호작도) No.0811"
 artist: "Geum Sahong"
 medium: "Acrylic on canvas"
 dimensions: "20 x 20 cm"

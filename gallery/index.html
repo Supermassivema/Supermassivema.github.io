@@ -510,40 +510,16 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     </div>
   </div>
 
-  <!-- 5. NEWS -->
+  <!-- 5. COLLECT -->
   <div class="main-section">
     <div class="main-section-header">
-      <h2 class="main-section-title">News</h2>
-      <a href="{{ '/gallery/news' | relative_url }}" class="main-section-viewall">View All →</a>
+      <h2 class="main-section-title">Collect</h2>
+      <a href="{{ '/gallery/artworks' | relative_url }}" class="main-section-viewall">Available Artworks →</a>
     </div>
 
-    <div class="main-news-grid">
-      {% assign news_posts = site.posts | default: site.pages %}
-      {% for exhibition in site.exhibitions limit: 3 %}
-      <a href="{{ exhibition.url | relative_url }}" class="main-news-card">
-        <div class="main-news-card-img">
-          {% if exhibition.featured_image %}
-          <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
-          {% endif %}
-        </div>
-        <p class="main-news-card-date">{{ exhibition.start_date | date: "%B %Y" }}</p>
-        <p class="main-news-card-title">{{ exhibition.title }}</p>
-        <p class="main-news-card-excerpt">{{ exhibition.location | default: "Inverell, NSW" }}</p>
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-
-  <!-- 6. MEDIA -->
-  <div class="main-section">
-    <div class="main-section-header">
-      <h2 class="main-section-title">Media</h2>
-      <a href="{{ '/gallery/collection' | relative_url }}" class="main-section-viewall">View All →</a>
-    </div>
-
-    {% assign media_artworks = site.artworks | where: "featured", true %}
+    {% assign collect_artworks = site.artworks | where: "featured", true %}
     <div class="main-artwork-grid">
-      {% for artwork in media_artworks limit: 4 offset: 8 %}
+      {% for artwork in collect_artworks limit: 4 %}
       <a href="{{ artwork.url | relative_url }}" class="main-artwork-card">
         <div class="main-artwork-card-img">
           {% if artwork.image %}

@@ -1,6 +1,6 @@
 ---
 layout: gallery-page
-title: "Media"
+title: "Artist Book"
 ---
 
 <style>
@@ -22,7 +22,8 @@ title: "Media"
   }
 
   .media-page-title {
-    font-size: clamp(3rem, 7vw, 6rem);
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
     font-weight: 700;
     letter-spacing: -0.02em;
     color: #000;
@@ -176,11 +177,129 @@ title: "Media"
     margin: 0;
   }
 
-  /* ── Artwork Grid (Collection) ── */
-  .media-artwork-grid {
+  /* ── Artist Bookshelf Stacks ── */
+  .media-stacks {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .media-stack {
+    cursor: pointer;
+  }
+
+  .media-stack-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .media-stack-artist {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+  }
+
+  .media-stack-count {
+    font-size: 0.72rem;
+    color: #999;
+    margin: 0;
+  }
+
+  .media-stack-shelf {
+    position: relative;
+    height: 280px;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 20px;
+  }
+
+  .media-stack-shelf::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .media-stack-shelf::-webkit-scrollbar-track {
+    background: #f0f0f0;
+  }
+
+  .media-stack-shelf::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
+  }
+
+  .media-stack-card {
+    position: absolute;
+    top: 0;
+    width: 200px;
+    height: 270px;
+    background: #f7f7f7;
+    box-shadow: -2px 0 6px rgba(0,0,0,0.06);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1), z-index 0s, box-shadow 0.3s;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .media-stack-card img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .media-stack-card:hover {
+    transform: translateY(-12px) scale(1.05) !important;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    z-index: 100 !important;
+  }
+
+  /* Expanded view */
+  .media-stack-expanded {
+    display: none;
+    margin-top: 24px;
+  }
+
+  .media-stack-expanded.active {
+    display: block;
+  }
+
+  .media-expanded-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .media-expanded-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000;
+  }
+
+  .media-expanded-close {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #999;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .media-expanded-close:hover { color: #000; }
+
+  .media-expanded-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    gap: 24px;
   }
 
   .media-artwork-card {
@@ -188,14 +307,15 @@ title: "Media"
     color: #000;
     display: flex;
     flex-direction: column;
+    text-align: center;
   }
 
   .media-artwork-img {
     width: 100%;
-    height: 280px;
+    height: 220px;
     overflow: hidden;
     background: #f7f7f7;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -206,15 +326,6 @@ title: "Media"
     max-height: 100%;
     object-fit: contain;
     display: block;
-    transition: transform 0.4s ease;
-  }
-
-  .media-artwork-card:hover .media-artwork-img img {
-    transform: scale(1.03);
-  }
-
-  .media-artwork-card {
-    text-align: center;
   }
 
   .media-artwork-title {
@@ -222,7 +333,6 @@ title: "Media"
     font-weight: 400;
     margin: 0 0 3px;
     line-height: 1.35;
-    min-height: 1.1em;
   }
 
   .media-artwork-artist {
@@ -295,6 +405,109 @@ title: "Media"
     color: #aaa;
     padding: 60px 0;
     text-align: center;
+  }
+
+  /* ── Bookshelf Spines ── */
+  .bookshelf {
+    max-width: 900px;
+    margin: 0 auto 48px;
+    padding: 60px 0 0;
+  }
+
+  .bookshelf-shelf {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 20px;
+    min-height: 320px;
+    align-items: flex-end;
+  }
+
+  .bookshelf-base {
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(to bottom, #8b7355, #6b5540);
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .bookshelf-spine {
+    width: 60px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    border-radius: 3px 3px 0 0;
+    box-shadow: inset -2px 0 4px rgba(0,0,0,0.2), 2px 0 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s cubic-bezier(0.25,0.1,0.25,1), box-shadow 0.3s;
+    transform-origin: bottom center;
+  }
+
+  .bookshelf-spine:hover {
+    transform: translateY(-20px);
+    box-shadow: inset -2px 0 4px rgba(0,0,0,0.2), 0 8px 20px rgba(0,0,0,0.2);
+  }
+
+  .spine-title {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 260px;
+    padding: 16px 0;
+  }
+
+  .book-back-shelf {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px 20px;
+  }
+
+  .book-back-link {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #999;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .book-back-link:hover { color: #000; }
+
+  @media (max-width: 768px) {
+    .bookshelf-spine {
+      width: 48px;
+      height: 240px;
+    }
+
+    .spine-title {
+      font-size: 0.6rem;
+      max-height: 200px;
+    }
+
+    .bookshelf-shelf {
+      min-height: 260px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .bookshelf-spine {
+      width: 40px;
+      height: 200px;
+    }
+
+    .bookshelf-shelf {
+      min-height: 220px;
+      gap: 4px;
+    }
   }
 
   /* ── Book Viewer (Spread + Flip) ── */
@@ -682,6 +895,46 @@ title: "Media"
   .book-nav.next { right: -28px; }
   .book-nav svg { width: 20px; height: 20px; stroke: #000; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
+  .book-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .book-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: 1px solid #ddd;
+    padding: 8px 18px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #666;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+
+  .book-action-btn:hover {
+    border-color: #000;
+    color: #000;
+  }
+
+  .book-action-btn svg {
+    flex-shrink: 0;
+  }
+
+  @media print {
+    .site-header, .site-footer, .kukje-footer, .book-nav,
+    .book-counter, .book-dots, .book-actions, .book-back-shelf,
+    .bookshelf, .media-header, .chat-assistant, .back-to-top { display: none !important; }
+    .book-wrapper { margin: 0 !important; padding: 0 !important; }
+    .book-spread { box-shadow: none !important; page-break-inside: avoid; }
+  }
+
   .book-counter {
     text-align: center; margin-top: 20px;
     font-size: 0.75rem; font-weight: 600;
@@ -762,6 +1015,7 @@ title: "Media"
     }
 
     .media-page-title {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
       font-size: clamp(2rem, 10vw, 3.5rem);
     }
 
@@ -771,9 +1025,18 @@ title: "Media"
     }
 
     .media-video-grid,
-    .media-artwork-grid {
+    .media-expanded-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
+    }
+
+    .media-stack-card {
+      width: 160px;
+      height: 220px;
+    }
+
+    .media-stack-shelf {
+      height: 240px;
     }
 
     .media-pub-grid {
@@ -783,8 +1046,17 @@ title: "Media"
 
   @media (max-width: 480px) {
     .media-video-grid,
-    .media-artwork-grid {
+    .media-expanded-grid {
       grid-template-columns: 1fr;
+    }
+
+    .media-stack-card {
+      width: 130px;
+      height: 180px;
+    }
+
+    .media-stack-shelf {
+      height: 200px;
     }
 
     .media-pub-grid {
@@ -799,69 +1071,35 @@ title: "Media"
   <!-- Header -->
   <div class="media-header">
     <div class="media-header-inner">
-      <h1 class="media-page-title">Media</h1>
+      <h1 class="media-page-title">Artist Book</h1>
     </div>
   </div>
 
-  <!-- Tabs -->
-  <div class="media-tabs">
-    <button class="media-tab active" data-tab="collection">Collection</button>
-    <button class="media-tab" data-tab="video">Video</button>
-    <button class="media-tab" data-tab="publications">Publications</button>
-    <button class="media-tab" data-tab="book">Book</button>
-  </div>
+  <!-- Book Content -->
+  <div class="media-content">
 
-  <!-- Collection Tab -->
-  <div class="media-content media-tab-content" id="tab-collection">
-    <!-- Filters -->
-    <div class="media-filters">
-      <button class="media-filter-btn active" data-filter="all">All</button>
-      {% assign artwork_artists = site.artworks | map: 'artist' | uniq | sort %}
-      {% for artist in artwork_artists %}
-      <button class="media-filter-btn" data-filter="{{ artist }}">{{ artist }}</button>
-      {% endfor %}
-    </div>
-
-    <div class="media-artwork-grid" id="collection-grid">
-      {% assign sorted_artworks = site.artworks | sort: 'title' %}
-      {% for artwork in sorted_artworks %}
-      <a href="{{ artwork.url | relative_url }}" class="media-artwork-card" data-artist="{{ artwork.artist }}">
-        <div class="media-artwork-img">
-          {% if artwork.image %}
-          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">
-          {% endif %}
+    <!-- Bookshelf Spines -->
+    <div class="bookshelf" id="bookshelf">
+      <div class="bookshelf-shelf">
+        {% assign book_artists = site.artworks | map: 'artist' | uniq | sort %}
+        {% assign spine_colors = "1a1a1a,2c3e50,4a3728,1b4332,3c1518,2d3436" | split: "," %}
+        {% for artist in book_artists %}
+        {% assign color_idx = forloop.index0 | modulo: 6 %}
+        <div class="bookshelf-spine" data-artist="{{ artist }}" onclick="openBook('{{ artist }}')" style="background:#{{ spine_colors[color_idx] }};">
+          <span class="spine-title">{{ artist }}</span>
         </div>
-        {% if artwork.title and artwork.title != "" %}
-        <p class="media-artwork-title">{{ artwork.title }}</p>
-        {% endif %}
-        <p class="media-artwork-artist">{{ artwork.artist }}</p>
-        <p class="media-artwork-meta">{{ artwork.medium }}{% if artwork.year %}, {{ artwork.year }}{% endif %}</p>
-      </a>
-      {% endfor %}
+        {% endfor %}
+      </div>
+      <div class="bookshelf-base"></div>
     </div>
 
-    {% if site.artworks.size == 0 %}
-    <p class="media-empty">No artworks in the collection yet.</p>
-    {% endif %}
-  </div>
+    <!-- Back to shelf button (hidden by default) -->
+    <div class="book-back-shelf" id="bookBackShelf" style="display:none;">
+      <a href="#" onclick="event.preventDefault();closeBook();" class="book-back-link">← Back to shelf</a>
+    </div>
 
-  <!-- Video Tab -->
-  <div class="media-content media-tab-content" id="tab-video" style="display:none;">
-    <p class="media-empty">No videos available at this time.</p>
-  </div>
-
-  <!-- Publications Tab -->
-  <div class="media-content media-tab-content" id="tab-publications" style="display:none;">
-    <p class="media-empty">No publications available at this time.</p>
-  </div>
-
-  <!-- Book Tab -->
-  <div class="media-content media-tab-content" id="tab-book" style="display:none;">
-    <p class="media-section-label">Artist Book</p>
-
-    <!-- Artist Select -->
-    <div class="book-artist-select">
-      {% assign book_artists = site.artworks | map: 'artist' | uniq | sort %}
+    <!-- Artist Select (hidden, used by book JS) -->
+    <div class="book-artist-select" style="display:none;">
       {% for artist in book_artists %}
       <button class="book-artist-btn{% if forloop.first %} active{% endif %}" data-artist="{{ artist }}">{{ artist }}</button>
       {% endfor %}
@@ -907,6 +1145,13 @@ title: "Media"
 
       <div class="book-counter" id="bookCounter">1–2 / 0</div>
       <div class="book-dots" id="bookDots"></div>
+
+      <div class="book-actions">
+        <button class="book-action-btn" onclick="shareBook()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          <span class="book-action-text">Share</span>
+        </button>
+      </div>
     </div>
 
     <!-- Hidden data source -->
@@ -925,32 +1170,6 @@ title: "Media"
 </div>
 
 <script>
-  // Tab switching
-  document.querySelectorAll('.media-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.media-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tab = btn.dataset.tab;
-      document.querySelectorAll('.media-tab-content').forEach(c => c.style.display = 'none');
-      document.getElementById('tab-' + tab).style.display = '';
-    });
-  });
-
-  // Collection filter
-  document.querySelectorAll('.media-filter-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.media-filter-btn').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      const filter = this.getAttribute('data-filter');
-      document.querySelectorAll('.media-artwork-card').forEach(card => {
-        if (filter === 'all' || card.getAttribute('data-artist') === filter) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
 
   // ── Book Viewer (Cover + Profile + Artworks with Captions) ──
   var bookRawData = [];
@@ -988,7 +1207,7 @@ title: "Media"
       ko: '금사홍',
       medium: 'Acrylic, Oil on Canvas',
       profileImg: '/assets/images/work/Geum Sahong/프로필.jpg',
-      coverImg: '/assets/images/work/Geum Sahong/Artwork No.0816 일월오봉도-150호F사이즈-227.3x181.8cm-Acrylic on canvas-2026.jpg',
+      coverImg: '/assets/images/work/Geum Sahong/ILWOLOBONGDO-Artwork No.0816 일월오봉도-150호F사이즈-227.3x181.8cm-Acrylic on canvas-2026-70,000AUD.jpg',
       bio: 'Geum Sahong is a Korean contemporary painter known for his pantheistic landscapes rendered in acrylic and oil. His works explore the spiritual connection between nature and humanity.',
       bioKo: '금사홍은 아크릴과 유화로 범신론적 풍경을 그리는 것으로 알려진 한국 현대 화가입니다. 그의 작품은 자연과 인간 사이의 영적 연결을 탐구합니다.',
       statement: 'Through layers of colour and gestural brushwork, Geum creates atmospheric compositions that dissolve the boundary between the physical and metaphysical — inviting viewers into meditative encounters with the natural world.',
@@ -1353,9 +1572,94 @@ title: "Media"
     });
   });
 
+  // Share book
+  function shareBook() {
+    var activeBtn = document.querySelector('.book-artist-btn.active');
+    var artist = activeBtn ? activeBtn.getAttribute('data-artist') : 'Artist Book';
+    var url = window.location.href;
+    navigator.clipboard.writeText(url).then(function() {
+      var btns = document.querySelectorAll('.book-action-btn');
+      var shareBtn = btns[0];
+      var origText = shareBtn.querySelector('.book-action-text').textContent;
+      shareBtn.querySelector('.book-action-text').textContent = 'Copied!';
+      setTimeout(function() { shareBtn.querySelector('.book-action-text').textContent = origText; }, 1500);
+    });
+  }
+
+  // Download full book as PDF
+  function downloadBookPDF() {
+    var activeBtn = document.querySelector('.book-artist-btn.active');
+    var artist = activeBtn ? activeBtn.getAttribute('data-artist') : 'Artist';
+
+    // Collect all page content
+    var allPages = [];
+    for (var i = 0; i < bookPages.length; i++) {
+      allPages.push(bookPages[i]);
+    }
+
+    // Build print window
+    var printWin = window.open('', '_blank');
+    printWin.document.write('<!DOCTYPE html><html><head><title>' + artist + ' - Artist Book</title>');
+    printWin.document.write('<style>');
+    printWin.document.write('* { margin: 0; padding: 0; box-sizing: border-box; }');
+    printWin.document.write('body { font-family: "Inter", "Helvetica Neue", Arial, sans-serif; background: #fff; }');
+    printWin.document.write('.page { page-break-after: always; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; }');
+    printWin.document.write('.page:last-child { page-break-after: auto; }');
+    printWin.document.write('img { max-width: 80%; max-height: 70vh; object-fit: contain; display: block; margin: 0 auto 20px; }');
+    printWin.document.write('p { text-align: center; font-size: 12px; color: #666; margin: 4px 0; }');
+    printWin.document.write('.cover-title { font-size: 28px; font-weight: 700; color: #000; margin: 20px 0 8px; }');
+    printWin.document.write('.cover-sub { font-size: 14px; color: #888; }');
+    printWin.document.write('@media print { .page { page-break-after: always; } .page:last-child { page-break-after: auto; } }');
+    printWin.document.write('</style></head><body>');
+
+    // Cover page
+    printWin.document.write('<div class="page">');
+    printWin.document.write('<p class="cover-title">' + artist + '</p>');
+    printWin.document.write('<p class="cover-sub">Artist Book — Art Space Byron</p>');
+    printWin.document.write('</div>');
+
+    // Content pages
+    for (var j = 0; j < allPages.length; j++) {
+      printWin.document.write('<div class="page">' + allPages[j] + '</div>');
+    }
+
+    printWin.document.write('</body></html>');
+    printWin.document.close();
+
+    // Wait for images to load then print
+    printWin.onload = function() {
+      setTimeout(function() {
+        printWin.print();
+      }, 1000);
+    };
+  }
+
+  // Bookshelf open/close
+  function openBook(artist) {
+    document.getElementById('bookshelf').style.display = 'none';
+    document.getElementById('bookBackShelf').style.display = '';
+    document.getElementById('bookWrapper').style.display = '';
+    // Trigger the artist button
+    document.querySelectorAll('.book-artist-btn').forEach(function(b) {
+      b.classList.remove('active');
+      if (b.getAttribute('data-artist') === artist) {
+        b.classList.add('active');
+        bookSelectArtist(artist);
+      }
+    });
+  }
+
+  function closeBook() {
+    document.getElementById('bookshelf').style.display = '';
+    document.getElementById('bookBackShelf').style.display = 'none';
+    document.getElementById('bookWrapper').style.display = 'none';
+  }
+
+  // Initially hide book viewer
+  document.getElementById('bookWrapper').style.display = 'none';
+
   document.addEventListener('keydown', function(e) {
-    var bookTab = document.getElementById('tab-book');
-    if (bookTab.style.display === 'none') return;
+    if (document.getElementById('bookWrapper').style.display === 'none') return;
     if (e.key === 'ArrowRight') bookNav(1);
     if (e.key === 'ArrowLeft') bookNav(-1);
   });

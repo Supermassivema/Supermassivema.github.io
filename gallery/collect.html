@@ -1,0 +1,202 @@
+---
+layout: gallery-page
+title: "Collect"
+section: gallery
+---
+
+<style>
+  .collect-page {
+    background: #fff;
+    min-height: 100vh;
+  }
+
+  .collect-header {
+    border-bottom: 1px solid #000;
+    padding: 60px 0 32px;
+  }
+
+  .collect-header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .collect-page-title {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #000;
+    line-height: 1;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  /* Split Row Cards */
+  .collect-list {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .collect-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 420px;
+    border-bottom: 1px solid #e0e0e0;
+    text-decoration: none;
+    color: #000;
+    transition: opacity 0.3s;
+  }
+
+  .collect-row:hover {
+    opacity: 0.85;
+  }
+
+  .collect-row:nth-child(even) {
+    direction: rtl;
+  }
+
+  .collect-row:nth-child(even) > * {
+    direction: ltr;
+  }
+
+  .collect-row-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 64px;
+  }
+
+  .collect-row-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 16px;
+  }
+
+  .collect-row-title {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0 0 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .collect-row-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #666;
+    margin: 0 0 28px;
+  }
+
+  .collect-row-cta {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #000;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .collect-row-cta::after {
+    content: '→';
+    transition: transform 0.2s;
+  }
+
+  .collect-row:hover .collect-row-cta::after {
+    transform: translateX(4px);
+  }
+
+  .collect-row-img {
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+
+  .collect-row-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .collect-row:hover .collect-row-img img {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 900px) {
+    .collect-row {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .collect-row:nth-child(even) {
+      direction: ltr;
+    }
+
+    .collect-row-img {
+      aspect-ratio: 16 / 9;
+    }
+
+    .collect-row-text {
+      padding: 36px 24px 48px;
+    }
+  }
+</style>
+
+<div class="collect-page">
+
+  <div class="collect-header">
+    <div class="collect-header-inner">
+      <h1 class="collect-page-title">Collect</h1>
+    </div>
+  </div>
+
+  <div class="collect-list">
+
+    <!-- Available Artworks -->
+    <a href="{{ '/gallery/artworks' | relative_url }}" class="collect-row">
+      <div class="collect-row-text">
+        <p class="collect-row-label">Browse</p>
+        <h2 class="collect-row-title">Available Artworks</h2>
+        <p class="collect-row-desc">Browse and inquire about works currently available for purchase from our represented artists. View pricing, dimensions, and medium details for each piece.</p>
+        <span class="collect-row-cta">View Artworks</span>
+      </div>
+      <div class="collect-row-img">
+        <img src="{{ '/assets/images/Available Artworks.png' | relative_url }}" alt="Available Artworks">
+      </div>
+    </a>
+
+    <!-- Create Account -->
+    <a href="{{ '/gallery/account' | relative_url }}" class="collect-row">
+      <div class="collect-row-text">
+        <p class="collect-row-label">Register</p>
+        <h2 class="collect-row-title">Create Account</h2>
+        <p class="collect-row-desc">Sign in with Google to access pricing information, submit purchase inquiries directly, and receive early access to new exhibitions and available works.</p>
+        <span class="collect-row-cta">Sign Up</span>
+      </div>
+      <div class="collect-row-img">
+        <img src="{{ '/assets/images/account.png' | relative_url }}" alt="Create Account">
+      </div>
+    </a>
+
+    <!-- Artist Book -->
+    <a href="{{ '/gallery/collection' | relative_url }}" class="collect-row">
+      <div class="collect-row-text">
+        <p class="collect-row-label">Explore</p>
+        <h2 class="collect-row-title">Artist Book</h2>
+        <p class="collect-row-desc">Explore digital artist books featuring works, biography, and studio insights. Flip through each artist's catalogue in an interactive book viewer.</p>
+        <span class="collect-row-cta">Open Books</span>
+      </div>
+      <div class="collect-row-img">
+        <img src="{{ '/assets/images/Artbook.png' | relative_url }}" alt="Artist Book">
+      </div>
+    </a>
+
+  </div>
+
+</div>

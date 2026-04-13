@@ -1,13 +1,13 @@
 ---
 layout: artwork
-title: ""
+title: "Kettle"
 artist: "Stephen Jones"
-medium: "Pencil, Charcoal, Acrylic"
-dimensions: ""
-year: ""
-image: /assets/images/work/Stephen Jones/7.jpg
+medium: "Acrylic on Paper"
+dimensions: "24 x 34 cm"
+year: "2026"
+image: /assets/images/work/Stephen Jones/Kettle-Acrylic on Paper-24x34cm-2026-200aud.jpg
 status: "available"
-price: "Contact for price"
+price: "200 AUD"
 description: ""
 featured: true
 ---
