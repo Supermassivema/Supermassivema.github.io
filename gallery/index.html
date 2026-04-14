@@ -2,13 +2,237 @@
 layout: gallery-page
 title: "Home"
 description: "ART SPACE BYRON - Contemporary art space in Inverell"
-header_transparent: true
+header_transparent: false
 image: "/assets/images/Gallery Background photo/space (3).jpg"
 ---
 
 <style>
-  /* ── Kukje-Style Main Page ── */
   .main-page { background: #fff; }
+
+  /* ── 1. Current Exhibition ── */
+  .home-exh {
+    width: 100%;
+    margin-bottom: 80px;
+  }
+
+  .home-exh-img {
+    display: block;
+    width: 100%;
+    background: #f5f5f5;
+    overflow: hidden;
+  }
+
+  .home-exh-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 80vh;
+    object-fit: cover;
+  }
+
+  .home-exh-info {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 48px 0;
+    text-align: center;
+  }
+
+  .home-exh-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 16px;
+  }
+
+  .home-exh-title {
+    font-family: 'Playfair Display', 'Noto Serif KR', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 600;
+    color: #000;
+    line-height: 1.2;
+    margin: 0 0 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .home-exh-artists {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+
+  .home-exh-dates {
+    font-size: 0.82rem;
+    color: #888;
+    margin: 0 0 24px;
+  }
+
+  .home-exh-link {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+    padding-bottom: 4px;
+  }
+
+  /* ── 2. Intro ── */
+  .home-intro {
+    max-width: 900px;
+    margin: 0 auto 80px;
+    padding: 40px 48px;
+    text-align: center;
+    border-top: 1px solid #eee;
+  }
+
+  .home-intro-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    line-height: 1.5;
+    color: #333;
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* ── Sections ── */
+  .home-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 48px 60px;
+  }
+
+  .home-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    margin-bottom: 36px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .home-section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0;
+  }
+
+  .home-section-viewall {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #999;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .home-section-viewall:hover { color: #000; }
+
+  /* ── 3. Artists Grid ── */
+  .home-artists-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .home-artist-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .home-artist-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #f7f7f7;
+    margin-bottom: 14px;
+  }
+
+  .home-artist-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .home-artist-card:hover .home-artist-img img {
+    transform: scale(1.03);
+  }
+
+  .home-artist-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+    letter-spacing: 0.01em;
+  }
+
+  .home-artist-medium {
+    font-size: 0.75rem;
+    color: #888;
+    margin: 0;
+  }
+
+  /* ── 4. Upcoming List ── */
+  .home-upcoming-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-upcoming-item {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    color: #000;
+    transition: opacity 0.2s;
+  }
+
+  .home-upcoming-item:hover { opacity: 0.6; }
+
+  .home-upcoming-date {
+    font-size: 0.78rem;
+    color: #999;
+    margin: 0;
+  }
+
+  .home-upcoming-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .home-upcoming-artist {
+    font-size: 0.82rem;
+    color: #666;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .home-exh-info { padding: 32px 24px 0; }
+    .home-intro { padding: 32px 24px; }
+    .home-section { padding: 24px 24px 40px; }
+    .home-artists-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .home-upcoming-item { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  @media (max-width: 480px) {
+    .home-artists-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Kukje-Style Main Page (legacy, unused after refactor) ── */
 
   /* ── Hero: Full-width current exhibition ── */
   .main-hero {
@@ -399,139 +623,79 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
 
 <div class="main-page">
 
-  <!-- 1. HERO: Current Exhibition Full Screen -->
   {% assign current_exhibition = site.exhibitions | where: "status", "current" | first %}
-  {% assign hero_bg = current_exhibition.featured_image | default: '/assets/images/Gallery Background photo/gallery.jpg' | relative_url %}
 
-  <section class="main-hero">
-    <!-- Slideshow Images (round-robin: Stephen → Debbie → Geum) -->
-    {% assign jones_works = site.artworks | where: "artist", "Stephen Jones" %}
-    {% assign doye_works = site.artworks | where: "artist", "Debbie Doye" %}
-    {% assign geum_works = site.artworks | where: "artist", "Geum Sahong" %}
-    {% assign slide_filtered = "" | split: "" %}
-    {% for i in (0..3) %}
-      {% assign gw = geum_works[i] %}
-      {% assign dw = doye_works[i] %}
-      {% assign jw = jones_works[i] %}
-      {% if gw %}{% assign slide_filtered = slide_filtered | push: gw %}{% endif %}
-      {% if dw %}{% assign slide_filtered = slide_filtered | push: dw %}{% endif %}
-      {% if jw %}{% assign slide_filtered = slide_filtered | push: jw %}{% endif %}
-    {% endfor %}
-    {% for artwork in slide_filtered limit: 10 %}
-    <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" class="main-hero-slide {% if forloop.first %}active{% endif %}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
-    {% endfor %}
+  <!-- 1. CURRENT EXHIBITION: Full-width image + info -->
+  <section class="home-exh">
+    {% if current_exhibition.featured_image %}
+    <a href="{{ current_exhibition.url | relative_url }}" class="home-exh-img">
+      <img src="{{ current_exhibition.featured_image | relative_url }}" alt="{{ current_exhibition.title }}" loading="eager">
+    </a>
+    {% endif %}
 
-    <div class="main-hero-overlay">
-      <p class="main-hero-label">Current Exhibition</p>
-      <p class="main-hero-artist">{{ current_exhibition.artists | join: ", " | default: current_exhibition.artist }}</p>
-      <h1 class="main-hero-title">{{ current_exhibition.title }}</h1>
-      <p class="main-hero-dates">
-        {{ current_exhibition.start_date | date: "%B %d" }} — {{ current_exhibition.end_date | date: "%B %d, %Y" }}
+    <div class="home-exh-info">
+      <p class="home-exh-label">Current Exhibition</p>
+      <h1 class="home-exh-title">{{ current_exhibition.title }}</h1>
+      <p class="home-exh-artists">{{ current_exhibition.artists | join: " · " | default: current_exhibition.artist }}</p>
+      <p class="home-exh-dates">
+        {{ current_exhibition.start_date | date: "%d %B" }} — {{ current_exhibition.end_date | date: "%d %B, %Y" }}
       </p>
-      <a href="{{ current_exhibition.url | relative_url }}" class="main-hero-link">View Exhibition →</a>
-    </div>
-
-    <!-- Slide indicators -->
-    <div class="main-hero-indicators">
-      {% for artwork in slide_filtered limit: 10 %}
-      <span class="hero-indicator {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}"></span>
-      {% endfor %}
-    </div>
-
-    <div class="main-scroll-indicator">
-      <div class="main-scroll-mouse">
-        <div class="main-scroll-wheel"></div>
-      </div>
+      <a href="{{ current_exhibition.url | relative_url }}" class="home-exh-link">View Exhibition →</a>
     </div>
   </section>
 
-  <!-- 2. EXHIBITIONS -->
-  <div class="main-section">
-    <div class="main-section-header">
-      <h2 class="main-section-title">Exhibitions</h2>
-      <a href="{{ '/gallery/exhibitions' | relative_url }}" class="main-section-viewall">View All →</a>
+  <!-- 2. GALLERY INTRO -->
+  <section class="home-intro">
+    <p class="home-intro-text">A gallery-café in Inverell, NSW — where contemporary art and everyday life meet.</p>
+  </section>
+
+  <!-- 3. ARTISTS GRID -->
+  <section class="home-section">
+    <div class="home-section-header">
+      <h2 class="home-section-title">Artists</h2>
+      <a href="{{ '/gallery/artists' | relative_url }}" class="home-section-viewall">View All →</a>
     </div>
 
-    {% assign all_exhibitions = site.exhibitions | where: "status", "current" %}
-    {% for exhibition in all_exhibitions limit: 1 %}
-    <div class="main-exh-row">
-      <a href="{{ exhibition.url | relative_url }}" class="main-exh-card">
-        <div class="main-exh-card-img">
-          {% if exhibition.featured_image %}
-          <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
-          {% endif %}
-        </div>
-        <p class="main-exh-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
-        <p class="main-exh-card-title">{{ exhibition.title }}</p>
-        <p class="main-exh-card-dates">{{ exhibition.start_date | date: "%B %d" }} — {{ exhibition.end_date | date: "%B %d, %Y" }}</p>
-      </a>
-      <div class="main-exh-poster">
-        <img src="{{ '/assets/images/Inaugural Exhibition Poster.jpg' | relative_url }}" alt="{{ exhibition.title }} Poster" loading="lazy">
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-
-  <!-- 3. ARTISTS -->
-  <div class="main-section">
-    <div class="main-section-header">
-      <h2 class="main-section-title">Artists</h2>
-      <a href="{{ '/gallery/artists' | relative_url }}" class="main-section-viewall">View All →</a>
-    </div>
-
-    <div class="main-artist-grid">
+    <div class="home-artists-grid">
       {% assign featured_artists = site.artists | where: "featured", true %}
       {% for artist in featured_artists limit: 6 %}
-      <a href="{{ artist.url | relative_url }}" class="main-artist-item">{{ artist.name }}</a>
-      {% endfor %}
-    </div>
-  </div>
-
-  <!-- 4. FROM THE COLLECTION -->
-  <div class="main-section">
-    <div class="main-section-header">
-      <h2 class="main-section-title">From the Collection</h2>
-      <a href="{{ '/gallery/collection' | relative_url }}" class="main-section-viewall">View All →</a>
-    </div>
-
-    {% assign featured_artworks = site.artworks | where: "featured", true %}
-    <div class="main-artwork-grid">
-      {% for artwork in featured_artworks limit: 8 %}
-      <a href="{{ artwork.url | relative_url }}" class="main-artwork-card">
-        <div class="main-artwork-card-img">
-          {% if artwork.image %}
-          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">
+      <a href="{{ artist.url | relative_url }}" class="home-artist-card">
+        <div class="home-artist-img">
+          {% if artist.featured_image %}
+          <img src="{{ artist.featured_image | relative_url }}" alt="{{ artist.name }}" loading="lazy">
           {% endif %}
         </div>
-        <p class="main-artwork-card-title">{{ artwork.title }}</p>
-        <p class="main-artwork-card-artist">{{ artwork.artist }}</p>
+        <p class="home-artist-name">{{ artist.name }}</p>
+        {% if artist.medium and artist.medium != "" %}
+        <p class="home-artist-medium">{{ artist.medium }}</p>
+        {% else %}
+        <p class="home-artist-medium">{{ artist.nationality }}</p>
+        {% endif %}
       </a>
       {% endfor %}
     </div>
-  </div>
+  </section>
 
-  <!-- 5. COLLECT -->
-  <div class="main-section">
-    <div class="main-section-header">
-      <h2 class="main-section-title">Collect</h2>
-      <a href="{{ '/gallery/artworks' | relative_url }}" class="main-section-viewall">Available Artworks →</a>
+  <!-- 4. UPCOMING EXHIBITIONS -->
+  {% assign upcoming = site.exhibitions | where: "status", "upcoming" | sort: "start_date" %}
+  {% if upcoming.size > 0 %}
+  <section class="home-section">
+    <div class="home-section-header">
+      <h2 class="home-section-title">Upcoming</h2>
+      <a href="{{ '/gallery/exhibitions' | relative_url }}" class="home-section-viewall">View All →</a>
     </div>
 
-    {% assign collect_artworks = site.artworks | where: "featured", true %}
-    <div class="main-artwork-grid">
-      {% for artwork in collect_artworks limit: 4 %}
-      <a href="{{ artwork.url | relative_url }}" class="main-artwork-card">
-        <div class="main-artwork-card-img">
-          {% if artwork.image %}
-          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">
-          {% endif %}
-        </div>
-        <p class="main-artwork-card-title">{{ artwork.title }}</p>
-        <p class="main-artwork-card-artist">{{ artwork.artist }}</p>
+    <div class="home-upcoming-list">
+      {% for exh in upcoming limit: 3 %}
+      <a href="{{ exh.url | relative_url }}" class="home-upcoming-item">
+        <p class="home-upcoming-date">{{ exh.start_date | date: "%d.%m.%Y" }} — {{ exh.end_date | date: "%d.%m.%Y" }}</p>
+        <p class="home-upcoming-title">{{ exh.title }}</p>
+        <p class="home-upcoming-artist">{{ exh.artists | join: ", " }}</p>
       </a>
       {% endfor %}
     </div>
-  </div>
+  </section>
+  {% endif %}
 
 </div>
 
