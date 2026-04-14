@@ -262,14 +262,14 @@
             }
 
             .header-account-icon {
-                right: 60px !important;
+                right: 16px !important;
                 z-index: 1000 !important;
             }
 
             .site-header--white-cube .header-mobile-toggle {
                 display: block !important;
                 position: absolute !important;
-                right: 16px !important;
+                right: 60px !important;
                 top: 50% !important;
                 transform: translateY(-50%) !important;
                 z-index: 1003 !important;
@@ -374,8 +374,8 @@
                 </a>
 
                 <!-- Mobile Menu Toggle (Preserved) -->
-                <div class="header-mobile-toggle">
-                    <button class="menu-toggle" aria-label="Toggle Menu" aria-controls="main-nav">
+                <div class="header-mobile-toggle" onclick="toggleMobileMenu()">
+                    <button class="menu-toggle" aria-label="Toggle Menu" aria-controls="main-nav" onclick="event.stopPropagation();toggleMobileMenu();">
                         <span class="hamburger-line"></span>
                         <span class="hamburger-line"></span>
                         <span class="hamburger-line"></span>
@@ -1148,20 +1148,24 @@
             }, { passive: true });
         })();
 
-        // Mobile Menu Toggle
+        // Mobile Menu Toggle (global function)
+        function toggleMobileMenu() {
+            var mainNav = document.querySelector('.main-nav');
+            var menuToggle = document.querySelector('.menu-toggle');
+            var body = document.body;
+            if (!mainNav || !menuToggle) return;
+            var isOpen = mainNav.classList.toggle('is-open');
+            menuToggle.classList.toggle('is-active');
+            body.style.overflow = isOpen ? 'hidden' : '';
+        }
+        window.toggleMobileMenu = toggleMobileMenu;
+
         document.addEventListener('DOMContentLoaded', function () {
             const menuToggle = document.querySelector('.menu-toggle');
             const mainNav = document.querySelector('.main-nav');
             const body = document.body;
 
             if (!menuToggle || !mainNav) return;
-
-            menuToggle.addEventListener('click', function (e) {
-                e.stopPropagation();
-                const isOpen = mainNav.classList.toggle('is-open');
-                menuToggle.classList.toggle('is-active');
-                body.style.overflow = isOpen ? 'hidden' : '';
-            });
 
             // Close menu on link click
             const navLinks = document.querySelectorAll('.nav-link');
