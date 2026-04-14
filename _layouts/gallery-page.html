@@ -262,14 +262,14 @@
             }
 
             .header-account-icon {
-                right: 16px !important;
+                right: 20px !important;
                 z-index: 1000 !important;
             }
 
             .site-header--white-cube .header-mobile-toggle {
                 display: block !important;
                 position: absolute !important;
-                right: 60px !important;
+                right: 76px !important;
                 top: 50% !important;
                 transform: translateY(-50%) !important;
                 z-index: 1003 !important;
@@ -1177,9 +1177,19 @@
                 });
             });
 
-            // Close menu on overlay background click
+            // Close menu on overlay background click (outside menu items)
             mainNav.addEventListener('click', function (e) {
-                if (e.target === mainNav) {
+                var menuList = mainNav.querySelector('.mobile-menu');
+                if (!menuList.contains(e.target)) {
+                    mainNav.classList.remove('is-open');
+                    menuToggle.classList.remove('is-active');
+                    body.style.overflow = '';
+                }
+            });
+
+            // ESC key to close
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mainNav.classList.contains('is-open')) {
                     mainNav.classList.remove('is-open');
                     menuToggle.classList.remove('is-active');
                     body.style.overflow = '';
