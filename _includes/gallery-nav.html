@@ -7,20 +7,17 @@
     </a>
   </div>
   <ul class="gallery-nav-menu">
-    <!-- <li {% if page.url contains '/gallery/index' or page.url=='/gallery/' %}class="active" {% endif %}>
-      <a href="{{ '/gallery/' | relative_url }}">Home</a>
-    </li> -->
     <li {% if page.url contains '/gallery/exhibitions' %}class="active" {% endif %}>
       <a href="{{ '/gallery/exhibitions' | relative_url }}">Exhibitions</a>
     </li>
     <li {% if page.url contains '/gallery/artists' %}class="active" {% endif %}>
       <a href="{{ '/gallery/artists' | relative_url }}">Artists</a>
     </li>
-    <li {% if page.url contains '/gallery/collection' %}class="active" {% endif %}>
-      <a href="{{ '/gallery/collection' | relative_url }}">Media</a>
+    <li {% if page.url contains '/gallery/collect' or page.url contains '/gallery/artworks' or page.url contains '/gallery/collection' or page.url contains '/gallery/account' %}class="active" {% endif %}>
+      <a href="{{ '/gallery/collect' | relative_url }}">Collect</a>
     </li>
     <li {% if page.url contains '/gallery/visit' %}class="active" {% endif %}>
-      <a href="{{ '/gallery/visit' | relative_url }}">About</a>
+      <a href="{{ '/gallery/visit' | relative_url }}">Visit</a>
     </li>
   </ul>
 </nav>
