@@ -262,17 +262,22 @@
             }
 
             .header-account-icon {
-                right: 50px !important;
+                right: 60px !important;
                 z-index: 1000 !important;
             }
 
             .site-header--white-cube .header-mobile-toggle {
                 display: block !important;
                 position: absolute !important;
-                right: 14px !important;
+                right: 16px !important;
                 top: 50% !important;
                 transform: translateY(-50%) !important;
                 z-index: 1003 !important;
+                width: 44px !important;
+                height: 44px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
             }
 
             .site-header--white-cube .menu-toggle {
@@ -283,10 +288,11 @@
                 height: 16px !important;
                 background: none !important;
                 border: none !important;
-                padding: 10px !important;
+                padding: 0 !important;
                 box-sizing: content-box !important;
                 cursor: pointer !important;
                 -webkit-tap-highlight-color: transparent !important;
+                pointer-events: auto !important;
             }
 
             .site-header--white-cube .hamburger-line {
@@ -1081,12 +1087,15 @@
         // Auth state for header icon
         (function() {
             var icon = document.querySelector('.header-account-icon');
-            if (!icon || !firebase.auth) return;
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user && user.photoURL) {
-                    icon.innerHTML = '<img src="' + user.photoURL + '" style="width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.5);" alt="Account">';
-                }
-            });
+            if (!icon) return;
+            if (typeof firebase === 'undefined' || !firebase.auth) return;
+            try {
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user && user.photoURL) {
+                        icon.innerHTML = '<img src="' + user.photoURL + '" style="width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.5);" alt="Account">';
+                    }
+                });
+            } catch(e) { console.log('Auth check failed:', e); }
         })();
 
         // Header auto-hide on scroll down, show on scroll up or idle
