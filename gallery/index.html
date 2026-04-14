@@ -2,82 +2,96 @@
 layout: gallery-page
 title: "Home"
 description: "ART SPACE BYRON - Contemporary art space in Inverell"
-header_transparent: false
+header_transparent: true
 image: "/assets/images/Gallery Background photo/space (3).jpg"
 ---
 
 <style>
   .main-page { background: #fff; }
 
-  /* ── 1. Current Exhibition ── */
-  .home-exh {
-    width: 100%;
-    margin-bottom: 80px;
-  }
-
-  .home-exh-img {
-    display: block;
-    width: 100%;
-    background: #f5f5f5;
+  /* ── 1. Full-Screen Hero (White Cube style) ── */
+  .home-hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
+    margin-left: calc(-50vw + 50%);
     overflow: hidden;
+    background: #1a1a1a;
   }
 
-  .home-exh-img img {
+  .home-hero-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    display: block;
-    max-height: 80vh;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: block;
   }
 
-  .home-exh-info {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 48px 0;
-    text-align: center;
+  .home-hero-text {
+    position: absolute;
+    left: 48px;
+    bottom: 48px;
+    z-index: 2;
+    max-width: 80%;
   }
 
-  .home-exh-label {
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #999;
-    margin: 0 0 16px;
-  }
-
-  .home-exh-title {
-    font-family: 'Playfair Display', 'Noto Serif KR', serif;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 600;
-    color: #000;
-    line-height: 1.2;
-    margin: 0 0 16px;
-    letter-spacing: -0.01em;
-  }
-
-  .home-exh-artists {
-    font-size: 0.95rem;
-    color: #555;
+  .home-hero-dates {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.7);
     margin: 0 0 8px;
-    font-weight: 500;
-  }
-
-  .home-exh-dates {
-    font-size: 0.82rem;
-    color: #888;
-    margin: 0 0 24px;
-  }
-
-  .home-exh-link {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #000;
+  }
+
+  .home-hero-title {
+    font-family: 'Playfair Display', 'Noto Serif KR', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 8px;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+  }
+
+  .home-hero-artists {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .home-hero-scroll {
+    position: absolute;
+    right: 48px;
+    bottom: 48px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    z-index: 2;
     text-decoration: none;
-    border-bottom: 1px solid #000;
-    padding-bottom: 4px;
+  }
+
+  /* Hero-aware header (transparent until scroll) */
+  body.home-hero-active .site-header:not(.scrolled) {
+    background: transparent !important;
+    border-bottom: none !important;
+  }
+
+  body.home-hero-active .site-header:not(.scrolled) .nav-link,
+  body.home-hero-active .site-header:not(.scrolled) .site-logo-minimal {
+    color: #fff !important;
+  }
+
+  body.home-hero-active .site-header:not(.scrolled) .header-account-icon svg {
+    stroke: #fff !important;
+  }
+
+  body.home-hero-active .site-header:not(.scrolled) .hamburger-line {
+    background-color: #fff !important;
   }
 
   /* ── 2. Intro ── */
@@ -221,7 +235,18 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
   }
 
   @media (max-width: 900px) {
-    .home-exh-info { padding: 32px 24px 0; }
+    .home-hero-text {
+      left: 24px;
+      bottom: 24px;
+      max-width: calc(100% - 48px);
+    }
+    .home-hero-scroll {
+      right: 24px;
+      bottom: 24px;
+    }
+    .home-hero-title {
+      font-size: 28px;
+    }
     .home-intro { padding: 32px 24px; }
     .home-section { padding: 24px 24px 40px; }
     .home-artists-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
@@ -625,27 +650,27 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
 
   {% assign current_exhibition = site.exhibitions | where: "status", "current" | first %}
 
-  <!-- 1. CURRENT EXHIBITION: Full-width image + info -->
-  <section class="home-exh">
-    {% if current_exhibition.featured_image %}
-    <a href="{{ current_exhibition.url | relative_url }}" class="home-exh-img">
-      <img src="{{ current_exhibition.featured_image | relative_url }}" alt="{{ current_exhibition.title }}" loading="eager">
+  <!-- 1. FULL-SCREEN HERO -->
+  <section class="home-hero">
+    <a href="{{ current_exhibition.url | relative_url }}" style="display:block;width:100%;height:100%;">
+      {% if current_exhibition.featured_image %}
+      <img src="{{ current_exhibition.featured_image | relative_url }}" alt="{{ current_exhibition.title }}" class="home-hero-img" loading="eager">
+      {% endif %}
     </a>
-    {% endif %}
 
-    <div class="home-exh-info">
-      <p class="home-exh-label">Current Exhibition</p>
-      <h1 class="home-exh-title">{{ current_exhibition.title }}</h1>
-      <p class="home-exh-artists">{{ current_exhibition.artists | join: " · " | default: current_exhibition.artist }}</p>
-      <p class="home-exh-dates">
-        {{ current_exhibition.start_date | date: "%d %B" }} — {{ current_exhibition.end_date | date: "%d %B, %Y" }}
+    <div class="home-hero-text">
+      <p class="home-hero-dates">
+        {{ current_exhibition.start_date | date: "%-d %B" }} – {{ current_exhibition.end_date | date: "%-d %B %Y" }}
       </p>
-      <a href="{{ current_exhibition.url | relative_url }}" class="home-exh-link">View Exhibition →</a>
+      <h1 class="home-hero-title">{{ current_exhibition.title }}</h1>
+      <p class="home-hero-artists">{{ current_exhibition.artists | join: ", " | default: current_exhibition.artist }}</p>
     </div>
+
+    <a href="#home-intro" class="home-hero-scroll">Scroll ↓</a>
   </section>
 
   <!-- 2. GALLERY INTRO -->
-  <section class="home-intro">
+  <section class="home-intro" id="home-intro">
     <p class="home-intro-text">A gallery-café in Inverell, NSW — where contemporary art and everyday life meet.</p>
   </section>
 
@@ -700,7 +725,10 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
 </div>
 
 <script>
-  // Hero Slideshow - 3 second interval
+  // Activate hero transparent header
+  document.body.classList.add('home-hero-active');
+
+  // Hero Slideshow - 3 second interval (legacy, no-op)
   (function() {
     const slides = document.querySelectorAll('.main-hero-slide');
     const indicators = document.querySelectorAll('.hero-indicator');
