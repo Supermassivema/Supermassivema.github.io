@@ -5,7 +5,7 @@ artist: "Geum Sahong"
 medium: "Acrylic on canvas"
 dimensions: "20 x 20 cm"
 year: "2026"
-image: /assets/images/work/Geum Sahong/HOJAKDO-Artwork No.0799 호작도-20x20cm-Acrylic on canvas-2026-500AUD.jpg
+image: /assets/images/work/Geum Sahong/geum-sahong-hojakdo-no0799-2026.jpg
 status: "available"
 price: "500 AUD"
 description: ""

@@ -6,7 +6,7 @@ curator_kr: 김기림
 start_date: 2026-06-05
 end_date: 2026-08-07
 status: upcoming
-featured_image: "/assets/images/work/MinHeaJungSoo/work_01.jpg"
+featured_image: "/assets/images/work/MinHeaJungSoo/min-hea-jung-soo-work-001.jpg"
 location: Inverell, NSW, Australia
 artists:
   - Min Hea Jung Soo

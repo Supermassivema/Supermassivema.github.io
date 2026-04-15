@@ -5,7 +5,7 @@ artist: "Stephen Jones"
 medium: "Conté on Paper"
 dimensions: "62 x 45 cm"
 year: "2026"
-image: /assets/images/work/Stephen Jones/Dame Judith-Conté on Paper-62x45cm-2026-380aud.jpg
+image: /assets/images/work/Stephen Jones/stephen-jones-dame-judith.jpg
 status: "available"
 price: "380 AUD"
 description: ""

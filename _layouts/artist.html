@@ -118,7 +118,7 @@ layout: gallery-page
       {% for artwork in artist_artworks limit:4 %}
       <a href="{{ artwork.url | relative_url }}" class="artist-work-card">
         <div class="artist-work-img-wrap artist-work-img-large">
-          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">
+          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.artist }}, {{ artwork.title }}, {{ artwork.year }}" loading="lazy">
         </div>
         <div class="artist-work-info">
           <p class="artist-work-title">{{ artwork.title }}</p>
@@ -135,7 +135,7 @@ layout: gallery-page
       {% for artwork in artist_artworks %}
       <a href="{{ artwork.url | relative_url }}" class="artist-work-card">
         <div class="artist-work-img-wrap">
-          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">
+          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.artist }}, {{ artwork.title }}, {{ artwork.year }}" loading="lazy">
         </div>
         <div class="artist-work-info">
           <p class="artist-work-title">{{ artwork.title }}</p>

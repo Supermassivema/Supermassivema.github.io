@@ -5,7 +5,7 @@ artist: "Geum Sahong"
 medium: "Acrylic on canvas"
 dimensions: "20 x 20 cm"
 year: "2026"
-image: /assets/images/work/Geum Sahong/BUHWAL-Artwork No.0806 부활-20x20cm-Acrylic on canvas-2026-500AUD.jpg
+image: /assets/images/work/Geum Sahong/geum-sahong-buhwal-no0806-2026.jpg
 status: "available"
 price: "500 AUD"
 description: ""

@@ -5,7 +5,7 @@ artist: "Lee Sang-kwon"
 medium: "Acrylic on canvas"
 dimensions: "55 x 55 cm (15호)"
 year: "2025"
-image: /assets/images/work/이상권 작가/Work(08).jpg
+image: /assets/images/work/이상권 작가/lee-sang-kwon-work-020.jpg
 status: "available"
 price: "Contact for price"
 description: ""

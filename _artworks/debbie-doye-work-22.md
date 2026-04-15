@@ -5,7 +5,7 @@ artist: "Debbie Doye"
 medium: "Mixed Media, Ceramic"
 dimensions: ""
 year: ""
-image: /assets/images/work/DebbieDoye/Three Shadow Horses(Blue, Mix)-Mixed Media, Ceramic-300aud-sold out.jpg
+image: /assets/images/work/DebbieDoye/debbie-doye-three-shadow-horsesblue-mix.jpg
 status: "sold"
 price: "300 AUD"
 description: ""

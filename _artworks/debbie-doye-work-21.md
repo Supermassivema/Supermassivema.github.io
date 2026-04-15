@@ -5,7 +5,7 @@ artist: "Debbie Doye"
 medium: "Mixed Media, Ceramic"
 dimensions: ""
 year: ""
-image: /assets/images/work/DebbieDoye/Horned Celtic Vase-Mixed Media-Ceramic-160aud.jpg
+image: /assets/images/work/DebbieDoye/debbie-doye-horned-celtic-vase.jpg
 status: "available"
 price: "160 AUD"
 description: ""

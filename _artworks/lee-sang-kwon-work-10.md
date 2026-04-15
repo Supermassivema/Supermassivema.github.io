@@ -5,7 +5,7 @@ artist: "Lee Sang-kwon"
 medium: "Acrylic on canvas"
 dimensions: "100 x 100 cm"
 year: "2022"
-image: /assets/images/work/이상권 작가/Work(04).jpg
+image: /assets/images/work/이상권 작가/lee-sang-kwon-work-016.jpg
 status: "available"
 price: "Contact for price"
 description: ""

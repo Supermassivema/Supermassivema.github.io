@@ -589,7 +589,7 @@ layout: gallery-page
       {% endif %}
       {% for work in slide_artworks %}
       <div class="exh-slide">
-        <img src="{{ work.image | relative_url }}" alt="{{ work.title | default: work.artist | escape }}" loading="lazy">
+        <img src="{{ work.image | relative_url }}" alt="{{ work.artist | escape }}, {{ work.title | escape }}, {{ work.year }}" loading="lazy">
         <div class="exh-slide-caption">
           <p class="caption-artist">{{ work.artist }}</p>
           {% if work.title and work.title != "" %}

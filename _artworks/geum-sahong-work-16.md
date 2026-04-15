@@ -5,7 +5,7 @@ artist: "Geum Sahong"
 medium: "Acrylic on canvas"
 dimensions: "20 x 20 cm"
 year: "2026"
-image: /assets/images/work/Geum Sahong/HWAMOG-Artwork No.0810 화목-20x20cm-Acrylic on canvas-2026-500AUD.jpg
+image: /assets/images/work/Geum Sahong/geum-sahong-hwamog-no0810-2026.jpg
 status: "available"
 price: "500 AUD"
 description: ""

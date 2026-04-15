@@ -5,7 +5,7 @@ artist: "Min Hea Jung Soo"
 medium: "Traditional Korean paper on canvas"
 dimensions: ""
 year: ""
-image: /assets/images/work/MinHeaJungSoo/work_09.jpg
+image: /assets/images/work/MinHeaJungSoo/min-hea-jung-soo-work-009.jpg
 status: "available"
 price: "Contact for price"
 description: ""

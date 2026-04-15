@@ -5,7 +5,7 @@ artist: "Geum Sahong"
 medium: "Acrylic on canvas"
 dimensions: "20 x 20 cm"
 year: "2026"
-image: /assets/images/work/Geum Sahong/PUNGYO-Artwork No.0808 풍요-20x20cm-Acrylic on canvas-2026-500AUD SOLD OUT.jpg
+image: /assets/images/work/Geum Sahong/geum-sahong-pungyo-no0808-2026.jpg
 status: "sold"
 price: "500 AUD"
 description: ""

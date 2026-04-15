@@ -6,7 +6,7 @@ curator_kr: 김기림
 start_date: 2026-10-13
 end_date: 2026-12-18
 status: upcoming
-featured_image: "/assets/images/work/조창환 작가/KakaoTalk_20260324_151400092_01.jpg"
+featured_image: "/assets/images/work/조창환 작가/cho-chang-hwan-soom-breath-02.jpg"
 location: Inverell, NSW, Australia
 artists:
   - Cho Chang-hwan

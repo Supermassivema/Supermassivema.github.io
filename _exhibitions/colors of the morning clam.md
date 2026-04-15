@@ -6,7 +6,7 @@ curator_kr: 김기림
 start_date: 2026-03-02
 end_date: 2026-06-05
 status: current
-featured_image: "/assets/images/work/Geum Sahong/ILWOLOBONGDO-Artwork No.0816 일월오봉도-150호F사이즈-227.3x181.8cm-Acrylic on canvas-2026-70,000AUD.jpg"
+featured_image: "/assets/images/work/Geum Sahong/geum-sahong-ilwolobongdo-no0816-2026.jpg"
 upcoming_design: halftone
 location: Inverell, NSW, Australia
 artists:

@@ -5,7 +5,7 @@ artist: "Debbie Doye"
 medium: "Mixed Media, Ceramic, Wood"
 dimensions: ""
 year: ""
-image: /assets/images/work/DebbieDoye/Bowls with wooden spoons (large)-Mixed Media-Ceramic-wood-65aud.jpg
+image: /assets/images/work/DebbieDoye/debbie-doye-bowls-with-wooden-spoons-large.jpg
 status: "available"
 price: "65 AUD"
 description: ""

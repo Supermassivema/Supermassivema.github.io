@@ -214,7 +214,7 @@ section: gallery
       <a href="{{ artwork.url | relative_url }}" class="aw-card">
         <div class="aw-card-img">
           {% if artwork.status == 'sold' %}<span class="aw-card-status sold">Sold</span>{% else %}<span class="aw-card-status available">Available</span>{% endif %}
-          {% if artwork.image %}<img src="{{ artwork.image | relative_url }}" alt="{{ artwork.title }}" loading="lazy">{% endif %}
+          {% if artwork.image %}<img src="{{ artwork.image | relative_url }}" alt="{{ artwork.artist }}, {{ artwork.title }}, {{ artwork.year }}" loading="lazy">{% endif %}
         </div>
         <div class="aw-card-info">
           {% if artwork.title and artwork.title != "" %}<p class="aw-card-title">{{ artwork.title }}</p>{% endif %}
