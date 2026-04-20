@@ -10,9 +10,6 @@ location: ""
 born: ""
 education: ""
 featured_image: "/assets/images/work/Stephen Jones/프로필 사진.jpg"
-exhibition_views_simple:
-  - path: "/assets/images/work/Stephen Jones/전시전경/Exhibition_01.jpg"
-  - path: "/assets/images/work/Stephen Jones/전시전경/Exhibition_02.jpg"
 studio_photos:
   - path: "/assets/images/work/Stephen Jones/스튜디오/studio (1).jpg"
   - path: "/assets/images/work/Stephen Jones/스튜디오/studio (2).jpg"
