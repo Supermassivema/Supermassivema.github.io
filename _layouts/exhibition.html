@@ -308,99 +308,54 @@ layout: gallery-page
     border-bottom: 1px solid #e0e0e0;
   }
 
-  .exh-views-slideshow {
-    position: relative;
-    width: 100%;
-    height: 65vh;
+  .exh-views-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .exh-views-grid.is-collapsed .exh-views-grid-item:nth-child(n+10) {
+    display: none;
+  }
+
+  .exh-views-grid-item {
+    aspect-ratio: 1 / 1;
     overflow: hidden;
+    cursor: pointer;
     background: #f5f5f5;
   }
 
-  .exh-views-track {
-    display: flex;
+  .exh-views-grid-item img {
+    width: 100%;
     height: 100%;
-    transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
-  }
-
-  .exh-views-slide {
-    min-width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .exh-views-slide img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
   }
 
-  .exh-views-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(0,0,0,0.15);
-    color: #fff;
-    font-size: 1.1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-    z-index: 2;
-  }
-
-  .exh-views-btn:hover {
-    background: rgba(0,0,0,0.6);
-  }
-
-  .exh-views-prev { left: 16px; }
-  .exh-views-next { right: 16px; }
-
-  .exh-views-counter {
-    position: absolute;
-    top: 16px;
-    right: 18px;
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: #fff;
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(4px);
-    padding: 4px 10px;
-    z-index: 2;
-  }
-
-  .exh-views-dots {
-    position: absolute;
-    bottom: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 6px;
-    z-index: 2;
-  }
-
-  .exh-views-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.3);
-    border: none;
-    cursor: pointer;
+  .exh-views-toggle {
+    display: inline-block;
+    margin-top: 20px;
     padding: 0;
-    transition: background 0.2s, transform 0.2s;
+    background: none;
+    border: none;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #000;
+    cursor: pointer;
+    border-bottom: 1px solid #000;
   }
 
-  .exh-views-dot.active {
-    background: #333;
-    transform: scale(1.25);
+  .exh-views-toggle:hover {
+    color: #555;
+    border-color: #555;
+  }
+
+  @media (max-width: 768px) {
+    .exh-views-grid {
+      gap: 8px;
+    }
   }
 
   /* ── Lightbox ── */
@@ -518,15 +473,6 @@ layout: gallery-page
     .exh-artwork-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-
-    .exh-views-btn {
-      width: 34px;
-      height: 34px;
-      font-size: 0.9rem;
-    }
-
-    .exh-views-prev { left: 10px; }
-    .exh-views-next { right: 10px; }
 
     .exh-slide-btn {
       width: 34px;
@@ -673,29 +619,18 @@ layout: gallery-page
   {% endif %}
 
 
-  <!-- ── Exhibition Views (전시전경) ── -->
-  {% assign view_images = "1.jpg,2.jpg,3.jpg,4.jpg,5.jpg,6.jpg,7.jpg,8.jpg,9.jpg,10.jpg,11.jpg,12.jpg,13.jpg" | split: "," %}
+  <!-- ── Exhibition Views ── -->
+  {% assign view_nums = "1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51" | split: "," %}
   <div class="exh-views-section">
-    <h2>Exhibition Views &middot; 전시 전경</h2>
-    <div class="exh-views-slideshow" id="viewsSlideshow">
-      <div class="exh-views-counter">
-        <span id="viewsCurrentNum">1</span> / {{ view_images | size }}
+    <h2>Exhibition Views</h2>
+    <div class="exh-views-grid is-collapsed" id="exhViewsGrid">
+      {% for num in view_nums %}
+      <div class="exh-views-grid-item">
+        <img src="{{ '/assets/images/Exhibition/Exhibition (' | append: num | append: ').jpg' | relative_url }}" alt="Exhibition view {{ num }}" loading="lazy">
       </div>
-      <div class="exh-views-track" id="viewsTrack">
-        {% for img in view_images %}
-        <div class="exh-views-slide">
-          <img src="{{ '/assets/images/전시전경/' | append: img | relative_url }}" alt="Exhibition view {{ forloop.index }}" loading="lazy">
-        </div>
-        {% endfor %}
-      </div>
-      <button class="exh-views-btn exh-views-prev" id="viewsPrev" aria-label="Previous">&#8592;</button>
-      <button class="exh-views-btn exh-views-next" id="viewsNext" aria-label="Next">&#8594;</button>
-      <div class="exh-views-dots" id="viewsDots">
-        {% for img in view_images %}
-        <button class="exh-views-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Go to view {{ forloop.index }}"></button>
-        {% endfor %}
-      </div>
+      {% endfor %}
     </div>
+    <button class="exh-views-toggle" id="exhViewsToggle" onclick="(function(btn){var g=document.getElementById('exhViewsGrid');g.classList.toggle('is-collapsed');btn.textContent=g.classList.contains('is-collapsed')?'View All':'Close';})(this)">View All</button>
   </div>
 
   <!-- Lightbox -->
@@ -824,80 +759,11 @@ document.querySelectorAll('.exh-slide').forEach(function(slide) {
   });
 });
 
-// Attach click to views slides
-document.querySelectorAll('.exh-views-slide').forEach(function(slide) {
-  slide.addEventListener('click', function(e) {
-    if (e.target.closest('.exh-views-btn')) return;
+// Attach click to views grid items
+document.querySelectorAll('.exh-views-grid-item').forEach(function(item) {
+  item.addEventListener('click', function() {
     var img = this.querySelector('img');
     if (img) openLightbox(img.src);
   });
 });
-
-// Exhibition Views slideshow
-(function() {
-  var ss = document.getElementById('viewsSlideshow');
-  if (!ss) return;
-
-  var track = document.getElementById('viewsTrack');
-  var slides = track.querySelectorAll('.exh-views-slide');
-  var total = slides.length;
-  if (total <= 1) return;
-
-  var current = 0;
-  var animating = false;
-  var counter = document.getElementById('viewsCurrentNum');
-  var dots = document.querySelectorAll('.exh-views-dot');
-  var autoInterval = null;
-
-  function goTo(index) {
-    if (animating) return;
-    if (index === current) return;
-    if (index < 0) index = total - 1;
-    if (index >= total) index = 0;
-    animating = true;
-    current = index;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    counter.textContent = current + 1;
-    dots.forEach(function(d, i) {
-      d.classList.toggle('active', i === current);
-    });
-  }
-
-  track.addEventListener('transitionend', function() { animating = false; });
-
-  document.getElementById('viewsNext').addEventListener('click', function() { goTo(current + 1); resetAuto(); });
-  document.getElementById('viewsPrev').addEventListener('click', function() { goTo(current - 1); resetAuto(); });
-
-  dots.forEach(function(dot) {
-    dot.addEventListener('click', function() {
-      goTo(parseInt(this.getAttribute('data-index')));
-      resetAuto();
-    });
-  });
-
-  function startAuto() {
-    if (autoInterval) clearInterval(autoInterval);
-    autoInterval = setInterval(function() { goTo(current + 1); }, 5000);
-  }
-  function resetAuto() {
-    clearInterval(autoInterval);
-    autoInterval = null;
-    startAuto();
-  }
-  startAuto();
-
-  ss.addEventListener('mouseenter', function() { clearInterval(autoInterval); autoInterval = null; });
-  ss.addEventListener('mouseleave', function() { startAuto(); });
-
-  // Touch swipe
-  var touchStartX = 0;
-  ss.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-  ss.addEventListener('touchend', function(e) {
-    var diff = touchStartX - e.changedTouches[0].screenX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) goTo(current + 1); else goTo(current - 1);
-      resetAuto();
-    }
-  }, { passive: true });
-})();
 </script>

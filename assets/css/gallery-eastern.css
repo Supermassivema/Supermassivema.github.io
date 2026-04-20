@@ -832,7 +832,7 @@
         right: -100% !important;
         width: 100% !important;
         height: 100vh !important;
-        background-color: var(--background-primary) !important;
+        background-color: #ffffff !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
@@ -852,6 +852,7 @@
 
     #main-nav .nav-link {
         font-size: 1.5rem !important;
+        color: #000000 !important;
     }
 
     .menu-toggle {
