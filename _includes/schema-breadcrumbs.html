@@ -1,0 +1,19 @@
+{%- comment %} BreadcrumbList built from page.url. Self-guards against the homepage. {% endcomment -%}
+{%- if page.url != "/" -%}
+{%- assign segs = page.url | split: "/" -%}
+{%- assign leaf = page.title | default: page.name -%}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":{{ '/' | absolute_url | jsonify }}}
+{%- assign path = "" -%}
+{%- assign pos = 1 -%}
+{%- for seg in segs -%}
+{%- if seg != "" -%}
+{%- assign path = path | append: "/" | append: seg -%}
+{%- assign pos = pos | plus: 1 -%}
+{%- if forloop.last and leaf and leaf != "" and leaf != "Home" -%}{%- assign label = leaf -%}{%- else -%}{%- assign label = seg | replace: "-", " " | capitalize -%}{%- endif -%}
+,{"@type":"ListItem","position":{{ pos }},"name":{{ label | jsonify }},"item":{{ path | append: "/" | absolute_url | jsonify }}}
+{%- endif -%}
+{%- endfor -%}
+]}
+</script>
+{%- endif -%}

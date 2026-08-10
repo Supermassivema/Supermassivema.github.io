@@ -4,6 +4,32 @@ title: Exhibitions
 section: gallery
 ---
 
+{%- comment %} Structured data: each exhibition as an ExhibitionEvent {% endcomment -%}
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@graph":[
+{%- for ex in site.exhibitions -%}
+{%- unless forloop.first %},{% endunless %}
+{
+"@type":"ExhibitionEvent",
+"name":{{ ex.title | jsonify }},
+"url":{{ ex.url | absolute_url | jsonify }},
+{%- if ex.start_date %}"startDate":{{ ex.start_date | date: "%Y-%m-%d" | jsonify }},{% endif %}
+{%- if ex.end_date %}"endDate":{{ ex.end_date | date: "%Y-%m-%d" | jsonify }},{% endif %}
+"eventStatus":"https://schema.org/EventScheduled",
+"eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+"isAccessibleForFree":true,
+{%- if ex.featured_image %}"image":{{ ex.featured_image | absolute_url | uri_escape | jsonify }},{% endif %}
+"location":{"@type":"Place","name":"ART SPACE BYRON","address":{"@type":"PostalAddress","streetAddress":"44 Byron Street","addressLocality":"Inverell","addressRegion":"NSW","postalCode":"2360","addressCountry":"AU"}},
+"organizer":{"@type":"Organization","name":"ART SPACE BYRON","url":{{ '/' | absolute_url | jsonify }}}
+{%- if ex.artists %},"performer":[{%- for a in ex.artists -%}{%- unless forloop.first %},{% endunless %}{"@type":"Person","name":{{ a | jsonify }}}{%- endfor -%}]{%- endif %}
+}
+{%- endfor -%}
+]
+}
+</script>
+
 <style>
   .exhibitions-page {
     background: #fff;

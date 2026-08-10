@@ -1,3 +1,29 @@
+{%- comment %} Artwork pages have no shared <head>, so structured data is injected here. {% endcomment -%}
+{% include schema-artgallery.html %}
+{% include schema-breadcrumbs.html %}
+{%- comment %} Structured data: VisualArtwork {% endcomment -%}
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"VisualArtwork",
+"name":{{ page.title | jsonify }},
+"url":{{ page.url | absolute_url | jsonify }},
+"creator":{"@type":"Person","name":{{ page.artist | jsonify }}}
+{%- if page.image %},"image":{{ page.image | absolute_url | uri_escape | jsonify }}{% endif %}
+{%- if page.artform and page.artform != "" %},"artform":{{ page.artform | jsonify }}{% endif %}
+{%- if page.medium and page.medium != "" %},"artMedium":{{ page.medium | jsonify }}{% endif %}
+{%- if page.year and page.year != "" %},"dateCreated":{{ page.year | jsonify }}{% endif %}
+{%- if page.dimensions and page.dimensions != "" %},"size":{{ page.dimensions | jsonify }}
+{%- assign dparts = page.dimensions | split: "x" -%}
+{%- if dparts.size >= 2 -%}
+{%- assign wv = dparts[0] | strip -%}
+{%- assign hv = dparts[1] | strip | split: " " | first -%}
+,"width":{"@type":"QuantitativeValue","value":{{ wv | jsonify }},"unitText":"cm"},"height":{"@type":"QuantitativeValue","value":{{ hv | jsonify }},"unitText":"cm"}
+{%- endif -%}
+{%- endif %}
+}
+</script>
+
 {% assign lang = page.lang | default: site.default_lang | default: "en" %}
 {% assign t = site.data.translations[lang] %}
 

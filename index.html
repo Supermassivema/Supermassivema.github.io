@@ -464,33 +464,17 @@ lang: en
         });
     </script>
 
-    <!-- Structured data: art gallery / local business (homepage) -->
+    <!-- Structured data: gallery/cafe (global) + website (homepage) -->
+    {% include schema-artgallery.html %}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ArtGallery",
+      "@type": "WebSite",
+      "@id": "{{ '/#website' | absolute_url }}",
       "name": "ART SPACE BYRON",
-      "description": "A contemporary art gallery and artisanal cafe in Inverell, NSW, Australia.",
       "url": "{{ '/' | absolute_url }}",
-      "logo": "{{ '/assets/logo/brand-logo.png' | absolute_url }}",
-      "image": "{{ '/assets/images/og-image.jpg' | absolute_url }}",
-      "email": "admin@artspacebyron.com.au",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "44 Byron St",
-        "addressLocality": "Inverell",
-        "addressRegion": "NSW",
-        "postalCode": "2360",
-        "addressCountry": "AU"
-      },
-      "openingHoursSpecification": [
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "10:00", "closes": "18:00" },
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:00", "closes": "17:00" }
-      ],
-      "sameAs": [
-        "https://instagram.com/liminalgallery",
-        "https://instagram.com/emberandhearth"
-      ]
+      "inLanguage": "en",
+      "publisher": { "@id": "{{ '/#artgallery' | absolute_url }}" }
     }
     </script>
 </head>

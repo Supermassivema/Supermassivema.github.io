@@ -1,0 +1,39 @@
+{%- comment %} Global structured data: ART SPACE BYRON (gallery + cafe). Rendered on every page. {% endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ArtGallery",
+  "additionalType": "https://schema.org/CafeOrCoffeeShop",
+  "@id": {{ '/#artgallery' | absolute_url | jsonify }},
+  "name": "ART SPACE BYRON",
+  "description": "A contemporary art gallery and artisanal cafe in Inverell, NSW, Australia.",
+  "url": {{ '/' | absolute_url | jsonify }},
+  "logo": {{ '/assets/logo/brand-logo.png' | absolute_url | jsonify }},
+  "image": {{ '/assets/images/og-image.jpg' | absolute_url | jsonify }},
+  "telephone": "+61455616983",
+  "email": "admin@artspacebyron.com.au",
+  "priceRange": "$$",
+  "isAccessibleForFree": true,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "44 Byron Street",
+    "addressLocality": "Inverell",
+    "addressRegion": "NSW",
+    "postalCode": "2360",
+    "addressCountry": "AU"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -29.7745,
+    "longitude": 151.1129
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "17:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "15:00" }
+  ],
+  "sameAs": [
+    "https://instagram.com/liminalgallery",
+    "https://instagram.com/emberandhearth"
+  ]
+}
+</script>

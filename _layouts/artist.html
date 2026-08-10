@@ -2,6 +2,27 @@
 layout: gallery-page
 ---
 
+{%- comment %} Structured data: artist as a Person {% endcomment -%}
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Person",
+"name":{{ page.name | jsonify }},
+"jobTitle":"Artist",
+"url":{{ page.url | absolute_url | jsonify }}
+{%- if page.name_kr and page.name_kr != "" %},"alternateName":{{ page.name_kr | jsonify }}{% endif %}
+{%- if page.nationality and page.nationality != "" %},"nationality":{{ page.nationality | jsonify }}{% endif %}
+{%- if page.born and page.born != "" %},"birthDate":{{ page.born | jsonify }}{% endif %}
+{%- if page.medium and page.medium != "" %},"knowsAbout":{{ page.medium | jsonify }}{% endif %}
+{%- if page.featured_image %},"image":{{ page.featured_image | absolute_url | uri_escape | jsonify }}{% endif %}
+{%- capture sameas -%}
+{%- if page.website and page.website != "" -%}{%- assign w = page.website -%}{%- unless w contains "http" -%}{%- assign w = "https://" | append: w -%}{%- endunless -%}{{ w | jsonify }}{%- endif -%}
+{%- if page.instagram and page.instagram != "" -%}{%- if page.website and page.website != "" -%},{%- endif -%}{%- assign ig = page.instagram | remove: "@" -%}{{ "https://instagram.com/" | append: ig | jsonify }}{%- endif -%}
+{%- endcapture -%}
+{%- if sameas != "" %},"sameAs":[{{ sameas }}]{% endif %}
+}
+</script>
+
 <div class="artist-detail">
 
   <!-- Hero: Large artist image + name -->
