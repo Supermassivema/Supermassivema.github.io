@@ -29,7 +29,7 @@ permalink: pretty
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-sitemap
+  # sitemap.xml is now a custom template (adds <image:image>); jekyll-sitemap removed to avoid conflict
 
 # Collections Configuration
 collections:
