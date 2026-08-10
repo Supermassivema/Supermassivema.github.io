@@ -1,5 +1,7 @@
 ---
 layout: artist
+title: "Lee Sang-kwon 이상권"
+description: "Lee Sang-kwon (b. 1965, Chuncheon): Paju-based painter, 21 solo shows. His landscapes explore the weight and depth of time through layered colour."
 name: "Lee Sang-kwon"
 name_kr: "이상권"
 slug: "lee-sang-kwon"

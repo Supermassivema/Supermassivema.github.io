@@ -1,5 +1,7 @@
 ---
 layout: artist
+title: "Min Hea Jung Soo 민해정수"
+description: "Min Hea Jung Soo, a Hongik-trained painter, turns hazy memories into vivid imagery through birds, flowers, bees and leaves—abstract afar, clear up close."
 name: "Min Hea Jung Soo"
 name_kr: "민해정수"
 slug: "min-hea-jung-soo"

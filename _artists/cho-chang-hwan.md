@@ -1,5 +1,7 @@
 ---
 layout: artist
+title: "Cho Chang-hwan 조창환"
+description: "Cho Chang-hwan (b. 1964, Boeun): abstract SOOM (Breath) paintings built from ~10 single-hair brush layers, linking breath to the East Asian concept of Ki."
 name: "Cho Chang-hwan"
 name_kr: "조창환"
 slug: "cho-chang-hwan"

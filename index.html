@@ -8,13 +8,14 @@ lang: en
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ART SPACE BYRON | Contemporary Art & Artisanal Coffee in Inverell</title>
-    <meta name="description"
-        content="ART SPACE BYRON - A sanctuary for contemporary art and artisanal coffee in Inverell, NSW.">
+    <title>ART SPACE BYRON | Art Gallery &amp; Cafe, Inverell NSW</title>
+    {%- assign cur_ex = site.exhibitions | where: "status", "current" | first -%}
+    {%- capture home_desc %}Contemporary art gallery and artisanal cafe at 44 Byron Street, Inverell NSW. Now showing {{ cur_ex.title }}. Free entry.{% endcapture -%}
+    <meta name="description" content="{{ home_desc | strip_newlines | strip | escape }}">
 
     <!-- Open Graph / Social Meta -->
     <meta property="og:title" content="ART SPACE BYRON | Contemporary Art in Inverell">
-    <meta property="og:description" content="A contemporary art space and artisanal coffee in Inverell, NSW, Australia.">
+    <meta property="og:description" content="{{ home_desc | strip_newlines | strip | escape }}">
     <meta property="og:image" content="{{ '/assets/images/og-image.jpg' | absolute_url }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ '/' | absolute_url }}">

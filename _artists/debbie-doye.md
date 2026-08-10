@@ -1,5 +1,7 @@
 ---
 layout: artist
+title: "Debbie Doye"
+description: "Debbie Doye, a ceramic sculptor from the Northern Tablelands, NSW, works in raw clay to explore solidity and transience through tactile sculptural form."
 name: "Debbie Doye"
 name_kr: ""
 slug: "debbie-doye"

@@ -1,5 +1,7 @@
 ---
 layout: artist
+title: "Stephen Jones"
+description: "Stephen Jones, an Inverell-based Australian painter, works in pencil, charcoal and acrylic, focusing on portraiture that captures character and expression."
 name: "Stephen Jones"
 name_kr: ""
 slug: "stephen-jones"

@@ -1,5 +1,7 @@
 ---
 layout: artist
+title: "Geum Sahong 금사홍"
+description: "Geum Sahong (b. 1962, Seoul): acrylic and tempera on untreated fabric in signature blue. 38 solo exhibitions exploring pantheism and the unity of nature."
 name: "Geum Sahong"
 name_kr: "금사홍"
 slug: "geum-sahong"
