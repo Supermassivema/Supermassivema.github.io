@@ -8,6 +8,8 @@ end_date: 2026-12-18
 status: upcoming
 featured_image: "/assets/images/work/조창환 작가/cho-chang-hwan-soom-breath-02.jpg"
 location: Inverell, NSW, Australia
+# Exhibition Views: empty for now — add the actual exhibition photo paths here after the show.
+exhibition_views: []
 artists:
   - Cho Chang-hwan
 description_kr: |

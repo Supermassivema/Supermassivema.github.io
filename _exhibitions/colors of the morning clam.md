@@ -5,10 +5,61 @@ curator: Kim Ki Lim
 curator_kr: 김기림
 start_date: 2026-03-02
 end_date: 2026-06-05
-status: current
+status: past
 featured_image: "/assets/images/work/Geum Sahong/geum-sahong-ilwolobongdo-no0816-2026.jpg"
 upcoming_design: halftone
 location: Inverell, NSW, Australia
+exhibition_views:
+  - "/assets/images/Exhibition/Exhibition (1).jpg"
+  - "/assets/images/Exhibition/Exhibition (2).jpg"
+  - "/assets/images/Exhibition/Exhibition (3).jpg"
+  - "/assets/images/Exhibition/Exhibition (4).jpg"
+  - "/assets/images/Exhibition/Exhibition (5).jpg"
+  - "/assets/images/Exhibition/Exhibition (6).jpg"
+  - "/assets/images/Exhibition/Exhibition (7).jpg"
+  - "/assets/images/Exhibition/Exhibition (8).jpg"
+  - "/assets/images/Exhibition/Exhibition (9).jpg"
+  - "/assets/images/Exhibition/Exhibition (10).jpg"
+  - "/assets/images/Exhibition/Exhibition (12).jpg"
+  - "/assets/images/Exhibition/Exhibition (13).jpg"
+  - "/assets/images/Exhibition/Exhibition (14).jpg"
+  - "/assets/images/Exhibition/Exhibition (15).jpg"
+  - "/assets/images/Exhibition/Exhibition (16).jpg"
+  - "/assets/images/Exhibition/Exhibition (17).jpg"
+  - "/assets/images/Exhibition/Exhibition (18).jpg"
+  - "/assets/images/Exhibition/Exhibition (19).jpg"
+  - "/assets/images/Exhibition/Exhibition (20).jpg"
+  - "/assets/images/Exhibition/Exhibition (21).jpg"
+  - "/assets/images/Exhibition/Exhibition (22).jpg"
+  - "/assets/images/Exhibition/Exhibition (23).jpg"
+  - "/assets/images/Exhibition/Exhibition (24).jpg"
+  - "/assets/images/Exhibition/Exhibition (25).jpg"
+  - "/assets/images/Exhibition/Exhibition (26).jpg"
+  - "/assets/images/Exhibition/Exhibition (27).jpg"
+  - "/assets/images/Exhibition/Exhibition (28).jpg"
+  - "/assets/images/Exhibition/Exhibition (29).jpg"
+  - "/assets/images/Exhibition/Exhibition (30).jpg"
+  - "/assets/images/Exhibition/Exhibition (31).jpg"
+  - "/assets/images/Exhibition/Exhibition (32).jpg"
+  - "/assets/images/Exhibition/Exhibition (33).jpg"
+  - "/assets/images/Exhibition/Exhibition (34).jpg"
+  - "/assets/images/Exhibition/Exhibition (35).jpg"
+  - "/assets/images/Exhibition/Exhibition (36).jpg"
+  - "/assets/images/Exhibition/Exhibition (37).jpg"
+  - "/assets/images/Exhibition/Exhibition (38).jpg"
+  - "/assets/images/Exhibition/Exhibition (39).jpg"
+  - "/assets/images/Exhibition/Exhibition (40).jpg"
+  - "/assets/images/Exhibition/Exhibition (41).jpg"
+  - "/assets/images/Exhibition/Exhibition (42).jpg"
+  - "/assets/images/Exhibition/Exhibition (43).jpg"
+  - "/assets/images/Exhibition/Exhibition (44).jpg"
+  - "/assets/images/Exhibition/Exhibition (45).jpg"
+  - "/assets/images/Exhibition/Exhibition (46).jpg"
+  - "/assets/images/Exhibition/Exhibition (47).jpg"
+  - "/assets/images/Exhibition/Exhibition (48).jpg"
+  - "/assets/images/Exhibition/Exhibition (49).jpg"
+  - "/assets/images/Exhibition/Exhibition (50).jpg"
+  - "/assets/images/Exhibition/Exhibition (51).jpg"
 artists:
   - Geum Sahong
   - Debbie Doye

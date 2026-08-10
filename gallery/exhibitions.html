@@ -303,9 +303,11 @@ section: gallery
           <img src="{{ exhibition.featured_image | relative_url }}" alt="{{ exhibition.title }}" loading="lazy">
           {% endif %}
         </div>
-        <p class="exhibition-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
-        <p class="exhibition-card-title">{{ exhibition.title }}</p>
-        <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%d.%m.%Y" }} — {{ exhibition.end_date | date: "%d.%m.%Y" }}</p>
+        <div class="exhibition-card-info">
+          <p class="exhibition-card-location">{{ exhibition.location | default: "Inverell, NSW" }}</p>
+          <p class="exhibition-card-title">{{ exhibition.title }}</p>
+          <p class="exhibition-card-dates">{{ exhibition.start_date | date: "%d.%m.%Y" }} — {{ exhibition.end_date | date: "%d.%m.%Y" }}</p>
+        </div>
       </a>
       {% endfor %}
     </div>

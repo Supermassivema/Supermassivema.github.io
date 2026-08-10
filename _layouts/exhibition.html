@@ -620,18 +620,23 @@ layout: gallery-page
 
 
   <!-- ── Exhibition Views ── -->
-  {% assign view_nums = "1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51" | split: "," %}
+  {% comment %}
+    Per-exhibition views: set `exhibition_views` in the exhibition's front matter
+    (a list of image paths). Empty or absent → this section is not shown (blank).
+  {% endcomment %}
+  {% if page.exhibition_views and page.exhibition_views.size > 0 %}
   <div class="exh-views-section">
     <h2>Exhibition Views</h2>
     <div class="exh-views-grid is-collapsed" id="exhViewsGrid">
-      {% for num in view_nums %}
+      {% for view in page.exhibition_views %}
       <div class="exh-views-grid-item">
-        <img src="{{ '/assets/images/Exhibition/Exhibition (' | append: num | append: ').jpg' | relative_url }}" alt="Exhibition view {{ num }}" loading="lazy">
+        <img src="{{ view | relative_url }}" alt="Exhibition view" loading="lazy">
       </div>
       {% endfor %}
     </div>
     <button class="exh-views-toggle" id="exhViewsToggle" onclick="(function(btn){var g=document.getElementById('exhViewsGrid');g.classList.toggle('is-collapsed');btn.textContent=g.classList.contains('is-collapsed')?'View All':'Close';})(this)">View All</button>
   </div>
+  {% endif %}
 
   <!-- Lightbox -->
   <div class="exh-lightbox" id="exhLightbox" onclick="closeLightbox(event)">

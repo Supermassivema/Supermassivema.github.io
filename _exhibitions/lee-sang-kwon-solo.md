@@ -8,6 +8,8 @@ end_date: 2026-10-09
 status: upcoming
 featured_image: "/assets/images/work/이상권 작가/lee-sang-kwon-work-002.jpg"
 location: Inverell, NSW, Australia
+# Exhibition Views: empty for now — add the actual exhibition photo paths here after the show.
+exhibition_views: []
 artists:
   - Lee Sang-kwon
 description_kr: |
