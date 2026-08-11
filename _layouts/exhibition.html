@@ -527,10 +527,11 @@ layout: gallery-page
       {% if page.featured_image %}
       <div class="exh-slide">
         <img src="{{ page.featured_image | relative_url }}" alt="{{ page.title | escape }}" loading="eager">
+        {% if page.artists and page.artists.first %}
         <div class="exh-slide-caption">
-          <p class="caption-artist">Geum Sahong</p>
-          <p class="caption-title">일월오봉도 (No.0816)</p>
+          <p class="caption-artist">{{ page.artists.first }}</p>
         </div>
+        {% endif %}
       </div>
       {% endif %}
       {% for work in slide_artworks %}
@@ -555,78 +556,80 @@ layout: gallery-page
   </div>
   {% endif %}
 
-  <!-- ── English Section ── -->
-  <div class="exh-section-en">
-    <p class="exh-lang-label">English</p>
+  <style>
+    /* ── Stage B modules ── */
+    .exh-hero-header { text-align:center; max-width:820px; margin:0 auto 8px; }
+    .exh-status-badge { display:inline-block; font-size:0.66rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:5px 14px; border-radius:100px; margin-bottom:18px; }
+    .exh-status--current { background:#e7f6ec; color:#1a7f43; }
+    .exh-status--upcoming { background:#e8f0fe; color:#1a56b8; }
+    .exh-status--past { background:#f0f0f0; color:#777; }
+    .exh-hero-header .exh-title { font-family:'Playfair Display', Georgia, serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:600; margin:0 0 6px; color:#111; }
+    .exh-title-kr { font-family:'Noto Serif KR', serif; color:#777; font-size:1.05rem; margin:0 0 14px; }
+    .exh-hero-header .exh-dates { color:#555; font-size:0.95rem; margin:0 0 4px; }
+    .exh-hero-loc { color:#999; font-size:0.85rem; margin:0; }
+    .exh-module { max-width:900px; margin:0 auto; padding:44px 0; border-top:1px solid #eee; }
+    .exh-module-title { font-family:'Playfair Display', Georgia, serif; font-size:1.5rem; font-weight:600; margin:0 0 20px; color:#111; }
+    .exh-curator-by { font-size:0.78rem; color:#999; text-transform:uppercase; letter-spacing:0.08em; margin:-8px 0 22px; }
+    .exh-curator-en { font-size:1.02rem; line-height:1.85; color:#222; }
+    .exh-curator-kr { margin-top:30px; padding-top:26px; border-top:1px dashed #e5e5e5; color:#555; line-height:1.9; word-break:keep-all; }
+    .exh-works-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:30px 22px; }
+    .exh-work-card { text-decoration:none; color:#111; }
+    .exh-work-imgwrap { width:100%; aspect-ratio:1/1; background:#f7f7f7; display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:10px; }
+    .exh-work-imgwrap img { max-width:100%; max-height:100%; object-fit:contain; transition:transform .3s; }
+    .exh-work-card:hover .exh-work-imgwrap img { transform:scale(1.04); }
+    .exh-work-title { font-size:0.9rem; font-weight:500; margin:0 0 3px; }
+    .exh-work-meta { font-size:0.78rem; color:#999; margin:0; }
+    .exh-artists-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:22px; }
+    .exh-artist-card2 { display:flex; gap:16px; text-decoration:none; color:#111; align-items:center; border:1px solid #eee; border-radius:12px; padding:16px; transition:border-color .2s; }
+    .exh-artist-card2:hover { border-color:#111; }
+    .exh-artist-photo { width:72px; height:72px; border-radius:50%; object-fit:cover; flex:none; background:#f2f2f2; }
+    .exh-artist-name2 { font-weight:600; font-size:1rem; margin:0 0 4px; }
+    .exh-artist-bio2 { font-size:0.8rem; color:#777; line-height:1.5; margin:0 0 6px; }
+    .exh-artist-link2 { font-size:0.7rem; color:#b8996f; text-transform:uppercase; letter-spacing:0.06em; }
+    .exh-visit-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:24px; }
+    .exh-visit-item .k { font-size:0.64rem; text-transform:uppercase; letter-spacing:0.1em; color:#999; margin:0 0 6px; }
+    .exh-visit-item .v { font-size:0.9rem; color:#222; line-height:1.6; margin:0; }
+    .exh-inquiry-btn { display:inline-block; background:#111; color:#fff; padding:16px 34px; text-decoration:none; font-size:0.7rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; transition:background .3s; }
+    .exh-inquiry-btn:hover { background:#b8996f; }
+    .exh-news-list2 { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
+    .exh-newsitem { display:flex; gap:14px; text-decoration:none; color:#111; align-items:center; }
+    .exh-newsthumb { width:84px; height:84px; object-fit:cover; border-radius:6px; background:#f2f2f2; flex:none; }
+    .exh-newscat { font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em; color:#999; }
+    .exh-newstitle { font-size:0.98rem; font-weight:500; line-height:1.35; margin:4px 0 0; }
+    .exh-newsdate { font-size:0.72rem; color:#aaa; margin-top:4px; }
+  </style>
 
-    <div class="exh-header-info">
-      <h1 class="exh-title">{{ page.title | escape }}</h1>
-      {% if page.start_date and page.end_date %}
-      <p class="exh-dates">
-        <time datetime="{{ page.start_date }}">{{ page.start_date | date: "%B %d, %Y" }}</time> —
-        <time datetime="{{ page.end_date }}">{{ page.end_date | date: "%B %d, %Y" }}</time>
-      </p>
-      {% endif %}
-      {% if page.status %}
-      <span class="exh-status">{{ page.status | capitalize }}</span>
-      {% endif %}
-    </div>
+  <!-- ── 1. HERO HEADER (전시명 · 기간 · 상태) ── -->
+  {%- assign st = page.status | default: "past" -%}
+  {%- if st == "current" -%}{%- assign st_label = "Current" -%}{%- elsif st == "upcoming" -%}{%- assign st_label = "Upcoming" -%}{%- else -%}{%- assign st_label = "Past" -%}{%- endif -%}
+  <header class="exh-hero-header">
+    <span class="exh-status-badge exh-status--{{ st }}">{{ st_label }}</span>
+    <h1 class="exh-title">{{ page.title | escape }}</h1>
+    {% if page.title_kr %}<p class="exh-title-kr">{{ page.title_kr }}</p>{% endif %}
+    {% if page.start_date and page.end_date %}
+    <p class="exh-dates"><time datetime="{{ page.start_date }}">{{ page.start_date | date: "%B %d, %Y" }}</time> — <time datetime="{{ page.end_date }}">{{ page.end_date | date: "%B %d, %Y" }}</time></p>
+    {% endif %}
+    {% if page.location %}<p class="exh-hero-loc">{{ page.location }}</p>{% endif %}
+  </header>
 
-    <h2>About This Exhibition</h2>
-    <div class="exh-body">
+  <!-- ── 2. CURATOR'S NOTE (한·영 병기) ── -->
+  <section class="exh-module" style="border-top:none;">
+    <h2 class="exh-module-title">Curator's Note</h2>
+    {% if page.curator and page.curator != "" %}<p class="exh-curator-by">Curated by {{ page.curator }}{% if page.curator_kr and page.curator_kr != "" %} · {{ page.curator_kr }}{% endif %}</p>{% endif %}
+    <div class="exh-body exh-curator-en">
       {{ content }}
     </div>
-  </div>
-
-  <!-- ── Korean Section ── -->
-  {% if page.title_kr or page.description_kr %}
-  <div class="exh-section-kr">
-    <p class="exh-lang-label">한국어</p>
-
-    {% if page.title_kr %}
-    <p class="exh-kr-title">{{ page.title_kr }}</p>
-    {% endif %}
-    {% if page.start_date and page.end_date %}
-    <p class="exh-kr-dates">
-      {{ page.start_date | date: "%Y년 %m월 %d일" }} — {{ page.end_date | date: "%Y년 %m월 %d일" }}
-    </p>
-    {% endif %}
-
-    {% if page.description_kr %}
-    <h2>전시 소개</h2>
-    <div class="exh-kr-body">
+    {% if page.description_kr and page.description_kr != "" %}
+    <div class="exh-body exh-curator-kr">
       {{ page.description_kr | markdownify }}
     </div>
     {% endif %}
-  </div>
-  {% endif %}
+  </section>
 
-  <!-- ── Featured Artists ── -->
-  {% if page.artists %}
-  <div class="exh-artists-section">
-    <h2>Featured Artists</h2>
-    <div class="exh-artist-list">
-      {% for artist_name in page.artists %}
-        {% assign artist = site.artists | where: "name", artist_name | first %}
-        {% if artist %}
-        <div class="exh-artist-card">
-          <a href="{{ artist.url | relative_url }}">{{ artist.name }}</a>
-        </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-  {% endif %}
-
-
-  <!-- ── Exhibition Views ── -->
-  {% comment %}
-    Per-exhibition views: set `exhibition_views` in the exhibition's front matter
-    (a list of image paths). Empty or absent → this section is not shown (blank).
-  {% endcomment %}
+  <!-- ── 3. INSTALLATION VIEWS ── -->
   {% if page.exhibition_views and page.exhibition_views.size > 0 %}
-  <div class="exh-views-section">
-    <h2>Exhibition Views</h2>
+  <section class="exh-module">
+    <h2 class="exh-module-title">Installation Views</h2>
     <div class="exh-views-grid is-collapsed" id="exhViewsGrid">
       {% for view in page.exhibition_views %}
       <div class="exh-views-grid-item">
@@ -635,40 +638,109 @@ layout: gallery-page
       {% endfor %}
     </div>
     <button class="exh-views-toggle" id="exhViewsToggle" onclick="(function(btn){var g=document.getElementById('exhViewsGrid');g.classList.toggle('is-collapsed');btn.textContent=g.classList.contains('is-collapsed')?'View All':'Close';})(this)">View All</button>
-  </div>
+  </section>
   {% endif %}
 
-  <!-- Related News -->
-  {%- assign ex_news_count = 0 -%}
-  {%- for n in site.news -%}{%- if n.related_exhibition and n.related_exhibition != "" and page.url contains n.related_exhibition -%}{%- assign ex_news_count = ex_news_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
-  {% if ex_news_count > 0 %}
-  <div class="exh-views-section">
-    <style>
-      .exh-news-list { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:20px; }
-      .exh-news-item { display:flex; gap:14px; text-decoration:none; color:#111; align-items:center; }
-      .exh-news-thumb { width:84px; height:84px; object-fit:cover; border-radius:6px; background:#f2f2f2; flex:none; }
-      .exh-news-cat { font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em; color:#999; }
-      .exh-news-title { font-size:0.98rem; font-weight:500; line-height:1.35; margin:4px 0 0; }
-      .exh-news-date { font-size:0.72rem; color:#aaa; margin-top:4px; }
-    </style>
-    <h2>Related News</h2>
-    <div class="exh-news-list">
-      {%- assign ex_news = site.news | sort: "date" | reverse -%}
-      {% for n in ex_news %}
-      {% if n.related_exhibition and n.related_exhibition != "" and page.url contains n.related_exhibition %}
-      {%- assign enwebp = n.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
-      <a href="{{ n.url | relative_url }}" class="exh-news-item">
-        <picture><source srcset="{{ enwebp | relative_url }}" type="image/webp"><img class="exh-news-thumb" src="{{ n.image | relative_url }}" alt="{{ n.title | escape }}" loading="lazy"></picture>
-        <div>
-          <span class="exh-news-cat">{{ n.category }}</span>
-          <p class="exh-news-title">{{ n.title }}</p>
-          <p class="exh-news-date">{{ n.date | date: "%d %b %Y" }}</p>
-        </div>
+  <!-- ── 4. WORKS IN THE EXHIBITION ── -->
+  {% if page.artists %}
+  {%- assign exh_works = "" | split: "" -%}
+  {%- for artist_name in page.artists -%}
+    {%- assign aw = site.artworks | where: "artist", artist_name -%}
+    {%- for w in aw -%}{%- assign exh_works = exh_works | push: w -%}{%- endfor -%}
+  {%- endfor -%}
+  {% if exh_works.size > 0 %}
+  <section class="exh-module">
+    <h2 class="exh-module-title">Works in the Exhibition</h2>
+    <div class="exh-works-grid">
+      {% for w in exh_works %}
+      {%- if w.title and w.title != "" -%}{%- assign wt = w.title -%}{%- else -%}{%- assign wt = "Untitled" -%}{%- endif -%}
+      <a href="{{ w.url | relative_url }}" class="exh-work-card">
+        <div class="exh-work-imgwrap"><img src="{{ w.image | relative_url }}" alt="{% include alt-artwork.html art=w %}" loading="lazy"></div>
+        <p class="exh-work-title">{{ wt }}</p>
+        <p class="exh-work-meta">{% if w.year and w.year != "" %}{{ w.year }}{% endif %}{% if w.year and w.year != "" and w.medium and w.medium != "" %} · {% endif %}{% if w.medium and w.medium != "" %}{{ w.medium }}{% endif %}</p>
       </a>
-      {% endif %}
       {% endfor %}
     </div>
-  </div>
+  </section>
+  {% endif %}
+  {% endif %}
+
+  <!-- ── 5. PARTICIPATING ARTISTS ── -->
+  {% if page.artists %}
+  <section class="exh-module">
+    <h2 class="exh-module-title">Participating Artists</h2>
+    <div class="exh-artists-grid">
+      {% for artist_name in page.artists %}
+        {% assign artist = site.artists | where: "name", artist_name | first %}
+        {% if artist %}
+        <a href="{{ artist.url | relative_url }}" class="exh-artist-card2">
+          {% if artist.featured_image %}<img class="exh-artist-photo" src="{{ artist.featured_image | relative_url }}" alt="{{ artist.name | escape }}" loading="lazy">{% endif %}
+          <div>
+            <p class="exh-artist-name2">{{ artist.name }}{% if artist.name_kr and artist.name_kr != "" %} <span style="color:#999;font-weight:400;">{{ artist.name_kr }}</span>{% endif %}</p>
+            {% if artist.bio_short and artist.bio_short != "" %}<p class="exh-artist-bio2">{{ artist.bio_short | strip_html | truncate: 120 }}</p>{% endif %}
+            <span class="exh-artist-link2">View artist →</span>
+          </div>
+        </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- ── 6. RELATED PROGRAMS (이 전시 기간의 이벤트) ── -->
+  {%- assign prog_count = 0 -%}
+  {%- for n in site.news -%}{%- if n.related_exhibition and n.related_exhibition != "" and n.category == "Event" and page.url contains n.related_exhibition -%}{%- assign prog_count = prog_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+  {% if prog_count > 0 %}
+  <section class="exh-module">
+    <h2 class="exh-module-title">Related Programs</h2>
+    <div class="exh-news-list2">
+      {%- assign allprog = site.news | sort: "date" | reverse -%}
+      {% for n in allprog %}{% if n.related_exhibition and n.related_exhibition != "" and n.category == "Event" and page.url contains n.related_exhibition %}
+      {%- assign pw = n.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
+      <a href="{{ n.url | relative_url }}" class="exh-newsitem">
+        <picture><source srcset="{{ pw | relative_url }}" type="image/webp"><img class="exh-newsthumb" src="{{ n.image | relative_url }}" alt="{{ n.title | escape }}" loading="lazy"></picture>
+        <div><span class="exh-newscat">{{ n.category }}</span><p class="exh-newstitle">{{ n.title }}</p><p class="exh-newsdate">{{ n.date | date: "%d %b %Y" }}</p></div>
+      </a>
+      {% endif %}{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- ── 7. PLAN YOUR VISIT ── -->
+  <section class="exh-module">
+    <h2 class="exh-module-title">Plan Your Visit</h2>
+    <div class="exh-visit-grid">
+      {% if page.start_date and page.end_date %}
+      <div class="exh-visit-item"><p class="k">Dates</p><p class="v">{{ page.start_date | date: "%d %b %Y" }} — {{ page.end_date | date: "%d %b %Y" }}</p></div>
+      {% endif %}
+      <div class="exh-visit-item"><p class="k">Hours</p><p class="v">Tue–Fri 8am–5pm<br>Sat 8am–3pm<br>Sun–Mon closed</p></div>
+      <div class="exh-visit-item"><p class="k">Admission</p><p class="v">Free entry</p></div>
+      <div class="exh-visit-item"><p class="k">Location</p><p class="v">44 Byron Street<br>Inverell NSW 2360</p></div>
+    </div>
+  </section>
+
+  <!-- ── 8. INQUIRY ── -->
+  <section class="exh-module" style="text-align:center;">
+    <a class="exh-inquiry-btn" href="mailto:admin@artspacebyron.com.au?subject={{ page.title | uri_escape }}%20Enquiry">Enquire about this exhibition</a>
+  </section>
+
+  <!-- ── 9. RELATED NEWS (이벤트 제외) ── -->
+  {%- assign relnews_count = 0 -%}
+  {%- for n in site.news -%}{%- if n.related_exhibition and n.related_exhibition != "" and n.category != "Event" and page.url contains n.related_exhibition -%}{%- assign relnews_count = relnews_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+  {% if relnews_count > 0 %}
+  <section class="exh-module">
+    <h2 class="exh-module-title">Related News</h2>
+    <div class="exh-news-list2">
+      {%- assign allrel = site.news | sort: "date" | reverse -%}
+      {% for n in allrel %}{% if n.related_exhibition and n.related_exhibition != "" and n.category != "Event" and page.url contains n.related_exhibition %}
+      {%- assign nw = n.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
+      <a href="{{ n.url | relative_url }}" class="exh-newsitem">
+        <picture><source srcset="{{ nw | relative_url }}" type="image/webp"><img class="exh-newsthumb" src="{{ n.image | relative_url }}" alt="{{ n.title | escape }}" loading="lazy"></picture>
+        <div><span class="exh-newscat">{{ n.category }}</span><p class="exh-newstitle">{{ n.title }}</p><p class="exh-newsdate">{{ n.date | date: "%d %b %Y" }}</p></div>
+      </a>
+      {% endif %}{% endfor %}
+    </div>
+  </section>
   {% endif %}
 
   <!-- Lightbox -->
