@@ -111,6 +111,23 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     background-color: #1a1a1a !important;
   }
 
+  /* ── Adaptive hero: JS adds body.hero-dark for dark / colourful artworks ──
+     (default above = light artwork → white hero + dark text/nav) */
+  body.hero-dark .home-hero { background: #1a1a1a; }
+  body.hero-dark .home-hero::after {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.4) 45%, transparent 100%);
+  }
+  body.hero-dark .home-hero-title { color: #fff; }
+  body.hero-dark .home-hero-dates,
+  body.hero-dark .home-hero-artists,
+  body.hero-dark .home-hero-scroll { color: rgba(255, 255, 255, 0.78); }
+  body.hero-dark .home-hero-text,
+  body.hero-dark .home-hero-scroll { text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5); }
+  body.hero-dark.home-hero-active .site-header:not(.scrolled) .nav-link,
+  body.hero-dark.home-hero-active .site-header:not(.scrolled) .site-logo-minimal { color: #fff !important; }
+  body.hero-dark.home-hero-active .site-header:not(.scrolled) .header-account-icon svg { stroke: #fff !important; }
+  body.hero-dark.home-hero-active .site-header:not(.scrolled) .hamburger-line { background-color: #fff !important; }
+
   /* ── Sections ── */
   .home-section {
     max-width: 1400px;
@@ -720,6 +737,32 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
 <script>
   // Activate hero transparent header
   document.body.classList.add('home-hero-active');
+
+  // Adaptive hero: sample the artwork's brightness and switch the hero + nav text
+  // to dark (on light/white artworks) or light (on dark / colourful artworks).
+  (function() {
+    var img = document.querySelector('.home-hero-img');
+    if (!img) return;
+    function analyze() {
+      try {
+        var s = 40, c = document.createElement('canvas');
+        c.width = s; c.height = s;
+        var ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, s, s);
+        var d = ctx.getImageData(0, 0, s, s).data, sum = 0, n = 0;
+        for (var i = 0; i < d.length; i += 4) {
+          if (d[i + 3] < 125) continue; // skip transparent
+          sum += (0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]) / 255;
+          n++;
+        }
+        var avg = n ? sum / n : 1;
+        // Only genuinely light/white artworks keep dark text; dark or colourful → light text.
+        document.body.classList.toggle('hero-dark', avg < 0.62);
+      } catch (e) { /* same-origin canvas fail → keep light default */ }
+    }
+    if (img.complete && img.naturalWidth) analyze();
+    else img.addEventListener('load', analyze);
+  })();
 
   // Hero Slideshow - 3 second interval (legacy, no-op)
   (function() {
