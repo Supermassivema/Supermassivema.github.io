@@ -357,6 +357,7 @@
                     <ul class="nav-menu">
                         <li><a href="{{ '/gallery/exhibitions' | relative_url }}" class="nav-link">Exhibitions</a></li>
                         <li><a href="{{ '/gallery/artists' | relative_url }}" class="nav-link">Artists</a></li>
+                        <li><a href="{{ '/news' | relative_url }}" class="nav-link">News</a></li>
                     </ul>
                 </nav>
 
@@ -399,6 +400,7 @@
                 <li><a href="{{ '/gallery/artists' | relative_url }}" class="nav-link">Artists</a></li>
                 <li><a href="{{ '/gallery/collect' | relative_url }}" class="nav-link">Collect</a></li>
                 <li><a href="{{ '/gallery/visit' | relative_url }}" class="nav-link">Visit</a></li>
+                <li><a href="{{ '/news' | relative_url }}" class="nav-link">News</a></li>
             </ul>
         </nav>
     </header>
@@ -667,8 +669,9 @@
                     <p class="kukje-footer-text">Stay up to date on our artists, exhibitions, and events.</p>
                     <div class="kukje-footer-newsletter">
                         <input type="email" placeholder="Email address" class="kukje-footer-email">
-                        <button class="kukje-footer-subscribe">Subscribe</button>
+                        <button class="kukje-footer-subscribe" onclick="var e=this.previousElementSibling.value;window.location.href='mailto:admin@artspacebyron.com.au?subject=Newsletter%20signup&body='+encodeURIComponent('Please add me to the ART SPACE BYRON newsletter: '+e);">Subscribe</button>
                     </div>
+                    <p class="kukje-footer-text" style="margin-top:12px;"><a href="{{ '/news/rss.xml' | relative_url }}">Subscribe via RSS →</a> · <a href="{{ '/news' | relative_url }}">Latest news</a></p>
                 </div>
             </div>
 

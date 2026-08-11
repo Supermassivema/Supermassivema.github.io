@@ -42,6 +42,9 @@ collections:
   artworks:
     output: true
     permalink: /gallery/collection/:title/
+  news:
+    output: true
+    permalink: /news/:title/
 
 # Collection Defaults
 defaults:
@@ -62,6 +65,12 @@ defaults:
       type: "artworks"
     values:
       layout: "artwork"
+      brand: "gallery"
+  - scope:
+      path: ""
+      type: "news"
+    values:
+      layout: "news"
       brand: "gallery"
   - scope:
       path: "gallery"

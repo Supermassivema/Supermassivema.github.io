@@ -15,5 +15,8 @@ main:
       - title: Artists
         url: /gallery/artists
 
+  - title: News
+    url: /news
+
   - title: Contact
     url: /gallery/contact

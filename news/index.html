@@ -1,0 +1,204 @@
+---
+layout: gallery-page
+permalink: /news/
+title: "News"
+description: "Latest news from ART SPACE BYRON — exhibitions, events, artist updates and announcements from our contemporary art gallery in Inverell, New England NSW."
+section: gallery
+---
+
+{%- assign posts = site.news | sort: "date" | reverse -%}
+{%- assign featured_post = posts | where: "featured", true | first -%}
+
+{%- comment %} ── CollectionPage + ItemList structured data ── {% endcomment -%}
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"CollectionPage",
+"name":"News — ART SPACE BYRON",
+"url":{{ '/news/' | absolute_url | jsonify }},
+"mainEntity":{
+  "@type":"ItemList",
+  "numberOfItems":{{ posts.size }},
+  "itemListElement":[
+  {%- for p in posts -%}
+  {"@type":"ListItem","position":{{ forloop.index }},"url":{{ p.url | absolute_url | jsonify }},"name":{{ p.title | jsonify }}}{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+  ]
+}
+}
+</script>
+
+<style>
+  .news-page { background:#fff; min-height:100vh; }
+  .news-wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .news-head { padding: 56px 0 24px; }
+  .news-page-title { font-family:'Playfair Display', Georgia, serif; font-size: clamp(2rem, 6vw, 3.4rem); font-weight:600; color:#111; margin:0; }
+  .news-page-sub { color:#888; margin-top:8px; font-size:0.98rem; }
+
+  /* Chips */
+  .news-chips { display:flex; flex-wrap:wrap; gap:10px; padding: 8px 0 36px; }
+  .news-chip { border:1px solid #ddd; background:#fff; color:#555; border-radius:100px; padding:8px 18px; font-size:0.86rem; cursor:pointer; transition: all .18s; }
+  .news-chip:hover { border-color:#111; color:#111; }
+  .news-chip.active { background:#111; color:#fff; border-color:#111; }
+
+  /* Featured */
+  .news-featured { display:grid; grid-template-columns: 1.15fr 1fr; gap:40px; align-items:center; padding-bottom: 48px; margin-bottom: 40px; border-bottom:1px solid #eee; }
+  .news-featured-img { width:100%; aspect-ratio: 4/3; object-fit:cover; background:#f2f2f2; display:block; }
+  .news-featured-meta { display:flex; gap:12px; align-items:center; font-size:0.76rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:16px; }
+  .news-featured-cat { font-weight:600; color:#111; border:1px solid #111; padding:3px 11px; border-radius:100px; }
+  .news-featured-date { color:#999; }
+  .news-featured-title { font-family:'Playfair Display', Georgia, serif; font-size: clamp(1.5rem, 3.2vw, 2.3rem); line-height:1.18; font-weight:600; color:#111; margin:0 0 8px; }
+  .news-featured-title-kr { display:block; font-family:'Noto Serif KR',serif; font-size:0.6em; color:#777; font-weight:500; margin-top:8px; }
+  .news-featured-excerpt { color:#555; line-height:1.7; margin: 16px 0 22px; font-size:1.02rem; }
+  .news-featured-more { font-size:0.9rem; color:#111; text-decoration:none; border-bottom:1px solid #111; padding-bottom:2px; }
+
+  /* Grid */
+  .news-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 36px 28px; }
+  .news-card { text-decoration:none; color:#111; display:flex; flex-direction:column; }
+  .news-card-imgwrap { width:100%; aspect-ratio: 4/3; overflow:hidden; background:#f2f2f2; }
+  .news-card-img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .4s ease; }
+  .news-card:hover .news-card-img { transform: scale(1.04); }
+  .news-card-meta { display:flex; gap:10px; align-items:center; margin: 14px 0 8px; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; }
+  .news-card-cat { color:#111; font-weight:600; }
+  .news-card-date { color:#aaa; }
+  .news-card-title { font-family:'Playfair Display', Georgia, serif; font-size:1.18rem; line-height:1.3; font-weight:600; margin:0 0 6px; }
+  .news-card-excerpt { color:#777; font-size:0.9rem; line-height:1.55; margin:0; }
+  .news-empty { color:#999; padding: 40px 0; text-align:center; grid-column:1/-1; }
+
+  /* Pagination */
+  .news-pager { display:flex; justify-content:center; gap:8px; margin: 56px 0 0; }
+  .news-pager button { min-width:40px; height:40px; border:1px solid #ddd; background:#fff; color:#333; border-radius:8px; cursor:pointer; font-size:0.9rem; transition: all .18s; }
+  .news-pager button:hover:not(:disabled) { border-color:#111; color:#111; }
+  .news-pager button.active { background:#111; color:#fff; border-color:#111; }
+  .news-pager button:disabled { opacity:0.4; cursor:default; }
+
+  @media (max-width: 900px){ .news-grid { grid-template-columns: repeat(2, 1fr); } .news-featured { grid-template-columns:1fr; gap:20px; } }
+  @media (max-width: 560px){ .news-grid { grid-template-columns: 1fr; } .news-wrap { padding:0 20px; } }
+</style>
+
+<div class="news-page">
+  <div class="news-wrap">
+
+    <div class="news-head">
+      <h1 class="news-page-title">News</h1>
+      <p class="news-page-sub">Exhibitions, events, and updates from ART SPACE BYRON.</p>
+    </div>
+
+    <!-- Category chips -->
+    <div class="news-chips" id="newsChips">
+      <button class="news-chip active" data-cat="all">All</button>
+      <button class="news-chip" data-cat="Exhibition">Exhibition</button>
+      <button class="news-chip" data-cat="Event">Event</button>
+      <button class="news-chip" data-cat="Artist">Artist</button>
+      <button class="news-chip" data-cat="Press">Press</button>
+      <button class="news-chip" data-cat="Announcement">Announcement</button>
+    </div>
+
+    <!-- Featured -->
+    {% if featured_post %}
+    {%- assign fwebp = featured_post.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
+    <a class="news-featured" id="newsFeatured" href="{{ featured_post.url | relative_url }}">
+      <picture>
+        <source srcset="{{ fwebp | relative_url }}" type="image/webp">
+        <img class="news-featured-img" src="{{ featured_post.image | relative_url }}" alt="{{ featured_post.title | escape }}" loading="lazy">
+      </picture>
+      <div class="news-featured-body">
+        <div class="news-featured-meta">
+          <span class="news-featured-cat">{{ featured_post.category }}</span>
+          <span class="news-featured-date">{{ featured_post.date | date: "%d %B %Y" }}</span>
+        </div>
+        <h2 class="news-featured-title">{{ featured_post.title }}{% if featured_post.title_kr %}<span class="news-featured-title-kr">{{ featured_post.title_kr }}</span>{% endif %}</h2>
+        <p class="news-featured-excerpt">{{ featured_post.description | default: featured_post.excerpt | strip_html | truncate: 180 }}</p>
+        <span class="news-featured-more">Read more →</span>
+      </div>
+    </a>
+    {% endif %}
+
+    <!-- Grid -->
+    <div class="news-grid" id="newsGrid">
+      {% for p in posts %}
+      {%- assign cwebp = p.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
+      <a class="news-card" data-category="{{ p.category }}" data-featured="{% if featured_post and p.url == featured_post.url %}1{% else %}0{% endif %}" href="{{ p.url | relative_url }}">
+        <div class="news-card-imgwrap">
+          <picture>
+            <source srcset="{{ cwebp | relative_url }}" type="image/webp">
+            <img class="news-card-img" src="{{ p.image | relative_url }}" alt="{{ p.title | escape }}" loading="lazy">
+          </picture>
+        </div>
+        <div class="news-card-meta">
+          <span class="news-card-cat">{{ p.category }}</span>
+          <span class="news-card-date">{{ p.date | date: "%d %b %Y" }}</span>
+        </div>
+        <h3 class="news-card-title">{{ p.title }}</h3>
+        <p class="news-card-excerpt">{{ p.description | default: p.excerpt | strip_html | truncate: 110 }}</p>
+      </a>
+      {% endfor %}
+      <p class="news-empty" id="newsEmpty" style="display:none;">No posts in this category yet.</p>
+    </div>
+
+    <div class="news-pager" id="newsPager"></div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var PER_PAGE = 6;
+  var grid = document.getElementById('newsGrid');
+  if (!grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.news-card'));
+  var chips = Array.prototype.slice.call(document.querySelectorAll('#newsChips .news-chip'));
+  var pager = document.getElementById('newsPager');
+  var featured = document.getElementById('newsFeatured');
+  var empty = document.getElementById('newsEmpty');
+  var category = 'all', pageNum = 1;
+
+  function matches(card){
+    if (category === 'all') return card.dataset.featured !== '1'; // featured shown in hero on 'all'
+    return card.dataset.category === category;
+  }
+  function filtered(){ return cards.filter(matches); }
+
+  function render(){
+    var list = filtered();
+    var pages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+    if (pageNum > pages) pageNum = pages;
+    var start = (pageNum - 1) * PER_PAGE;
+    // show/hide cards
+    cards.forEach(function(c){ c.style.display = 'none'; });
+    list.slice(start, start + PER_PAGE).forEach(function(c){ c.style.display = 'flex'; });
+    // featured only on 'all' + first page
+    if (featured) featured.style.display = (category === 'all' && pageNum === 1) ? 'grid' : 'none';
+    // empty state
+    if (empty) empty.style.display = list.length === 0 ? 'block' : 'none';
+    // pager
+    pager.innerHTML = '';
+    if (pages > 1){
+      var mk = function(label, target, opts){
+        opts = opts || {};
+        var b = document.createElement('button');
+        b.textContent = label;
+        if (opts.active) b.className = 'active';
+        if (opts.disabled) b.disabled = true;
+        b.addEventListener('click', function(){ pageNum = target; render(); grid.scrollIntoView({behavior:'smooth', block:'start'}); });
+        pager.appendChild(b);
+      };
+      mk('‹', pageNum - 1, { disabled: pageNum === 1 });
+      for (var i = 1; i <= pages; i++) mk(String(i), i, { active: i === pageNum });
+      mk('›', pageNum + 1, { disabled: pageNum === pages });
+    }
+  }
+
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      category = chip.dataset.cat;
+      pageNum = 1;
+      render();
+    });
+  });
+
+  render();
+})();
+</script>

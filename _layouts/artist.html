@@ -254,6 +254,35 @@ layout: gallery-page
     {% endif %}
   </div>
 
+  <!-- Related News Section -->
+  {% assign artist_news = site.news | where_exp: "n", "n.related_artists contains page.name" | sort: "date" | reverse %}
+  {% if artist_news.size > 0 %}
+  <div class="artist-section" id="section-news">
+    <style>
+      .artist-news-list { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:20px; margin-top:24px; }
+      .artist-news-item { display:flex; gap:14px; text-decoration:none; color:#111; align-items:center; }
+      .artist-news-thumb { width:80px; height:80px; object-fit:cover; border-radius:6px; background:#f2f2f2; flex:none; }
+      .artist-news-cat { font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em; color:#999; }
+      .artist-news-title { font-size:0.95rem; font-weight:500; line-height:1.35; margin:4px 0 0; }
+      .artist-news-date { font-size:0.72rem; color:#aaa; margin-top:4px; }
+    </style>
+    <div class="artist-section-label">Related News</div>
+    <div class="artist-news-list">
+      {% for n in artist_news limit: 4 %}
+      {%- assign anwebp = n.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
+      <a href="{{ n.url | relative_url }}" class="artist-news-item">
+        <picture><source srcset="{{ anwebp | relative_url }}" type="image/webp"><img class="artist-news-thumb" src="{{ n.image | relative_url }}" alt="{{ n.title | escape }}" loading="lazy"></picture>
+        <div>
+          <span class="artist-news-cat">{{ n.category }}</span>
+          <p class="artist-news-title">{{ n.title }}</p>
+          <p class="artist-news-date">{{ n.date | date: "%d %b %Y" }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
   <!-- Studio Photos Section -->
   {% if page.studio_photos %}
   <div class="artist-section" id="section-studio">

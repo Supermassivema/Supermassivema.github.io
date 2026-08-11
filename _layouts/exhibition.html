@@ -638,6 +638,39 @@ layout: gallery-page
   </div>
   {% endif %}
 
+  <!-- Related News -->
+  {%- assign ex_news_count = 0 -%}
+  {%- for n in site.news -%}{%- if n.related_exhibition and n.related_exhibition != "" and page.url contains n.related_exhibition -%}{%- assign ex_news_count = ex_news_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+  {% if ex_news_count > 0 %}
+  <div class="exh-views-section">
+    <style>
+      .exh-news-list { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:20px; }
+      .exh-news-item { display:flex; gap:14px; text-decoration:none; color:#111; align-items:center; }
+      .exh-news-thumb { width:84px; height:84px; object-fit:cover; border-radius:6px; background:#f2f2f2; flex:none; }
+      .exh-news-cat { font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em; color:#999; }
+      .exh-news-title { font-size:0.98rem; font-weight:500; line-height:1.35; margin:4px 0 0; }
+      .exh-news-date { font-size:0.72rem; color:#aaa; margin-top:4px; }
+    </style>
+    <h2>Related News</h2>
+    <div class="exh-news-list">
+      {%- assign ex_news = site.news | sort: "date" | reverse -%}
+      {% for n in ex_news %}
+      {% if n.related_exhibition and n.related_exhibition != "" and page.url contains n.related_exhibition %}
+      {%- assign enwebp = n.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
+      <a href="{{ n.url | relative_url }}" class="exh-news-item">
+        <picture><source srcset="{{ enwebp | relative_url }}" type="image/webp"><img class="exh-news-thumb" src="{{ n.image | relative_url }}" alt="{{ n.title | escape }}" loading="lazy"></picture>
+        <div>
+          <span class="exh-news-cat">{{ n.category }}</span>
+          <p class="exh-news-title">{{ n.title }}</p>
+          <p class="exh-news-date">{{ n.date | date: "%d %b %Y" }}</p>
+        </div>
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
   <!-- Lightbox -->
   <div class="exh-lightbox" id="exhLightbox" onclick="closeLightbox(event)">
     <button class="exh-lightbox-close" aria-label="Close">&times;</button>

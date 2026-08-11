@@ -1,0 +1,174 @@
+---
+layout: gallery-page
+---
+
+{%- comment %} ── NewsArticle structured data ── {% endcomment -%}
+{%- assign img_abs = page.image | absolute_url -%}
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"NewsArticle",
+"headline":{{ page.title | jsonify }},
+"datePublished":{{ page.date | date_to_xmlschema | jsonify }},
+"dateModified":{{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+"image":[{{ img_abs | uri_escape | jsonify }}],
+"url":{{ page.url | absolute_url | jsonify }},
+"mainEntityOfPage":{{ page.url | absolute_url | jsonify }},
+"articleSection":{{ page.category | default: "News" | jsonify }},
+"author":{"@type":"Organization","name":"ART SPACE BYRON","url":{{ '/' | absolute_url | jsonify }}},
+"publisher":{"@type":"Organization","name":"ART SPACE BYRON","logo":{"@type":"ImageObject","url":{{ '/assets/images/og-image.jpg' | absolute_url | jsonify }}}}
+{%- if page.description and page.description != "" %},"description":{{ page.description | jsonify }}{% endif %}
+}
+</script>
+
+<style>
+  .news-article { background:#fff; }
+  .news-article-wrap { max-width: 800px; margin: 0 auto; padding: 0 24px 96px; }
+  /* Hero */
+  .news-article-hero { width:100%; max-width:1100px; margin:0 auto; }
+  .news-article-hero-img { width:100%; height:auto; display:block; aspect-ratio: 16/9; object-fit:cover; background:#f2f2f2; }
+  /* Meta */
+  .news-article-head { padding-top: 40px; }
+  .news-article-meta { display:flex; align-items:center; gap:14px; margin-bottom:20px; font-size:0.8rem; letter-spacing:0.04em; text-transform:uppercase; }
+  .news-article-cat { color:#111; font-weight:600; border:1px solid #111; padding:4px 12px; border-radius:100px; }
+  .news-article-date { color:#888; }
+  .news-article-title { font-family:'Playfair Display', Georgia, serif; font-size: clamp(1.7rem, 4.5vw, 2.8rem); line-height:1.15; font-weight:600; margin:0 0 8px; color:#111; }
+  .news-article-title-kr { display:block; font-family:'Noto Serif KR', serif; font-size: 0.62em; color:#666; font-weight:500; margin-top:10px; }
+  /* Body */
+  .news-article-body { font-size: 1.08rem; line-height: 1.85; color:#222; margin-top: 36px; }
+  .news-article-body p { margin: 0 0 1.3em; }
+  .news-article-body strong { font-weight:600; color:#111; }
+  .news-article-body a { color:#111; text-decoration: underline; text-underline-offset: 3px; }
+  .news-article-body hr { border:none; border-top:1px solid #e5e5e5; margin: 34px 0; }
+  .news-article-body hr + p { color:#555; }   /* Korean half, muted */
+  /* Gallery */
+  .news-gallery { display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; margin: 40px 0; }
+  .news-gallery img { width:100%; height:100%; object-fit:cover; aspect-ratio:1/1; display:block; }
+  /* Related */
+  .news-related { margin-top: 56px; padding-top: 36px; border-top: 1px solid #eee; }
+  .news-related-label { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:#999; margin-bottom:18px; }
+  .news-related-grid { display:flex; flex-wrap:wrap; gap:12px; }
+  .news-related-item { display:flex; align-items:center; gap:12px; border:1px solid #e8e8e8; border-radius:10px; padding:10px 16px 10px 10px; text-decoration:none; color:#111; transition:border-color .2s; }
+  .news-related-item:hover { border-color:#111; }
+  .news-related-thumb { width:44px; height:44px; border-radius:6px; object-fit:cover; background:#f2f2f2; flex:none; }
+  .news-related-kind { font-size:0.68rem; color:#999; text-transform:uppercase; letter-spacing:0.06em; display:block; }
+  .news-related-name { font-size:0.95rem; font-weight:500; }
+  /* Prev / Next */
+  .news-pagerlinks { display:flex; justify-content:space-between; gap:16px; margin-top:48px; padding-top:28px; border-top:1px solid #eee; }
+  .news-pagerlink { max-width:48%; text-decoration:none; color:#111; }
+  .news-pagerlink.next { text-align:right; margin-left:auto; }
+  .news-pagerlink span { display:block; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:#999; margin-bottom:4px; }
+  .news-pagerlink strong { font-weight:500; font-size:0.98rem; }
+  /* Share */
+  .news-share { display:flex; align-items:center; gap:12px; margin-top:44px; }
+  .news-share-label { font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:#999; }
+  .news-share a, .news-share button { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border:1px solid #ddd; border-radius:50%; background:#fff; color:#333; cursor:pointer; text-decoration:none; font-size:0.85rem; transition: all .2s; }
+  .news-share a:hover, .news-share button:hover { border-color:#111; color:#111; }
+  .news-back { display:inline-block; margin: 28px 0 0; font-size:0.85rem; color:#666; text-decoration:none; }
+  .news-back:hover { color:#111; }
+  @media (max-width: 600px){ .news-gallery { grid-template-columns: 1fr; } }
+</style>
+
+{%- assign img_webp = page.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
+
+<article class="news-article">
+
+  <div class="news-article-hero">
+    <picture>
+      <source srcset="{{ img_webp | relative_url }}" type="image/webp">
+      <img src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}" class="news-article-hero-img" width="1100" height="619">
+    </picture>
+  </div>
+
+  <div class="news-article-wrap">
+
+    <div class="news-article-head">
+      <div class="news-article-meta">
+        <span class="news-article-cat">{{ page.category | default: "News" }}</span>
+        <span class="news-article-date">{{ page.date | date: "%d %B %Y" }}</span>
+      </div>
+      <h1 class="news-article-title">{{ page.title }}{% if page.title_kr and page.title_kr != "" %}<span class="news-article-title-kr">{{ page.title_kr }}</span>{% endif %}</h1>
+    </div>
+
+    <div class="news-article-body">
+      {{ content }}
+    </div>
+
+    {%- comment %} Optional image gallery {% endcomment -%}
+    {% if page.gallery and page.gallery.size > 0 %}
+    <div class="news-gallery">
+      {% for g in page.gallery %}
+      <img src="{{ g | relative_url }}" alt="{{ page.title | escape }} — image {{ forloop.index }}" loading="lazy">
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {%- comment %} ── Related items ── {% endcomment -%}
+    {%- assign has_related = false -%}
+    {%- if page.related_exhibition and page.related_exhibition != "" %}{% assign has_related = true %}{% endif -%}
+    {%- if page.related_artists and page.related_artists.size > 0 %}{% assign has_related = true %}{% endif -%}
+    {%- if page.related_artworks and page.related_artworks.size > 0 %}{% assign has_related = true %}{% endif -%}
+    {% if has_related %}
+    <div class="news-related">
+      <p class="news-related-label">Related</p>
+      <div class="news-related-grid">
+        {%- if page.related_exhibition and page.related_exhibition != "" -%}
+          {%- for ex in site.exhibitions -%}{%- if ex.url contains page.related_exhibition -%}
+          <a class="news-related-item" href="{{ ex.url | relative_url }}">
+            {% if ex.featured_image %}<img class="news-related-thumb" src="{{ ex.featured_image | relative_url }}" alt="">{% endif %}
+            <span><span class="news-related-kind">Exhibition</span><span class="news-related-name">{{ ex.title }}</span></span>
+          </a>
+          {%- endif -%}{%- endfor -%}
+        {%- endif -%}
+        {%- if page.related_artists and page.related_artists.size > 0 -%}
+          {%- for artist in site.artists -%}{%- if page.related_artists contains artist.name -%}
+          <a class="news-related-item" href="{{ artist.url | relative_url }}">
+            {% if artist.featured_image %}<img class="news-related-thumb" src="{{ artist.featured_image | relative_url }}" alt="">{% endif %}
+            <span><span class="news-related-kind">Artist</span><span class="news-related-name">{{ artist.name }}</span></span>
+          </a>
+          {%- endif -%}{%- endfor -%}
+        {%- endif -%}
+        {%- if page.related_artworks and page.related_artworks.size > 0 -%}
+          {%- for aw in site.artworks -%}{%- for slug in page.related_artworks -%}{%- if aw.url contains slug -%}
+          <a class="news-related-item" href="{{ aw.url | relative_url }}">
+            {% if aw.image %}<img class="news-related-thumb" src="{{ aw.image | relative_url }}" alt="">{% endif %}
+            <span><span class="news-related-kind">Artwork</span><span class="news-related-name">{{ aw.title | default: "Untitled" }}</span></span>
+          </a>
+          {%- endif -%}{%- endfor -%}{%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+    {% endif %}
+
+    {%- comment %} ── Prev / Next (chronological) ── {% endcomment -%}
+    {%- assign sorted = site.news | sort: "date" | reverse -%}
+    {%- assign cur = 0 -%}
+    {%- for n in sorted -%}{%- if n.url == page.url -%}{%- assign cur = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+    {%- assign newer_i = cur | minus: 1 -%}
+    {%- assign older_i = cur | plus: 1 -%}
+    <div class="news-pagerlinks">
+      {%- if cur > 0 -%}
+      {%- assign newer = sorted[newer_i] -%}
+      <a class="news-pagerlink prev" href="{{ newer.url | relative_url }}"><span>← Newer</span><strong>{{ newer.title }}</strong></a>
+      {%- endif -%}
+      {%- if older_i < sorted.size -%}
+      {%- assign older = sorted[older_i] -%}
+      <a class="news-pagerlink next" href="{{ older.url | relative_url }}"><span>Older →</span><strong>{{ older.title }}</strong></a>
+      {%- endif -%}
+    </div>
+
+    {%- comment %} ── Share ── {% endcomment -%}
+    {%- assign share_url = page.url | absolute_url -%}
+    {%- assign share_title = page.title | uri_escape -%}
+    <div class="news-share">
+      <span class="news-share-label">Share</span>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url | uri_escape }}" target="_blank" rel="noopener" aria-label="Share on Facebook">f</a>
+      <a href="https://twitter.com/intent/tweet?url={{ share_url | uri_escape }}&text={{ share_title }}" target="_blank" rel="noopener" aria-label="Share on X">X</a>
+      <a href="mailto:?subject={{ share_title }}&body={{ share_url | uri_escape }}" aria-label="Share by email">✉</a>
+      <button type="button" onclick="navigator.clipboard.writeText('{{ share_url }}').then(function(){var b=event.currentTarget;var o=b.textContent;b.textContent='✓';setTimeout(function(){b.textContent=o;},1500);})" aria-label="Copy link">⧉</button>
+    </div>
+
+    <a class="news-back" href="{{ '/news/' | relative_url }}">← Back to News</a>
+
+  </div>
+</article>

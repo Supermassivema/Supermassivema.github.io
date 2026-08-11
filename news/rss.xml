@@ -1,0 +1,27 @@
+---
+permalink: /news/rss.xml
+sitemap: false
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ART SPACE BYRON — News</title>
+    <link>{{ '/news/' | absolute_url }}</link>
+    <atom:link href="{{ '/news/rss.xml' | absolute_url }}" rel="self" type="application/rss+xml" />
+    <description>Latest news from ART SPACE BYRON, a contemporary art gallery in Inverell, New England NSW.</description>
+    <language>en-AU</language>
+    {%- assign posts = site.news | sort: "date" | reverse -%}
+    {%- if posts.first %}<lastBuildDate>{{ posts.first.date | date_to_rfc822 }}</lastBuildDate>{% endif %}
+    {%- for p in posts %}
+    <item>
+      <title>{{ p.title | escape }}</title>
+      <link>{{ p.url | absolute_url }}</link>
+      <guid isPermaLink="true">{{ p.url | absolute_url }}</guid>
+      <pubDate>{{ p.date | date_to_rfc822 }}</pubDate>
+      {%- if p.category %}<category>{{ p.category | escape }}</category>{% endif %}
+      {%- if p.description %}<description>{{ p.description | escape }}</description>{% endif %}
+      {%- if p.image %}<enclosure url="{{ p.image | absolute_url | uri_escape }}" type="image/jpeg" />{% endif %}
+    </item>
+    {%- endfor %}
+  </channel>
+</rss>

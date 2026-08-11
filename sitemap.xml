@@ -41,4 +41,17 @@
 {%- endif %}
   </url>
 {%- endfor %}
+{%- for doc in site.news %}
+  <url>
+    <loc>{{ doc.url | absolute_url }}</loc>
+{%- if doc.date %}
+    <lastmod>{{ doc.last_modified_at | default: doc.date | date_to_xmlschema }}</lastmod>
+{%- endif %}
+{%- if doc.image %}
+    <image:image>
+      <image:loc>{{ doc.image | absolute_url | uri_escape }}</image:loc>
+    </image:image>
+{%- endif %}
+  </url>
+{%- endfor %}
 </urlset>
