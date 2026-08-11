@@ -28,7 +28,7 @@ layout: gallery-page
   <!-- Hero: Large artist image + name -->
   <section class="artist-hero">
     <div class="artist-hero-img-wrap">
-      <img src="{{ page.featured_image | relative_url }}" alt="{{ page.name }}" class="artist-hero-img">
+      <img src="{{ page.featured_image | relative_url }}" alt="{{ page.name }}{% if page.nationality and page.nationality != '' %}, {{ page.nationality }} contemporary artist{% endif %}" class="artist-hero-img">
     </div>
     <div class="artist-hero-info">
       <h1 class="artist-hero-name">{{ page.name }}{% if page.name_kr and page.name_kr != "" %} <span class="artist-hero-name-kr">{{ page.name_kr }}</span>{% endif %}</h1>
@@ -139,7 +139,7 @@ layout: gallery-page
       {% for artwork in artist_artworks limit:4 %}
       <a href="{{ artwork.url | relative_url }}" class="artist-work-card">
         <div class="artist-work-img-wrap artist-work-img-large">
-          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.artist }}, {{ artwork.title }}, {{ artwork.year }}" loading="lazy">
+          <img src="{{ artwork.image | relative_url }}" alt="{% include alt-artwork.html art=artwork %}" loading="lazy">
         </div>
         <div class="artist-work-info">
           <p class="artist-work-title">{{ artwork.title }}</p>
@@ -156,7 +156,7 @@ layout: gallery-page
       {% for artwork in artist_artworks %}
       <a href="{{ artwork.url | relative_url }}" class="artist-work-card">
         <div class="artist-work-img-wrap">
-          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.artist }}, {{ artwork.title }}, {{ artwork.year }}" loading="lazy">
+          <img src="{{ artwork.image | relative_url }}" alt="{% include alt-artwork.html art=artwork %}" loading="lazy">
         </div>
         <div class="artist-work-info">
           <p class="artist-work-title">{{ artwork.title }}</p>
@@ -246,7 +246,7 @@ layout: gallery-page
       {% for view in page.exhibition_views_simple %}
       <div class="artist-work-card">
         <div class="artist-work-img-wrap artist-work-img-large">
-          <img src="{{ view.path | relative_url }}" alt="Exhibition view" loading="lazy">
+          <img src="{{ view.path | relative_url }}" alt="{{ page.name }} exhibition installation view" loading="lazy">
         </div>
       </div>
       {% endfor %}
@@ -268,7 +268,7 @@ layout: gallery-page
       {% for photo in page.studio_photos limit:4 %}
       <div class="artist-work-card">
         <div class="artist-work-img-wrap artist-work-img-large">
-          <img src="{{ photo.path | relative_url }}" alt="Studio photo" loading="lazy">
+          <img src="{{ photo.path | relative_url }}" alt="{{ page.name }} in the studio" loading="lazy">
         </div>
       </div>
       {% endfor %}
@@ -279,7 +279,7 @@ layout: gallery-page
       {% for photo in page.studio_photos %}
       <div class="artist-work-card">
         <div class="artist-work-img-wrap">
-          <img src="{{ photo.path | relative_url }}" alt="Studio photo" loading="lazy">
+          <img src="{{ photo.path | relative_url }}" alt="{{ page.name }} in the studio" loading="lazy">
         </div>
       </div>
       {% endfor %}

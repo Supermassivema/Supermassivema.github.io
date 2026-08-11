@@ -1,0 +1,5 @@
+{%- comment %} alt text for an artwork image: "Artist, Title, Year, Medium" (empty fields skipped). Pass the artwork/page object as `art`. {% endcomment -%}
+{%- assign a = include.art -%}
+{{- a.artist | escape }}, {{ a.title | escape }}
+{%- if a.year and a.year != "" %}, {{ a.year | escape }}{% endif -%}
+{%- if a.medium and a.medium != "" %}, {{ a.medium | escape }}{% endif -%}

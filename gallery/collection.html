@@ -1320,7 +1320,7 @@ title: "Artist Book"
       pages.push(
         '<div class="book-artwork-page">' +
           '<div class="book-artwork-img-wrap">' +
-            '<img src="' + w.image + '" alt="' + [w.artist, w.title, w.year].filter(Boolean).join(', ') + '" loading="lazy">' +
+            '<img src="' + w.image + '" alt="' + [w.artist, w.title, w.year, w.medium].filter(Boolean).join(', ') + '" loading="lazy">' +
           '</div>' +
           caption +
         '</div>'

@@ -1100,7 +1100,7 @@
             try {
                 firebase.auth().onAuthStateChanged(function(user) {
                     if (user && user.photoURL) {
-                        icon.innerHTML = '<img src="' + user.photoURL + '" style="width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.5);" alt="Account">';
+                        icon.innerHTML = '<img src="' + user.photoURL + '" style="width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.5);" alt="Your account profile picture">';
                     }
                 });
             } catch(e) { console.log('Auth check failed:', e); }

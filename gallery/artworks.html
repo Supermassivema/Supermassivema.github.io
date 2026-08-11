@@ -214,7 +214,7 @@ section: gallery
       <a href="{{ artwork.url | relative_url }}" class="aw-card">
         <div class="aw-card-img">
           {% if artwork.status == 'sold' %}<span class="aw-card-status sold">Sold</span>{% else %}<span class="aw-card-status available">Available</span>{% endif %}
-          {% if artwork.image %}<img src="{{ artwork.image | relative_url }}" alt="{{ artwork.artist }}, {{ artwork.title }}, {{ artwork.year }}" loading="lazy">{% endif %}
+          {% if artwork.image %}<img src="{{ artwork.image | relative_url }}" alt="{% include alt-artwork.html art=artwork %}" loading="lazy">{% endif %}
         </div>
         <div class="aw-card-info">
           {% if artwork.title and artwork.title != "" %}<p class="aw-card-title">{{ artwork.title }}</p>{% endif %}
@@ -267,7 +267,7 @@ section: gallery
         textEl.innerHTML = '<p class="aw-auth-title">Welcome, ' + (user.displayName || 'Member') + '</p>'
           + '<p class="aw-auth-desc">You have full access to pricing and purchase inquiries.</p>';
         actions.innerHTML = '<div class="aw-auth-welcome">'
-          + (user.photoURL ? '<div class="aw-auth-avatar"><img src="' + user.photoURL + '" alt=""></div>' : '')
+          + (user.photoURL ? '<div class="aw-auth-avatar"><img src="' + user.photoURL + '" alt="Your account profile picture"></div>' : '')
           + '<span class="aw-auth-user">' + user.email + '</span>'
           + '</div>';
       }

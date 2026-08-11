@@ -535,7 +535,7 @@ layout: gallery-page
       {% endif %}
       {% for work in slide_artworks %}
       <div class="exh-slide">
-        <img src="{{ work.image | relative_url }}" alt="{{ work.artist | escape }}, {{ work.title | escape }}, {{ work.year }}" loading="lazy">
+        <img src="{{ work.image | relative_url }}" alt="{% include alt-artwork.html art=work %}" loading="lazy">
         <div class="exh-slide-caption">
           <p class="caption-artist">{{ work.artist }}</p>
           {% if work.title and work.title != "" %}
@@ -630,7 +630,7 @@ layout: gallery-page
     <div class="exh-views-grid is-collapsed" id="exhViewsGrid">
       {% for view in page.exhibition_views %}
       <div class="exh-views-grid-item">
-        <img src="{{ view | relative_url }}" alt="Exhibition view" loading="lazy">
+        <img src="{{ view | relative_url }}" alt="{{ page.title | escape }} installation view" loading="lazy">
       </div>
       {% endfor %}
     </div>

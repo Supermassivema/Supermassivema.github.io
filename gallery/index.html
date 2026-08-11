@@ -687,7 +687,7 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
       <a href="{{ artist.url | relative_url }}" class="home-artist-card">
         <div class="home-artist-img">
           {% if artist.featured_image %}
-          <img src="{{ artist.featured_image | relative_url }}" alt="{{ artist.name }}" loading="lazy">
+          <img src="{{ artist.featured_image | relative_url }}" alt="{{ artist.name }}{% if artist.nationality and artist.nationality != '' %}, {{ artist.nationality }} artist{% endif %}" loading="lazy">
           {% endif %}
         </div>
         <p class="home-artist-name">{{ artist.name }}</p>
