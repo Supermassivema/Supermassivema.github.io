@@ -146,17 +146,18 @@
         </div>
         {% endif %}
 
-        {% if page.exhibition %}
-        {% assign exhibition = site.exhibitions | where: "title", page.exhibition | first %}
+        {% if page.exhibition and page.exhibition != "" %}
+        {%- assign exhibition = nil -%}
+        {%- for ex in site.exhibitions -%}{%- if ex.url contains page.exhibition or ex.title == page.exhibition -%}{%- assign exhibition = ex -%}{%- endif -%}{%- endfor -%}
+        {% if exhibition %}
         <div class="info-block" data-animate="5">
           <div class="info-exhibition">
             <span class="exhibition-label">Exhibition</span>
-            <h3 class="exhibition-name">{{ page.exhibition }}</h3>
-            {% if exhibition %}
+            <h3 class="exhibition-name">{{ exhibition.title }}</h3>
             <a href="{{ exhibition.url | relative_url }}" class="exhibition-link">View Exhibition <span>→</span></a>
-            {% endif %}
           </div>
         </div>
+        {% endif %}
         {% endif %}
 
         <div class="info-block artwork-user-actions" data-animate="5.5">

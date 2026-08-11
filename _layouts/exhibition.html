@@ -642,12 +642,17 @@ layout: gallery-page
   {% endif %}
 
   <!-- ── 4. WORKS IN THE EXHIBITION ── -->
-  {% if page.artists %}
-  {%- assign exh_works = "" | split: "" -%}
-  {%- for artist_name in page.artists -%}
-    {%- assign aw = site.artworks | where: "artist", artist_name -%}
-    {%- for w in aw -%}{%- assign exh_works = exh_works | push: w -%}{%- endfor -%}
-  {%- endfor -%}
+  {%- comment %} Prefer works explicitly tagged with this exhibition's slug; else fall back to works by participating artists. {% endcomment -%}
+  {%- assign url_parts = page.url | split: "/" -%}
+  {%- assign ex_slug = url_parts[3] -%}
+  {%- assign exh_works = site.artworks | where: "exhibition", ex_slug -%}
+  {%- if exh_works.size == 0 and page.artists -%}
+    {%- assign exh_works = "" | split: "" -%}
+    {%- for artist_name in page.artists -%}
+      {%- assign aw = site.artworks | where: "artist", artist_name -%}
+      {%- for w in aw -%}{%- assign exh_works = exh_works | push: w -%}{%- endfor -%}
+    {%- endfor -%}
+  {%- endif -%}
   {% if exh_works.size > 0 %}
   <section class="exh-module">
     <h2 class="exh-module-title">Works in the Exhibition</h2>
@@ -662,7 +667,6 @@ layout: gallery-page
       {% endfor %}
     </div>
   </section>
-  {% endif %}
   {% endif %}
 
   <!-- ── 5. PARTICIPATING ARTISTS ── -->

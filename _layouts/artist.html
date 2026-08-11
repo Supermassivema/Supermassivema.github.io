@@ -219,7 +219,12 @@ layout: gallery-page
     {% endfor %}
     {% endif %}
 
-    {% assign artist_exhibitions = site.exhibitions | where: "featured_artist", page.name %}
+    {%- assign artist_exhibitions = "" | split: "" -%}
+    {%- for ex in site.exhibitions -%}
+      {%- if ex.artists contains page.name or ex.featured_artist == page.name -%}
+        {%- assign artist_exhibitions = artist_exhibitions | push: ex -%}
+      {%- endif -%}
+    {%- endfor -%}
     {% if artist_exhibitions.size > 0 %}
     <div class="artist-exhibitions-list" style="margin-top:32px;">
       {% for exhibition in artist_exhibitions %}
