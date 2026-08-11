@@ -3,6 +3,9 @@
 {%- comment %} Fallback display title so an empty `title:` never leaves a dangling em-dash / empty H1. {% endcomment -%}
 {%- assign has_title = false -%}{%- if page.title and page.title != "" %}{% assign has_title = true %}{% endif -%}
 {%- if has_title %}{% assign art_title = page.title %}{% else %}{% assign art_title = "Untitled" %}{% endif -%}
+{%- comment %} Resolve the artwork's exhibition once (used by JSON-LD isPartOf + the Exhibition link below). {% endcomment -%}
+{%- assign artwork_exhibition = nil -%}
+{%- if page.exhibition and page.exhibition != "" -%}{%- for ex in site.exhibitions -%}{%- if ex.url contains page.exhibition or ex.title == page.exhibition -%}{%- assign artwork_exhibition = ex -%}{%- endif -%}{%- endfor -%}{%- endif -%}
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,6 +48,7 @@
 ,"width":{"@type":"QuantitativeValue","value":{{ wv | jsonify }},"unitText":"cm"},"height":{"@type":"QuantitativeValue","value":{{ hv | jsonify }},"unitText":"cm"}
 {%- endif -%}
 {%- endif %}
+{%- if artwork_exhibition %},"isPartOf":{"@type":"ExhibitionEvent","name":{{ artwork_exhibition.title | jsonify }},"url":{{ artwork_exhibition.url | absolute_url | jsonify }}}{% endif %}
 }
 </script>
 
@@ -146,18 +150,14 @@
         </div>
         {% endif %}
 
-        {% if page.exhibition and page.exhibition != "" %}
-        {%- assign exhibition = nil -%}
-        {%- for ex in site.exhibitions -%}{%- if ex.url contains page.exhibition or ex.title == page.exhibition -%}{%- assign exhibition = ex -%}{%- endif -%}{%- endfor -%}
-        {% if exhibition %}
+        {% if artwork_exhibition %}
         <div class="info-block" data-animate="5">
           <div class="info-exhibition">
             <span class="exhibition-label">Exhibition</span>
-            <h3 class="exhibition-name">{{ exhibition.title }}</h3>
-            <a href="{{ exhibition.url | relative_url }}" class="exhibition-link">View Exhibition <span>→</span></a>
+            <h3 class="exhibition-name">{{ artwork_exhibition.title }}</h3>
+            <a href="{{ artwork_exhibition.url | relative_url }}" class="exhibition-link">View Exhibition <span>→</span></a>
           </div>
         </div>
-        {% endif %}
         {% endif %}
 
         <div class="info-block artwork-user-actions" data-animate="5.5">

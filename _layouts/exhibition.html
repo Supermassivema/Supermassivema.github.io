@@ -487,6 +487,36 @@ layout: gallery-page
 
 <article class="exh-detail">
 
+{%- comment %} ── ExhibitionEvent structured data ── {% endcomment -%}
+{%- assign evt_parts = page.url | split: "/" -%}{%- assign evt_slug = evt_parts[3] -%}
+{%- capture evt_desc -%}{{ content | strip_html | strip_newlines | truncate: 300 }}{%- endcapture -%}
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"ExhibitionEvent",
+"name":{{ page.title | jsonify }},
+"url":{{ page.url | absolute_url | jsonify }},
+"eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+"isAccessibleForFree":true,
+"location":{"@type":"Place","name":"ART SPACE BYRON","address":{"@type":"PostalAddress","streetAddress":"44 Byron Street","addressLocality":"Inverell","addressRegion":"NSW","postalCode":"2360","addressCountry":"AU"}},
+"organizer":{"@type":"Organization","name":"ART SPACE BYRON","url":{{ '/' | absolute_url | jsonify }}}
+{%- if page.start_date %},"startDate":{{ page.start_date | date: "%Y-%m-%d" | jsonify }}{% endif %}
+{%- if page.end_date %},"endDate":{{ page.end_date | date: "%Y-%m-%d" | jsonify }}{% endif %}
+{%- if evt_desc and evt_desc != "" %},"description":{{ evt_desc | jsonify }}{% endif %}
+{%- if page.featured_image %},"image":[{{ page.featured_image | absolute_url | uri_escape | jsonify }}]{% endif %}
+{%- if page.artists and page.artists.size > 0 %},"performer":[{% for a in page.artists %}{"@type":"Person","name":{{ a | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}
+{%- assign sub_count = 0 -%}{%- for n in site.news -%}{%- if n.related_exhibition == evt_slug and n.category == "Event" -%}{%- assign sub_count = sub_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+{%- if sub_count > 0 %},"subEvent":[
+{%- assign sfirst = true -%}
+{%- for n in site.news -%}{%- if n.related_exhibition == evt_slug and n.category == "Event" -%}
+{%- unless sfirst %},{% endunless %}{%- assign sfirst = false -%}
+{"@type":"Event","name":{{ n.title | jsonify }},"startDate":{{ n.date | date: "%Y-%m-%d" | jsonify }},"url":{{ n.url | absolute_url | jsonify }},"eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode"}
+{%- endif -%}{%- endfor -%}
+]{% endif %}
+}
+</script>
+
+
   <!-- ── Hero Slideshow ── -->
   {% comment %}
     First slide = featured_image, then all artworks in round-robin order across artists.
