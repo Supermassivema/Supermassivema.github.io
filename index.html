@@ -131,6 +131,19 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     background-color: #fff !important;
   }
 
+  /* Past the hero (over the white content): dark logo/menu, header still transparent */
+  body.home-hero-active.hero-passed .site-header .nav-link,
+  body.home-hero-active.hero-passed .site-header .site-logo-minimal {
+    color: #1a1a1a !important;
+    text-shadow: none !important;
+  }
+  body.home-hero-active.hero-passed .site-header .header-account-icon svg {
+    stroke: #1a1a1a !important;
+  }
+  body.home-hero-active.hero-passed .site-header .hamburger-line {
+    background-color: #1a1a1a !important;
+  }
+
   /* ── Adaptive hero: JS adds body.hero-dark for dark / colourful artworks ──
      (default above = light artwork → white hero + dark text/nav) */
   body.hero-dark .home-hero { background: #1a1a1a; }
@@ -758,6 +771,17 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
 <script>
   // Activate hero transparent header
   document.body.classList.add('home-hero-active');
+
+  // Once scrolled past the full-screen hero, switch the header text to dark
+  // (readable over the white content) while keeping the header transparent.
+  (function() {
+    function onScroll() {
+      var passed = window.scrollY > (window.innerHeight - 80);
+      document.body.classList.toggle('hero-passed', passed);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
 
   // Adaptive hero: sample the artwork's brightness and switch the hero + nav text
   // to dark (on light/white artworks) or light (on dark / colourful artworks).
