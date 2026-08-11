@@ -1,13 +1,19 @@
 <!doctype html>
 <html lang="{{ page.lang | default: site.default_lang | default: 'en' }}">
+{%- comment %} Fallback display title so an empty `title:` never leaves a dangling em-dash / empty H1. {% endcomment -%}
+{%- assign has_title = false -%}{%- if page.title and page.title != "" %}{% assign has_title = true %}{% endif -%}
+{%- if has_title %}{% assign art_title = page.title %}{% else %}{% assign art_title = "Untitled" %}{% endif -%}
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ page.title | escape }} — {{ page.artist | escape }} | ART SPACE BYRON</title>
-  {%- capture art_desc %}{{ page.artist }}, {{ page.title }}{% if page.year and page.year != "" %}, {{ page.year }}{% endif %}{% if page.medium and page.medium != "" %}, {{ page.medium }}{% endif %} — original artwork at ART SPACE BYRON, a contemporary art gallery in Inverell, NSW.{% endcapture -%}
+  <title>{{ art_title | escape }} — {{ page.artist | escape }} | ART SPACE BYRON</title>
+  {%- capture art_desc %}{{ page.artist }}, {{ art_title }}{% if page.year and page.year != "" %}, {{ page.year }}{% endif %}{% if page.medium and page.medium != "" %}, {{ page.medium }}{% endif %} — original artwork at ART SPACE BYRON, a contemporary art gallery in Inverell, NSW.{% endcapture -%}
   <meta name="description" content="{{ art_desc | strip_newlines | strip | escape }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
-  <meta property="og:title" content="{{ page.title | escape }} — {{ page.artist | escape }}">
+  {%- unless has_title %}
+  <meta name="robots" content="noindex, follow">
+  {%- endunless %}
+  <meta property="og:title" content="{{ art_title | escape }} — {{ page.artist | escape }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   {%- if page.image %}
@@ -24,7 +30,7 @@
 {
 "@context":"https://schema.org",
 "@type":"VisualArtwork",
-"name":{{ page.title | jsonify }},
+"name":{{ art_title | jsonify }},
 "url":{{ page.url | absolute_url | jsonify }},
 "creator":{"@type":"Person","name":{{ page.artist | jsonify }}}
 {%- if page.image %},"image":{{ page.image | absolute_url | uri_escape | jsonify }}{% endif %}
@@ -76,7 +82,7 @@
 
         <div class="info-block" data-animate="1">
           <span class="info-eyebrow">FINE ART CATALOGUE</span>
-          <h1 class="info-title">{{ page.title }}</h1>
+          <h1 class="info-title">{{ art_title }}</h1>
         </div>
 
         {% if page.artist %}
@@ -221,13 +227,13 @@
       <div class="inquiry-modal-artwork">
         <img src="{{ page.image | relative_url }}" alt="{% include alt-artwork.html art=page %}">
         <div class="inquiry-modal-artwork-info">
-          <span class="inquiry-artwork-title">{{ page.title }}</span>
+          <span class="inquiry-artwork-title">{{ art_title }}</span>
           {% if page.artist %}<span class="inquiry-artwork-artist">{{ page.artist }}</span>{% endif %}
           {% if page.medium and page.medium != "" %}<span class="inquiry-artwork-detail">{{ page.medium }}</span>{% endif %}
         </div>
       </div>
       <form class="inquiry-form" id="inquiryForm" onsubmit="submitInquiry(event)">
-        <input type="hidden" name="artwork" value="{{ page.title }}">
+        <input type="hidden" name="artwork" value="{{ art_title }}">
         <input type="hidden" name="artist" value="{{ page.artist }}">
         <div class="inquiry-form-row">
           <div class="inquiry-form-field">

@@ -1,5 +1,9 @@
-{%- comment %} alt text for an artwork image: "Artist, Title, Year, Medium" (empty fields skipped). Pass the artwork/page object as `art`. {% endcomment -%}
+{%- comment %} alt text for an artwork image: "Artist, Title, Year, Medium" — only non-empty fields, joined with ", " (no doubled commas). Pass the artwork/page object as `art`. {% endcomment -%}
 {%- assign a = include.art -%}
-{{- a.artist | escape }}, {{ a.title | escape }}
-{%- if a.year and a.year != "" %}, {{ a.year | escape }}{% endif -%}
-{%- if a.medium and a.medium != "" %}, {{ a.medium | escape }}{% endif -%}
+{%- capture parts -%}
+{%- if a.artist and a.artist != "" %}{{ a.artist | escape }}|{% endif -%}
+{%- if a.title and a.title != "" %}{{ a.title | escape }}|{% endif -%}
+{%- if a.year and a.year != "" %}{{ a.year | escape }}|{% endif -%}
+{%- if a.medium and a.medium != "" %}{{ a.medium | escape }}|{% endif -%}
+{%- endcapture -%}
+{{- parts | split: "|" | join: ", " -}}
