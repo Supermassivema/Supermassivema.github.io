@@ -5,6 +5,7 @@ description: "Geum Sahong (b. 1962, Seoul): acrylic and tempera on untreated fab
 name: "Geum Sahong"
 name_kr: "금사홍"
 slug: "geum-sahong"
+listed: true
 nationality: "Korean"
 born: ""
 education: ""

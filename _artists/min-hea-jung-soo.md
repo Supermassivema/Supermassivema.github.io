@@ -5,6 +5,7 @@ description: "Min Hea Jung Soo, a Hongik-trained painter, turns hazy memories in
 name: "Min Hea Jung Soo"
 name_kr: "민해정수"
 slug: "min-hea-jung-soo"
+listed: true
 medium: ""
 medium_kr: ""
 nationality: "Korean"

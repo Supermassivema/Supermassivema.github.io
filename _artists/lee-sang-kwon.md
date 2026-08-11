@@ -5,6 +5,7 @@ description: "Lee Sang-kwon (b. 1965, Chuncheon): Paju-based painter, 21 solo sh
 name: "Lee Sang-kwon"
 name_kr: "이상권"
 slug: "lee-sang-kwon"
+listed: true
 medium: ""
 medium_kr: ""
 nationality: "Korean"

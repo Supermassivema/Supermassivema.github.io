@@ -5,6 +5,7 @@ description: "Cho Chang-hwan (b. 1964, Boeun): abstract SOOM (Breath) paintings 
 name: "Cho Chang-hwan"
 name_kr: "조창환"
 slug: "cho-chang-hwan"
+listed: true
 medium: ""
 medium_kr: ""
 nationality: "Korean"

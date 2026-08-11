@@ -34,10 +34,11 @@ description: Process a dropped artist folder in _incoming/ into published artist
    `featured_image` = 위 프로필 경로. 약력은 영문/한글 본문에 배치.
 4. **작품 파일 생성**: 작품마다 `_templates/artwork-item.md` 를 복사해 `_artworks/<slug>-work-NNN.md` 로 저장.
    `artist` = 작가 `name` (정확히), `image` = 해당 작품 경로. 아는 메타만 채움.
-5. **작가 목록 페이지에 추가 (중요! 자동 안 됨)**: `gallery/artists.html` 의 작가 목록은
-   `<li>` 가 **하드코딩**이라 새 작가가 자동으로 안 뜬다. `<ul class="artists-name-list" id="artistsList">`
-   안에 새 `<li><a href="{{ '/gallery/artists/<slug>/' | relative_url }}" class="artist-name-link">Name</a></li>` 를 추가할 것.
-   · 홈 3×3 그리드는 `site.artists | where featured,true | limit:6` 로 자동 — `featured: true` 면 노출(단 6명 초과 시 상위 6명만).
+5. **목록 노출 스위치**: 작가 목록(`gallery/artists.html`)은 `site.artists | where "listed", true` 로 자동 표시된다.
+   · 목록에 **바로 공개**하려면 front matter 에 `listed: true`.
+   · 아직 **비공개(초안)**로 두려면 `listed: false` 또는 생략 → 페이지는 생성되지만 목록엔 안 뜬다.
+   · 사용자가 info.md 에서 공개 의사를 밝혔으면 `listed: true`, 애매하면 `listed: false` 로 두고 공개 여부를 한글로 물을 것.
+   · 홈 3×3 그리드는 `where featured,true | limit:6` 로 자동 — `featured: true` 면 노출(단 상위 6명만).
 6. **(선택) 전시 등록**: info.md 에서 전시 등록 = 예 이면 `_exhibitions/` 에 파일 생성
    (`featured_artist`, `start_date`, `end_date`, `status`). 기존 전시 파일 형식 참고.
 7. **검증**: `JEKYLL_ENV=production bundle exec jekyll build` 후

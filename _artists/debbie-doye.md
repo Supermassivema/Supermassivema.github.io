@@ -5,6 +5,7 @@ description: "Debbie Doye, a ceramic sculptor from the Northern Tablelands, NSW,
 name: "Debbie Doye"
 name_kr: ""
 slug: "debbie-doye"
+listed: true
 medium: ""
 medium_kr: ""
 nationality: "Australian"

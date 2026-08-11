@@ -5,6 +5,7 @@ description: "Stephen Jones, an Inverell-based Australian painter, works in penc
 name: "Stephen Jones"
 name_kr: ""
 slug: "stephen-jones"
+listed: true
 medium: ""
 medium_kr: ""
 nationality: "Australian"

@@ -38,7 +38,8 @@ philosophy: "«작가노트/작업 철학 영문»"
 philosophy_kr: "«작가노트/작업 철학 한글»"
 
 # ── 노출 ──
-featured: true                        # 홈/작가 그리드 노출 여부 (true/false)
+listed: true                          # 작가 목록(/gallery/artists/)에 표시 여부. false/생략 = 페이지는 있어도 목록에 안 뜸(비공개 초안)
+featured: true                        # 홈 3×3 그리드 노출 여부 (상위 6명만). true/false
 ---
 
 ## Biography

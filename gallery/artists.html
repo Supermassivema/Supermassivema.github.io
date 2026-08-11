@@ -278,38 +278,14 @@ section: gallery
   <!-- Artists List -->
   <div class="artists-list-wrap" id="tab-artists">
     <ul class="artists-name-list" id="artistsList">
+      {%- assign listed_artists = site.artists | where: "listed", true | sort: "name" -%}
+      {%- for artist in listed_artists %}
       <li>
-        <a href="{{ '/gallery/artists/cho-chang-hwan/' | relative_url }}" class="artist-name-link">
-          Cho Chang-hwan
+        <a href="{{ artist.url | relative_url }}" class="artist-name-link">
+          {{ artist.name }}
         </a>
       </li>
-      <li>
-        <a href="{{ '/gallery/artists/debbie-doye/' | relative_url }}" class="artist-name-link">
-          Debbie Doye
-
-        </a>
-      </li>
-      <li>
-        <a href="{{ '/gallery/artists/geum-sahong/' | relative_url }}" class="artist-name-link">
-          Geum Sahong
-        </a>
-      </li>
-      <li>
-        <a href="{{ '/gallery/artists/lee-sang-kwon/' | relative_url }}" class="artist-name-link">
-          Lee Sang-kwon
-        </a>
-      </li>
-      <li>
-        <a href="{{ '/gallery/artists/min-hea-jung-soo/' | relative_url }}" class="artist-name-link">
-          Min Hea Jung Soo
-        </a>
-      </li>
-      <li>
-        <a href="{{ '/gallery/artists/stephen-jones/' | relative_url }}" class="artist-name-link">
-          Stephen Jones
-
-        </a>
-      </li>
+      {%- endfor %}
     </ul>
   </div>
 
