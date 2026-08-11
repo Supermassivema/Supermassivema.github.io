@@ -1,744 +1,883 @@
 ---
-layout: none
-lang: en
+layout: gallery-page
+permalink: /
+title: "Art Gallery & Cafe in Inverell NSW"
+description: "ART SPACE BYRON is a contemporary art gallery and artisanal cafe at 44 Byron Street, Inverell NSW. See the current exhibition — free admission."
+header_transparent: true
+image: "/assets/images/Gallery Background photo/space (3).jpg"
 ---
-<!DOCTYPE html>
-<html lang="{{ page.lang | default: site.default_lang | default: 'en' }}">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ART SPACE BYRON | Art Gallery &amp; Cafe, Inverell NSW</title>
-    {%- assign cur_ex = site.exhibitions | where: "status", "current" | first -%}
-    {%- capture home_desc %}Contemporary art gallery and artisanal cafe at 44 Byron Street, Inverell NSW. Now showing {{ cur_ex.title }}. Free entry.{% endcapture -%}
-    <meta name="description" content="{{ home_desc | strip_newlines | strip | escape }}">
+<style>
+  .main-page { background: #fff; }
 
-    <!-- Open Graph / Social Meta -->
-    <meta property="og:title" content="ART SPACE BYRON | Contemporary Art in Inverell">
-    <meta property="og:description" content="{{ home_desc | strip_newlines | strip | escape }}">
-    <meta property="og:image" content="{{ '/assets/images/og-image.jpg' | absolute_url }}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ '/' | absolute_url }}">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ART SPACE BYRON">
-    <meta name="twitter:image" content="{{ '/assets/images/og-image.jpg' | absolute_url }}">
+  /* ── 1. Full-Screen Hero (White Cube style) ── */
+  .home-hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    background: #1a1a1a;
+  }
 
-    <link rel="canonical" href="{{ '/' | absolute_url }}">
-    <link rel="icon" type="image/svg+xml" href="{{ site.favicon | relative_url }}">
+  .home-hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,700&display=swap" rel="stylesheet">
+  .home-hero-text {
+    position: absolute;
+    left: 48px;
+    bottom: 48px;
+    z-index: 2;
+    max-width: 80%;
+  }
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ '/assets/css/eastern-minimal.css' | relative_url }}">
+  .home-hero-dates {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 8px;
+    text-transform: uppercase;
+  }
 
-    <style>
-        /* Gateway Page Specific Styles */
-        .gateway-page {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background-color: var(--rice-paper);
-        }
+  .home-hero-title {
+    font-family: 'Playfair Display', 'Noto Serif KR', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 8px;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+  }
 
-        .gateway-header {
-            padding: var(--space-4) var(--container-padding);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  .home-hero-artists {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
 
-        .gateway-logo {
-            font-family: var(--font-serif-en);
-            font-size: var(--text-xl);
-            font-weight: var(--weight-semibold);
-            letter-spacing: var(--tracking-wider);
-            color: var(--warm-white);
-        }
+  .home-hero-scroll {
+    position: absolute;
+    right: 48px;
+    bottom: 48px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    z-index: 2;
+    text-decoration: none;
+  }
 
-        .gateway-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: var(--space-12) var(--container-padding);
-        }
+  /* Hero-aware header (transparent until scroll) */
+  body.home-hero-active .site-header:not(.scrolled) {
+    background: transparent !important;
+    border-bottom: none !important;
+  }
 
-        .gateway-content {
-            max-width: 1200px;
-            width: 100%;
-            text-align: center;
-        }
+  body.home-hero-active .site-header:not(.scrolled) .nav-link,
+  body.home-hero-active .site-header:not(.scrolled) .site-logo-minimal {
+    color: #fff !important;
+  }
 
-        .gateway-title {
-            margin-bottom: 0;
-            display: flex;
-            justify-content: center;
-        }
+  body.home-hero-active .site-header:not(.scrolled) .header-account-icon svg {
+    stroke: #fff !important;
+  }
 
-        .gateway-brand-logo {
-            max-width: clamp(400px, 60vw, 780px);
-            height: auto;
-            filter: brightness(0) invert(1);
-            clip-path: inset(5% 0 30% 0);
-            margin-bottom: -20%;
-        }
+  body.home-hero-active .site-header:not(.scrolled) .hamburger-line {
+    background-color: #fff !important;
+  }
 
-        .gateway-tagline {
-            font-family: var(--font-sans-en);
-            font-size: var(--text-xl);
-            font-weight: var(--weight-light);
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: var(--tracking-wide);
-            margin-bottom: var(--space-12);
-            line-height: var(--leading-relaxed);
-        }
+  /* ── 2. Intro ── */
+  .home-intro {
+    max-width: 900px;
+    margin: 0 auto 80px;
+    padding: 40px 48px;
+    text-align: center;
+    border-top: 1px solid #eee;
+  }
 
-        .gateway-divider {
-            width: 120px;
-            height: 1px;
-            background-color: var(--celadon);
-            margin: var(--space-8) auto;
-        }
+  .home-intro-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    line-height: 1.5;
+    color: #333;
+    margin: 0;
+    font-style: italic;
+  }
 
-        .gateway-choices {
-            display: flex;
-            justify-content: center;
-            margin-top: var(--space-2);
-        }
+  /* ── Sections ── */
+  .home-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 48px 60px;
+  }
 
-        .gateway-choice {
-            position: relative;
-            padding: 18px 52px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transition: all var(--duration-base) var(--ease-elegant);
-            text-decoration: none;
-            display: inline-block;
-        }
+  .home-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    margin-bottom: 36px;
+    border-bottom: 1px solid #e0e0e0;
+  }
 
-        .gateway-choice:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.15);
-        }
+  .home-section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0;
+  }
 
-        .gateway-choice-label {
-            font-size: var(--text-xs);
-            font-weight: var(--weight-medium);
-            letter-spacing: var(--tracking-widest);
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: var(--space-3);
-        }
+  .home-section-viewall {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #999;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
 
-        .gateway-choice-title {
-            font-family: var(--font-serif-en);
-            font-size: var(--text-4xl);
-            font-weight: var(--weight-semibold);
-            color: var(--warm-white);
-            margin-bottom: var(--space-4);
-            line-height: var(--leading-tight);
-        }
+  .home-section-viewall:hover { color: #000; }
 
-        .gateway-choice-description {
-            font-size: var(--text-base);
-            color: rgba(255, 255, 255, 0.7);
-            line-height: var(--leading-relaxed);
-            margin-bottom: var(--space-6);
-        }
+  /* ── 3. Artists Grid ── */
+  .home-artists-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
 
-        .gateway-choice-cta {
-            font-size: var(--text-sm);
-            font-weight: var(--weight-medium);
-            letter-spacing: var(--tracking-wider);
-            text-transform: uppercase;
-            color: var(--warm-white);
-            display: inline-block;
-        }
+  .home-artist-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
 
-        .gateway-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: var(--space-6) var(--container-padding);
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            background-color: var(--ink-black);
-            z-index: 100;
-            transform: translateY(100%);
-            opacity: 0;
-            transition: all 0.4s var(--ease-elegant);
-            pointer-events: none;
-        }
+  .home-artist-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #f7f7f7;
+    margin-bottom: 14px;
+  }
 
-        .footer-trigger {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            z-index: 99;
-        }
+  .home-artist-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
 
-        .footer-trigger:hover~.gateway-footer,
-        .gateway-footer:hover {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: all;
-        }
+  .home-artist-card:hover .home-artist-img img {
+    transform: scale(1.03);
+  }
 
-        .gateway-footer-text {
-            font-size: var(--text-sm);
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: var(--space-2);
-        }
+  .home-artist-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+    letter-spacing: 0.01em;
+  }
 
-        .gateway-footer-contact {
-            font-size: var(--text-xs);
-            color: rgba(255, 255, 255, 0.4);
-        }
+  .home-artist-medium {
+    font-size: 0.75rem;
+    color: #888;
+    margin: 0;
+  }
 
-        /* Korean Typography */
-        html[lang="ko"] .gateway-title,
-        html[lang="ko"] .gateway-choice-title {
-            font-family: var(--font-serif-kr);
-            letter-spacing: var(--tracking-normal);
-        }
+  /* ── 4. Upcoming List ── */
+  .home-upcoming-list {
+    display: flex;
+    flex-direction: column;
+  }
 
-        html[lang="ko"] .gateway-tagline,
-        html[lang="ko"] .gateway-choice-description {
-            font-family: var(--font-sans-kr);
-        }
+  .home-upcoming-item {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    color: #000;
+    transition: opacity 0.2s;
+  }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .gateway-choices {
-                margin-top: var(--space-2);
-            }
+  .home-upcoming-item:hover { opacity: 0.6; }
 
-            .gateway-choice {
-                padding: 12px 36px;
-            }
+  .home-upcoming-date {
+    font-size: 0.78rem;
+    color: #999;
+    margin: 0;
+  }
 
-            .gateway-choice-cta {
-                font-size: 0.7rem;
-            }
+  .home-upcoming-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+  }
 
-            .gateway-brand-logo {
-                max-width: 70vw;
-                margin-bottom: -18%;
-            }
+  .home-upcoming-artist {
+    font-size: 0.82rem;
+    color: #666;
+    margin: 0;
+  }
 
-            .gateway-social {
-                margin-top: var(--space-3);
-            }
-        }
-
-        .gateway-social {
-            margin-top: var(--space-6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .social-link {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 0.7rem;
-            font-weight: 900;
-            letter-spacing: 0.15em;
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .social-link:hover {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .social-divider {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.8rem;
-        }
-
-        .address-tag {
-            position: fixed;
-            bottom: 24px;
-            right: 28px;
-            font-family: 'Bodoni Moda', serif;
-            font-size: 0.72rem;
-            font-weight: 900;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.7);
-            text-transform: none;
-            z-index: 50;
-            pointer-events: none;
-        }
-
-        /* Fade-in Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .gateway-content>* {
-            animation: fadeInUp 0.8s var(--ease-elegant) backwards;
-        }
-
-        .gateway-title {
-            animation-delay: 0.1s;
-        }
-
-        .gateway-tagline {
-            animation-delay: 0.2s;
-        }
-
-        .gateway-divider {
-            animation-delay: 0.3s;
-        }
-
-        .gateway-choices {
-            animation-delay: 0.4s;
-        }
-
-        /* Background Video */
-        .background-video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            background-color: #000000;
-            /* Black background for fade effect */
-        }
-
-        .background-video-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom,
-                    rgba(0, 0, 0, 0.5) 0%,
-                    rgba(0, 0, 0, 0.2) 50%,
-                    rgba(0, 0, 0, 0.7) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 2;
-            transition: opacity 1.5s ease-in-out;
-            /* Added transition for overlay */
-        }
-
-        .background-video-container.fading::before {
-            opacity: 0;
-            /* Fade out overlay during transition */
-        }
-
-        #bg-video-1,
-        #bg-video-2 {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            /* Adjusted timing */
-        }
-
-        #bg-video-1.active,
-        #bg-video-2.active {
-            opacity: 1;
-        }
-
-        /* Ensure content visibility */
-        .gateway-page {
-            position: relative;
-            background-color: transparent;
-        }
-
-        /* Ensure footer stays above background */
-        .gateway-footer {
-            z-index: 100;
-        }
-    </style>
-
-    <!-- Background Video Sequencer script -->
-    {% assign video_files = "" | split: "" %}
-    {% for file in site.static_files %}
-    {% if file.path contains "/assets/video/" and file.extname == ".mp4" %}
-    {% assign path = file.path | relative_url %}
-    {% assign video_files = video_files | push: path %}
-    {% endif %}
-    {% endfor %}
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const videos = {{ video_files | jsonify | default: "[]" | strip_newlines
-        }};
-        const container = document.querySelector('.background-video-container');
-        const video1 = document.getElementById('bg-video-1');
-        const video2 = document.getElementById('bg-video-2');
-        const videoElements = [video1, video2];
-
-        let currentVideoIndex = 0;
-        let activeElementIndex = 0;
-
-        function playNextVideo() {
-            if (videos.length <= 1) return;
-            const activeVideo = videoElements[activeElementIndex];
-            container.classList.add('fading');
-            activeVideo.classList.remove('active');
-
-            setTimeout(() => {
-                activeVideo.pause();
-                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-                const nextElementIndex = 1 - activeElementIndex;
-                const nextVideo = videoElements[nextElementIndex];
-                nextVideo.src = videos[currentVideoIndex];
-                nextVideo.load();
-                nextVideo.oncanplay = function () {
-                    nextVideo.play().catch(e => console.log("Autoplay blocked:", e));
-                    nextVideo.classList.add('active');
-                    container.classList.remove('fading');
-                    activeElementIndex = nextElementIndex;
-                    nextVideo.onended = playNextVideo;
-                };
-            }, 1500);
-        }
-
-        // Force Play Logic for initial video
-        video1.classList.add('active');
-        video1.loop = true;
-        video1.muted = true;
-        video1.playsInline = true;
-        video1.autoplay = true;
-
-        // Ensure src is set
-        if (!video1.src || video1.src === '') {
-            video1.src = '/assets/video/art_gallery_hyperlapse.mp4';
-        }
-
-        const forcePlay = () => {
-            video1.muted = true;
-            var p = video1.play();
-            if (p !== undefined) {
-                p.then(() => {
-                    console.log("Video playing");
-                }).catch(err => {
-                    console.log("Autoplay blocked, waiting for interaction");
-                    document.addEventListener('click', () => { video1.muted = true; video1.play(); }, { once: true });
-                    document.addEventListener('touchstart', () => { video1.muted = true; video1.play(); }, { once: true });
-                });
-            }
-        };
-
-        video1.addEventListener('loadeddata', forcePlay);
-        video1.oncanplay = forcePlay;
-        if (video1.readyState >= 2) forcePlay();
-        setTimeout(forcePlay, 500);
-        setTimeout(forcePlay, 1500);
-        setTimeout(forcePlay, 3000);
-        });
-    </script>
-
-    <!-- Structured data: gallery/cafe (global) + website (homepage) -->
-    {% include schema-artgallery.html %}
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "@id": "{{ '/#website' | absolute_url }}",
-      "name": "ART SPACE BYRON",
-      "url": "{{ '/' | absolute_url }}",
-      "inLanguage": "en",
-      "publisher": { "@id": "{{ '/#artgallery' | absolute_url }}" }
+  @media (max-width: 900px) {
+    .home-hero-text {
+      left: 24px;
+      bottom: 24px;
+      max-width: calc(100% - 48px);
     }
-    </script>
-</head>
+    .home-hero-scroll {
+      right: 24px;
+      bottom: 24px;
+    }
+    .home-hero-title {
+      font-size: 28px;
+    }
+    .home-intro { padding: 32px 24px; }
+    .home-section { padding: 24px 24px 40px; }
+    .home-artists-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .home-upcoming-item { grid-template-columns: 1fr; gap: 6px; }
+  }
 
-<body class="gateway-page">
-    <div class="background-video-container">
-        {% assign first_video = video_files | first %}
-        <video id="bg-video-1" class="active" muted playsinline autoplay loop preload="metadata"
-            src="{{ '/assets/video/art_gallery_hyperlapse.mp4' | relative_url }}"
-            poster="{{ '/assets/images/og-image.jpg' | relative_url }}">
-        </video>
-        <video id="bg-video-2" muted playsinline preload="metadata"></video>
-    </div>
-    <main class="gateway-container">
-        <div class="gateway-content">
-            <div class="gateway-title">
-                <img src="{{ '/assets/logo/brand-logo.png' | relative_url }}" alt="ART SPACE BYRON" class="gateway-brand-logo">
-            </div>
+  @media (max-width: 480px) {
+    .home-artists-grid { grid-template-columns: 1fr; }
+  }
 
-            <div class="gateway-choices">
-                <!-- Gallery Choice -->
-                <a href="{{ '/gallery/' | relative_url }}" class="gateway-choice"
-                    style="max-width: 500px; margin: 0 auto;">
-                    <span class="gateway-choice-cta">Enter Gallery</span>
-                </a>
-            </div>
+  /* ── Kukje-Style Main Page (legacy, unused after refactor) ── */
 
-        </div>
-    </main>
+  /* ── Hero: Full-width current exhibition ── */
+  .main-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-    <!-- ===== Homepage content below the splash (crawlable text + visitor info) ===== -->
-    <div class="home-content">
-      <section class="home-lede">
-        <h1>Contemporary Art Gallery &amp; Cafe in Inverell, NSW</h1>
-        <p>ART SPACE BYRON brings East Asian contemporary art to regional Australia — connecting Korean and local artists through exhibitions, alongside an artisanal cafe at 44 Byron Street, Inverell.</p>
-      </section>
+  .main-hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+  }
 
-      {% assign cur = site.exhibitions | where: "status", "current" | first %}
-      {% if cur %}
-      <section class="home-current-exh">
-        <p class="home-eyebrow">Current Exhibition</p>
-        <a href="{{ cur.url | relative_url }}" class="home-exh-card">
-          {% if cur.featured_image %}
-          <div class="home-exh-img"><img src="{{ cur.featured_image | relative_url }}" alt="{{ cur.title | escape }}" loading="lazy"></div>
-          {% endif %}
-          <div class="home-exh-info">
-            <h2>{{ cur.title }}</h2>
-            <p class="home-exh-dates">{{ cur.start_date | date: "%-d %B" }} – {{ cur.end_date | date: "%-d %B %Y" }}</p>
-            {% if cur.artists %}<p class="home-exh-artists">{{ cur.artists | join: ", " }}</p>{% endif %}
-            <span class="home-link">View exhibition →</span>
-          </div>
-        </a>
-      </section>
+  .main-hero-slide.active {
+    opacity: 1;
+  }
+
+  /* Slide indicators */
+  .main-hero-indicators {
+    position: absolute;
+    bottom: 70px;
+    right: 48px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+
+  .hero-indicator {
+    width: 24px;
+    height: 2px;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .hero-indicator.active {
+    background: rgba(255,255,255,0.9);
+  }
+
+  .main-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 60px 48px 48px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+  }
+
+  .main-hero-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin: 0 0 10px;
+  }
+
+  .main-hero-title {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px;
+    line-height: 1.2;
+  }
+
+  .main-hero-artist {
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    color: rgba(255,255,255,0.85);
+    margin: 0 0 8px;
+  }
+
+  .main-hero-dates {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+    margin: 0 0 20px;
+  }
+
+  .main-hero-link {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 4px;
+    transition: border-color 0.2s;
+  }
+
+  .main-hero-link:hover {
+    border-color: #fff;
+  }
+
+  /* Scroll indicator */
+  .main-scroll-indicator {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 10;
+  }
+
+  .main-scroll-mouse {
+    width: 20px;
+    height: 32px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 12px;
+    position: relative;
+  }
+
+  .main-scroll-wheel {
+    width: 3px;
+    height: 8px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollBounce 1.5s ease-in-out infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.3; transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── Section Container ── */
+  .main-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 64px 48px;
+  }
+
+  .main-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .main-section-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0;
+  }
+
+  .main-section-viewall {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #999;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .main-section-viewall:hover {
+    color: #000;
+  }
+
+  /* ── Exhibition Row (thumbnail + poster) ── */
+  .main-exh-row {
+    display: flex;
+    gap: 36px;
+    align-items: start;
+    margin-bottom: 48px;
+  }
+
+  .main-exh-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .main-exh-card-img {
+    width: 100%;
+    overflow: hidden;
+    background: #f5f5f5;
+    margin-bottom: 14px;
+  }
+
+  .main-exh-card-img img {
+    width: 100%;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .main-exh-poster {
+    flex-shrink: 0;
+  }
+
+  .main-exh-poster img {
+    display: block;
+    max-height: 500px;
+    width: auto;
+  }
+
+  .main-exh-card:hover .main-exh-card-img img {
+    transform: scale(1.03);
+  }
+
+  .main-exh-card-location {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 6px;
+  }
+
+  .main-exh-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+    line-height: 1.35;
+  }
+
+  .main-exh-card-dates {
+    font-size: 0.75rem;
+    color: #888;
+    margin: 0;
+  }
+
+  /* ── Artist Grid (name list style) ── */
+  .main-artist-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 36px;
+  }
+
+  .main-artist-item {
+    text-decoration: none;
+    color: #000;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: color 0.2s;
+    display: block;
+  }
+
+  .main-artist-item:hover {
+    color: #666;
+  }
+
+  /* ── News Cards ── */
+  .main-news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .main-news-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .main-news-card-img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #f5f5f5;
+    margin-bottom: 14px;
+  }
+
+  .main-news-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .main-news-card:hover .main-news-card-img img {
+    transform: scale(1.03);
+  }
+
+  .main-news-card-date {
+    font-size: 0.65rem;
+    color: #999;
+    letter-spacing: 0.06em;
+    margin: 0 0 6px;
+  }
+
+  .main-news-card-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin: 0 0 6px;
+    line-height: 1.4;
+  }
+
+  .main-news-card-excerpt {
+    font-size: 0.78rem;
+    color: #888;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── Artwork Featured Row ── */
+  .main-artwork-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .main-artwork-card {
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .main-artwork-card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #f5f5f5;
+    margin-bottom: 10px;
+  }
+
+  .main-artwork-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .main-artwork-card:hover .main-artwork-card-img img {
+    transform: scale(1.03);
+  }
+
+  .main-artwork-card-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin: 0 0 2px;
+  }
+
+  .main-artwork-card-artist {
+    font-size: 0.72rem;
+    color: #888;
+    margin: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .main-section { padding: 48px 24px; }
+    .main-exh-row {
+      flex-direction: column;
+      gap: 24px;
+    }
+    .main-exh-poster img {
+      max-height: none;
+      width: 100%;
+    }
+    .main-artist-grid { grid-template-columns: repeat(2, 1fr); }
+    .main-news-grid { grid-template-columns: 1fr; }
+    .main-artwork-grid { grid-template-columns: repeat(2, 1fr); }
+    .main-hero-overlay { padding: 40px 24px 32px; }
+  }
+
+  @media (max-width: 480px) {
+    .main-artist-grid { grid-template-columns: 1fr; }
+    .main-artwork-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<div class="main-page">
+
+  {% assign current_exhibition = site.exhibitions | where: "status", "current" | first %}
+
+  <!-- 1. FULL-SCREEN HERO -->
+  <section class="home-hero">
+    <a href="{{ current_exhibition.url | relative_url }}" style="display:block;width:100%;height:100%;">
+      {% if current_exhibition.featured_image %}
+      <img src="{{ current_exhibition.featured_image | relative_url }}" alt="{{ current_exhibition.title }}" class="home-hero-img" loading="eager">
       {% endif %}
+    </a>
 
-      <section class="home-visit">
-        <div class="home-visit-col">
-          <h2>Visit</h2>
-          <p>44 Byron Street<br>Inverell NSW 2360, Australia</p>
-          <p><a href="mailto:admin@artspacebyron.com.au">admin@artspacebyron.com.au</a><br>0455 616 983</p>
-          <p><strong>Free admission</strong> to the gallery and cafe.</p>
-        </div>
-        <div class="home-visit-col">
-          <h2>Opening Hours</h2>
-          <ul class="home-hours">
-            <li><span>Tuesday – Friday</span><span>8am – 5pm</span></li>
-            <li><span>Saturday</span><span>8am – 3pm</span></li>
-            <li><span>Sunday – Monday</span><span>Closed</span></li>
-          </ul>
-        </div>
-      </section>
-
-      <nav class="home-explore" aria-label="Explore ART SPACE BYRON">
-        <a href="{{ '/gallery/' | relative_url }}">Gallery</a>
-        <a href="{{ '/gallery/exhibitions/' | relative_url }}">Exhibitions</a>
-        <a href="{{ '/gallery/artists/' | relative_url }}">Artists</a>
-        <a href="{{ '/cafe/' | relative_url }}">Cafe</a>
-      </nav>
+    <div class="home-hero-text">
+      <p class="home-hero-dates">
+        {{ current_exhibition.start_date | date: "%-d %B" }} – {{ current_exhibition.end_date | date: "%-d %B %Y" }}
+      </p>
+      <h1 class="home-hero-title">{{ current_exhibition.title }}</h1>
+      <p class="home-hero-artists">{{ current_exhibition.artists | join: ", " | default: current_exhibition.artist }}</p>
     </div>
 
-    <style>
-      /* Homepage content below the splash */
-      .home-content {
-        position: relative;
-        z-index: 10;
-        background: #f6f4ef;
-        color: #1c1c1c;
-        padding: clamp(56px, 8vw, 110px) clamp(20px, 6vw, 80px);
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      }
-      .home-content h1, .home-content h2 {
-        font-family: "Bodoni Moda", Georgia, serif;
-        font-weight: 500;
-        letter-spacing: 0.01em;
-        line-height: 1.2;
-        margin: 0;
-      }
-      .home-lede { max-width: 820px; margin: 0 auto 72px; text-align: center; }
-      .home-lede h1 { font-size: clamp(1.7rem, 4vw, 2.9rem); margin-bottom: 22px; }
-      .home-lede p { font-size: clamp(1rem, 1.6vw, 1.18rem); line-height: 1.7; color: #4a4a4a; margin: 0; }
+    <a href="#home-intro" class="home-hero-scroll">Scroll ↓</a>
+  </section>
 
-      .home-eyebrow, .home-exh-dates, .home-exh-artists {
-        font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: #8a8a8a; margin: 0;
-      }
-      .home-current-exh { max-width: 1040px; margin: 0 auto 80px; }
-      .home-eyebrow { text-align: center; margin-bottom: 26px; }
-      .home-exh-card {
-        display: flex; gap: clamp(24px, 4vw, 56px); align-items: center;
-        text-decoration: none; color: inherit;
-      }
-      .home-exh-img { flex: 0 0 clamp(240px, 42%, 480px); }
-      .home-exh-img img { width: 100%; height: auto; display: block; aspect-ratio: 4 / 3; object-fit: cover; }
-      .home-exh-info h2 { font-size: clamp(1.4rem, 3vw, 2.1rem); margin-bottom: 14px; }
-      .home-exh-info .home-exh-dates { margin-bottom: 10px; }
-      .home-exh-info .home-exh-artists { color: #5a5a5a; letter-spacing: 0.04em; text-transform: none; font-size: 0.95rem; margin-bottom: 22px; }
-      .home-link {
-        display: inline-block; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
-        border-bottom: 1px solid #1c1c1c; padding-bottom: 3px; transition: opacity .2s;
-      }
-      .home-exh-card:hover .home-link { opacity: 0.55; }
+  <!-- 2. GALLERY INTRO -->
+  <section class="home-intro" id="home-intro">
+    <p class="home-intro-text">A gallery-café in Inverell, NSW — where contemporary art and everyday life meet.</p>
+  </section>
 
-      .home-visit {
-        max-width: 1040px; margin: 0 auto 72px; display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(32px, 5vw, 72px);
-        border-top: 1px solid #e2ded5; padding-top: clamp(40px, 5vw, 64px);
-      }
-      .home-visit h2 { font-size: 1.35rem; margin-bottom: 18px; }
-      .home-visit p { line-height: 1.75; color: #4a4a4a; margin: 0 0 14px; }
-      .home-visit a { color: #1c1c1c; text-decoration: underline; text-underline-offset: 3px; }
-      .home-hours { list-style: none; padding: 0; margin: 0; }
-      .home-hours li { display: flex; justify-content: space-between; gap: 24px; padding: 8px 0; border-bottom: 1px solid #ece8df; color: #3a3a3a; }
-      .home-hours li span:last-child { color: #6a6a6a; }
-
-      .home-explore {
-        max-width: 1040px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center;
-        gap: clamp(18px, 4vw, 44px); border-top: 1px solid #e2ded5; padding-top: clamp(40px, 5vw, 56px);
-      }
-      .home-explore a {
-        font-family: "Bodoni Moda", Georgia, serif; font-size: clamp(1.1rem, 2.4vw, 1.6rem);
-        color: #1c1c1c; text-decoration: none; transition: color .2s;
-      }
-      .home-explore a:hover { color: #7d8b6a; }
-
-      @media (max-width: 700px) {
-        .home-exh-card { flex-direction: column; align-items: stretch; text-align: center; }
-        .home-exh-img { flex-basis: auto; }
-      }
-    </style>
-
-    <!-- Geometric Cursor -->
-    <div id="geo-cursor">
-        <svg id="geo-cursor-svg" viewBox="-5 -5 70 70" xmlns="http://www.w3.org/2000/svg" overflow="visible">
-            <polygon class="geo-shape geo-hex" points="30,4 52,17 52,43 30,56 8,43 8,17" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.2"/>
-            <rect class="geo-shape geo-rect" x="14" y="14" width="32" height="32" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
-            <polygon class="geo-shape geo-tri" points="30,12 48,46 12,46" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="0.7"/>
-            <circle class="geo-shape geo-dot" cx="30" cy="30" r="2.5" fill="rgba(255,255,255,0.95)"/>
-        </svg>
+  <!-- 3. ARTISTS GRID -->
+  <section class="home-section">
+    <div class="home-section-header">
+      <h2 class="home-section-title">Artists</h2>
+      <a href="{{ '/gallery/artists' | relative_url }}" class="home-section-viewall">View All →</a>
     </div>
 
-    <style>
-        * { cursor: none !important; }
-        a, button, input, select, .site-header, .site-header * { cursor: pointer !important; }
+    <div class="home-artists-grid">
+      {% assign featured_artists = site.artists | where: "featured", true %}
+      {% for artist in featured_artists limit: 6 %}
+      <a href="{{ artist.url | relative_url }}" class="home-artist-card">
+        <div class="home-artist-img">
+          {% if artist.featured_image %}
+          <img src="{{ artist.featured_image | relative_url }}" alt="{{ artist.name }}{% if artist.nationality and artist.nationality != '' %}, {{ artist.nationality }} artist{% endif %}" loading="lazy">
+          {% endif %}
+        </div>
+        <p class="home-artist-name">{{ artist.name }}</p>
+        {% if artist.medium and artist.medium != "" %}
+        <p class="home-artist-medium">{{ artist.medium }}</p>
+        {% else %}
+        <p class="home-artist-medium">{{ artist.nationality }}</p>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+  </section>
 
-        #geo-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 80px;
-            height: 80px;
-            pointer-events: none;
-            z-index: 99999;
-            transform: translate(-50%, -50%);
-            will-change: transform;
-            overflow: visible;
-        }
+  <!-- 4. UPCOMING EXHIBITIONS -->
+  {% assign upcoming = site.exhibitions | where: "status", "upcoming" | sort: "start_date" %}
+  {% if upcoming.size > 0 %}
+  <section class="home-section">
+    <div class="home-section-header">
+      <h2 class="home-section-title">Upcoming</h2>
+      <a href="{{ '/gallery/exhibitions' | relative_url }}" class="home-section-viewall">View All →</a>
+    </div>
 
-        #geo-cursor-svg {
-            width: 100%;
-            height: 100%;
-            overflow: visible;
-        }
+    <div class="home-upcoming-list">
+      {% for exh in upcoming limit: 3 %}
+      <a href="{{ exh.url | relative_url }}" class="home-upcoming-item">
+        <p class="home-upcoming-date">{{ exh.start_date | date: "%d.%m.%Y" }} — {{ exh.end_date | date: "%d.%m.%Y" }}</p>
+        <p class="home-upcoming-title">{{ exh.title }}</p>
+        <p class="home-upcoming-artist">{{ exh.artists | join: ", " }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
 
-        .geo-shape {
-            transform-origin: 30px 30px;
-            transform-box: fill-box;
-        }
+</div>
 
-        .geo-hex {
-            animation: rotateHex 6s linear infinite;
-        }
+<script>
+  // Activate hero transparent header
+  document.body.classList.add('home-hero-active');
 
-        .geo-rect {
-            animation: rotateRect 4s linear infinite reverse;
-        }
+  // Hero Slideshow - 3 second interval (legacy, no-op)
+  (function() {
+    const slides = document.querySelectorAll('.main-hero-slide');
+    const indicators = document.querySelectorAll('.hero-indicator');
+    if (slides.length <= 1) return;
 
-        .geo-tri {
-            animation: rotateTri 8s linear infinite;
-        }
+    let current = 0;
+    let interval;
 
-        @keyframes rotateHex {
-            from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
-        }
+    function goTo(index) {
+      slides[current].classList.remove('active');
+      indicators[current].classList.remove('active');
+      current = index % slides.length;
+      slides[current].classList.add('active');
+      indicators[current].classList.add('active');
+    }
 
-        @keyframes rotateRect {
-            from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
-        }
+    function next() {
+      goTo((current + 1) % slides.length);
+    }
 
-        @keyframes rotateTri {
-            from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
-        }
+    function startAutoplay() {
+      interval = setInterval(next, 3000);
+    }
 
-        /* 클릭 시 펄스 효과 */
-        #geo-cursor.clicking #geo-cursor-svg {
-            animation: cursorPulse 0.3s ease-out forwards;
-        }
+    indicators.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        clearInterval(interval);
+        goTo(i);
+        startAutoplay();
+      });
+    });
 
-        @keyframes cursorPulse {
-            0%   { transform: scale(1); opacity: 1; }
-            50%  { transform: scale(1.5); opacity: 0.6; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-    </style>
+    startAutoplay();
+  })();
 
-    <script>
-        (function() {
-            const cursor = document.getElementById('geo-cursor');
-            let mouseX = -100, mouseY = -100;
-            let curX = -100, curY = -100;
+  // Easter Holiday Notice Popup
+  (function() {
+    var now = new Date();
+    var showFrom = new Date('2026-03-25');
+    var showUntil = new Date('2026-04-05');
+    var dismissed = sessionStorage.getItem('easter-notice-dismissed');
 
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
+    if (now >= showFrom && now <= showUntil && !dismissed) {
+      var overlay = document.createElement('div');
+      overlay.id = 'holidayNotice';
+      overlay.innerHTML = '<div class="holiday-popup">'
+        + '<button class="holiday-close" onclick="closeHolidayNotice()">&times;</button>'
+        + '<p class="holiday-label">HOLIDAY NOTICE</p>'
+        + '<h3 class="holiday-title">Easter Holiday Closure</h3>'
+        + '<p class="holiday-text">The gallery will be closed for the Easter holiday period.</p>'
+        + '<p class="holiday-dates">03 April — 06 April, 2026</p>'
+        + '<p class="holiday-text" style="font-size:0.8rem;color:#888;">Fri 3 Apr · Sat 4 Apr · Sun 5 Apr · Mon 6 Apr</p>'
+        + '<p class="holiday-text">We will reopen on <strong>Tuesday, 7 April</strong>. Wishing everyone a happy Easter!</p>'
+        + '<p class="holiday-text" style="color:#aaa;font-size:0.78rem;margin-top:12px;">이스터 연휴로 인해 4월 3일~6일 휴무합니다. 4월 7일(화) 정상 운영합니다.</p>'
+        + '<button class="holiday-btn" onclick="closeHolidayNotice()">OK, Got it</button>'
+        + '</div>';
+      document.body.appendChild(overlay);
+    }
+  })();
 
-            document.addEventListener('mousedown', () => {
-                cursor.classList.add('clicking');
-            });
-            document.addEventListener('mouseup', () => {
-                cursor.classList.remove('clicking');
-            });
+  function closeHolidayNotice() {
+    var el = document.getElementById('holidayNotice');
+    if (el) el.remove();
+    sessionStorage.setItem('easter-notice-dismissed', '1');
+  }
+</script>
 
-            // 부드러운 따라오기
-            function animate() {
-                curX += (mouseX - curX) * 0.12;
-                curY += (mouseY - curY) * 0.12;
-                cursor.style.left = curX + 'px';
-                cursor.style.top  = curY + 'px';
-                requestAnimationFrame(animate);
-            }
-            animate();
-        })();
-    </script>
+<style>
+  #holidayNotice {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
 
-    <div class="address-tag">44 Byron St, Inverell NSW 2360</div>
+  .holiday-popup {
+    background: #fff;
+    max-width: 420px;
+    width: 100%;
+    padding: 48px 40px;
+    position: relative;
+    text-align: center;
+  }
 
-    <div class="footer-trigger"></div>
-    <footer class="gateway-footer">
-        <p class="gateway-footer-text">Contemporary art at the intersection of tradition and innovation.</p>
-        <p class="gateway-footer-contact">44 Byron St, Inverell NSW 2360 | admin@artspacebyron.com.au</p>
-    </footer>
-</body>
+  .holiday-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+  }
 
-</html>
+  .holiday-close:hover { color: #000; }
+
+  .holiday-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #999;
+    margin: 0 0 16px;
+  }
+
+  .holiday-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 16px;
+  }
+
+  .holiday-dates {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 16px;
+    padding: 16px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+
+  .holiday-text {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0 0 8px;
+  }
+
+  .holiday-btn {
+    margin-top: 24px;
+    padding: 14px 40px;
+    background: #000;
+    color: #fff;
+    border: none;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .holiday-btn:hover { background: #333; }
+</style>
