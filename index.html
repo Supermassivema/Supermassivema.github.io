@@ -683,16 +683,11 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
       <p class="home-hero-artists">{{ current_exhibition.artists | join: ", " | default: current_exhibition.artist }}</p>
     </div>
 
-    <a href="#home-intro" class="home-hero-scroll">Scroll ↓</a>
-  </section>
-
-  <!-- 2. GALLERY INTRO -->
-  <section class="home-intro" id="home-intro">
-    <p class="home-intro-text">A gallery-café in Inverell, NSW — where contemporary art and everyday life meet.</p>
+    <a href="#home-artists" class="home-hero-scroll">Scroll ↓</a>
   </section>
 
   <!-- 3. ARTISTS GRID -->
-  <section class="home-section">
+  <section class="home-section" id="home-artists">
     <div class="home-section-header">
       <h2 class="home-section-title">Artists</h2>
       <a href="{{ '/gallery/artists' | relative_url }}" class="home-section-viewall">View All →</a>
