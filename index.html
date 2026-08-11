@@ -109,22 +109,25 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
   }
 
-  /* Hero-aware header (transparent until scroll) */
-  body.home-hero-active .site-header:not(.scrolled) {
+  /* Homepage hero: header stays transparent (even when scrolled) with white logo/menu */
+  body.home-hero-active .site-header,
+  body.home-hero-active .site-header.scrolled {
     background: transparent !important;
+    backdrop-filter: none !important;
     border-bottom: none !important;
   }
 
-  body.home-hero-active .site-header:not(.scrolled) .nav-link,
-  body.home-hero-active .site-header:not(.scrolled) .site-logo-minimal {
+  body.home-hero-active .site-header .nav-link,
+  body.home-hero-active .site-header .site-logo-minimal {
     color: #fff !important;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4) !important;
   }
 
-  body.home-hero-active .site-header:not(.scrolled) .header-account-icon svg {
+  body.home-hero-active .site-header .header-account-icon svg {
     stroke: #fff !important;
   }
 
-  body.home-hero-active .site-header:not(.scrolled) .hamburger-line {
+  body.home-hero-active .site-header .hamburger-line {
     background-color: #fff !important;
   }
 
