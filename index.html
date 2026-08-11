@@ -135,6 +135,9 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     padding: 40px 48px 60px;
   }
 
+  /* extra breathing room between the hero and the first content section */
+  #home-artists { margin-top: 64px; }
+
   .home-section-header {
     display: flex;
     justify-content: space-between;
@@ -169,8 +172,9 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
   /* ── 3. Artists Grid ── */
   .home-artists-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 200px));
+    justify-content: center;
+    gap: 28px 24px;
   }
 
   .home-artist-card {
@@ -181,7 +185,7 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
 
   .home-artist-img {
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
     background: #f7f7f7;
     margin-bottom: 14px;
@@ -264,12 +268,7 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
       font-size: 28px;
     }
     .home-section { padding: 24px 24px 40px; }
-    .home-artists-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .home-upcoming-item { grid-template-columns: 1fr; gap: 6px; }
-  }
-
-  @media (max-width: 480px) {
-    .home-artists-grid { grid-template-columns: 1fr; }
   }
 
   /* ── Kukje-Style Main Page (legacy, unused after refactor) ── */
