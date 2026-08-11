@@ -52,30 +52,49 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     text-shadow: 0 1px 8px rgba(255, 255, 255, 0.75);
   }
 
-  .home-hero-dates {
-    font-size: 11px;
-    letter-spacing: 0.12em;
+  .home-hero-artists {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 14px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .home-hero-country {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(0.95rem, 1.7vw, 1.2rem);
+    font-weight: 500;
     color: #555;
-    margin: 0 0 8px;
+    margin: 0 0 6px;
+    letter-spacing: 0.04em;
+  }
+
+  .home-hero-dates {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    letter-spacing: 0.08em;
+    color: #555;
+    margin: 0 0 24px;
     text-transform: uppercase;
   }
 
-  .home-hero-title {
-    font-family: 'Playfair Display', 'Noto Serif KR', serif;
-    font-size: 36px;
-    font-weight: 400;
+  .home-hero-more {
+    display: inline-block;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: #1a1a1a;
-    margin: 0 0 8px;
-    line-height: 1.15;
-    letter-spacing: -0.005em;
+    text-decoration: none;
+    border-bottom: 1.5px solid currentColor;
+    padding-bottom: 4px;
+    transition: opacity 0.2s;
   }
 
-  .home-hero-artists {
-    font-size: 13px;
-    color: #555;
-    margin: 0;
-    letter-spacing: 0.02em;
-  }
+  .home-hero-more:hover { opacity: 0.55; }
 
   .home-hero-scroll {
     position: absolute;
@@ -115,10 +134,11 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
   body.hero-dark .home-hero::after {
     background: radial-gradient(ellipse 60% 45% at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.22) 55%, transparent 80%);
   }
-  body.hero-dark .home-hero-title { color: #fff; }
+  body.hero-dark .home-hero-artists { color: #fff; }
+  body.hero-dark .home-hero-country,
   body.hero-dark .home-hero-dates,
-  body.hero-dark .home-hero-artists,
-  body.hero-dark .home-hero-scroll { color: rgba(255, 255, 255, 0.78); }
+  body.hero-dark .home-hero-more,
+  body.hero-dark .home-hero-scroll { color: rgba(255, 255, 255, 0.82); }
   body.hero-dark .home-hero-text,
   body.hero-dark .home-hero-scroll { text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5); }
   body.hero-dark.home-hero-active .site-header:not(.scrolled) .nav-link,
@@ -260,9 +280,6 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     .home-hero-scroll {
       right: 24px;
       bottom: 24px;
-    }
-    .home-hero-title {
-      font-size: 28px;
     }
     .home-section { padding: 24px 24px 40px; }
     .home-upcoming-item { grid-template-columns: 1fr; gap: 6px; }
@@ -674,11 +691,12 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     </a>
 
     <div class="home-hero-text">
-      <p class="home-hero-dates">
-        {{ current_exhibition.start_date | date: "%-d %B" }} – {{ current_exhibition.end_date | date: "%-d %B %Y" }}
-      </p>
-      <h1 class="home-hero-title">{{ current_exhibition.title }}</h1>
-      <p class="home-hero-artists">{{ current_exhibition.artists | join: ", " | default: current_exhibition.artist }}</p>
+      {%- assign _first_artist = current_exhibition.artists | first -%}
+      {%- assign _artist_obj = site.artists | where: "name", _first_artist | first -%}
+      <h1 class="home-hero-artists">{{ current_exhibition.artists | join: ", " | default: current_exhibition.artist }}</h1>
+      {% if _artist_obj.nationality and _artist_obj.nationality != "" %}<p class="home-hero-country">{{ _artist_obj.nationality }}</p>{% endif %}
+      <p class="home-hero-dates">{{ current_exhibition.start_date | date: "%-d %B" }} – {{ current_exhibition.end_date | date: "%-d %B %Y" }}</p>
+      <a href="{{ current_exhibition.url | relative_url }}" class="home-hero-more">Find out more →</a>
     </div>
 
     <a href="#home-artists" class="home-hero-scroll">Scroll ↓</a>
