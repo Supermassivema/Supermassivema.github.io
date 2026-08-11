@@ -1033,6 +1033,9 @@
             const input = document.getElementById('globalSearchInput');
             const closeBtn = document.getElementById('globalSearchClose');
 
+            // Guard: the search UI isn't present on every page (e.g. the homepage)
+            if (!btn || !overlay || !input || !closeBtn) return;
+
             btn.addEventListener('click', () => {
                 overlay.classList.add('active');
                 setTimeout(() => input.focus(), 100);

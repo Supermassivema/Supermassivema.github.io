@@ -1,4 +1,22 @@
-{%- comment %} Artwork pages have no shared <head>, so structured data is injected here. {% endcomment -%}
+<!doctype html>
+<html lang="{{ page.lang | default: site.default_lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | escape }} — {{ page.artist | escape }} | ART SPACE BYRON</title>
+  {%- capture art_desc %}{{ page.artist }}, {{ page.title }}{% if page.year and page.year != "" %}, {{ page.year }}{% endif %}{% if page.medium and page.medium != "" %}, {{ page.medium }}{% endif %} — original artwork at ART SPACE BYRON, a contemporary art gallery in Inverell, NSW.{% endcapture -%}
+  <meta name="description" content="{{ art_desc | strip_newlines | strip | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{{ page.title | escape }} — {{ page.artist | escape }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  {%- if page.image %}
+  <meta property="og:image" content="{{ page.image | absolute_url | uri_escape }}">
+  {%- endif %}
+</head>
+<body>
+
+{%- comment %} Structured data (global + VisualArtwork) injected here. {% endcomment -%}
 {% include schema-artgallery.html %}
 {% include schema-breadcrumbs.html %}
 {%- comment %} Structured data: VisualArtwork {% endcomment -%}
@@ -1320,3 +1338,5 @@
     });
   })();
 </script>
+</body>
+</html>

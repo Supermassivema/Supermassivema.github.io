@@ -55,7 +55,7 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
 
   .home-hero-artists {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: clamp(2.4rem, 6vw, 4.3rem);
+    font-size: clamp(1.4rem, 6.5vw, 4.3rem);
     font-weight: 700;
     color: #fff;
     margin: 0 0 7px;
@@ -224,6 +224,12 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     overflow: hidden;
     background: #f7f7f7;
     margin-bottom: 14px;
+  }
+
+  .home-artist-img picture {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .home-artist-img img {
@@ -702,7 +708,11 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
   <section class="home-hero">
     <a href="{{ current_exhibition.url | relative_url }}" style="display:block;width:100%;height:100%;">
       {% if current_exhibition.featured_image %}
-      <img src="{{ current_exhibition.featured_image | relative_url }}" alt="{{ current_exhibition.title }}" class="home-hero-img" loading="eager">
+      {% assign hero_webp = current_exhibition.featured_image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' | replace: '.PNG','.webp' %}
+      <picture>
+        <source srcset="{{ hero_webp | relative_url }}" type="image/webp">
+        <img src="{{ current_exhibition.featured_image | relative_url }}" alt="{{ current_exhibition.title }}" class="home-hero-img" loading="eager">
+      </picture>
       {% endif %}
     </a>
 
@@ -731,7 +741,11 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
       <a href="{{ artist.url | relative_url }}" class="home-artist-card">
         <div class="home-artist-img">
           {% if artist.featured_image %}
-          <img src="{{ artist.featured_image | relative_url }}" alt="{{ artist.name }}{% if artist.nationality and artist.nationality != '' %}, {{ artist.nationality }} artist{% endif %}" loading="lazy">
+          {% assign ar_webp = artist.featured_image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' | replace: '.PNG','.webp' %}
+          <picture>
+            <source srcset="{{ ar_webp | relative_url }}" type="image/webp">
+            <img src="{{ artist.featured_image | relative_url }}" alt="{{ artist.name }}{% if artist.nationality and artist.nationality != '' %}, {{ artist.nationality }} artist{% endif %}" loading="lazy">
+          </picture>
           {% endif %}
         </div>
         <p class="home-artist-name">{{ artist.name }}</p>
