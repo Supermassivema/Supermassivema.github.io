@@ -3,8 +3,8 @@ title: "Lee Sang-kwon Solo Exhibition"
 title_kr: "이상권 개인전"
 curator: Kim Ki Lim
 curator_kr: 김기림
-start_date: 2026-08-11
-end_date: 2026-10-09
+start_date: 2026-11-01
+end_date: 2026-12-31
 status: upcoming
 featured_image: "/assets/images/work/이상권 작가/lee-sang-kwon-work-002.jpg"
 location: Inverell, NSW, Australia
