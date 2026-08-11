@@ -172,9 +172,10 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
   /* ── 3. Artists Grid ── */
   .home-artists-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 200px));
-    justify-content: center;
-    gap: 28px 24px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    max-width: 980px;
+    margin: 0 auto;
   }
 
   .home-artist-card {
@@ -269,6 +270,10 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     }
     .home-section { padding: 24px 24px 40px; }
     .home-upcoming-item { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  @media (max-width: 560px) {
+    .home-artists-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   }
 
   /* ── Kukje-Style Main Page (legacy, unused after refactor) ── */
