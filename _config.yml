@@ -91,6 +91,8 @@ exclude:
   - vendor/ruby/
   - .claude/
   - README.md
+  - _templates/
+  - _incoming/
   - LICENSE
 
 # Sass Configuration
