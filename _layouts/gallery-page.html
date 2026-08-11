@@ -11,6 +11,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <!-- Fonts: async (non-render-blocking); display=swap shows fallback text meanwhile -->
+    {% assign font_href = "https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" %}
+    <link rel="stylesheet" href="{{ font_href }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ font_href }}"></noscript>
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ '/assets/css/eastern-minimal.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/gallery-eastern.css' | relative_url }}">
@@ -615,7 +620,7 @@
             <!-- Main content: Location + Hours + Contact + Newsletter -->
             <div class="kukje-footer-grid">
                 <div class="kukje-footer-col">
-                    <h4 class="kukje-footer-label">Location</h4>
+                    <p class="kukje-footer-label">Location</p>
                     <p class="kukje-footer-text">
                         44 Byron Street<br>
                         Inverell NSW 2360<br>
@@ -634,7 +639,7 @@
                 </div>
 
                 <div class="kukje-footer-col">
-                    <h4 class="kukje-footer-label">Hours</h4>
+                    <p class="kukje-footer-label">Hours</p>
                     <p class="kukje-footer-text">
                         Tuesday – Friday<br>
                         8:00 AM – 5:00 PM<br><br>
@@ -646,7 +651,7 @@
                 </div>
 
                 <div class="kukje-footer-col">
-                    <h4 class="kukje-footer-label">Contact</h4>
+                    <p class="kukje-footer-label">Contact</p>
                     <p class="kukje-footer-text">
                         <a href="mailto:admin@artspacebyron.com.au">admin@artspacebyron.com.au</a><br>
                         <a href="tel:0455616983">0455 616 983</a>
@@ -1206,7 +1211,7 @@
 
     <!-- ====== AI Chat Assistant ====== -->
     <div id="chatAssistant" class="chat-assistant">
-        <button class="chat-toggle" id="chatToggle" onclick="toggleChat()">
+        <button class="chat-toggle" id="chatToggle" onclick="toggleChat()" aria-label="Open chat">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
         </button>
         <div class="chat-window" id="chatWindow">
