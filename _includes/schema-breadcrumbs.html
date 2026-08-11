@@ -9,9 +9,12 @@
 {%- for seg in segs -%}
 {%- if seg != "" -%}
 {%- assign path = path | append: "/" | append: seg -%}
+{%- comment %} Skip the "gallery" segment as a crumb — /gallery/ now redirects to Home. {% endcomment -%}
+{%- unless seg == "gallery" -%}
 {%- assign pos = pos | plus: 1 -%}
 {%- if forloop.last and leaf and leaf != "" and leaf != "Home" -%}{%- assign label = leaf -%}{%- else -%}{%- assign label = seg | replace: "-", " " | capitalize -%}{%- endif -%}
 ,{"@type":"ListItem","position":{{ pos }},"name":{{ label | jsonify }},"item":{{ path | append: "/" | absolute_url | jsonify }}}
+{%- endunless -%}
 {%- endif -%}
 {%- endfor -%}
 ]}
