@@ -1,12 +1,11 @@
-{%- comment %} Global structured data: ART SPACE BYRON (gallery + cafe). Rendered on every page. {% endcomment -%}
+{%- comment %} Global structured data: ART SPACE BYRON (contemporary art gallery). Rendered on every page. {% endcomment -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ArtGallery",
-  "additionalType": "https://schema.org/CafeOrCoffeeShop",
   "@id": {{ '/#artgallery' | absolute_url | jsonify }},
   "name": "ART SPACE BYRON",
-  "description": "A contemporary art gallery and artisanal cafe in Inverell, NSW, Australia.",
+  "description": "A contemporary art gallery in Inverell, New England NSW, Australia, showing Korean and Australian contemporary art.",
   "url": {{ '/' | absolute_url | jsonify }},
   "logo": {{ '/assets/logo/brand-logo.png' | absolute_url | jsonify }},
   "image": {{ '/assets/images/og-image.jpg' | absolute_url | jsonify }},
@@ -32,8 +31,7 @@
     { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "15:00" }
   ],
   "sameAs": [
-    "https://instagram.com/liminalgallery",
-    "https://instagram.com/emberandhearth"
+    "https://instagram.com/liminalgallery"
   ]
 }
 </script>

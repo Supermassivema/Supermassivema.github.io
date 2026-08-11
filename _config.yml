@@ -1,9 +1,9 @@
-# Jekyll Gallery & Cafe Website Configuration
-# 44BYRON STUDIO
+# Jekyll Gallery Website Configuration
+# ART SPACE BYRON
 
 # Site Settings
 title: "ART SPACE BYRON"
-description: "A premium contemporary art gallery and artisanal cafe in Inverell, NSW."
+description: "A contemporary art gallery in Inverell, New England NSW — Korean and Australian contemporary art. Free admission."
 baseurl: ""
 url: "https://www.artspacebyron.com.au"
 repository: "Supermassivema/Supermassivema.github.io"
@@ -22,7 +22,6 @@ author:
 # Social Media
 social:
   gallery_instagram: "liminalgallery"
-  cafe_instagram: "emberandhearth"
 
 # Build Settings
 markdown: kramdown
@@ -43,8 +42,6 @@ collections:
   artworks:
     output: true
     permalink: /gallery/collection/:title/
-  menu_items:
-    output: false
 
 # Collection Defaults
 defaults:
@@ -71,11 +68,6 @@ defaults:
     values:
       layout: "gallery-page"
       brand: "gallery"
-  - scope:
-      path: "cafe"
-    values:
-      layout: "cafe-page"
-      brand: "cafe"
 
 # Exclude from processing
 exclude:
@@ -113,4 +105,3 @@ social:
   name: ART SPACE BYRON
   links:
     - https://instagram.com/liminalgallery
-    - https://instagram.com/emberandhearth

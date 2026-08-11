@@ -3,13 +3,12 @@ en:
   site:
     title: "44BYRON STUDIO"
     tagline: "Curating Space, Crafting Experience"
-    description: "44BYRON STUDIO - A sanctuary for contemporary art and artisanal coffee in Inverell."
+    description: "44BYRON STUDIO - A sanctuary for contemporary art in Inverell."
     all: "ALL"
     
   nav:
     home: "Home"
     gallery: "Gallery"
-    cafe: "Café"
     exhibitions: "Exhibitions"
     artists: "Artists"
     collection: "Collection"
@@ -108,28 +107,18 @@ en:
     social: "Social Media"
     insta: "Instagram"
     contact_email: "Email"
-    
-  cafe:
-    title: "Ember & Hearth"
-    tagline: "Come for the coffee, stay for the warmth"
-    menu: "Menu"
-    coffee: "Coffee"
-    brunch: "Brunch"
-    pastries: "Pastries"
-    reserve: "Reserve a Table"
 
 # Korean Translations
 ko:
   site:
     title: "44BYRON STUDIO"
     tagline: "공간을 큐레이팅하고, 경험을 빚어냅니다"
-    description: "인버렐의 현대 미술 갤러리와 아티즌 카페, 44BYRON STUDIO"
+    description: "인버렐의 현대 미술 갤러리, 44BYRON STUDIO"
     all: "전체"
     
   nav:
     home: "홈"
     gallery: "갤러리"
-    cafe: "카페"
     exhibitions: "전시"
     artists: "작가"
     collection: "컬렉션"
@@ -228,12 +217,3 @@ ko:
     social: "소셜 미디어"
     insta: "인스타그램"
     contact_email: "이메일"
-    
-  cafe:
-    title: "엠버 앤 하스"
-    tagline: "커피를 위해 오고, 따뜻함을 위해 머무세요"
-    menu: "메뉴"
-    coffee: "커피"
-    brunch: "브런치"
-    pastries: "페이스트리"
-    reserve: "테이블 예약"

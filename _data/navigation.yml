@@ -15,8 +15,5 @@ main:
       - title: Artists
         url: /gallery/artists
 
-  - title: Cafe
-    url: /cafe
-
   - title: Contact
     url: /gallery/contact
