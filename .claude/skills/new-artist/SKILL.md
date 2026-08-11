@@ -34,14 +34,19 @@ description: Process a dropped artist folder in _incoming/ into published artist
    `featured_image` = 위 프로필 경로. 약력은 영문/한글 본문에 배치.
 4. **작품 파일 생성**: 작품마다 `_templates/artwork-item.md` 를 복사해 `_artworks/<slug>-work-NNN.md` 로 저장.
    `artist` = 작가 `name` (정확히), `image` = 해당 작품 경로. 아는 메타만 채움.
-5. **(선택) 전시 등록**: info.md 에서 전시 등록 = 예 이면 `_exhibitions/` 에 파일 생성
+5. **작가 목록 페이지에 추가 (중요! 자동 안 됨)**: `gallery/artists.html` 의 작가 목록은
+   `<li>` 가 **하드코딩**이라 새 작가가 자동으로 안 뜬다. `<ul class="artists-name-list" id="artistsList">`
+   안에 새 `<li><a href="{{ '/gallery/artists/<slug>/' | relative_url }}" class="artist-name-link">Name</a></li>` 를 추가할 것.
+   · 홈 3×3 그리드는 `site.artists | where featured,true | limit:6` 로 자동 — `featured: true` 면 노출(단 6명 초과 시 상위 6명만).
+6. **(선택) 전시 등록**: info.md 에서 전시 등록 = 예 이면 `_exhibitions/` 에 파일 생성
    (`featured_artist`, `start_date`, `end_date`, `status`). 기존 전시 파일 형식 참고.
-6. **검증**: `JEKYLL_ENV=production bundle exec jekyll build` 후
+7. **검증**: `JEKYLL_ENV=production bundle exec jekyll build` 후
    - `_site/gallery/artists/<slug>/index.html` 생성 확인
    - 작가 페이지에 작품 N개 모두 연결됐는지 (artist==name 매칭) 확인
+   - 작가 목록 페이지(`_site/gallery/artists/index.html`)에 새 작가 노출 확인
    - 이미지 경로가 실제 파일과 일치하는지, alt 채워졌는지 확인
    - 링크 검사(scratchpad linkcheck.cjs) 로 깨진 링크 0 확인
-7. **보고 & 승인**: 생성/수정 파일 목록과 검증 결과를 한글로 요약. **커밋/푸시는 사용자 확인 후 진행** (큰 변경이므로 한글로 승인 요청).
+8. **보고 & 승인**: 생성/수정 파일 목록과 검증 결과를 한글로 요약. **커밋/푸시는 사용자 확인 후 진행** (큰 변경이므로 한글로 승인 요청).
 
 ## 참고
 - 사용자 작업 선호: 큰 변경·중요 사안만 한글로 승인 요청, 나머지는 진행.
