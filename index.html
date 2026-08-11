@@ -25,32 +25,30 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
   .home-hero::after {
     content: "";
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 45%;
-    background: linear-gradient(to top, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.55) 45%, transparent 100%);
+    inset: 0;
+    background: radial-gradient(ellipse 60% 45% at center, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.12) 55%, transparent 78%);
     z-index: 1;
     pointer-events: none;
   }
 
   .home-hero-img {
     position: absolute;
-    top: 15vh;
-    left: 6vw;
-    width: calc(100% - 12vw);
-    height: calc(100% - 25vh);
-    object-fit: contain;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     object-position: center;
     display: block;
   }
 
   .home-hero-text {
     position: absolute;
-    left: 48px;
-    bottom: 48px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
-    max-width: 80%;
+    max-width: 82%;
+    text-align: center;
     text-shadow: 0 1px 8px rgba(255, 255, 255, 0.75);
   }
 
@@ -115,7 +113,7 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
      (default above = light artwork → white hero + dark text/nav) */
   body.hero-dark .home-hero { background: #1a1a1a; }
   body.hero-dark .home-hero::after {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.4) 45%, transparent 100%);
+    background: radial-gradient(ellipse 60% 45% at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.22) 55%, transparent 80%);
   }
   body.hero-dark .home-hero-title { color: #fff; }
   body.hero-dark .home-hero-dates,
@@ -257,8 +255,6 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
 
   @media (max-width: 900px) {
     .home-hero-text {
-      left: 24px;
-      bottom: 24px;
       max-width: calc(100% - 48px);
     }
     .home-hero-scroll {
