@@ -1,6 +1,7 @@
 ---
 layout: artwork
-title: "Softly Heaped (소복이 소복이)"
+title: "Softly Heaped"
+title_kr: "소복이 소복이"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Traditional Korean paper on high-glossy panel"

@@ -1,6 +1,7 @@
 ---
 layout: artwork
-title: "Blooming and Fading (피고지고 피고지고)"
+title: "Blooming and Fading"
+title_kr: "피고지고 피고지고"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Traditional Korean paper on canvas"

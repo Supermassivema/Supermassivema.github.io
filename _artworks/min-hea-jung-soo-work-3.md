@@ -1,6 +1,7 @@
 ---
 layout: artwork
-title: "After a Sudden Shower (세차게 소낙비가 한 차례 내린 뒤)"
+title: "After a Sudden Shower"
+title_kr: "세차게 소낙비가 한 차례 내린 뒤"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Traditional Korean paper on canvas"

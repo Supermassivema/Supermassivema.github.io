@@ -1,6 +1,7 @@
 ---
 layout: artwork
-title: "A Day the Spring Breeze Blew (봄바람이 불던 어느날)"
+title: "A Day the Spring Breeze Blew"
+title_kr: "봄바람이 불던 어느날"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Traditional Korean paper on high-glossy panel"

@@ -1,6 +1,7 @@
 ---
 layout: artwork
-title: "Thinking of You More Than Myself (나보다 너를 더 생각해)"
+title: "Thinking of You More Than Myself"
+title_kr: "나보다 너를 더 생각해"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Traditional Korean paper on canvas"

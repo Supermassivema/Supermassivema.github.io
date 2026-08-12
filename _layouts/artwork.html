@@ -101,6 +101,7 @@
         <div class="info-block" data-animate="1">
           <span class="info-eyebrow">FINE ART CATALOGUE</span>
           <h1 class="info-title">{{ art_title }}</h1>
+          {% if page.title_kr and page.title_kr != "" %}<p class="info-title-kr">{{ page.title_kr }}</p>{% endif %}
         </div>
 
         {% if page.artist %}
@@ -504,6 +505,14 @@
     line-height: 1.15;
     color: var(--gw-ink);
     margin-bottom: 24px;
+  }
+
+  .info-title-kr {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #999;
+    margin: -16px 0 24px;
   }
 
   [lang="ko"] .info-title {

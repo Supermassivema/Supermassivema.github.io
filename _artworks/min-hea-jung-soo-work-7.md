@@ -1,6 +1,7 @@
 ---
 layout: artwork
-title: "Wind of Memory (기억의 바람)"
+title: "Wind of Memory"
+title_kr: "기억의 바람"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Traditional Korean paper on canvas"

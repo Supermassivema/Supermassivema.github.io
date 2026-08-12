@@ -1,6 +1,7 @@
 ---
 layout: artwork
-title: "Grandmother's Scent (할머니 향기)"
+title: "Grandmother's Scent"
+title_kr: "할머니 향기"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Traditional Korean paper on canvas"

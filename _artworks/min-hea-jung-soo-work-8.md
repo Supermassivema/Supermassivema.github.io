@@ -1,6 +1,7 @@
 ---
 layout: artwork
-title: "Petal-like Memory (꽃잎 같은 기억)"
+title: "Petal-like Memory"
+title_kr: "꽃잎 같은 기억"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Traditional Korean paper on canvas"

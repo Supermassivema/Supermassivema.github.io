@@ -1,6 +1,7 @@
 ---
 layout: artwork
-title: "A Sunny Day (햇살 좋은 날)"
+title: "A Sunny Day"
+title_kr: "햇살 좋은 날"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Traditional Korean paper on canvas"

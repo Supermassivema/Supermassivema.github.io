@@ -1,6 +1,7 @@
 ---
 layout: artwork
-title: "Seeped In II (스며든 것들 Ⅱ)"
+title: "Seeped In II"
+title_kr: "스며든 것들 Ⅱ"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Cast hanji on canvas, watercolour dyeing"

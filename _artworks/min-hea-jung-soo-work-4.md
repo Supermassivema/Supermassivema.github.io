@@ -1,6 +1,7 @@
 ---
 layout: artwork
-title: "Sodam Sodam (소담소담)"
+title: "Sodam Sodam"
+title_kr: "소담소담"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Traditional Korean paper casting on canvas"
