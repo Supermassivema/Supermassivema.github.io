@@ -318,8 +318,8 @@ section: gallery
     {% endif %}
   </div>
 
-  <!-- Past Exhibitions -->
-  {% assign past_exhibitions = site.exhibitions | where: "status", "past" %}
+  <!-- Past Exhibitions (archive, newest first) -->
+  {% assign past_exhibitions = site.exhibitions | where: "status", "past" | sort: "start_date" | reverse %}
   <div class="exhibitions-content exhibitions-tab-content" id="tab-past" style="display:none;">
     {% if past_exhibitions.size > 0 %}
     <div class="exhibitions-grid">
