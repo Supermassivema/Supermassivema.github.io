@@ -357,7 +357,14 @@
                 <!-- Left Nav -->
                 <nav class="header-nav-left">
                     <ul class="nav-menu">
-                        <li><a href="{{ '/gallery/exhibitions' | relative_url }}" class="nav-link">Exhibitions</a></li>
+                        <li class="nav-dropdown-wrap">
+                            <a href="{{ '/gallery/exhibitions' | relative_url }}" class="nav-link">Exhibitions</a>
+                            <div class="nav-dropdown">
+                                <a href="{{ '/gallery/exhibitions' | relative_url }}#current" class="nav-dropdown-link">Current</a>
+                                <a href="{{ '/gallery/exhibitions' | relative_url }}#upcoming" class="nav-dropdown-link">Upcoming</a>
+                                <a href="{{ '/gallery/exhibitions' | relative_url }}#past" class="nav-dropdown-link">Past</a>
+                            </div>
+                        </li>
                         <li><a href="{{ '/gallery/artists' | relative_url }}" class="nav-link">Artists</a></li>
                         <li><a href="{{ '/news' | relative_url }}" class="nav-link">News</a></li>
                     </ul>

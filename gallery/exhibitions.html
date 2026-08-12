@@ -346,13 +346,29 @@ section: gallery
 </div>
 
 <script>
-  document.querySelectorAll('.exhibitions-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.exhibitions-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tab = btn.dataset.tab;
-      document.querySelectorAll('.exhibitions-tab-content').forEach(c => c.style.display = 'none');
-      document.getElementById('tab-' + tab).style.display = '';
+  function showExhTab(tab) {
+    var target = document.getElementById('tab-' + tab);
+    if (!target) return;
+    document.querySelectorAll('.exhibitions-tab').forEach(function(b) { b.classList.remove('active'); });
+    var btn = document.querySelector('.exhibitions-tab[data-tab="' + tab + '"]');
+    if (btn) btn.classList.add('active');
+    document.querySelectorAll('.exhibitions-tab-content').forEach(function(c) { c.style.display = 'none'; });
+    target.style.display = '';
+  }
+
+  document.querySelectorAll('.exhibitions-tab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var tab = btn.dataset.tab;
+      showExhTab(tab);
+      if (history.replaceState) history.replaceState(null, '', '#' + tab);
     });
   });
+
+  // Open the tab named in the URL hash (e.g. /gallery/exhibitions#past)
+  function openTabFromHash() {
+    var h = (location.hash || '').replace('#', '');
+    if (h) showExhTab(h);
+  }
+  openTabFromHash();
+  window.addEventListener('hashchange', openTabFromHash);
 </script>
