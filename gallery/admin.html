@@ -147,6 +147,21 @@ noindex: true
     }
   });
 
+  var notice;
+  function showNotice(text, isError) {
+    if (!notice) {
+      notice = document.createElement('div');
+      notice.style.cssText = 'margin:0 0 14px;padding:10px 14px;border-radius:6px;font-size:0.85rem;line-height:1.4;';
+      var anchor = document.getElementById('adminCount');
+      if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(notice, anchor);
+    }
+    if (!text) { notice.style.display = 'none'; return; }
+    notice.style.display = 'block';
+    notice.style.background = isError ? '#fdecea' : '#e7f6ec';
+    notice.style.color = isError ? '#c44536' : '#1a7f43';
+    notice.textContent = text;
+  }
+
   function renderRow(row, status) {
     var badge = row.querySelector('[data-badge]');
     var btn = row.querySelector('[data-toggle]');
@@ -169,8 +184,8 @@ noindex: true
       });
       updateCount();
     }).catch(function(err) {
-      msg.textContent = 'Could not load statuses: ' + err.message;
-      // Fall back to defaults so toggles still work
+      console.error('Firestore read failed', err);
+      showNotice('상태 불러오기 실패: ' + (err.code ? err.code + ' — ' : '') + err.message + ' (기본값으로 표시)', true);
       rows.forEach(function(row) { renderRow(row, row.dataset.default || 'available'); });
     });
 
@@ -182,17 +197,32 @@ noindex: true
         btn.disabled = true;
         var prev = btn.textContent;
         btn.textContent = 'Saving…';
+        showNotice('');
+        var settled = false;
+        var timer = setTimeout(function() {
+          if (settled) return;
+          settled = true;
+          btn.disabled = false;
+          btn.textContent = prev;
+          showNotice('저장이 응답하지 않습니다. Firebase 콘솔에서 Cloud Firestore가 활성화되어 있는지 확인하세요.', true);
+        }, 9000);
         db.collection('artwork_status').doc(slug).set({
           status: next,
           updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
           updatedBy: (auth.currentUser && auth.currentUser.email) || ''
         }, { merge: true }).then(function() {
+          if (settled) return;
+          settled = true; clearTimeout(timer);
           renderRow(row, next);
           updateCount();
+          showNotice('저장됨: ' + slug + ' → ' + (next === 'sold' ? 'Sold' : 'Available'));
         }).catch(function(err) {
+          if (settled) return;
+          settled = true; clearTimeout(timer);
           btn.disabled = false;
           btn.textContent = prev;
-          alert('Save failed: ' + err.message);
+          console.error('Firestore write failed', err);
+          showNotice('저장 실패: ' + (err.code ? err.code + ' — ' : '') + err.message, true);
         });
       });
     });
