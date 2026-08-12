@@ -382,7 +382,7 @@
                             <a href="{{ '/gallery/collect' | relative_url }}" class="nav-link">Collect</a>
                             <div class="nav-dropdown">
                                 <a href="{{ '/gallery/artworks' | relative_url }}" class="nav-dropdown-link">Available Artworks</a>
-                                <a href="{{ '/gallery/collection' | relative_url }}" class="nav-dropdown-link">Artist Book</a>
+                                {%- comment %} Artist Book hidden from the Collect menu {% endcomment -%}
                             </div>
                         </li>
                         <li><a href="{{ '/gallery/visit' | relative_url }}" class="nav-link">Visit</a></li>
