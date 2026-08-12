@@ -214,7 +214,8 @@ section: gallery
     </div>
     <div class="aw-grid">
       {% for artwork in artist_works %}
-      <a href="{{ artwork.url | relative_url }}" class="aw-card">
+      {%- assign p = artwork.url | split: "/" -%}{%- assign slug = p[3] -%}
+      <a href="{{ artwork.url | relative_url }}" class="aw-card" data-slug="{{ slug }}">
         <div class="aw-card-img">
           {% if artwork.status == 'sold' %}<span class="aw-card-status sold">Sold</span>{% else %}<span class="aw-card-status available">Available</span>{% endif %}
           {% if artwork.image %}<img src="{{ artwork.image | relative_url }}" alt="{% include alt-artwork.html art=artwork %}" loading="lazy">{% endif %}
@@ -235,6 +236,32 @@ section: gallery
 </div>
 
 <script>
+  // Live status overrides from Firestore (managed in /gallery/admin/)
+  (function() {
+    if (typeof firebase === 'undefined' || !firebase.firestore) return;
+    var db = firebase.firestore();
+    db.collection('artwork_status').get().then(function(snap) {
+      var map = {};
+      snap.forEach(function(d) { map[d.id] = (d.data() || {}).status; });
+      document.querySelectorAll('.aw-card[data-slug]').forEach(function(card) {
+        var st = map[card.dataset.slug];
+        if (!st) return;
+        var badge = card.querySelector('.aw-card-status');
+        var price = card.querySelector('.aw-card-price');
+        var inq = card.querySelector('.aw-inquire');
+        if (st === 'sold') {
+          if (badge) { badge.textContent = 'Sold'; badge.className = 'aw-card-status sold'; }
+          if (price) price.classList.add('sold-price');
+          if (inq) inq.style.display = 'none';
+        } else {
+          if (badge) { badge.textContent = 'Available'; badge.className = 'aw-card-status available'; }
+          if (price) price.classList.remove('sold-price');
+          if (inq) inq.style.display = '';
+        }
+      });
+    }).catch(function() {});
+  })();
+
   // Filters
   document.querySelectorAll('.aw-filter-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {

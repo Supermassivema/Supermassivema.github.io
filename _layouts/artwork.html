@@ -22,6 +22,17 @@
   {%- if page.image %}
   <meta property="og:image" content="{{ page.image | absolute_url | uri_escape }}">
   {%- endif %}
+  <!-- Firebase (auth + firestore) — enables live sold/available status -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey: "AIzaSyCLmembnMugIu4id8Jt1ycX6QOLp8_sNuw",
+      authDomain: "artspacebyron-9970d.firebaseapp.com",
+      projectId: "artspacebyron-9970d"
+    });
+  </script>
 </head>
 <body>
 
@@ -125,7 +136,7 @@
             {% endif %}
             <div class="detail-row detail-status">
               <span class="detail-label">{{ t.artwork.status | default: 'Status' }}</span>
-              <span class="detail-value">
+              <span class="detail-value" id="awStatusValue">
                 {% if page.status == 'available' %}
                 <span class="status-available">{{ page.price | default: 'Price upon request' }}</span>
                 {% else %}
@@ -171,7 +182,7 @@
           </button>
         </div>
 
-        <div class="info-block" data-animate="6">
+        <div class="info-block" data-animate="6" id="awInquiryBlock">
           {% if page.status == 'sold' %}
           <button type="button" class="inquiry-btn" disabled style="opacity:0.3;cursor:not-allowed;">
             SOLD — NO LONGER AVAILABLE
@@ -1136,6 +1147,29 @@
 </style>
 
 <script>
+  // Live sold/available status (managed in /gallery/admin/, stored in Firestore)
+  (function() {
+    {%- assign slug_parts = page.url | split: "/" -%}
+    var STATUS = { slug: {{ slug_parts[3] | jsonify }}, def: {{ page.status | default: 'available' | jsonify }}, price: {{ page.price | default: 'Price upon request' | jsonify }} };
+    if (typeof firebase === 'undefined' || !firebase.firestore) return;
+    var db = firebase.firestore();
+    db.collection('artwork_status').doc(STATUS.slug).get().then(function(doc) {
+      var st = (doc && doc.exists && doc.data() && doc.data().status) ? doc.data().status : STATUS.def;
+      apply(st);
+    }).catch(function() {});
+    function apply(st) {
+      var val = document.getElementById('awStatusValue');
+      var blk = document.getElementById('awInquiryBlock');
+      if (st === 'sold') {
+        if (val) val.innerHTML = '<span class="status-sold"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#c44536;margin-right:6px;vertical-align:middle;"></span>Sold</span>';
+        if (blk) blk.innerHTML = '<button type="button" class="inquiry-btn" disabled style="opacity:0.3;cursor:not-allowed;">SOLD — NO LONGER AVAILABLE</button>';
+      } else {
+        if (val) val.innerHTML = '<span class="status-available">' + STATUS.price + '</span>';
+        if (blk) blk.innerHTML = '<button type="button" class="inquiry-btn" onclick="openInquiryModal()">INQUIRE ABOUT THIS WORK</button>';
+      }
+    }
+  })();
+
   function openInquiryModal() {
     document.getElementById('inquiryModal').classList.add('active');
     document.body.style.overflow = 'hidden';
