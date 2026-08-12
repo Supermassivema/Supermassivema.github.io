@@ -166,7 +166,7 @@ section: gallery
   <div class="artworks-header">
     <div class="artworks-header-inner">
       <h1 class="artworks-page-title">Available Artworks</h1>
-      <p class="artworks-page-sub">Works currently on display at ART SPACE BYRON.</p>
+      <p class="artworks-page-sub">Browse available works by our artists at ART SPACE BYRON.</p>
     </div>
   </div>
 
@@ -190,18 +190,17 @@ section: gallery
     </div>
   </div>
 
+  {%- comment %} All artists that have works, grouped by artist (not just the current exhibition). {% endcomment -%}
+  {% assign artist_names = site.artworks | map: "artist" | uniq | sort %}
+
   <div class="artworks-filters">
     <button class="aw-filter-btn active" data-filter="all">All Artists</button>
-    {% assign current_exh = site.exhibitions | where: "status", "current" | first %}
-    {% if current_exh.artists %}
-    {% for artist_name in current_exh.artists %}
+    {% for artist_name in artist_names %}
     <button class="aw-filter-btn" data-filter="{{ artist_name }}">{{ artist_name }}</button>
     {% endfor %}
-    {% endif %}
   </div>
 
-  {% if current_exh.artists %}
-  {% for artist_name in current_exh.artists %}
+  {% for artist_name in artist_names %}
   {% assign artist_works = site.artworks | where: "artist", artist_name %}
   {% if artist_works.size > 0 %}
   <div class="aw-artist-section" data-artist="{{ artist_name }}">
@@ -230,7 +229,6 @@ section: gallery
   </div>
   {% endif %}
   {% endfor %}
-  {% endif %}
 </div>
 
 <script>
