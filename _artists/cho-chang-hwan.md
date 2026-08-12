@@ -5,7 +5,8 @@ description: "Cho Chang-hwan (b. 1964, Boeun): abstract SOOM (Breath) paintings 
 name: "Cho Chang-hwan"
 name_kr: "조창환"
 slug: "cho-chang-hwan"
-listed: false
+listed: true
+available_art: false
 medium: ""
 medium_kr: ""
 nationality: "Korean"
@@ -28,7 +29,7 @@ bio_short: "Cho Chang-hwan is an abstract painter known for his 'SOOM (Breath)' 
 bio_short_kr: "조창환은 한 올 붓으로 캔버스 위에 약 10겹의 물감을 쌓아 올리는 '숨(SOOM)' 시리즈로 알려진 추상화가이다."
 philosophy: "I only paint every breath on top of each other on my canvas."
 philosophy_kr: "나는 캔버스 위에 숨결을 겹겹이 쌓아 올릴 뿐이다."
-featured: false
+featured: true
 ---
 
 ## Biography
