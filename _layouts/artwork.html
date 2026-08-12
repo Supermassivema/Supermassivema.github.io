@@ -6,6 +6,9 @@
 {%- comment %} Resolve the artwork's exhibition once (used by JSON-LD isPartOf + the Exhibition link below). {% endcomment -%}
 {%- assign artwork_exhibition = nil -%}
 {%- if page.exhibition and page.exhibition != "" -%}{%- for ex in site.exhibitions -%}{%- if ex.url contains page.exhibition or ex.title == page.exhibition -%}{%- assign artwork_exhibition = ex -%}{%- endif -%}{%- endfor -%}{%- endif -%}
+{%- comment %} Prices >= $1000 are shown as "Price on request" (direct enquiry only); only sub-$1000 prices display. {% endcomment -%}
+{%- assign pnum = page.price | default: '' | remove: 'AUD' | remove: 'aud' | remove: '$' | remove: ',' | remove: 'each' | strip | plus: 0 -%}
+{%- if pnum > 0 and pnum < 1000 -%}{%- assign show_price = page.price -%}{%- else -%}{%- assign show_price = 'Price on request' -%}{%- endif -%}
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -138,10 +141,10 @@
               <span class="detail-label">{{ t.artwork.status | default: 'Status' }}</span>
               <span class="detail-value" id="awStatusValue">
                 {% if page.status == 'available' %}
-                <span class="status-available">{{ page.price | default: 'Price upon request' }}</span>
+                <span class="status-available">{{ show_price }}</span>
                 {% else %}
                 <span class="status-sold"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#c44536;margin-right:6px;vertical-align:middle;"></span>Sold</span>
-                {% if page.price and page.price != "Contact for price" %}
+                {% if pnum > 0 and pnum < 1000 %}
                 <span style="display:block;font-size:0.78rem;color:#bbb;margin-top:4px;">{{ page.price }}</span>
                 {% endif %}
                 {% endif %}
@@ -1150,7 +1153,7 @@
   // Live sold/available status (managed in /gallery/admin/, stored in Firestore)
   (function() {
     {%- assign slug_parts = page.url | split: "/" -%}
-    var STATUS = { slug: {{ slug_parts[3] | jsonify }}, def: {{ page.status | default: 'available' | jsonify }}, price: {{ page.price | default: 'Price upon request' | jsonify }} };
+    var STATUS = { slug: {{ slug_parts[3] | jsonify }}, def: {{ page.status | default: 'available' | jsonify }}, price: {{ show_price | jsonify }} };
     if (typeof firebase === 'undefined' || !firebase.firestore) return;
     var db = firebase.firestore();
     db.collection('artwork_status').doc(STATUS.slug).get().then(function(doc) {

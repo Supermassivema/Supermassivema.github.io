@@ -224,7 +224,8 @@ section: gallery
           {% if artwork.title and artwork.title != "" %}<p class="aw-card-title">{{ artwork.title }}</p>{% endif %}
           <p class="aw-card-artist">{{ artwork.artist }}</p>
           {% if artwork.medium and artwork.medium != "" %}<p class="aw-card-detail">{{ artwork.medium }}{% if artwork.dimensions and artwork.dimensions != "" %}, {{ artwork.dimensions }}{% endif %}</p>{% endif %}
-          {% if artwork.price and artwork.price != "Contact for price" %}<p class="aw-card-price {% if artwork.status == 'sold' %}sold-price{% endif %}">{{ artwork.price }}</p>{% else %}<p class="aw-card-price">Price on request</p>{% endif %}
+          {%- assign pnum = artwork.price | default: '' | remove: 'AUD' | remove: 'aud' | remove: '$' | remove: ',' | remove: 'each' | strip | plus: 0 -%}
+          {% if pnum > 0 and pnum < 1000 %}<p class="aw-card-price {% if artwork.status == 'sold' %}sold-price{% endif %}">{{ artwork.price }}</p>{% else %}<p class="aw-card-price">Price on request</p>{% endif %}
           {% unless artwork.status == 'sold' %}<span class="aw-inquire">Inquire</span>{% endunless %}
         </div>
       </a>
