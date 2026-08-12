@@ -23,8 +23,15 @@ noindex: true
   .admin-user b { font-weight:600; }
   .admin-signout { background:none; border:1px solid #ddd; padding:7px 16px; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; cursor:pointer; border-radius:5px; }
   .admin-signout:hover { border-color:#111; }
-  .admin-search { width:100%; padding:11px 14px; border:1px solid #e0e0e0; border-radius:6px; font-size:0.9rem; margin-bottom:20px; font-family:inherit; }
+  .admin-search { width:100%; padding:11px 14px; border:1px solid #e0e0e0; border-radius:6px; font-size:0.9rem; margin-bottom:16px; font-family:inherit; }
+  .admin-filters { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .admin-chip { background:none; border:1px solid #ddd; color:#666; border-radius:100px; padding:7px 15px; font-size:0.76rem; cursor:pointer; font-family:inherit; transition:all .18s; }
+  .admin-chip:hover { border-color:#111; color:#111; }
+  .admin-chip.active { background:#111; color:#fff; border-color:#111; }
   .admin-count { font-size:0.75rem; color:#999; margin-bottom:14px; }
+  .admin-group { margin-bottom:24px; }
+  .admin-group-title { font-size:0.8rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#111; margin:18px 0 6px; padding-bottom:8px; border-bottom:2px solid #111; display:flex; justify-content:space-between; }
+  .admin-group-title span { color:#bbb; font-weight:500; }
 
   .admin-row { display:flex; align-items:center; gap:16px; padding:12px 0; border-bottom:1px solid #f2f2f2; }
   .admin-thumb { width:52px; height:52px; object-fit:cover; background:#f5f5f5; border-radius:5px; flex:none; }
@@ -61,20 +68,35 @@ noindex: true
       <button class="admin-signout" id="adminSignOut">Sign out</button>
     </div>
     <input type="text" class="admin-search" id="adminSearch" placeholder="Search by title or artist…">
+
+    {% assign artist_names = site.artworks | map: "artist" | uniq | sort %}
+    <div class="admin-filters" id="adminFilters">
+      <button class="admin-chip active" data-filter="all">All artists</button>
+      {% for an in artist_names %}
+      <button class="admin-chip" data-filter="{{ an }}">{{ an }}</button>
+      {% endfor %}
+    </div>
+
     <p class="admin-count" id="adminCount"></p>
+
     <div id="adminRows">
-      {% assign all_works = site.artworks | sort: "artist" %}
-      {% for aw in all_works %}
-      {%- assign parts = aw.url | split: "/" -%}{%- assign slug = parts[3] -%}
-      {%- if aw.title and aw.title != "" -%}{%- assign atitle = aw.title -%}{%- else -%}{%- assign atitle = "Untitled" -%}{%- endif -%}
-      <div class="admin-row" data-slug="{{ slug }}" data-default="{{ aw.status | default: 'available' }}" data-search="{{ atitle | downcase | escape }} {{ aw.artist | downcase | escape }}">
-        <img class="admin-thumb" src="{{ aw.image | relative_url }}" alt="" loading="lazy">
-        <div class="admin-info">
-          <p class="admin-title">{{ atitle }}</p>
-          <p class="admin-artist">{{ aw.artist }}</p>
+      {% for an in artist_names %}
+      {% assign works = site.artworks | where: "artist", an %}
+      <div class="admin-group" data-artist="{{ an }}">
+        <h3 class="admin-group-title">{{ an }} <span>{{ works.size }}</span></h3>
+        {% for aw in works %}
+        {%- assign parts = aw.url | split: "/" -%}{%- assign slug = parts[3] -%}
+        {%- if aw.title and aw.title != "" -%}{%- assign atitle = aw.title -%}{%- else -%}{%- assign atitle = "Untitled" -%}{%- endif -%}
+        <div class="admin-row" data-slug="{{ slug }}" data-default="{{ aw.status | default: 'available' }}" data-artist="{{ an }}" data-search="{{ atitle | downcase | escape }} {{ aw.artist | downcase | escape }}">
+          <img class="admin-thumb" src="{{ aw.image | relative_url }}" alt="" loading="lazy">
+          <div class="admin-info">
+            <p class="admin-title">{{ atitle }}</p>
+            <p class="admin-artist">{{ aw.artist }}</p>
+          </div>
+          <span class="admin-badge available" data-badge>—</span>
+          <button class="admin-toggle" data-toggle disabled>…</button>
         </div>
-        <span class="admin-badge available" data-badge>—</span>
-        <button class="admin-toggle" data-toggle disabled>…</button>
+        {% endfor %}
       </div>
       {% endfor %}
     </div>
@@ -181,13 +203,34 @@ noindex: true
     document.getElementById('adminCount').textContent = rows.length + ' works · ' + sold + ' sold · ' + (rows.length - sold) + ' available';
   }
 
-  // Search filter
+  // Artist chips + search filter (combined)
   var search = document.getElementById('adminSearch');
-  search.addEventListener('input', function() {
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.admin-chip'));
+  var currentArtist = 'all';
+
+  function applyFilter() {
     var q = search.value.trim().toLowerCase();
-    document.querySelectorAll('.admin-row').forEach(function(row) {
-      row.style.display = (!q || (row.dataset.search || '').indexOf(q) !== -1) ? '' : 'none';
+    document.querySelectorAll('.admin-group').forEach(function(group) {
+      var artistOk = (currentArtist === 'all' || group.dataset.artist === currentArtist);
+      var anyVisible = false;
+      group.querySelectorAll('.admin-row').forEach(function(row) {
+        var searchOk = (!q || (row.dataset.search || '').indexOf(q) !== -1);
+        var show = artistOk && searchOk;
+        row.style.display = show ? '' : 'none';
+        if (show) anyVisible = true;
+      });
+      group.style.display = anyVisible ? '' : 'none';
+    });
+  }
+
+  chips.forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      chips.forEach(function(c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      currentArtist = chip.dataset.filter;
+      applyFilter();
     });
   });
+  search.addEventListener('input', applyFilter);
 })();
 </script>

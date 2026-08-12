@@ -682,9 +682,25 @@
             <!-- Bottom: Copyright -->
             <div class="kukje-footer-bottom">
                 <p class="kukje-footer-copy">&copy; 2026 ART SPACE BYRON. All Rights Reserved.</p>
+                <a href="{{ '/gallery/admin' | relative_url }}" id="footerAdminLink" class="kukje-footer-admin" style="display:none;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                    Admin
+                </a>
             </div>
         </div>
     </footer>
+
+    <script>
+      /* Reveal the footer Admin link only for the administrator account */
+      (function() {
+        if (typeof firebase === 'undefined' || !firebase.auth) return;
+        var ADMIN_EMAIL = 'showx7176@gmail.com';
+        firebase.auth().onAuthStateChanged(function(user) {
+          var link = document.getElementById('footerAdminLink');
+          if (link) link.style.display = (user && user.email === ADMIN_EMAIL) ? 'inline-flex' : 'none';
+        });
+      })();
+    </script>
 
     <style>
         .kukje-footer {
@@ -889,7 +905,29 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 20px;
             padding: 24px 0;
+        }
+
+        .kukje-footer-admin {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #999;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px 12px;
+            transition: all 0.2s;
+        }
+
+        .kukje-footer-admin:hover {
+            border-color: #111;
+            color: #111;
         }
 
         .back-to-top {
