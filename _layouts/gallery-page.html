@@ -1017,7 +1017,21 @@
     </div>
 
     <style>
-        * { cursor: auto; }
+        /* Clickable elements always show the pointer (finger) cursor,
+           including text/spans nested inside links and buttons. */
+        a[href], a[href] *,
+        button, button *,
+        label[for], select, summary,
+        [role="button"], [onclick], [onclick] *,
+        input[type="button"], input[type="submit"], input[type="reset"],
+        .nav-link, .nav-dropdown-wrap, .nav-dropdown-link {
+            cursor: pointer;
+        }
+
+        /* Disabled controls should not look clickable */
+        button:disabled, input:disabled, [aria-disabled="true"] {
+            cursor: not-allowed;
+        }
 
         #geo-cursor {
             display: none;
