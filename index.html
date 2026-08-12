@@ -94,7 +94,9 @@ image: "/assets/images/Gallery Background photo/space (3).jpg"
     transition: opacity 0.2s;
   }
 
-  .home-hero-more:hover { opacity: 0.55; }
+  /* Hover: keep pure white, no colour change, no underline (override global a:hover) */
+  .home-hero-more:hover,
+  body.hero-dark .home-hero-more:hover { color: #fff !important; opacity: 1; text-decoration: none; }
 
   .home-hero-scroll {
     position: absolute;

@@ -692,6 +692,17 @@
 
             <div class="kukje-footer-divider"></div>
 
+            <!-- Social -->
+            <div class="kukje-footer-socialrow">
+                <span class="kukje-footer-social-label">Follow us</span>
+                <a href="https://www.instagram.com/artspacebyron/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="ART SPACE BYRON on Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="https://www.instagram.com/artspacebyron/" target="_blank" rel="noopener" class="kukje-footer-social-handle">@artspacebyron</a>
+            </div>
+
+            <div class="kukje-footer-divider"></div>
+
             <!-- Bottom: Copyright -->
             <div class="kukje-footer-bottom">
                 <p class="kukje-footer-copy">&copy; 2026 ART SPACE BYRON. All Rights Reserved.</p>
@@ -762,6 +773,42 @@
         .kukje-footer-social a:hover {
             color: #000;
         }
+
+        /* Dedicated social row at the bottom of the footer */
+        .kukje-footer-socialrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 26px 0;
+        }
+        .kukje-footer-social-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #999;
+        }
+        .footer-social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            color: #444;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .footer-social-icon svg { flex: none; }
+        .footer-social-icon:hover { color: #111; border-color: #111; }
+        .kukje-footer-social-handle {
+            font-size: 0.85rem;
+            color: #666;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: color 0.2s;
+        }
+        .kukje-footer-social-handle:hover { color: #111; }
 
         /* Divider */
         .kukje-footer-divider {
