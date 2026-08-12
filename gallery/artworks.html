@@ -196,16 +196,19 @@ section: gallery
   <div class="artworks-filters">
     <button class="aw-filter-btn active" data-filter="all">All Artists</button>
     {% for artist_name in artist_names %}
+    {% assign a_rec = site.artists | where: "name", artist_name | first %}
+    {% unless a_rec.listed == false %}
     <button class="aw-filter-btn" data-filter="{{ artist_name }}">{{ artist_name }}</button>
+    {% endunless %}
     {% endfor %}
   </div>
 
   {% for artist_name in artist_names %}
+  {% assign artist = site.artists | where: "name", artist_name | first %}
   {% assign artist_works = site.artworks | where: "artist", artist_name %}
-  {% if artist_works.size > 0 %}
+  {% if artist_works.size > 0 and artist.listed != false %}
   <div class="aw-artist-section" data-artist="{{ artist_name }}">
     <div class="aw-artist-header">
-      {% assign artist = site.artists | where: "name", artist_name | first %}
       <h2 class="aw-artist-name">{% if artist %}<a href="{{ artist.url | relative_url }}">{{ artist_name }}</a>{% else %}{{ artist_name }}{% endif %}</h2>
       <span class="aw-artist-count">{{ artist_works.size }} works</span>
     </div>

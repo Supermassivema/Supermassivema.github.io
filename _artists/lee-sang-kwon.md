@@ -5,7 +5,7 @@ description: "Lee Sang-kwon (b. 1965, Chuncheon): Paju-based painter, 21 solo sh
 name: "Lee Sang-kwon"
 name_kr: "이상권"
 slug: "lee-sang-kwon"
-listed: true
+listed: false
 medium: ""
 medium_kr: ""
 nationality: "Korean"
@@ -25,7 +25,7 @@ bio_short: "Lee Sang-kwon (b. 1965, Chuncheon) graduated from Hongik University 
 bio_short_kr: "이상권(1965년 춘천 출생)은 1991년 홍익대학교 회화과를 졸업했다. 1995년부터 21회의 개인전을 개최하며, 자연을 통해 시간의 무게와 깊이를 탐구하고, 익숙한 풍경을 복합적인 색층과 붓질로 재구성한다."
 philosophy: "The act of painting is a journey of finding a 'hidden path' through nature and memory."
 philosophy_kr: "그림을 그리는 행위는 자연과 기억 속에서 '숨은 길'을 찾아가는 여정이다."
-featured: true
+featured: false
 ---
 
 ## Biography
