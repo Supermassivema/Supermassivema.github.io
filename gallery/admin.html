@@ -88,7 +88,8 @@ noindex: true
         {%- assign parts = aw.url | split: "/" -%}{%- assign slug = parts[3] -%}
         {%- if aw.title and aw.title != "" -%}{%- assign atitle = aw.title -%}{%- else -%}{%- assign atitle = "Untitled" -%}{%- endif -%}
         <div class="admin-row" data-slug="{{ slug }}" data-default="{{ aw.status | default: 'available' }}" data-artist="{{ an }}" data-search="{{ atitle | downcase | escape }} {{ aw.artist | downcase | escape }}">
-          <img class="admin-thumb" src="{{ aw.image | relative_url }}" alt="" loading="lazy">
+          {%- assign thumb = aw.image | split: '/' | last | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' | prepend: '/assets/images/thumb/' -%}
+          <img class="admin-thumb" src="{{ thumb | relative_url }}" alt="" loading="lazy" decoding="async" width="52" height="52" onerror="this.onerror=null;this.src='{{ aw.image | relative_url }}';">
           <div class="admin-info">
             <p class="admin-title">{{ atitle }}</p>
             <p class="admin-artist">{{ aw.artist }}</p>
