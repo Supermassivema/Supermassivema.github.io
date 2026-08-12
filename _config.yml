@@ -21,7 +21,7 @@ author:
 
 # Social Media
 social:
-  gallery_instagram: "liminalgallery"
+  gallery_instagram: "artspacebyron"
 
 # Build Settings
 markdown: kramdown
@@ -113,4 +113,4 @@ image: /assets/images/og-image.jpg
 social:
   name: ART SPACE BYRON
   links:
-    - https://instagram.com/liminalgallery
+    - https://instagram.com/artspacebyron
