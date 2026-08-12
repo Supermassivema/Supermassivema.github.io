@@ -1,14 +1,14 @@
 ---
 layout: artwork
-title: ""
+title: "A Sunny Day (햇살 좋은 날)"
 artist: "Min Hea Jung Soo"
 exhibition: "min-hea-jung-soo-solo"
 medium: "Traditional Korean paper on canvas"
-dimensions: ""
-year: ""
+dimensions: "45.5 x 37.9 cm"
+year: "2023"
 image: /assets/images/work/MinHeaJungSoo/min-hea-jung-soo-work-012.jpg
-status: "available"
+status: "sold"
 price: "Contact for price"
-description: ""
+description: "From the Nyeonnyeon-yuyeo (Abundance Year after Year) series."
 featured: true
 ---
