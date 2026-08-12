@@ -140,13 +140,15 @@
             <div class="detail-row detail-status">
               <span class="detail-label">{{ t.artwork.status | default: 'Status' }}</span>
               <span class="detail-value" id="awStatusValue">
-                {% if page.status == 'available' %}
-                <span class="status-available">{{ show_price }}</span>
-                {% else %}
+                {% if page.status == 'sold' %}
                 <span class="status-sold"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#c44536;margin-right:6px;vertical-align:middle;"></span>Sold</span>
                 {% if pnum > 0 and pnum < 1000 %}
                 <span style="display:block;font-size:0.78rem;color:#bbb;margin-top:4px;">{{ page.price }}</span>
                 {% endif %}
+                {% elsif page.status == 'not-for-sale' %}
+                <span class="status-nfs">Not for Sale</span>
+                {% else %}
+                <span class="status-available">{{ show_price }}</span>
                 {% endif %}
               </span>
             </div>
@@ -189,6 +191,10 @@
           {% if page.status == 'sold' %}
           <button type="button" class="inquiry-btn" disabled style="opacity:0.3;cursor:not-allowed;">
             SOLD — NO LONGER AVAILABLE
+          </button>
+          {% elsif page.status == 'not-for-sale' %}
+          <button type="button" class="inquiry-btn" disabled style="opacity:0.3;cursor:not-allowed;">
+            NOT FOR SALE
           </button>
           {% else %}
           <button type="button" class="inquiry-btn" onclick="openInquiryModal()">
@@ -585,6 +591,14 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--gw-mute);
+  }
+
+  .status-nfs {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #777;
   }
 
   /* ── Statement ── */
@@ -1166,6 +1180,9 @@
       if (st === 'sold') {
         if (val) val.innerHTML = '<span class="status-sold"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#c44536;margin-right:6px;vertical-align:middle;"></span>Sold</span>';
         if (blk) blk.innerHTML = '<button type="button" class="inquiry-btn" disabled style="opacity:0.3;cursor:not-allowed;">SOLD — NO LONGER AVAILABLE</button>';
+      } else if (st === 'not-for-sale') {
+        if (val) val.innerHTML = '<span class="status-nfs">Not for Sale</span>';
+        if (blk) blk.innerHTML = '<button type="button" class="inquiry-btn" disabled style="opacity:0.3;cursor:not-allowed;">NOT FOR SALE</button>';
       } else {
         if (val) val.innerHTML = '<span class="status-available">' + STATUS.price + '</span>';
         if (blk) blk.innerHTML = '<button type="button" class="inquiry-btn" onclick="openInquiryModal()">INQUIRE ABOUT THIS WORK</button>';

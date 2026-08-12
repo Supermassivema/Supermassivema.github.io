@@ -14,7 +14,7 @@ medium: "«Oil on canvas»"             # 재료/기법
 dimensions: "«116.8 x 91.0 cm»"       # 크기
 image: "/assets/images/work/«ArtistFolder»/«artist»-work-001.jpg"  # 작품 이미지 경로
 
-status: "available"                    # available / sold / reserved / not-for-sale
+status: "available"                    # available (판매중) / sold (판매완료) / not-for-sale (미판매·비매품)
 price: "Contact for price"             # 가격 또는 "Contact for price"
 description: "«작품 설명 (선택)»"
 

@@ -34,6 +34,7 @@ section: gallery
   .aw-card-status { position: absolute; top: 10px; left: 10px; z-index: 2; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; }
   .aw-card-status.available { background: #1a56b8; color: #fff; }
   .aw-card-status.sold { background: #c44536; color: #fff; }
+  .aw-card-status.nfs { background: #777; color: #fff; }
 
   .aw-card-info { text-align: center; }
   .aw-card-title { font-size: 0.78rem; font-weight: 500; margin: 0 0 3px; }
@@ -217,7 +218,7 @@ section: gallery
       {%- assign p = artwork.url | split: "/" -%}{%- assign slug = p[3] -%}
       <a href="{{ artwork.url | relative_url }}" class="aw-card" data-slug="{{ slug }}">
         <div class="aw-card-img">
-          {% if artwork.status == 'sold' %}<span class="aw-card-status sold">Sold</span>{% else %}<span class="aw-card-status available">Available</span>{% endif %}
+          {% if artwork.status == 'sold' %}<span class="aw-card-status sold" data-badge>Sold</span>{% elsif artwork.status == 'not-for-sale' %}<span class="aw-card-status nfs" data-badge>Not for Sale</span>{% else %}<span class="aw-card-status available" data-badge>Available</span>{% endif %}
           {% if artwork.image %}<img src="{{ artwork.image | relative_url }}" alt="{% include alt-artwork.html art=artwork %}" loading="lazy">{% endif %}
         </div>
         <div class="aw-card-info">
@@ -225,8 +226,9 @@ section: gallery
           <p class="aw-card-artist">{{ artwork.artist }}</p>
           {% if artwork.medium and artwork.medium != "" %}<p class="aw-card-detail">{{ artwork.medium }}{% if artwork.dimensions and artwork.dimensions != "" %}, {{ artwork.dimensions }}{% endif %}</p>{% endif %}
           {%- assign pnum = artwork.price | default: '' | remove: 'AUD' | remove: 'aud' | remove: '$' | remove: ',' | remove: 'each' | strip | plus: 0 -%}
-          {% if pnum > 0 and pnum < 1000 %}<p class="aw-card-price {% if artwork.status == 'sold' %}sold-price{% endif %}">{{ artwork.price }}</p>{% else %}<p class="aw-card-price">Price on request</p>{% endif %}
-          {% unless artwork.status == 'sold' %}<span class="aw-inquire">Inquire</span>{% endunless %}
+          {%- if pnum > 0 and pnum < 1000 -%}{%- assign avail_price = artwork.price -%}{%- else -%}{%- assign avail_price = 'Price on request' -%}{%- endif -%}
+          {% if artwork.status == 'not-for-sale' %}<p class="aw-card-price" data-avail-price="{{ avail_price | escape }}">Not for sale</p>{% elsif artwork.status == 'sold' %}<p class="aw-card-price {% if pnum > 0 and pnum < 1000 %}sold-price{% endif %}" data-avail-price="{{ avail_price | escape }}">{{ avail_price }}</p>{% else %}<p class="aw-card-price" data-avail-price="{{ avail_price | escape }}">{{ avail_price }}</p>{% endif %}
+          {% unless artwork.status == 'sold' or artwork.status == 'not-for-sale' %}<span class="aw-inquire">Inquire</span>{% endunless %}
         </div>
       </a>
       {% endfor %}
@@ -247,16 +249,22 @@ section: gallery
       document.querySelectorAll('.aw-card[data-slug]').forEach(function(card) {
         var st = map[card.dataset.slug];
         if (!st) return;
-        var badge = card.querySelector('.aw-card-status');
+        var badge = card.querySelector('[data-badge]') || card.querySelector('.aw-card-status');
         var price = card.querySelector('.aw-card-price');
         var inq = card.querySelector('.aw-inquire');
+        var avail = price ? (price.getAttribute('data-avail-price') || '') : '';
+        var hasNum = avail && avail !== 'Price on request';
         if (st === 'sold') {
           if (badge) { badge.textContent = 'Sold'; badge.className = 'aw-card-status sold'; }
-          if (price) price.classList.add('sold-price');
+          if (price) { price.textContent = avail; if (hasNum) { price.classList.add('sold-price'); } else { price.classList.remove('sold-price'); } }
+          if (inq) inq.style.display = 'none';
+        } else if (st === 'not-for-sale') {
+          if (badge) { badge.textContent = 'Not for Sale'; badge.className = 'aw-card-status nfs'; }
+          if (price) { price.textContent = 'Not for sale'; price.classList.remove('sold-price'); }
           if (inq) inq.style.display = 'none';
         } else {
           if (badge) { badge.textContent = 'Available'; badge.className = 'aw-card-status available'; }
-          if (price) price.classList.remove('sold-price');
+          if (price) { price.textContent = avail; price.classList.remove('sold-price'); }
           if (inq) inq.style.display = '';
         }
       });

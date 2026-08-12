@@ -41,9 +41,9 @@ noindex: true
   .admin-badge { font-size:0.62rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:100px; flex:none; }
   .admin-badge.available { background:#e7f6ec; color:#1a7f43; }
   .admin-badge.sold { background:#fdecea; color:#c44536; }
-  .admin-toggle { flex:none; background:#111; color:#fff; border:none; padding:8px 16px; font-size:0.68rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; border-radius:5px; }
-  .admin-toggle:hover { background:#b8996f; }
-  .admin-toggle:disabled { opacity:0.4; cursor:default; }
+  .admin-badge.nfs { background:#f0f0f0; color:#777; }
+  .admin-select { flex:none; padding:8px 10px; font-size:0.72rem; font-family:inherit; border:1px solid #ddd; border-radius:5px; background:#fff; cursor:pointer; }
+  .admin-select:disabled { opacity:0.4; cursor:default; }
 
   .admin-saving { font-size:0.7rem; color:#b8996f; }
 </style>
@@ -95,7 +95,11 @@ noindex: true
             <p class="admin-artist">{{ aw.artist }}</p>
           </div>
           <span class="admin-badge available" data-badge>—</span>
-          <button class="admin-toggle" data-toggle disabled>…</button>
+          <select class="admin-select" data-select disabled>
+            <option value="available">Available</option>
+            <option value="sold">Sold</option>
+            <option value="not-for-sale">Not for Sale</option>
+          </select>
         </div>
         {% endfor %}
       </div>
@@ -162,13 +166,15 @@ noindex: true
     notice.textContent = text;
   }
 
+  function statusLabel(s) { return s === 'sold' ? 'Sold' : (s === 'not-for-sale' ? 'Not for Sale' : 'Available'); }
+  function statusClass(s) { return s === 'sold' ? 'sold' : (s === 'not-for-sale' ? 'nfs' : 'available'); }
+
   function renderRow(row, status) {
     var badge = row.querySelector('[data-badge]');
-    var btn = row.querySelector('[data-toggle]');
-    badge.textContent = status === 'sold' ? 'Sold' : 'Available';
-    badge.className = 'admin-badge ' + (status === 'sold' ? 'sold' : 'available');
-    btn.disabled = false;
-    btn.textContent = status === 'sold' ? 'Mark available' : 'Mark sold';
+    var sel = row.querySelector('[data-select]');
+    badge.textContent = statusLabel(status);
+    badge.className = 'admin-badge ' + statusClass(status);
+    if (sel) { sel.value = status; sel.disabled = false; }
     row.dataset.status = status;
   }
 
@@ -189,21 +195,19 @@ noindex: true
       rows.forEach(function(row) { renderRow(row, row.dataset.default || 'available'); });
     });
 
-    document.querySelectorAll('[data-toggle]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var row = btn.closest('.admin-row');
+    document.querySelectorAll('[data-select]').forEach(function(sel) {
+      sel.addEventListener('change', function() {
+        var row = sel.closest('.admin-row');
         var slug = row.dataset.slug;
-        var next = row.dataset.status === 'sold' ? 'available' : 'sold';
-        btn.disabled = true;
-        var prev = btn.textContent;
-        btn.textContent = 'Saving…';
+        var next = sel.value;
+        var prev = row.dataset.status || row.dataset.default || 'available';
+        sel.disabled = true;
         showNotice('');
         var settled = false;
         var timer = setTimeout(function() {
           if (settled) return;
           settled = true;
-          btn.disabled = false;
-          btn.textContent = prev;
+          sel.disabled = false; sel.value = prev;
           showNotice('저장이 응답하지 않습니다. Firebase 콘솔에서 Cloud Firestore가 활성화되어 있는지 확인하세요.', true);
         }, 9000);
         db.collection('artwork_status').doc(slug).set({
@@ -215,12 +219,11 @@ noindex: true
           settled = true; clearTimeout(timer);
           renderRow(row, next);
           updateCount();
-          showNotice('저장됨: ' + slug + ' → ' + (next === 'sold' ? 'Sold' : 'Available'));
+          showNotice('저장됨: ' + slug + ' → ' + statusLabel(next));
         }).catch(function(err) {
           if (settled) return;
           settled = true; clearTimeout(timer);
-          btn.disabled = false;
-          btn.textContent = prev;
+          sel.disabled = false; sel.value = prev;
           console.error('Firestore write failed', err);
           showNotice('저장 실패: ' + (err.code ? err.code + ' — ' : '') + err.message, true);
         });
@@ -231,7 +234,8 @@ noindex: true
   function updateCount() {
     var rows = document.querySelectorAll('.admin-row');
     var sold = document.querySelectorAll('.admin-row[data-status="sold"]').length;
-    document.getElementById('adminCount').textContent = rows.length + ' works · ' + sold + ' sold · ' + (rows.length - sold) + ' available';
+    var nfs = document.querySelectorAll('.admin-row[data-status="not-for-sale"]').length;
+    document.getElementById('adminCount').textContent = rows.length + ' works · ' + (rows.length - sold - nfs) + ' available · ' + sold + ' sold · ' + nfs + ' not for sale';
   }
 
   // Artist chips + search filter (combined)
