@@ -9,7 +9,7 @@ description: "Seventeen skulls held in Sydney since 1883 have been returned to E
 description_kr: "1883년부터 시드니에 보관돼 온 두개골 17점이 이스터섬으로 돌아갔습니다."
 source_name: "The Art Newspaper"
 source_url: "https://www.theartnewspaper.com/2026/08/05/australian-museum-repatriates-rapa-nui-remains-easter-island"
-image: /assets/images/news/2026-08-05-australian-museum-rapa-nui-return.jpg
+image: ""
 featured: false
 ---
 The Australian Museum in Sydney has returned 17 skulls and one hair sample belonging to Rapa Nui ancestors, which the museum acquired in 1883 following a German naval expedition to the island in 1882 led by Captain Wilhelm Geiseler. A handover ceremony took place in Sydney on 15 July 2026, attended by museum director and chief executive Kim McKay, the museum's Director for First Nations Laura McBride, and Carlos Edmunds Paoa, president of the Rapa Nui Council of Elders. The remains arrived in Santiago on 17 July, where an airport ceremony was held with Chilean undersecretary of cultural heritage Emilio De la Cerda, and were then taken to Rapa Nui for a welcome ceremony. McKay stated that the museum is deeply sorry for the past wrong. The Rapa Nui community has indicated it will now approach the British Museum regarding the moai *Hoa Hakananai'a*.

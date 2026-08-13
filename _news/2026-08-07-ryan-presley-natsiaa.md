@@ -9,7 +9,7 @@ description: "The Marri Ngarr artist takes the top award at the 2026 National Ab
 description_kr: "마리 응아르 출신 작가가 2026 원주민·토레스해협 도서민 미술상 대상을 받았습니다."
 source_name: "ArtsHub Australia"
 source_url: "https://www.artshub.com.au/news/features/ryan-presley-lands-100000-telstra-natsiaa-art-award-with-a-renaissance-inspired-artwork-2869781/"
-image: /assets/images/news/2026-08-07-ryan-presley-natsiaa.jpg
+image: ""
 featured: false
 ---
 Marri Ngarr artist Dr Ryan Presley has won the $100,000 Telstra Art Award at the 2026 National Aboriginal and Torres Strait Islander Art Awards for his oil on canvas painting *Our lifestyle of tranquillity undisturbed*, selected from 64 finalists. The judges were Julie Gough of the Trawlwoolway people, Yhonnie Scarce of the Kokatha and Nukunu peoples, and Warraba Weatherall of the Kamilaroi people. Six category awards of $15,000 each went to Vanessa Inkamala for General Painting, Barayuwa Munuŋgurr for Bark Painting, Jenna Mayilema Lee for Work on Paper, Napuwarri Marawili for the Wandjuk Marika Memorial 3D Award, Guruwuy Murrinyina for Emerging Artist and Colin Heenan-Puruntatameri for Multimedia. The exhibition is on at the Museum and Art Gallery of the Northern Territory in Garramilla/Darwin until 24 January 2027. This edition marks 35 years of Telstra's sponsorship and 40 years of the Wandjuk Marika 3D award.

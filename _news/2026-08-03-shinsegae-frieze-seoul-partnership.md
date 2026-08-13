@@ -9,7 +9,7 @@ description: "The retail group takes the fair's top sponsorship slot in a five-y
 description_kr: "신세계그룹이 5년 계약으로 프리즈 서울 최상위 후원사가 됐습니다. 한국 유통기업으로는 처음입니다."
 source_name: "Seoul Economic Daily"
 source_url: "https://en.sedaily.com/finance/2026/08/03/shinsegae-becomes-frieze-seoul-headline-partner-for-five"
-image: /assets/images/news/2026-08-03-shinsegae-frieze-seoul-partnership.jpg
+image: ""
 featured: false
 ---
 Shinsegae Group has signed on as headline partner of Frieze Seoul for the five years from 2026 to 2030. It is the first Korean retail company to hold the fair's top sponsorship position. The fifth edition of the fair runs from 2 to 5 September 2026 at COEX in Gangnam, with more than 125 galleries from around 30 countries taking part. The group said it will build a dedicated lounge for visitors at the fair and support Korean artists and galleries entering overseas markets. Financial terms of the agreement were not disclosed.

@@ -7,7 +7,7 @@ description: "Hammer totals rose 99% while the number of lots offered fell 11%, 
 description_kr: "낙찰액은 99% 늘고 출품작은 11% 줄었습니다. 단 두 점이 전체의 23%를 차지했습니다."
 source_name: "The Korea Herald"
 source_url: "https://www.koreaherald.com/article/10822972"
-image: "2026-07-28-korea-auction-first-half-2026.jpg"
+image: ""
 featured: false
 ---
 Hammer sales across seven domestic Korean auction houses reached 110.8 billion won in the first half of 2026, a rise of 99.05 percent on the same period a year earlier, according to the Korea Art Authentication and Appraisal Institute. The number of lots offered fell 11.03 percent over the same period, from 9,607 to 8,547. The institute stated that the increase was driven by a small number of ultra-high-value transactions rather than by a broader increase in the number of works offered. Two lots accounted for 23 percent of total sales: Yoshitomo Nara's *Nothing about it* at 15 billion won and Yayoi Kusama's *Pumpkin* at 10.45 billion won. Eight works sold above 1 billion won, compared with one in 2025, and five of those eight were by artists from outside Korea.

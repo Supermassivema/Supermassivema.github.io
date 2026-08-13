@@ -9,7 +9,7 @@ description: "The Dansaekhwa painter's foundation opens a permanent museum built
 description_kr: "단색화 작가 박서보가 기증한 약 3,000점을 기반으로 한 미술관이 문을 엽니다."
 source_name: "K-ARTNOW"
 source_url: "https://k-artnow.com/posts.php?co_id=1785571453"
-image: /assets/images/news/2026-08-04-parkseobo-museum-seoul-opens.jpg
+image: ""
 featured: false
 ---
 The Parkseobo Foundation will open PARKSEOBO MUSEUM SEOUL on 21 August 2026 in Yeonhui-dong, Seodaemun-gu, next to the foundation's existing building. The five-storey building, with two basement levels and three above ground, was designed by architect Choi Moon-kyu, whose previous projects include Ssamzigil, Kansong Art Museum Daegu and the Hyundai Card Music Library. The foundation was established around roughly 3,000 works donated by Park Seo-Bo, the Dansaekhwa painter who died in 2023, and states that the museum will focus on preservation and research while also supporting emerging artists. Its inaugural exhibition, *Park Seo-Bo & Huong Dodinh: Emptiness, Fullness*, a two-person show with the French-Vietnamese artist Huong Dodinh, runs from 21 August to 31 December 2026.

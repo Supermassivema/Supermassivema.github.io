@@ -9,7 +9,7 @@ description: "The gallery will wind up after its 85th exhibition, following a ru
 description_kr: "85번째 전시를 끝으로 문을 닫습니다. 최근 런던 갤러리 폐관이 이어지고 있습니다."
 source_name: "The Art Newspaper"
 source_url: "https://www.theartnewspaper.com/2026/08/11/stopping-while-were-ahead-london-gallery-sid-motion-to-shut-after-a-decade"
-image: /assets/images/news/2026-08-11-sid-motion-gallery-closes.jpg
+image: ""
 featured: false
 ---
 Sid Motion has announced she will wind up the London gallery she founded in 2016, which opened in King's Cross and moved to the Penarth Centre in South Bermondsey in 2019. The final exhibition, *That Which Appears*, runs from 18 September to 31 October 2026 and will be the gallery's 85th; it then travels to Sheffield's Millennium Gallery in April 2028. Motion described the decision as a positive and conscious one, while stating that the gallery was not in a financial position to fully support what its artists were capable of. The closure follows Stephen Friedman Gallery's collapse in February 2026 with debts of £8m, and Pace's decision in June 2026 to cut around 50 artists from its roster.
