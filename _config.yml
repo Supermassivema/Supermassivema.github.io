@@ -95,6 +95,8 @@ exclude:
   - _templates/
   - _incoming/
   - LICENSE
+  - improvement-report.md
+  - debug.html
 
 # Sass Configuration
 sass:
