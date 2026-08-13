@@ -30,83 +30,113 @@ section: gallery
 
 <style>
   .news-page { background:#fff; min-height:100vh; }
-  .news-wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
-  .news-head { padding: 56px 0 24px; }
-  .news-page-title { font-family:'Playfair Display', Georgia, serif; font-size: clamp(2rem, 6vw, 3.4rem); font-weight:600; color:#111; margin:0; }
-  .news-page-sub { color:#888; margin-top:8px; font-size:0.98rem; }
+  .news-wrap { max-width: 1220px; margin: 0 auto; padding: 0 32px; }
 
-  /* Chips */
-  .news-chips { display:flex; flex-wrap:wrap; gap:10px; padding: 8px 0 36px; }
-  .news-chip { border:1px solid #ddd; background:#fff; color:#555; border-radius:100px; padding:8px 18px; font-size:0.86rem; cursor:pointer; transition: all .18s; }
+  /* ── Masthead ── */
+  .news-masthead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+    padding: 52px 0 18px; border-bottom: 3px double #111; }
+  .news-page-title { font-family:'Playfair Display', Georgia, serif; font-size: clamp(2rem, 5.5vw, 3.3rem);
+    font-weight:700; color:#111; margin:0; letter-spacing:-0.01em; }
+  .news-page-sub { color:#777; margin:8px 0 0; font-size:0.98rem; max-width:46ch; }
+  .news-dateline { text-align:right; flex:none; padding-bottom:6px; }
+  .news-dateline-label { display:block; font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:#aaa; }
+  .news-dateline-date { font-family:'Playfair Display', Georgia, serif; font-size:0.98rem; color:#333; }
+
+  /* ── Region tabs ── */
+  .news-chips { display:flex; flex-wrap:wrap; gap:8px; padding: 20px 0 30px; }
+  .news-chip { border:1px solid #e2e2e2; background:#fff; color:#555; border-radius:100px; padding:7px 16px;
+    font-size:0.82rem; cursor:pointer; transition: all .18s; display:inline-flex; align-items:center; gap:7px; }
   .news-chip:hover { border-color:#111; color:#111; }
   .news-chip.active { background:#111; color:#fff; border-color:#111; }
-  .news-chip { display:inline-flex; align-items:center; gap:7px; }
-  .chip-dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
-  .dot-gallery { background:#111; }         /* brand black — our own gallery news */
-  .dot-global { background:#2563eb; }      /* blue */
-  .dot-australia { background:#159e63; }    /* green */
-  .dot-korea { background:#d4483b; }        /* red */
+  .chip-dot { width:8px; height:8px; border-radius:50%; display:inline-block; flex:none; }
+  .dot-gallery { background:#111; } .dot-global { background:#2563eb; }
+  .dot-australia { background:#159e63; } .dot-korea { background:#d4483b; }
 
-  /* Region badge on cards/featured */
-  .news-region { display:inline-flex; align-items:center; gap:6px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; }
+  /* Region label (kicker) */
+  .news-region { display:inline-flex; align-items:center; gap:6px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; }
   .news-region .chip-dot { width:7px; height:7px; }
-  .region-gallery { color:#111; }
-  .region-global { color:#2563eb; }
-  .region-australia { color:#159e63; }
-  .region-korea { color:#d4483b; }
+  .region-gallery { color:#111; } .region-global { color:#2563eb; }
+  .region-australia { color:#159e63; } .region-korea { color:#d4483b; }
 
-  /* Featured */
-  .news-featured { display:grid; grid-template-columns: 1.15fr 1fr; gap:40px; align-items:center; padding-bottom: 48px; margin-bottom: 40px; border-bottom:1px solid #eee; }
-  .news-featured-img { width:100%; aspect-ratio: 4/3; object-fit:contain; background:#fff; display:block; }
-  .news-featured-meta { display:flex; gap:12px; align-items:center; font-size:0.76rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:16px; }
-  .news-featured-cat { font-weight:600; color:#111; border:1px solid #111; padding:3px 11px; border-radius:100px; }
-  .news-featured-date { color:#999; }
-  .news-featured-title { font-family:'Playfair Display', Georgia, serif; font-size: clamp(1.5rem, 3.2vw, 2.3rem); line-height:1.18; font-weight:600; color:#111; margin:0 0 8px; }
-  .news-featured-title-kr { display:block; font-family:'Noto Serif KR',serif; font-size:0.6em; color:#777; font-weight:500; margin-top:8px; }
-  .news-featured-excerpt { color:#555; line-height:1.7; margin: 16px 0 22px; font-size:1.02rem; }
-  .news-featured-more { font-size:0.9rem; color:#111; text-decoration:none; border-bottom:1px solid #111; padding-bottom:2px; }
+  /* ── Lead story ── */
+  .news-lead { display:grid; grid-template-columns: 1.25fr 1fr; gap:44px; align-items:center;
+    text-decoration:none; color:#111; padding: 34px 0 40px; margin-bottom: 8px; border-bottom:1px solid #ececec; }
+  .news-lead-media { width:100%; aspect-ratio: 16/10; overflow:hidden; background:#fafafa; }
+  .news-lead-media img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+  .news-lead:hover .news-lead-media img { transform:scale(1.03); }
+  .news-kicker { display:inline-block; font-size:0.66rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:#b11; font-weight:700; margin-bottom:14px; }
+  .news-lead-meta { display:flex; gap:12px; align-items:center; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px; }
+  .news-lead-date { color:#999; }
+  .news-lead-title { font-family:'Playfair Display', Georgia, serif; font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+    line-height:1.15; font-weight:700; color:#111; margin:0 0 10px; }
+  .news-lead-title-kr { display:block; font-family:'Noto Serif KR',serif; font-size:0.52em; color:#888; font-weight:500; margin-top:10px; }
+  .news-lead-excerpt { color:#555; line-height:1.7; margin: 12px 0 20px; font-size:1.04rem; }
+  .news-lead-foot { display:flex; align-items:center; gap:14px; font-size:0.82rem; }
+  .news-lead-source { color:#999; }
+  .news-lead-more { color:#111; font-weight:600; border-bottom:2px solid #111; padding-bottom:2px; }
 
-  /* Grid */
-  .news-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 36px 28px; }
+  /* ── Section header ── */
+  .news-section-head { display:flex; align-items:center; gap:18px; margin: 34px 0 26px; }
+  .news-section-label { font-family:'Playfair Display', Georgia, serif; font-size:1.35rem; font-weight:700; color:#111; margin:0; white-space:nowrap; }
+  .news-section-rule { flex:1; height:1px; background:#e2e2e2; }
+
+  /* ── Grid ── */
+  .news-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 40px 30px; }
   .news-card { text-decoration:none; color:#111; display:flex; flex-direction:column; }
-  .news-card-imgwrap { width:100%; aspect-ratio: 4/3; overflow:hidden; background:#fff; }
-  .news-card-img { width:100%; height:100%; object-fit:contain; display:block; transition: transform .4s ease; }
-  .news-card:hover .news-card-img { transform: scale(1.04); }
-  .news-card-meta { display:flex; gap:10px; align-items:center; margin: 14px 0 8px; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; }
-  .news-card-cat { color:#111; font-weight:600; }
+  .news-card-imgwrap { width:100%; aspect-ratio: 16/10; overflow:hidden; background:#fafafa; }
+  .news-card-img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .4s ease; }
+  .news-card:hover .news-card-img { transform: scale(1.05); }
+  .news-card-meta { display:flex; gap:10px; align-items:center; margin: 15px 0 9px; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; }
   .news-card-date { color:#aaa; }
-  .news-card-title { font-family:'Playfair Display', Georgia, serif; font-size:1.18rem; line-height:1.3; font-weight:600; margin:0 0 6px; }
-  .news-card-excerpt { color:#777; font-size:0.9rem; line-height:1.55; margin:0; }
+  .news-card-title { font-family:'Playfair Display', Georgia, serif; font-size:1.24rem; line-height:1.28; font-weight:700; margin:0 0 8px;
+    transition: color .15s; }
+  .news-card:hover .news-card-title { color:#b11; }
+  .news-card-excerpt { color:#777; font-size:0.9rem; line-height:1.6; margin:0 0 12px; }
+  .news-card-source { margin-top:auto; font-size:0.72rem; letter-spacing:0.04em; color:#999; padding-top:10px; border-top:1px solid #f0f0f0; }
   .news-empty { color:#999; padding: 40px 0; text-align:center; grid-column:1/-1; }
 
   /* No-image placeholder (curated news without a copyright-safe photo) */
-  .news-noimg { width:100%; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; }
-  .news-noimg span { font-family:'Playfair Display', Georgia, serif; font-size:1.1rem; letter-spacing:0.08em; text-transform:uppercase; color:#fff; opacity:0.95; }
-  .noimg-gallery { background:linear-gradient(135deg,#333,#111); }
-  .noimg-global { background:linear-gradient(135deg,#2563eb,#1e3a8a); }
-  .noimg-australia { background:linear-gradient(135deg,#159e63,#0b5e3b); }
-  .noimg-korea { background:linear-gradient(135deg,#d4483b,#8f2820); }
+  .news-noimg { width:100%; height:100%; aspect-ratio:16/10; display:flex; align-items:flex-end; padding:16px; box-sizing:border-box; }
+  .news-noimg span { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#fff; opacity:0.92; }
+  .noimg-gallery { background:linear-gradient(140deg,#3a3a3a,#111); }
+  .noimg-global { background:linear-gradient(140deg,#2f6fe0,#16307a); }
+  .noimg-australia { background:linear-gradient(140deg,#18a56a,#0a5234); }
+  .noimg-korea { background:linear-gradient(140deg,#e0503f,#7f2018); }
+  .news-lead-media .news-noimg { aspect-ratio:16/10; }
 
-  /* Pagination */
-  .news-pager { display:flex; justify-content:center; gap:8px; margin: 56px 0 0; }
+  /* ── Pagination ── */
+  .news-pager { display:flex; justify-content:center; gap:8px; margin: 56px 0 8px; }
   .news-pager button { min-width:40px; height:40px; border:1px solid #ddd; background:#fff; color:#333; border-radius:8px; cursor:pointer; font-size:0.9rem; transition: all .18s; }
   .news-pager button:hover:not(:disabled) { border-color:#111; color:#111; }
   .news-pager button.active { background:#111; color:#fff; border-color:#111; }
   .news-pager button:disabled { opacity:0.4; cursor:default; }
 
-  @media (max-width: 900px){ .news-grid { grid-template-columns: repeat(2, 1fr); } .news-featured { grid-template-columns:1fr; gap:20px; } }
+  @media (max-width: 900px){
+    .news-grid { grid-template-columns: repeat(2, 1fr); }
+    .news-lead { grid-template-columns:1fr; gap:22px; }
+    .news-masthead { flex-direction:column; align-items:flex-start; gap:10px; }
+    .news-dateline { text-align:left; }
+  }
   @media (max-width: 560px){ .news-grid { grid-template-columns: 1fr; } .news-wrap { padding:0 20px; } }
 </style>
 
 <div class="news-page">
   <div class="news-wrap">
 
-    <div class="news-head">
-      <h1 class="news-page-title">Art News</h1>
-      <p class="news-page-sub">Contemporary art news from around the world — plus updates from ART SPACE BYRON.</p>
-    </div>
+    <!-- Masthead -->
+    <header class="news-masthead">
+      <div class="news-masthead-main">
+        <h1 class="news-page-title">Art News</h1>
+        <p class="news-page-sub">Contemporary art from around the world — and the latest from ART SPACE BYRON.</p>
+      </div>
+      <div class="news-dateline">
+        <span class="news-dateline-label">Updated</span>
+        <span class="news-dateline-date">{{ site.time | date: "%-d %B %Y" }}</span>
+      </div>
+    </header>
 
-    <!-- Region chips (Global · Australia · Korea) -->
+    <!-- Region tabs -->
     <div class="news-chips" id="newsChips">
       <button class="news-chip active" data-region="all">All</button>
       <button class="news-chip" data-region="gallery"><span class="chip-dot dot-gallery"></span>Gallery</button>
@@ -115,30 +145,41 @@ section: gallery
       <button class="news-chip" data-region="korea"><span class="chip-dot dot-korea"></span>Korea</button>
     </div>
 
-    <!-- Featured -->
+    <!-- Lead story -->
     {% if featured_post %}
     {%- assign fwebp = featured_post.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
-    <a class="news-featured" id="newsFeatured" href="{{ featured_post.url | relative_url }}">
-      {% if featured_post.image and featured_post.image != "" %}
-      <picture>
-        <source srcset="{{ fwebp | relative_url }}" type="image/webp">
-        <img class="news-featured-img" src="{{ featured_post.image | relative_url }}" alt="{{ featured_post.title | escape }}" loading="lazy">
-      </picture>
-      {% else %}
-      <div class="news-noimg news-featured-img noimg-{{ featured_post.region | default: 'global' }}"><span>{{ featured_post.region | default: 'Art News' | capitalize }}</span></div>
-      {% endif %}
-      <div class="news-featured-body">
-        <div class="news-featured-meta">
+    <a class="news-lead" id="newsFeatured" href="{{ featured_post.url | relative_url }}">
+      <div class="news-lead-media">
+        {% if featured_post.image and featured_post.image != "" %}
+        <picture>
+          <source srcset="{{ fwebp | relative_url }}" type="image/webp">
+          <img src="{{ featured_post.image | relative_url }}" alt="{{ featured_post.title | escape }}" loading="lazy">
+        </picture>
+        {% else %}
+        <div class="news-noimg noimg-{{ featured_post.region | default: 'global' }}"><span>{{ featured_post.region | default: 'Art News' | capitalize }}</span></div>
+        {% endif %}
+      </div>
+      <div class="news-lead-body">
+        <span class="news-kicker">Lead story</span>
+        <div class="news-lead-meta">
           {%- if featured_post.region -%}<span class="news-region region-{{ featured_post.region }}"><span class="chip-dot dot-{{ featured_post.region }}"></span>{{ featured_post.region | capitalize }}</span>{%- endif -%}
-          <span class="news-featured-cat">{{ featured_post.category }}</span>
-          <span class="news-featured-date">{{ featured_post.date | date: "%d %B %Y" }}</span>
+          <span class="news-lead-date">{{ featured_post.date | date: "%d %B %Y" }}</span>
         </div>
-        <h2 class="news-featured-title">{{ featured_post.title }}{% if featured_post.title_kr %}<span class="news-featured-title-kr">{{ featured_post.title_kr }}</span>{% endif %}</h2>
-        <p class="news-featured-excerpt">{{ featured_post.description | default: featured_post.excerpt | strip_html | truncate: 180 }}</p>
-        <span class="news-featured-more">Read more →</span>
+        <h2 class="news-lead-title">{{ featured_post.title }}{% if featured_post.title_kr %}<span class="news-lead-title-kr">{{ featured_post.title_kr }}</span>{% endif %}</h2>
+        <p class="news-lead-excerpt">{{ featured_post.description | default: featured_post.excerpt | strip_html | truncate: 190 }}</p>
+        <div class="news-lead-foot">
+          <span class="news-lead-more">Read more →</span>
+          {% if featured_post.source_name and featured_post.source_name != "" %}<span class="news-lead-source">{{ featured_post.source_name }}</span>{% endif %}
+        </div>
       </div>
     </a>
     {% endif %}
+
+    <!-- Latest section -->
+    <div class="news-section-head">
+      <h2 class="news-section-label">Latest</h2>
+      <span class="news-section-rule"></span>
+    </div>
 
     <!-- Grid -->
     <div class="news-grid" id="newsGrid">
@@ -157,14 +198,14 @@ section: gallery
         </div>
         <div class="news-card-meta">
           {%- if p.region -%}<span class="news-region region-{{ p.region }}"><span class="chip-dot dot-{{ p.region }}"></span>{{ p.region | capitalize }}</span>{%- endif -%}
-          <span class="news-card-cat">{{ p.category }}</span>
           <span class="news-card-date">{{ p.date | date: "%d %b %Y" }}</span>
         </div>
         <h3 class="news-card-title">{{ p.title }}</h3>
-        <p class="news-card-excerpt">{{ p.description | default: p.excerpt | strip_html | truncate: 110 }}</p>
+        <p class="news-card-excerpt">{{ p.description | default: p.excerpt | strip_html | truncate: 105 }}</p>
+        {% if p.source_name and p.source_name != "" %}<span class="news-card-source">{{ p.source_name }}</span>{% endif %}
       </a>
       {% endfor %}
-      <p class="news-empty" id="newsEmpty" style="display:none;">No posts in this category yet.</p>
+      <p class="news-empty" id="newsEmpty" style="display:none;">No posts in this section yet.</p>
     </div>
 
     <div class="news-pager" id="newsPager"></div>
@@ -174,7 +215,7 @@ section: gallery
 
 <script>
 (function(){
-  var PER_PAGE = 6;
+  var PER_PAGE = 9;
   var grid = document.getElementById('newsGrid');
   if (!grid) return;
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.news-card'));
@@ -185,7 +226,7 @@ section: gallery
   var region = 'all', pageNum = 1;
 
   function matches(card){
-    if (region === 'all') return card.dataset.featured !== '1'; // featured shown in hero on 'all'
+    if (region === 'all') return card.dataset.featured !== '1'; // featured shown as lead on 'all'
     return card.dataset.region === region;
   }
   function filtered(){ return cards.filter(matches); }
@@ -195,14 +236,10 @@ section: gallery
     var pages = Math.max(1, Math.ceil(list.length / PER_PAGE));
     if (pageNum > pages) pageNum = pages;
     var start = (pageNum - 1) * PER_PAGE;
-    // show/hide cards
     cards.forEach(function(c){ c.style.display = 'none'; });
     list.slice(start, start + PER_PAGE).forEach(function(c){ c.style.display = 'flex'; });
-    // featured only on 'all' + first page
     if (featured) featured.style.display = (region === 'all' && pageNum === 1) ? 'grid' : 'none';
-    // empty state
     if (empty) empty.style.display = list.length === 0 ? 'block' : 'none';
-    // pager
     pager.innerHTML = '';
     if (pages > 1){
       var mk = function(label, target, opts){
