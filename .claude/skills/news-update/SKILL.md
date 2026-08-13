@@ -35,7 +35,10 @@ description: Check the _incoming/news/ shared folder and convert dropped items i
       - 이미지가 있으면 `assets/images/news/` 로 옮기고 `image:` 경로를 그에 맞게 수정.
         (이미지 없으면 `image:` 는 비워둠 → 레이아웃이 지역색 배경 자동 처리)
    c. 원본을 `_incoming/news/_processed/` 로 이동.
-3. **빌드 확인**: `bundle exec jekyll build` 가 깨지지 않는지 확인(front matter 오류 방지).
+3. **가벼운 검증**: 생성한 각 파일의 **YAML front matter 파싱만** 확인한다
+   (`ruby -ryaml -e 'YAML.load_file(ARGV[0])' <file>` 또는 `python3 -c "import yaml,sys;yaml.safe_load(open(sys.argv[1]).read().split('---')[1])" <file>`).
+   **`bundle install` 이나 `jekyll build` 를 실행하지 말 것** — 클라우드 환경엔 젬이 없어 시간만 낭비된다.
+   YAML 이 안 열리면 그 파일은 되돌리고 반려한다.
 4. **커밋**: `published: false` 라 라이브 노출 안 되므로 main 에 커밋·푸시해도 안전.
    (원하면 `news/auto-<날짜>` 브랜치 + PR 로 승인받는 방식도 가능.)
 5. **보고**: 만든 초안(제목·지역·출처)과 반려 항목을 사용자에게 보고, 승인 요청.
