@@ -7,7 +7,7 @@ description: "Nearly 200 works from the BTS member's collection, including Yun H
 description_kr: "윤형근·박래현 등 약 200점. BTS RM의 소장품이 10월 샌프란시스코에서 처음 공개됩니다."
 source_name: "SFMOMA"
 source_url: "https://www.sfmoma.org/press-release/rm-and-sfmoma-partner-on-first-exhibition-of-its-kind/"
-image: "2026-08-04-rm-sfmoma-collection-exhibition.jpg"
+image: ""
 featured: false
 ---
 The San Francisco Museum of Modern Art will present *RM x SFMOMA: Between You and Me* from 3 October 2026 to 7 February 2027, with member previews from 1 to 3 October. It is the first museum exhibition of the personal art collection assembled by RM of BTS. Close to 200 works from the collection will be shown alongside pieces from SFMOMA's own holdings, in a presentation RM co-curated with the museum's América Castillo and Hyoeun Kim. Korean artists represented include Chang Ucchin, Kim Yun Shin, Kwon Okyon, Park Rehyun, To Sangbong and Yun Hyong-keun. The museum states this will be the collection's only United States showing; lead support comes from Randi and Bob Fisher, with major support from Samsung Electronics and additional support from the Korea Foundation.
