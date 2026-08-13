@@ -31,6 +31,10 @@ layout: gallery-page
   .news-article-head { padding-top: 40px; }
   .news-article-meta { display:flex; align-items:center; gap:14px; margin-bottom:20px; font-size:0.8rem; letter-spacing:0.04em; text-transform:uppercase; }
   .news-article-cat { color:#111; font-weight:600; border:1px solid #111; padding:4px 12px; border-radius:100px; }
+  .news-article-region { display:inline-flex; align-items:center; gap:6px; font-weight:700; letter-spacing:0.06em; }
+  .news-article-region .region-dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .dot-global { background:#2563eb; } .dot-australia { background:#159e63; } .dot-korea { background:#d4483b; }
+  .region-global { color:#2563eb; } .region-australia { color:#159e63; } .region-korea { color:#d4483b; }
   .news-article-date { color:#888; }
   .news-article-title { font-family:'Playfair Display', Georgia, serif; font-size: clamp(1.7rem, 4.5vw, 2.8rem); line-height:1.15; font-weight:600; margin:0 0 8px; color:#111; }
   .news-article-title-kr { display:block; font-family:'Noto Serif KR', serif; font-size: 0.62em; color:#666; font-weight:500; margin-top:10px; }
@@ -41,6 +45,8 @@ layout: gallery-page
   .news-article-body a { color:#111; text-decoration: underline; text-underline-offset: 3px; }
   .news-article-body hr { border:none; border-top:1px solid #e5e5e5; margin: 34px 0; }
   .news-article-body hr + p { color:#555; }   /* Korean half, muted */
+  .news-article-source { margin-top:28px; font-size:0.85rem; color:#888; }
+  .news-article-source a { color:#555; text-decoration:underline; text-underline-offset:2px; }
   /* Gallery */
   .news-gallery { display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; margin: 40px 0; }
   .news-gallery img { width:100%; height:100%; object-fit:cover; aspect-ratio:1/1; display:block; }
@@ -73,17 +79,20 @@ layout: gallery-page
 
 <article class="news-article">
 
+  {% if page.image and page.image != "" %}
   <div class="news-article-hero">
     <picture>
       <source srcset="{{ img_webp | relative_url }}" type="image/webp">
       <img src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}" class="news-article-hero-img" width="1100" height="619">
     </picture>
   </div>
+  {% endif %}
 
   <div class="news-article-wrap">
 
     <div class="news-article-head">
       <div class="news-article-meta">
+        {% if page.region %}<span class="news-article-region region-{{ page.region }}"><span class="region-dot dot-{{ page.region }}"></span>{{ page.region | capitalize }}</span>{% endif %}
         <span class="news-article-cat">{{ page.category | default: "News" }}</span>
         <span class="news-article-date">{{ page.date | date: "%d %B %Y" }}</span>
       </div>
@@ -93,6 +102,14 @@ layout: gallery-page
     <div class="news-article-body">
       {{ content }}
     </div>
+
+    {%- comment %} Source attribution for curated art news (copyright-safe: summary + link) {% endcomment -%}
+    {% if page.source_name and page.source_name != "" %}
+    <p class="news-article-source">
+      Source:
+      {% if page.source_url and page.source_url != "" %}<a href="{{ page.source_url }}" target="_blank" rel="noopener nofollow">{{ page.source_name }} ↗</a>{% else %}{{ page.source_name }}{% endif %}
+    </p>
+    {% endif %}
 
     {%- comment %} Optional image gallery {% endcomment -%}
     {% if page.gallery and page.gallery.size > 0 %}

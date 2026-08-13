@@ -2,6 +2,7 @@
 title: "Opening reception — Saturday 28 March"
 title_kr: "오프닝 리셉션 — 3월 28일 토요일"
 date: 2026-03-20
+region: australia
 category: Event
 image: /assets/images/news/opening-reception.jpg
 description: "Join us for the inaugural exhibition opening and a chance to meet the artists."

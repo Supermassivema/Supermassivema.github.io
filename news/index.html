@@ -40,6 +40,18 @@ section: gallery
   .news-chip { border:1px solid #ddd; background:#fff; color:#555; border-radius:100px; padding:8px 18px; font-size:0.86rem; cursor:pointer; transition: all .18s; }
   .news-chip:hover { border-color:#111; color:#111; }
   .news-chip.active { background:#111; color:#fff; border-color:#111; }
+  .news-chip { display:inline-flex; align-items:center; gap:7px; }
+  .chip-dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .dot-global { background:#2563eb; }      /* blue */
+  .dot-australia { background:#159e63; }    /* green */
+  .dot-korea { background:#d4483b; }        /* red */
+
+  /* Region badge on cards/featured */
+  .news-region { display:inline-flex; align-items:center; gap:6px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; }
+  .news-region .chip-dot { width:7px; height:7px; }
+  .region-global { color:#2563eb; }
+  .region-australia { color:#159e63; }
+  .region-korea { color:#d4483b; }
 
   /* Featured */
   .news-featured { display:grid; grid-template-columns: 1.15fr 1fr; gap:40px; align-items:center; padding-bottom: 48px; margin-bottom: 40px; border-bottom:1px solid #eee; }
@@ -65,6 +77,13 @@ section: gallery
   .news-card-excerpt { color:#777; font-size:0.9rem; line-height:1.55; margin:0; }
   .news-empty { color:#999; padding: 40px 0; text-align:center; grid-column:1/-1; }
 
+  /* No-image placeholder (curated news without a copyright-safe photo) */
+  .news-noimg { width:100%; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; }
+  .news-noimg span { font-family:'Playfair Display', Georgia, serif; font-size:1.1rem; letter-spacing:0.08em; text-transform:uppercase; color:#fff; opacity:0.95; }
+  .noimg-global { background:linear-gradient(135deg,#2563eb,#1e3a8a); }
+  .noimg-australia { background:linear-gradient(135deg,#159e63,#0b5e3b); }
+  .noimg-korea { background:linear-gradient(135deg,#d4483b,#8f2820); }
+
   /* Pagination */
   .news-pager { display:flex; justify-content:center; gap:8px; margin: 56px 0 0; }
   .news-pager button { min-width:40px; height:40px; border:1px solid #ddd; background:#fff; color:#333; border-radius:8px; cursor:pointer; font-size:0.9rem; transition: all .18s; }
@@ -80,30 +99,33 @@ section: gallery
   <div class="news-wrap">
 
     <div class="news-head">
-      <h1 class="news-page-title">News</h1>
-      <p class="news-page-sub">Exhibitions, events, and updates from ART SPACE BYRON.</p>
+      <h1 class="news-page-title">Art News</h1>
+      <p class="news-page-sub">Contemporary art news from around the world — plus updates from ART SPACE BYRON.</p>
     </div>
 
-    <!-- Category chips -->
+    <!-- Region chips (Global · Australia · Korea) -->
     <div class="news-chips" id="newsChips">
-      <button class="news-chip active" data-cat="all">All</button>
-      <button class="news-chip" data-cat="Exhibition">Exhibition</button>
-      <button class="news-chip" data-cat="Event">Event</button>
-      <button class="news-chip" data-cat="Artist">Artist</button>
-      <button class="news-chip" data-cat="Press">Press</button>
-      <button class="news-chip" data-cat="Announcement">Announcement</button>
+      <button class="news-chip active" data-region="all">All</button>
+      <button class="news-chip" data-region="global"><span class="chip-dot dot-global"></span>Global</button>
+      <button class="news-chip" data-region="australia"><span class="chip-dot dot-australia"></span>Australia</button>
+      <button class="news-chip" data-region="korea"><span class="chip-dot dot-korea"></span>Korea</button>
     </div>
 
     <!-- Featured -->
     {% if featured_post %}
     {%- assign fwebp = featured_post.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
     <a class="news-featured" id="newsFeatured" href="{{ featured_post.url | relative_url }}">
+      {% if featured_post.image and featured_post.image != "" %}
       <picture>
         <source srcset="{{ fwebp | relative_url }}" type="image/webp">
         <img class="news-featured-img" src="{{ featured_post.image | relative_url }}" alt="{{ featured_post.title | escape }}" loading="lazy">
       </picture>
+      {% else %}
+      <div class="news-noimg news-featured-img noimg-{{ featured_post.region | default: 'global' }}"><span>{{ featured_post.region | default: 'Art News' | capitalize }}</span></div>
+      {% endif %}
       <div class="news-featured-body">
         <div class="news-featured-meta">
+          {%- if featured_post.region -%}<span class="news-region region-{{ featured_post.region }}"><span class="chip-dot dot-{{ featured_post.region }}"></span>{{ featured_post.region | capitalize }}</span>{%- endif -%}
           <span class="news-featured-cat">{{ featured_post.category }}</span>
           <span class="news-featured-date">{{ featured_post.date | date: "%d %B %Y" }}</span>
         </div>
@@ -118,14 +140,19 @@ section: gallery
     <div class="news-grid" id="newsGrid">
       {% for p in posts %}
       {%- assign cwebp = p.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
-      <a class="news-card" data-category="{{ p.category }}" data-featured="{% if featured_post and p.url == featured_post.url %}1{% else %}0{% endif %}" href="{{ p.url | relative_url }}">
+      <a class="news-card" data-region="{{ p.region | default: 'global' }}" data-category="{{ p.category }}" data-featured="{% if featured_post and p.url == featured_post.url %}1{% else %}0{% endif %}" href="{{ p.url | relative_url }}">
         <div class="news-card-imgwrap">
+          {% if p.image and p.image != "" %}
           <picture>
             <source srcset="{{ cwebp | relative_url }}" type="image/webp">
             <img class="news-card-img" src="{{ p.image | relative_url }}" alt="{{ p.title | escape }}" loading="lazy">
           </picture>
+          {% else %}
+          <div class="news-noimg noimg-{{ p.region | default: 'global' }}"><span>{{ p.region | default: 'Art News' | capitalize }}</span></div>
+          {% endif %}
         </div>
         <div class="news-card-meta">
+          {%- if p.region -%}<span class="news-region region-{{ p.region }}"><span class="chip-dot dot-{{ p.region }}"></span>{{ p.region | capitalize }}</span>{%- endif -%}
           <span class="news-card-cat">{{ p.category }}</span>
           <span class="news-card-date">{{ p.date | date: "%d %b %Y" }}</span>
         </div>
@@ -151,11 +178,11 @@ section: gallery
   var pager = document.getElementById('newsPager');
   var featured = document.getElementById('newsFeatured');
   var empty = document.getElementById('newsEmpty');
-  var category = 'all', pageNum = 1;
+  var region = 'all', pageNum = 1;
 
   function matches(card){
-    if (category === 'all') return card.dataset.featured !== '1'; // featured shown in hero on 'all'
-    return card.dataset.category === category;
+    if (region === 'all') return card.dataset.featured !== '1'; // featured shown in hero on 'all'
+    return card.dataset.region === region;
   }
   function filtered(){ return cards.filter(matches); }
 
@@ -168,7 +195,7 @@ section: gallery
     cards.forEach(function(c){ c.style.display = 'none'; });
     list.slice(start, start + PER_PAGE).forEach(function(c){ c.style.display = 'flex'; });
     // featured only on 'all' + first page
-    if (featured) featured.style.display = (category === 'all' && pageNum === 1) ? 'grid' : 'none';
+    if (featured) featured.style.display = (region === 'all' && pageNum === 1) ? 'grid' : 'none';
     // empty state
     if (empty) empty.style.display = list.length === 0 ? 'block' : 'none';
     // pager
@@ -193,7 +220,7 @@ section: gallery
     chip.addEventListener('click', function(){
       chips.forEach(function(c){ c.classList.remove('active'); });
       chip.classList.add('active');
-      category = chip.dataset.cat;
+      region = chip.dataset.region;
       pageNum = 1;
       render();
     });

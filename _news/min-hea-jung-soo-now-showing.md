@@ -2,6 +2,7 @@
 title: "Now showing: Min Hea Jung Soo"
 title_kr: "현재 전시: 민해정수"
 date: 2026-07-01
+region: korea
 category: Artist
 image: /assets/images/news/min-hea-feature.jpg
 description: "Korean painter Min Hea Jung Soo turns hazy memory into vivid imagery — on view now through 31 August."
