@@ -1,6 +1,6 @@
 ---
 region: korea
-published: false
+published: true
 category: News
 title: "Shinsegae becomes Frieze Seoul's headline partner through 2030"
 title_kr: "신세계, 프리즈 서울 헤드라인 파트너로 2030년까지"

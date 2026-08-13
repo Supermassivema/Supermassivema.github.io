@@ -1,6 +1,6 @@
 ---
 region: korea
-published: false
+published: true
 category: News
 title: "Park Seo-Bo Museum Seoul opens 21 August in Yeonhui-dong"
 title_kr: "박서보미술관 서울, 8월 21일 연희동 개관"

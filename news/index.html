@@ -42,6 +42,7 @@ section: gallery
   .news-chip.active { background:#111; color:#fff; border-color:#111; }
   .news-chip { display:inline-flex; align-items:center; gap:7px; }
   .chip-dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .dot-gallery { background:#111; }         /* brand black — our own gallery news */
   .dot-global { background:#2563eb; }      /* blue */
   .dot-australia { background:#159e63; }    /* green */
   .dot-korea { background:#d4483b; }        /* red */
@@ -49,6 +50,7 @@ section: gallery
   /* Region badge on cards/featured */
   .news-region { display:inline-flex; align-items:center; gap:6px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; }
   .news-region .chip-dot { width:7px; height:7px; }
+  .region-gallery { color:#111; }
   .region-global { color:#2563eb; }
   .region-australia { color:#159e63; }
   .region-korea { color:#d4483b; }
@@ -80,6 +82,7 @@ section: gallery
   /* No-image placeholder (curated news without a copyright-safe photo) */
   .news-noimg { width:100%; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; }
   .news-noimg span { font-family:'Playfair Display', Georgia, serif; font-size:1.1rem; letter-spacing:0.08em; text-transform:uppercase; color:#fff; opacity:0.95; }
+  .noimg-gallery { background:linear-gradient(135deg,#333,#111); }
   .noimg-global { background:linear-gradient(135deg,#2563eb,#1e3a8a); }
   .noimg-australia { background:linear-gradient(135deg,#159e63,#0b5e3b); }
   .noimg-korea { background:linear-gradient(135deg,#d4483b,#8f2820); }
@@ -106,6 +109,7 @@ section: gallery
     <!-- Region chips (Global · Australia · Korea) -->
     <div class="news-chips" id="newsChips">
       <button class="news-chip active" data-region="all">All</button>
+      <button class="news-chip" data-region="gallery"><span class="chip-dot dot-gallery"></span>Gallery</button>
       <button class="news-chip" data-region="global"><span class="chip-dot dot-global"></span>Global</button>
       <button class="news-chip" data-region="australia"><span class="chip-dot dot-australia"></span>Australia</button>
       <button class="news-chip" data-region="korea"><span class="chip-dot dot-korea"></span>Korea</button>

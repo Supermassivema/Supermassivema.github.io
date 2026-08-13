@@ -1,6 +1,6 @@
 ---
 region: global
-published: false
+published: true
 category: News
 title: "London's Sid Motion Gallery to close after a decade"
 title_kr: "런던 시드 모션 갤러리, 10년 만에 문 닫는다"

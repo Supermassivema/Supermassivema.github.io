@@ -1,6 +1,6 @@
 ---
 region: korea
-published: false
+published: true
 category: News
 title: "Korean auction sales nearly double, but on fewer lots"
 title_kr: "한국 경매 낙찰액 두 배 가까이 늘었지만, 출품은 줄었다"

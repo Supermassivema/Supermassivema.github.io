@@ -2,7 +2,7 @@
 title: "ART SPACE BYRON opens with its inaugural exhibition"
 title_kr: "ART SPACE BYRON, 개관전으로 문을 열다"
 date: 2026-03-02
-region: australia
+region: gallery
 category: Exhibition
 image: /assets/images/news/inaugural-exhibition.jpg
 description: "Our first exhibition brings Korean painter Geum Sahong together with local Inverell artists Debbie Doye and Stephen Jones."

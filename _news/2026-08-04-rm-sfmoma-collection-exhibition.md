@@ -1,6 +1,6 @@
 ---
 region: korea
-published: false
+published: true
 category: News
 title: "RM's collection of Korean art goes on view at SFMOMA"
 title_kr: "RM 소장 한국 미술, SFMOMA에서 첫 공개"

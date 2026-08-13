@@ -1,6 +1,6 @@
 ---
 region: australia
-published: false
+published: true
 category: News
 title: "Ryan Presley wins the $100,000 Telstra NATSIAA"
 title_kr: "라이언 프레슬리, 10만 달러 텔스트라 NATSIAA 대상"

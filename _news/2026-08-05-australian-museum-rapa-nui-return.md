@@ -1,6 +1,6 @@
 ---
 region: australia
-published: false
+published: true
 category: News
 title: "Australian Museum returns Rapa Nui ancestral remains"
 title_kr: "호주박물관, 라파누이 조상 유해 반환"
