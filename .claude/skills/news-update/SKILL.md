@@ -25,8 +25,9 @@ description: Check the _incoming/news/ shared folder and convert dropped items i
 5. **틀 준수**: `_templates/news-post.md` 필드 사용.
 
 ## 절차 (체크 실행 시)
-1. **스캔**: `_incoming/news/` 안의 `.md` 파일 목록을 본다 (`_FORMAT.md`, `README.md`,
-   `_processed/` 는 제외). 없으면 "새 자료 없음" 보고하고 종료.
+1. **스캔**: `_incoming/news/` 안의 `.md` 파일 목록을 본다. **`_`(밑줄)로 시작하는 파일은 모두 제외**
+   (`_FORMAT.md`, `README.md`, `_briefing-*.md` 등)하고 `_processed/` 폴더도 제외.
+   `[TEST]` 등 명백한 테스트/비뉴스 콘텐츠도 변환하지 말고 건너뛴다. 처리할 게 없으면 "새 자료 없음" 보고 후 종료.
 2. 각 파일마다:
    a. front matter 를 읽고 **필수 필드 검증**. 빠지면 그 파일은 건너뛰고 반려 사유 기록.
    b. `_news/<YYYY-MM-DD>-<slug>.md` 생성:
