@@ -5,7 +5,7 @@ curator: Kim Ki Lim
 curator_kr: 김기림
 start_date: 2026-06-05
 end_date: 2026-08-31
-status: current
+status: past
 featured_image: "/assets/images/work/MinHeaJungSoo/min-hea-jung-soo-work-001.jpg"
 location: Inverell, NSW, Australia
 # Exhibition Views: leave empty for now — add the actual exhibition photo paths here later.

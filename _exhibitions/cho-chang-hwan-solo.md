@@ -5,7 +5,7 @@ curator: Kim Ki Lim
 curator_kr: 김기림
 start_date: 2026-09-01
 end_date: 2026-10-31
-status: upcoming
+status: current
 featured_image: "/assets/images/work/조창환 작가/cho-chang-hwan-soom-breath-02.jpg"
 location: Inverell, NSW, Australia
 # Exhibition Views: empty for now — add the actual exhibition photo paths here after the show.
