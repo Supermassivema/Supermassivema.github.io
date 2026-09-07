@@ -377,11 +377,11 @@
                 <!-- Right Nav -->
                 <nav class="header-nav-right">
                     <ul class="nav-menu">
-                        <li><a href="{{ '/news' | relative_url }}" class="nav-link">News</a></li>
                         <li class="nav-dropdown-wrap">
                             <a href="{{ '/gallery/collect' | relative_url }}" class="nav-link">Collect</a>
                             <div class="nav-dropdown">
                                 <a href="{{ '/gallery/artworks' | relative_url }}" class="nav-dropdown-link">Available Artworks</a>
+                                <a href="{{ '/gallery/news' | relative_url }}" class="nav-dropdown-link">Gallery News</a>
                                 {%- comment %} Artist Book hidden from the Collect menu {% endcomment -%}
                             </div>
                         </li>
@@ -414,8 +414,8 @@
                 <li><a href="{{ '/gallery/exhibitions' | relative_url }}" class="nav-link">Exhibitions</a></li>
                 <li><a href="{{ '/gallery/artists' | relative_url }}" class="nav-link">Artists</a></li>
                 <li><a href="{{ '/gallery/collect' | relative_url }}" class="nav-link">Collect</a></li>
+                <li><a href="{{ '/gallery/news' | relative_url }}" class="nav-link">Gallery News</a></li>
                 <li><a href="{{ '/gallery/visit' | relative_url }}" class="nav-link">Visit</a></li>
-                <li><a href="{{ '/news' | relative_url }}" class="nav-link">News</a></li>
             </ul>
         </nav>
     </header>
@@ -686,7 +686,7 @@
                         <input type="email" placeholder="Email address" class="kukje-footer-email">
                         <button class="kukje-footer-subscribe" onclick="var e=this.previousElementSibling.value;window.location.href='mailto:admin@artspacebyron.com.au?subject=Newsletter%20signup&body='+encodeURIComponent('Please add me to the ART SPACE BYRON newsletter: '+e);">Subscribe</button>
                     </div>
-                    <p class="kukje-footer-text" style="margin-top:12px;"><a href="{{ '/news/rss.xml' | relative_url }}">Subscribe via RSS →</a> · <a href="{{ '/news' | relative_url }}">Latest news</a></p>
+                    <p class="kukje-footer-text" style="margin-top:12px;"><a href="{{ '/gallery/news' | relative_url }}">Gallery news →</a></p>
                 </div>
             </div>
 

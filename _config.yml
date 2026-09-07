@@ -97,6 +97,7 @@ exclude:
   - LICENSE
   - improvement-report.md
   - debug.html
+  - generated_artworks.md
 
 # Sass Configuration
 sass:

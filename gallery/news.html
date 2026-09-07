@@ -1,19 +1,89 @@
 ---
+layout: gallery-page
 permalink: /gallery/news/
-layout: none
-sitemap: false
+title: "Gallery News"
+description: "News and announcements from ART SPACE BYRON — exhibition openings, receptions and gallery updates from our contemporary art gallery in Inverell, New England NSW."
+section: gallery
 ---
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>News — ART SPACE BYRON</title>
-  <link rel="canonical" href="https://www.artspacebyron.com.au/news/">
-  <meta http-equiv="refresh" content="0; url=/news/">
-  <meta name="robots" content="noindex, follow">
-</head>
-<body>
-  <p>ART SPACE BYRON news has moved to <a href="/news/">artspacebyron.com.au/news</a>.</p>
-  <script>location.replace('/news/');</script>
-</body>
-</html>
+
+{%- assign posts = site.news | where: "region", "gallery" | sort: "date" | reverse -%}
+
+{%- comment %} ── CollectionPage + ItemList structured data ── {% endcomment -%}
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"CollectionPage",
+"name":"Gallery News — ART SPACE BYRON",
+"url":{{ '/gallery/news/' | absolute_url | jsonify }},
+"mainEntity":{
+  "@type":"ItemList",
+  "numberOfItems":{{ posts.size }},
+  "itemListElement":[
+  {%- for p in posts -%}
+  {"@type":"ListItem","position":{{ forloop.index }},"url":{{ p.url | absolute_url | jsonify }},"name":{{ p.title | jsonify }}}{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+  ]
+}
+}
+</script>
+
+<style>
+  .gnews-page { background:#fff; min-height:70vh; }
+  .gnews-wrap { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+
+  /* Masthead */
+  .gnews-masthead { padding: 56px 0 20px; border-bottom: 3px double #111; }
+  .gnews-crumb { font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:#aaa; margin:0 0 10px; }
+  .gnews-crumb a { color:#aaa; text-decoration:none; }
+  .gnews-crumb a:hover { color:#111; }
+  .gnews-title { font-family:'Playfair Display', Georgia, serif; font-size: clamp(2rem, 5vw, 3rem);
+    font-weight:700; color:#111; margin:0; letter-spacing:-0.01em; }
+  .gnews-sub { color:#777; margin:10px 0 0; font-size:0.98rem; max-width:52ch; }
+
+  /* List (text rows) */
+  .gnews-list { display:flex; flex-direction:column; margin-top: 8px; }
+  .gnews-item { display:grid; grid-template-columns: 132px 1fr; gap: 26px; align-items:start;
+    text-decoration:none; color:#111; padding: 28px 0 28px 20px;
+    border-bottom:1px solid #eee; border-left:3px solid #111; transition: background .15s; }
+  .gnews-item:hover { background:#fafafa; }
+  .gnews-date { display:block; font-size:0.8rem; color:#999; padding-top:4px; letter-spacing:0.02em; }
+  .gnews-body { min-width:0; }
+  .gnews-item-title { font-family:'Playfair Display', Georgia, serif; font-size:1.5rem; line-height:1.28; font-weight:700; margin:0 0 8px;
+    transition: color .15s; }
+  .gnews-item:hover .gnews-item-title { color:#b11; }
+  .gnews-item-title-kr { display:block; font-family:'Noto Serif KR',serif; font-size:0.6em; color:#999; font-weight:500; margin-top:6px; }
+  .gnews-excerpt { color:#666; font-size:0.98rem; line-height:1.65; margin:0; max-width: 62ch; }
+  .gnews-empty { color:#999; padding: 48px 0; text-align:center; }
+
+  @media (max-width: 640px){
+    .gnews-item { grid-template-columns: 1fr; gap: 8px; padding-left:16px; }
+    .gnews-date { padding-top:0; }
+    .gnews-wrap { padding:0 20px; }
+  }
+</style>
+
+<div class="gnews-page">
+  <div class="gnews-wrap">
+
+    <header class="gnews-masthead">
+      <p class="gnews-crumb"><a href="{{ '/gallery/collect' | relative_url }}">Collect</a> / Gallery News</p>
+      <h1 class="gnews-title">Gallery News</h1>
+      <p class="gnews-sub">Exhibition openings, receptions and announcements from ART SPACE BYRON.</p>
+    </header>
+
+    <div class="gnews-list">
+      {% for p in posts %}
+      <a class="gnews-item" href="{{ p.url | relative_url }}">
+        <span class="gnews-date">{{ p.date | date: "%d %b %Y" }}</span>
+        <div class="gnews-body">
+          <h2 class="gnews-item-title">{{ p.title }}{% if p.title_kr and p.title_kr != "" %}<span class="gnews-item-title-kr">{{ p.title_kr }}</span>{% endif %}</h2>
+          <p class="gnews-excerpt">{{ p.description | default: p.excerpt | strip_html | truncate: 180 }}</p>
+        </div>
+      </a>
+      {% else %}
+      <p class="gnews-empty">No gallery news yet.</p>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
