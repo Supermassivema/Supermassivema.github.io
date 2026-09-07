@@ -1,6 +1,6 @@
 ---
-title: "Now showing: Min Hea Jung Soo"
-title_kr: "현재 전시: 민해정수"
+title: "Min Hea Jung Soo Solo Exhibition"
+title_kr: "민해정수 개인전"
 date: 2026-07-01
 region: gallery
 category: Artist

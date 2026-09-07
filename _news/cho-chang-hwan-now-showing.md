@@ -1,6 +1,6 @@
 ---
-title: "Now showing: Cho Chang-hwan"
-title_kr: "현재 전시: 조창환"
+title: "Cho Chang-hwan Solo Exhibition"
+title_kr: "조창환 개인전"
 date: 2026-09-01
 region: gallery
 category: Artist
