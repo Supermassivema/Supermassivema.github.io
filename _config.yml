@@ -29,7 +29,7 @@ permalink: pretty
 
 # Analytics. Add your GA4 Measurement ID to start collecting visits; the admin
 # page links out to Google's dashboards (no OAuth/API setup needed).
-google_analytics: ""            # GA4 Measurement ID, e.g. G-XXXXXXXXXX (enables sitewide tracking in production)
+google_analytics: "G-E14QQGMG9B"   # GA4 Measurement ID (enables sitewide tracking in production)
 analytics:
   ga4_property_id: ""           # GA4 numeric Property ID (Admin ▸ Property details) — optional, deep-links the "Open Google Analytics" button
 plugins:
