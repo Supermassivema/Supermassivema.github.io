@@ -27,12 +27,11 @@ social:
 markdown: kramdown
 permalink: pretty
 
-# Analytics (admin dashboard). Fill these after Google setup — see admin page notes.
+# Analytics. Add your GA4 Measurement ID to start collecting visits; the admin
+# page links out to Google's dashboards (no OAuth/API setup needed).
 google_analytics: ""            # GA4 Measurement ID, e.g. G-XXXXXXXXXX (enables sitewide tracking in production)
 analytics:
-  ga4_property_id: ""           # GA4 numeric Property ID (Admin ▸ Property details), for the Data API
-  oauth_client_id: ""           # Google Cloud OAuth 2.0 Web client ID (…apps.googleusercontent.com)
-  search_console_site: "https://www.artspacebyron.com.au/"  # exact Search Console property URL
+  ga4_property_id: ""           # GA4 numeric Property ID (Admin ▸ Property details) — optional, deep-links the "Open Google Analytics" button
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
