@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-09-14T04:29:04.564Z",
         "reason": "AI chat typing indicator: pulse reflects genuinely live assistant activity (sanctioned exception)"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-14T05:26:56.726Z",
+        "reason": "user confirmed: keep editorial muted-gray tone; hero text sits over dark background imagery (analyzer false positive)"
       }
     ]
   }
