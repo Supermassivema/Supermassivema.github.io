@@ -939,7 +939,7 @@
         }
 
         .kukje-footer-email::placeholder {
-            color: #bbb;
+            color: #767676;
         }
 
         .kukje-footer-subscribe {
@@ -1018,7 +1018,7 @@
 
         .kukje-footer-copy {
             font-size: 0.65rem;
-            color: #bbb;
+            color: #6e6e6e;
             margin: 0;
             letter-spacing: 0.04em;
         }
@@ -1078,6 +1078,36 @@
         /* Disabled controls should not look clickable */
         button:disabled, input:disabled, [aria-disabled="true"] {
             cursor: not-allowed;
+        }
+
+        /* ── Design polish (batch 1): accessibility + typographic finish ── */
+        /* Visible keyboard focus ring (branded gold), suppressed for mouse users */
+        a:focus-visible, button:focus-visible, select:focus-visible,
+        summary:focus-visible, input:focus-visible, textarea:focus-visible,
+        [tabindex]:focus-visible, .nav-link:focus-visible, .nav-dropdown-link:focus-visible {
+            outline: 2px solid #c79a5b;
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+        /* Kill orphan words: balance headings, tidy paragraph wrapping */
+        h1, h2, h3, .home-hero-text, .home-section-title,
+        .news-lead-title, .news-card-title, .gnews-item-title, .an-title {
+            text-wrap: balance;
+        }
+        p, .home-news-excerpt, .news-card-excerpt, .gnews-excerpt, .news-lead-excerpt {
+            text-wrap: pretty;
+        }
+        /* Anchor targets clear the fixed header when jumped to */
+        :where([id]) { scroll-margin-top: 92px; }
+        html { scroll-behavior: smooth; }
+        /* Current page indicator in the top nav */
+        .nav-menu .nav-link.is-current {
+            text-decoration: underline;
+            text-underline-offset: 6px;
+            text-decoration-thickness: 1.5px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
         }
 
         #geo-cursor {
@@ -1292,6 +1322,18 @@
             const menuToggle = document.querySelector('.menu-toggle');
             const mainNav = document.querySelector('.main-nav');
             const body = document.body;
+
+            // Mark the current section in the top nav (longest matching path wins)
+            (function markCurrentNav() {
+                var here = location.pathname.replace(/\/+$/, '') || '/';
+                var best = null, bestLen = -1;
+                document.querySelectorAll('.nav-menu .nav-link[href]').forEach(function (a) {
+                    var p = a.getAttribute('href').replace(/\/+$/, '') || '/';
+                    var match = (p === '/') ? (here === '/') : (here === p || here.indexOf(p + '/') === 0);
+                    if (match && p.length > bestLen) { best = a; bestLen = p.length; }
+                });
+                if (best) { best.classList.add('is-current'); best.setAttribute('aria-current', 'page'); }
+            })();
 
             if (!menuToggle || !mainNav) return;
 

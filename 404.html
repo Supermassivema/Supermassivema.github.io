@@ -1,0 +1,37 @@
+---
+layout: gallery-page
+permalink: /404.html
+title: "Page not found"
+sitemap: false
+noindex: true
+---
+
+<style>
+  .nf-wrap { max-width: 720px; margin: 0 auto; padding: 120px 24px 140px; text-align: center; min-height: 60vh; }
+  .nf-code { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(3.5rem, 12vw, 7rem);
+    font-weight: 500; line-height: 1; color: #111; letter-spacing: -0.02em; margin: 0; }
+  .nf-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 500; color: #111; margin: 18px 0 0; }
+  .nf-text { color: #555; font-size: 1rem; line-height: 1.7; margin: 16px auto 0; max-width: 46ch; text-wrap: pretty; }
+  .nf-rule { width: 44px; height: 1px; background: #c79a5b; margin: 34px auto; }
+  .nf-links { display: flex; flex-wrap: wrap; gap: 10px 14px; justify-content: center; }
+  .nf-link { text-decoration: none; color: #111; font-size: 0.82rem; letter-spacing: 0.04em;
+    text-transform: uppercase; border: 1px solid #ddd; border-radius: 100px; padding: 10px 22px; transition: all .18s; }
+  .nf-link:hover { border-color: #111; background: #111; color: #fff; }
+  .nf-link.primary { border-color: #111; background: #111; color: #fff; }
+  .nf-link.primary:hover { background: #333; }
+</style>
+
+<div class="nf-wrap">
+  <p class="nf-code">404</p>
+  <h1 class="nf-title">This page isn't on the wall</h1>
+  <p class="nf-text">The page you're looking for may have been moved or is no longer here. Let's get you back to the gallery.</p>
+  <div class="nf-rule"></div>
+  <nav class="nf-links" aria-label="Recovery links">
+    <a class="nf-link primary" href="{{ '/' | relative_url }}">Home</a>
+    <a class="nf-link" href="{{ '/gallery/exhibitions' | relative_url }}">Exhibitions</a>
+    <a class="nf-link" href="{{ '/gallery/artists' | relative_url }}">Artists</a>
+    <a class="nf-link" href="{{ '/gallery/news' | relative_url }}">Gallery News</a>
+    <a class="nf-link" href="{{ '/gallery/visit' | relative_url }}">Visit</a>
+  </nav>
+</div>
