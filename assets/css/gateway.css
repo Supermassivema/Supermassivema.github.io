@@ -32,7 +32,7 @@ html, body {
 }
 
 body.gateway-page {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -193,7 +193,7 @@ body.gateway-page {
   text-transform: uppercase;
   transition: all 0.3s ease;
   font-weight: 500;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
 }
 
 /* Footer */
@@ -204,7 +204,7 @@ body.gateway-page {
   align-items: center;
   justify-content: center;
   background-color: var(--soft-linen);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: 14px;
   color: var(--roasted-coffee);
   border-top: 1px solid rgba(0, 0, 0, 0.05);

@@ -147,7 +147,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--pure-white);
   color: var(--deep-black);
   line-height: var(--leading-normal);
@@ -254,7 +254,7 @@ img {
 }
 
 .gallery-nav-menu li a {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: var(--text-sm);
   font-weight: var(--weight-bold);
   color: var(--medium-grey);
@@ -380,7 +380,7 @@ img {
 }
 
 .spotify-hero-description {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: var(--text-xl);
   font-weight: var(--weight-regular);
   line-height: var(--leading-relaxed);
@@ -407,7 +407,7 @@ img {
   color: var(--acid-yellow);
   border: none;
   border-radius: var(--radius-full);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: var(--text-base);
   font-weight: var(--weight-bold);
   text-transform: uppercase;
@@ -560,7 +560,7 @@ img {
 }
 
 .spotify-section-subtitle {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Hanken Grotesk', sans-serif;
   font-size: var(--text-lg);
   font-weight: var(--weight-regular);
   line-height: var(--leading-relaxed);
