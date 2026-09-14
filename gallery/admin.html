@@ -46,6 +46,35 @@ noindex: true
   .admin-select:disabled { opacity:0.4; cursor:default; }
 
   .admin-saving { font-size:0.7rem; color:#b8996f; }
+
+  /* ── Analytics ── */
+  .an-section { border:1px solid #eee; border-radius:10px; padding:20px 22px 24px; margin:4px 0 34px; background:#fcfcfc; }
+  .an-head { display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:16px; }
+  .an-title { font-family:'Playfair Display', Georgia, serif; font-size:1.25rem; font-weight:600; margin:0; }
+  .an-controls { display:flex; gap:8px; }
+  .an-range { padding:8px 12px; border:1px solid #ddd; border-radius:6px; font-size:0.8rem; font-family:inherit; background:#fff; cursor:pointer; }
+  .an-load { padding:8px 18px; border:1px solid #111; background:#111; color:#fff; border-radius:6px; font-size:0.8rem; cursor:pointer; font-family:inherit; }
+  .an-load:hover { background:#333; }
+  .an-load:disabled { opacity:0.5; cursor:default; }
+  .an-setup { background:#fff8e6; border:1px solid #f0e0a8; border-radius:8px; padding:14px 18px; font-size:0.85rem; color:#6b5a1e; line-height:1.6; }
+  .an-setup code { background:#fff; padding:1px 5px; border-radius:3px; font-size:0.9em; }
+  .an-setup ul { margin:8px 0 0; padding-left:18px; }
+  .an-msg { font-size:0.82rem; color:#c44536; min-height:1em; margin:6px 0; }
+  .an-tiles { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:6px 0 18px; }
+  .an-tile { background:#fff; border:1px solid #eee; border-radius:8px; padding:16px 14px; text-align:center; }
+  .an-tile-num { display:block; font-size:1.7rem; font-weight:700; color:#111; font-family:'Playfair Display', Georgia, serif; }
+  .an-tile-lbl { display:block; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em; color:#999; margin-top:4px; }
+  .an-grids { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .an-card { background:#fff; border:1px solid #eee; border-radius:8px; padding:14px 16px; }
+  .an-card-wide { grid-column:1 / -1; }
+  .an-card-title { font-size:0.82rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:#111; margin:0 0 10px; }
+  .an-card-note { font-weight:400; text-transform:none; letter-spacing:0; color:#aaa; font-size:0.9em; }
+  .an-table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+  .an-table td { padding:7px 4px; border-bottom:1px solid #f2f2f2; color:#333; }
+  .an-table td:first-child { max-width:0; width:99%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .an-table td.an-num { text-align:right; white-space:nowrap; color:#666; font-variant-numeric:tabular-nums; padding-left:14px; }
+  .an-empty { color:#aaa; font-size:0.82rem; padding:10px 0; }
+  @media (max-width:640px){ .an-tiles{grid-template-columns:repeat(2,1fr);} .an-grids{grid-template-columns:1fr;} }
 </style>
 
 <div class="admin-wrap">
@@ -67,6 +96,59 @@ noindex: true
       <span class="admin-user">Signed in as <b id="adminEmail"></b></span>
       <button class="admin-signout" id="adminSignOut">Sign out</button>
     </div>
+
+    <!-- ══ Visitor Analytics (GA4 + Search Console) ══ -->
+    <section class="an-section" id="anSection">
+      <div class="an-head">
+        <h2 class="an-title">Visitor Analytics</h2>
+        <div class="an-controls">
+          <select class="an-range" id="anRange">
+            <option value="7daysAgo">Last 7 days</option>
+            <option value="28daysAgo" selected>Last 28 days</option>
+            <option value="90daysAgo">Last 90 days</option>
+          </select>
+          <button class="an-load" id="anLoad">Load stats</button>
+        </div>
+      </div>
+
+      <!-- Setup notice (shown when config missing) -->
+      <div class="an-setup" id="anSetup" style="display:none;">
+        <p><b>Analytics is not configured yet.</b> Add these to <code>_config.yml</code> under <code>analytics:</code> after the Google setup:</p>
+        <ul>
+          <li><code>google_analytics</code> — GA4 Measurement ID (G-…)</li>
+          <li><code>ga4_property_id</code> — GA4 numeric Property ID</li>
+          <li><code>oauth_client_id</code> — Google Cloud OAuth Web client ID</li>
+          <li><code>search_console_site</code> — Search Console property URL</li>
+        </ul>
+      </div>
+
+      <p class="an-msg" id="anMsg"></p>
+
+      <!-- Summary tiles -->
+      <div class="an-tiles" id="anTiles" style="display:none;">
+        <div class="an-tile"><span class="an-tile-num" id="anUsers">—</span><span class="an-tile-lbl">Visitors</span></div>
+        <div class="an-tile"><span class="an-tile-num" id="anSessions">—</span><span class="an-tile-lbl">Sessions</span></div>
+        <div class="an-tile"><span class="an-tile-num" id="anViews">—</span><span class="an-tile-lbl">Page views</span></div>
+        <div class="an-tile"><span class="an-tile-num" id="anToday">—</span><span class="an-tile-lbl">Visitors today</span></div>
+      </div>
+
+      <div class="an-grids" id="anGrids" style="display:none;">
+        <div class="an-card">
+          <h3 class="an-card-title">Top pages</h3>
+          <table class="an-table"><tbody id="anPages"></tbody></table>
+        </div>
+        <div class="an-card">
+          <h3 class="an-card-title">Traffic sources</h3>
+          <table class="an-table"><tbody id="anSources"></tbody></table>
+        </div>
+        <div class="an-card an-card-wide">
+          <h3 class="an-card-title">Search keywords <span class="an-card-note">(Search Console · clicks · impressions)</span></h3>
+          <table class="an-table"><tbody id="anQueries"></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="an-title" style="margin-top:8px;">Artwork Status</h2>
     <input type="text" class="admin-search" id="adminSearch" placeholder="Search by title or artist…">
 
     {% assign artist_names = site.artworks | map: "artist" | uniq | sort %}
@@ -267,5 +349,123 @@ noindex: true
     });
   });
   search.addEventListener('input', applyFilter);
+})();
+</script>
+
+<!-- Google Identity Services (OAuth token for Analytics + Search Console read) -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+(function() {
+  var CFG = {
+    propertyId: {{ site.analytics.ga4_property_id | default: '' | jsonify }},
+    clientId:   {{ site.analytics.oauth_client_id | default: '' | jsonify }},
+    scSite:     {{ site.analytics.search_console_site | default: '' | jsonify }}
+  };
+  var SCOPES = 'https://www.googleapis.com/auth/analytics.readonly https://www.googleapis.com/auth/webmasters.readonly';
+
+  var setupEl = document.getElementById('anSetup');
+  var loadBtn = document.getElementById('anLoad');
+  var rangeEl = document.getElementById('anRange');
+  var msgEl   = document.getElementById('anMsg');
+  var tilesEl = document.getElementById('anTiles');
+  var gridsEl = document.getElementById('anGrids');
+
+  var configured = CFG.propertyId && CFG.clientId && CFG.scSite;
+  if (!configured) { if (setupEl) setupEl.style.display = 'block'; if (loadBtn) loadBtn.disabled = true; return; }
+
+  var tokenClient = null, accessToken = null;
+
+  function setMsg(t, err) { if (!msgEl) return; msgEl.textContent = t || ''; msgEl.style.color = err ? '#c44536' : '#777'; }
+  function fmt(n) { n = Number(n) || 0; return n.toLocaleString('en-US'); }
+
+  function ensureToken(cb) {
+    if (accessToken) { cb(); return; }
+    if (!window.google || !google.accounts || !google.accounts.oauth2) {
+      setMsg('Google 라이브러리 로딩 중입니다. 잠시 후 다시 눌러주세요.', true); return;
+    }
+    if (!tokenClient) {
+      tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: CFG.clientId, scope: SCOPES,
+        callback: function(resp) {
+          if (resp && resp.access_token) { accessToken = resp.access_token; cb(); }
+          else { setMsg('권한 승인이 필요합니다.', true); loadBtn.disabled = false; }
+        }
+      });
+    }
+    tokenClient.requestAccessToken({ prompt: '' });
+  }
+
+  function ga(body) {
+    return fetch('https://analyticsdata.googleapis.com/v1beta/properties/' + CFG.propertyId + ':runReport', {
+      method: 'POST', headers: { 'Authorization': 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function(r){ return r.json(); });
+  }
+
+  function fillTable(id, rows, emptyText) {
+    var tb = document.getElementById(id); tb.innerHTML = '';
+    if (!rows || !rows.length) { tb.innerHTML = '<tr><td class="an-empty">' + (emptyText||'No data') + '</td></tr>'; return; }
+    rows.forEach(function(r){
+      var tr = document.createElement('tr');
+      var td1 = document.createElement('td'); td1.textContent = r.label; td1.title = r.label;
+      var td2 = document.createElement('td'); td2.className = 'an-num'; td2.textContent = r.value;
+      tr.appendChild(td1); tr.appendChild(td2); tb.appendChild(tr);
+    });
+  }
+
+  function isoDaysAgo(range) {
+    var d = new Date(); var n = range === '7daysAgo' ? 7 : (range === '90daysAgo' ? 90 : 28);
+    d.setDate(d.getDate() - n); return d.toISOString().slice(0,10);
+  }
+  function isoToday() { return new Date().toISOString().slice(0,10); }
+
+  function load() {
+    var range = rangeEl.value;
+    setMsg('불러오는 중…'); loadBtn.disabled = true;
+    ensureToken(function() {
+      var jobs = [
+        // Summary totals
+        ga({ dateRanges:[{startDate:range,endDate:'today'}], metrics:[{name:'activeUsers'},{name:'sessions'},{name:'screenPageViews'}] }),
+        // Today visitors
+        ga({ dateRanges:[{startDate:'today',endDate:'today'}], metrics:[{name:'activeUsers'}] }),
+        // Top pages
+        ga({ dateRanges:[{startDate:range,endDate:'today'}], dimensions:[{name:'pagePath'}], metrics:[{name:'screenPageViews'}], orderBys:[{metric:{metricName:'screenPageViews'},desc:true}], limit:10 }),
+        // Traffic sources
+        ga({ dateRanges:[{startDate:range,endDate:'today'}], dimensions:[{name:'sessionSourceMedium'}], metrics:[{name:'sessions'}], orderBys:[{metric:{metricName:'sessions'},desc:true}], limit:10 }),
+        // Search Console queries
+        fetch('https://searchconsole.googleapis.com/webmasters/v3/sites/' + encodeURIComponent(CFG.scSite) + '/searchAnalytics/query', {
+          method:'POST', headers:{ 'Authorization':'Bearer '+accessToken, 'Content-Type':'application/json' },
+          body: JSON.stringify({ startDate: isoDaysAgo(range), endDate: isoToday(), dimensions:['query'], rowLimit:20 })
+        }).then(function(r){ return r.json(); })
+      ];
+      Promise.all(jobs).then(function(res){
+        var sum = res[0], today = res[1], pages = res[2], sources = res[3], sc = res[4];
+        if (sum.error) { throw new Error('GA4: ' + (sum.error.message || 'error') + ' (속성 ID/권한 확인)'); }
+        var m = (sum.rows && sum.rows[0] && sum.rows[0].metricValues) || [];
+        document.getElementById('anUsers').textContent = fmt(m[0] && m[0].value);
+        document.getElementById('anSessions').textContent = fmt(m[1] && m[1].value);
+        document.getElementById('anViews').textContent = fmt(m[2] && m[2].value);
+        var tm = (today.rows && today.rows[0] && today.rows[0].metricValues) || [];
+        document.getElementById('anToday').textContent = fmt(tm[0] && tm[0].value);
+        tilesEl.style.display = ''; gridsEl.style.display = '';
+
+        fillTable('anPages', (pages.rows||[]).map(function(r){ return { label: r.dimensionValues[0].value, value: fmt(r.metricValues[0].value) }; }), 'No page data');
+        fillTable('anSources', (sources.rows||[]).map(function(r){ return { label: r.dimensionValues[0].value, value: fmt(r.metricValues[0].value) }; }), 'No source data');
+
+        if (sc.error) {
+          fillTable('anQueries', null, 'Search Console: ' + (sc.error.message || 'error') + ' (사이트 URL/권한 확인)');
+        } else {
+          fillTable('anQueries', (sc.rows||[]).map(function(r){ return { label: r.keys[0], value: fmt(r.clicks) + ' · ' + fmt(r.impressions) }; }), '아직 검색 유입 데이터가 없습니다 (색인 후 수일 필요).');
+        }
+        setMsg('업데이트됨 · ' + new Date().toLocaleString('ko-KR'));
+        loadBtn.disabled = false;
+      }).catch(function(err){
+        setMsg('불러오기 실패: ' + err.message, true); loadBtn.disabled = false;
+        console.error(err);
+      });
+    });
+  }
+
+  loadBtn.addEventListener('click', load);
 })();
 </script>
