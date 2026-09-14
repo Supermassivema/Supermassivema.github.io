@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "pulsing-dot",
+        "value": "*",
+        "files": [
+          "_layouts/gallery-page.html"
+        ],
+        "createdAt": "2026-09-14T04:29:04.564Z",
+        "reason": "AI chat typing indicator: pulse reflects genuinely live assistant activity (sanctioned exception)"
+      }
+    ]
+  }
+}
