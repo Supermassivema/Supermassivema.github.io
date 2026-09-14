@@ -65,9 +65,9 @@ artists:
   - Debbie Doye
   - Stephen Jones
 description_kr: |
-  ART SPACE BYRON의 첫 번째 전시이다. 인버렐 지역에서 활동하는 작가 데비 도예, 스티븐 존스와 한국 작가 금사홍이 함께 참여한다. 호주 로컬 지역에 동아시아 미술을 소개하고, 지역 작가들과 자연스럽게 교류하는 작은 자리를 마련하고자 했다.
+  ART SPACE BYRON의 문을 여는 첫 전시. 인버렐에서 활동하는 데비 도예와 스티븐 존스, 그리고 한국 작가 금사홍이 함께한다. 호주의 작은 지역 도시에 동아시아 미술을 건네고, 지역 작가들과 스스럼없이 오가는 자리를 만들고 싶었다.
 
-  세라믹, 회화, 동양화 등 각기 다른 매체의 작품을 한 공간에서 만나볼 수 있다. 오프닝 리셉션은 3월 28일 토요일에 진행될 예정이다.
+  세라믹과 회화, 동양화가 한 공간에 나란히 놓인다. 오프닝 리셉션은 3월 28일 토요일에 연다.
 ---
 
 This is the first exhibition at ART SPACE BYRON. Local Inverell artists Debbie Doye and Stephen Jones are joined by Korean artist Geum Sahong, bringing together ceramics, painting, and East Asian ink painting under one roof.
