@@ -133,9 +133,9 @@ layout: gallery-page
     position: absolute;
     top: 16px;
     right: 18px;
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.02em;
     color: #fff;
     background: rgba(0,0,0,0.45);
     backdrop-filter: blur(4px);
@@ -589,7 +589,7 @@ layout: gallery-page
   <style>
     /* ── Stage B modules ── */
     .exh-hero-header { text-align:center; max-width:820px; margin:0 auto 8px; }
-    .exh-status-badge { display:inline-block; font-size:0.66rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:5px 14px; border-radius:100px; margin-bottom:18px; }
+    .exh-status-badge { display:inline-block; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:5px 14px; border-radius:100px; margin-bottom:18px; }
     .exh-status--current { background:#e7f6ec; color:#1a7f43; }
     .exh-status--upcoming { background:#e8f0fe; color:#1a56b8; }
     .exh-status--past { background:#f0f0f0; color:#777; }
@@ -599,7 +599,10 @@ layout: gallery-page
     .exh-hero-loc { color:#999; font-size:0.85rem; margin:0; }
     .exh-module { max-width:900px; margin:0 auto; padding:44px 0; border-top:1px solid #eee; }
     .exh-module-title { font-family:'Playfair Display', Georgia, serif; font-size:1.5rem; font-weight:600; margin:0 0 20px; color:#111; }
-    .exh-curator-by { font-size:0.78rem; color:#999; text-transform:uppercase; letter-spacing:0.08em; margin:-8px 0 22px; }
+    .exh-poster { display:inline-block; max-width:420px; width:100%; color:#111; text-decoration:none; }
+    .exh-poster img { display:block; width:100%; height:auto; border:1px solid #eee; }
+    .exh-poster-link { display:inline-block; margin-top:12px; font-size:0.85rem; letter-spacing:0.04em; border-bottom:1px solid currentColor; }
+    .exh-curator-by { font-size:0.85rem; color:#999; letter-spacing:0.01em; margin:-8px 0 22px; }
     .exh-curator-en { font-size:1.02rem; line-height:1.85; color:#222; }
     .exh-curator-kr { margin-top:30px; padding-top:26px; border-top:1px dashed #e5e5e5; color:#555; line-height:1.9; word-break:keep-all; }
     .exh-works-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:30px 22px; }
@@ -617,14 +620,14 @@ layout: gallery-page
     .exh-artist-bio2 { font-size:0.8rem; color:#777; line-height:1.5; margin:0 0 6px; }
     .exh-artist-link2 { font-size:0.7rem; color:#b8996f; text-transform:uppercase; letter-spacing:0.06em; }
     .exh-visit-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:24px; }
-    .exh-visit-item .k { font-size:0.64rem; text-transform:uppercase; letter-spacing:0.1em; color:#999; margin:0 0 6px; }
+    .exh-visit-item .k { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:#999; margin:0 0 6px; }
     .exh-visit-item .v { font-size:0.9rem; color:#222; line-height:1.6; margin:0; }
     .exh-inquiry-btn { display:inline-block; background:#111; color:#fff; padding:16px 34px; text-decoration:none; font-size:0.7rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; transition:background .3s; }
     .exh-inquiry-btn:hover { background:#b8996f; }
     .exh-news-list2 { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; }
     .exh-newsitem { display:flex; gap:14px; text-decoration:none; color:#111; align-items:center; }
     .exh-newsthumb { width:84px; height:84px; object-fit:cover; border-radius:6px; background:#f2f2f2; flex:none; }
-    .exh-newscat { font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em; color:#999; }
+    .exh-newscat { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:#999; }
     .exh-newstitle { font-size:0.98rem; font-weight:500; line-height:1.35; margin:4px 0 0; }
     .exh-newsdate { font-size:0.72rem; color:#aaa; margin-top:4px; }
   </style>
@@ -655,6 +658,17 @@ layout: gallery-page
     </div>
     {% endif %}
   </section>
+
+  <!-- ── 2b. POSTER ── -->
+  {% if page.poster_pdf and page.poster_pdf != "" %}
+  <section class="exh-module">
+    <h2 class="exh-module-title">Exhibition Poster</h2>
+    <a class="exh-poster" href="{{ page.poster_pdf | relative_url }}" target="_blank" rel="noopener">
+      {% if page.poster_image %}<img src="{{ page.poster_image | relative_url }}" alt="{{ page.title | escape }} poster" loading="lazy" width="700" height="989">{% endif %}
+      <span class="exh-poster-link">View poster (PDF) →</span>
+    </a>
+  </section>
+  {% endif %}
 
   <!-- ── 3. INSTALLATION VIEWS ── -->
   {% if page.exhibition_views and page.exhibition_views.size > 0 %}
