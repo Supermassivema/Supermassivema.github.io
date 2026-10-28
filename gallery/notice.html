@@ -1,0 +1,30 @@
+---
+layout: gallery-page
+permalink: /gallery/news/notice/
+title: "Notice"
+description: "Official notices from ART SPACE BYRON — gallery announcements and job opportunities at our contemporary art gallery in Inverell, New England NSW."
+section: gallery
+---
+
+{%- assign posts = site.news | where: "region", "gallery" | where: "category", "Notice" | sort: "date" | reverse -%}
+
+{%- comment %} ── CollectionPage + ItemList structured data ── {% endcomment -%}
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"CollectionPage",
+"name":"Notice — ART SPACE BYRON",
+"url":{{ '/gallery/news/notice/' | absolute_url | jsonify }},
+"mainEntity":{
+  "@type":"ItemList",
+  "numberOfItems":{{ posts.size }},
+  "itemListElement":[
+  {%- for p in posts -%}
+  {"@type":"ListItem","position":{{ forloop.index }},"url":{{ p.url | absolute_url | jsonify }},"name":{{ p.title | jsonify }}}{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+  ]
+}
+}
+</script>
+
+{% include gnews-board.html posts=posts tab="notice" title="Notice" sub="Official gallery announcements and job opportunities." empty="No notices yet." %}

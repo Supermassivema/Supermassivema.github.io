@@ -3,7 +3,7 @@ layout: gallery-page
 ---
 
 {%- comment %} ── NewsArticle structured data ── {% endcomment -%}
-{%- assign img_abs = page.image | absolute_url -%}
+{%- assign img_abs = page.image | default: '/assets/images/og-image.jpg' | absolute_url -%}
 <script type="application/ld+json">
 {
 "@context":"https://schema.org",
@@ -36,6 +36,7 @@ layout: gallery-page
   .dot-gallery { background:#111; } .dot-global { background:#2563eb; } .dot-australia { background:#159e63; } .dot-korea { background:#d4483b; }
   .region-gallery { color:#111; } .region-global { color:#2563eb; } .region-australia { color:#159e63; } .region-korea { color:#d4483b; }
   .news-article-date { color:#888; }
+  .is-notice .news-article-title { font-family:'Hanken Grotesk', -apple-system, sans-serif; font-weight:700; letter-spacing:-0.02em; }
   .news-article-title { font-family:'Playfair Display', Georgia, serif; font-size: clamp(1.7rem, 4.5vw, 2.8rem); line-height:1.15; font-weight:600; margin:0 0 8px; color:#111; }
   .news-article-title-kr { display:block; font-family:'Noto Serif KR', serif; font-size: 0.62em; color:#666; font-weight:500; margin-top:10px; }
   /* Body */
@@ -77,7 +78,7 @@ layout: gallery-page
 
 {%- assign img_webp = page.image | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.JPG','.webp' -%}
 
-<article class="news-article">
+<article class="news-article{% if page.category == "Notice" %} is-notice{% endif %}">
 
   {% if page.image and page.image != "" %}
   <div class="news-article-hero">
@@ -185,7 +186,7 @@ layout: gallery-page
       <button type="button" onclick="navigator.clipboard.writeText('{{ share_url }}').then(function(){var b=event.currentTarget;var o=b.textContent;b.textContent='✓';setTimeout(function(){b.textContent=o;},1500);})" aria-label="Copy link">⧉</button>
     </div>
 
-    <a class="news-back" href="{{ '/gallery/news/' | relative_url }}">← Back to Gallery News</a>
+    {% if page.category == "Notice" %}<a class="news-back" href="{{ '/gallery/news/notice/' | relative_url }}">← Back to Notice</a>{% else %}<a class="news-back" href="{{ '/gallery/news/' | relative_url }}">← Back to Gallery News</a>{% endif %}
 
   </div>
 </article>

@@ -1,0 +1,45 @@
+{%- comment %} CV submission. Static site, so FormSubmit relays the form + attachment by email.
+First submission triggers a one-time activation email to the address below. {% endcomment -%}
+<style>
+  .cv-apply { margin: 40px 0 8px; border:1px solid #111; }
+  .cv-apply summary { list-style:none; cursor:pointer; display:block; text-align:center; background:#111; color:#fff;
+    padding:16px 24px; font-size:0.85rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; }
+  .cv-apply summary::-webkit-details-marker { display:none; }
+  .cv-apply summary:hover, .cv-apply summary:focus-visible { background:#333; }
+  .cv-apply[open] summary { background:#fff; color:#111; border-bottom:1px solid #111; }
+  .cv-form { display:grid; gap:18px; padding:28px; }
+  .cv-form label { display:grid; gap:6px; font-size:0.85rem; font-weight:600; color:#111; }
+  .cv-form input, .cv-form select, .cv-form textarea { font:inherit; font-size:0.95rem; font-weight:400; padding:10px 12px; border:1px solid #bbb; border-radius:0; background:#fff; color:#111; }
+  .cv-form input:focus, .cv-form select:focus, .cv-form textarea:focus { outline:2px solid #111; outline-offset:1px; }
+  .cv-form .cv-hint { font-size:0.8rem; font-weight:400; color:#666; }
+  .cv-form button { justify-self:start; background:#111; color:#fff; border:0; padding:14px 30px; font-size:0.85rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; }
+  .cv-form button:hover { background:#333; }
+  .cv-honey { position:absolute; left:-9999px; }
+</style>
+<details class="cv-apply" id="apply">
+  <summary>Submit your CV</summary>
+  <form class="cv-form" action="https://formsubmit.co/kilimkim@artspacebyron.com.au" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_subject" value="Job application — ART SPACE BYRON">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" class="cv-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label>Position
+      <select name="position" required>
+        <option value="">Select a position</option>
+        <option>Gallery Assistant</option>
+        <option>Gallery Curator</option>
+      </select>
+    </label>
+    <label>Full name<input type="text" name="name" autocomplete="name" required></label>
+    <label>Email<input type="email" name="email" autocomplete="email" required></label>
+    <label>Phone <span class="cv-hint">(optional)</span><input type="tel" name="phone" autocomplete="tel"></label>
+    <label>Short introduction
+      <span class="cv-hint">Your interest in the role, relevant experience and availability.</span>
+      <textarea name="message" rows="5" required></textarea>
+    </label>
+    <label>CV
+      <span class="cv-hint">PDF or Word, up to 10MB.</span>
+      <input type="file" name="attachment" accept=".pdf,.doc,.docx" required>
+    </label>
+    <button type="submit">Send application</button>
+  </form>
+</details>
