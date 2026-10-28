@@ -4,7 +4,7 @@ title_kr: "조창환 개인전"
 curator: Kim Ki Lim
 curator_kr: 김기림
 start_date: 2026-09-01
-end_date: 2026-12-31
+end_date: 2026-11-30
 status: current
 featured_image: "/assets/images/work/조창환 작가/cho-chang-hwan-soom-breath-02.jpg"
 location: Inverell, NSW, Australia
